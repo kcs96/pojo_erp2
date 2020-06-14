@@ -1,0 +1,211 @@
+package com.erp;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
+
+public class WorkLogic {
+	WorkDao workDao = null;
+	Logger logger = Logger.getLogger(WorkLogic.class);
+	public WorkLogic() {
+		workDao = new WorkDao();
+	}
+	public List<Map<String, Object>> personManageMent(Map<String, Object> pMap) {
+		//인사 insert here
+		logger.info("Logic : 인사조직도 호출 성공");
+		List<Map<String,Object>> rlist = null;
+		rlist = workDao.personManageMent(pMap);
+		return rlist;
+	}
+	public List<Map<String, Object>> smySign(Map<String, Object> pMap) {
+		//내결재함(보낸 결재)
+		logger.info("Logic : 전자결재 호출 성공");
+		List<Map<String,Object>> slist = new ArrayList<Map<String,Object>>();
+		slist = workDao.smySign(pMap);
+		return slist;
+	}
+	public List<Map<String, Object>> rmySign(Map<String, Object> rMap) {
+		//내결재함(받은 결재)
+		logger.info("Logic : 전자결재 호출 성공");
+		List<Map<String,Object>> rlist = new ArrayList();
+		rlist = workDao.rmySign(rMap);
+		return rlist;
+	}
+	public List<Map<String,Object>> signForm(Map<String,Object> pMap) {
+		//결재양식 탭 이벤트
+		logger.info("Logic : 전자결재 양식 호출 성공");
+		List<Map<String,Object>> rlist = null;
+		rlist = workDao.signForm(pMap);
+		return rlist;
+	}
+	public List<Map<String,Object>> signSend(Map<String, Object> pMap) {
+		//결재신청 이벤트 탭
+		logger.info("Logic : 결재신청 호출 성공");
+		List<Map<String,Object>> rlist = null;
+		rlist = workDao.signSend(pMap);
+		return rlist;
+	}
+	public List<Map<String, Object>> empList(Map<String, Object> pMap) {
+		//사원조회 탭
+		logger.info("Logic : 사원조회 호출 성공");
+		List<Map<String,Object>> rlist = null;
+		rlist = workDao.empList(pMap);
+		return rlist;
+	}
+	public List<Map<String, Object>> empRetire(Map<String, Object> pMap) {
+		//퇴직사원조회 이벤트 탭
+		logger.info("Logic : 퇴직사원관리 호출 성공");
+		List<Map<String,Object>> rlist = null;
+		rlist = workDao.empRetire(pMap);
+		return rlist;
+	}
+	public List<Map<String, Object>> empSend(Map<String, Object> pMap) {
+		///파견사원 조회
+		logger.info("Logic : 파견사원관리 호출 성공");
+		List<Map<String,Object>> rlist = null;
+		rlist = workDao.empSend(pMap);
+		return rlist;
+	}
+	public List<Map<String, Object>> branchList(Map<String, Object> pMap) {
+		//지사관리 이벤트 탭
+		logger.info("Logic : 지사관리 호출 성공");
+		List<Map<String,Object>> rlist = null;
+		rlist = workDao.branchList(pMap);
+		return rlist;
+	}
+	public List deptSchedule(Map<String,Object> pMap) {
+		//부서일정 이벤트 탭
+		logger.info("Logic : 부서일정 호출 성공");
+		List<Map<String,Object>> rlist = null;
+		rlist = workDao.deptSchedule(pMap);
+		return rlist;
+		
+	}
+	public List<Map<String, Object>> Manager(Map<String, Object> pMap) {
+		//관리자 모드 이벤트 탭
+		logger.info("Logic : 관리자모드 호출 성공");
+		List<Map<String,Object>> rlist = null;
+		rlist = workDao.Manager(pMap);
+		return rlist;
+	}
+/////////////////////////////////cud 작업/////////////////////////////////////
+	public List<Map<String, Object>> workSelectSearchSign(Map<String, Object> pMap) {
+		//내결제함 조회이벤트 탭 insert here
+		logger.info("Logic : 내결제함 조회 호출 성공");
+		List<Map<String,Object>> rlist = null;
+		rlist = workDao.workSelectSearchSign(pMap);
+		return rlist;
+	}
+	public int workAddDocument(Map<String, Object> pMap) {
+		//결제양식 작성 insert here
+		logger.info("Logic : 결제양식 호출 성공");
+		int result = 0 ;
+		result = workDao.workAddDocument(pMap);
+		return result;
+	}
+	public int workAgree(Map<String, Object> pMap) {
+		//결재 승인 이벤트 insert here
+		logger.info("Logic : 결재 승인 호출 성공");
+		int result = 0;
+		result = workDao.workAgree(pMap);
+		return result;
+	}
+	public int workDeny(Map<String, Object> pMap) {
+		//결재 기각 이벤트 insert here
+		logger.info("Logic : 결재 기각 호출 성공");
+		int result = 0;
+		result = workDao.workDeny(pMap);
+		return result;
+	}
+	public List<Map<String, Object>> workSelectPerson(Map<String, Object> pMap) {
+		//결재신청 수신자 추가 탭 insert here
+		logger.info("Logic : 결재 신청 수신자 추가 호출 성공");
+		List<Map<String,Object>> rlist = null;
+		rlist = workDao.workSelectPerson(pMap);
+		return rlist;
+	}
+	public int workAddSendDoc(Map<String, Object> pMap) {
+		//결재 신청 이벤트 탭 insert here
+		logger.info("Logic : 결재 신청 호출 성공");
+		int result = 0;
+		result = workDao.workAddSendDoc(pMap);
+		return result;
+	}
+	public List<Map<String, Object>> workSelectOverView(Map<String, Object> pMap) {
+		//내결재함 오버뷰 insert here
+		logger.info("Logic : 내결재함 오버뷰 호출 성공");
+		List<Map<String,Object>> rlist = null;
+		rlist = workDao.SelectOverView(pMap);
+		return rlist;
+	}
+	public List<Map<String, Object>> workSelectSearchEmp(Map<String, Object> pMap) {
+		//사원조회 이벤트 탭 insert here
+		logger.info("Logic : 사원조회 호출 성공");
+		List<Map<String,Object>> rlist = null;
+		rlist = workDao.workSelectSearchEmp(pMap);
+		return rlist;
+	}
+	public List<Map<String, Object>> workSelectEmp(Map<String, Object> pMap) {
+		//정보수정 이벤트 탭 insert here
+		logger.info("Logic : 정보수정 이벤트 호출 성공");
+		List<Map<String,Object>> rlist = null;
+		rlist = workDao.workSelectEmp(pMap);
+		return rlist;
+		
+	}
+	public int workAddEmp(Map<String, Object> pMap) {
+		//신규사원 등록 이벤트 탭 insert here
+		logger.info("Logic : 신규사원 등록 호출 성공");
+		int result = 0;
+		result = workDao.workAddEmp(pMap);
+		return result;
+	}
+	public int workUpdPw(Map<String, Object> pMap) {
+		//재직사원 비밀번호 변경 insert here
+		logger.info("Logic : 재직사원 비밀번호 변경 호출 성공");
+		int result = 0;
+		result = workDao.workUpdPw(pMap);
+		return result;
+	}
+	public int workUpdProfile(Map<String,Object> pMap) {
+		//재직사원 정보 변경 insert here
+		logger.info("Logic : 재직사원 정보 변경 호출 성공");
+		int result = 0;
+		result = workDao.workUpdProfile(pMap);
+		return result;
+	}
+	public List<Map<String, Object>> workSelectSearchRetire(Map<String, Object> pMap) {
+		//퇴직사원 조회 insert here
+		logger.info("Logic : 퇴직사원 조회 호출 성공");
+		List<Map<String,Object>> rlist = null;
+		rlist = workDao.workSelectSearchRetire(pMap);
+		return rlist;
+	}
+	public List<Map<String, Object>> workSelectSearchDispatcher(Map<String, Object> pMap) {
+		//파견사원 조회 insert here
+		logger.info("Logic : 파견사원 조회 호출 성공");
+		List<Map<String,Object>> rlist = null;
+		rlist = workDao.workSelectSearchDispatcher(pMap);
+		return rlist;
+	}
+	public int workDelBranch(Map<String, Object> pMap) {
+		//지사 삭제 insert here
+		logger.info("Logic : 지사 삭제 호출 성공");
+		int result = 0 ; 
+		result = workDao.workDelBranch(pMap);
+		return result;
+	}
+	public int workAddBranch(Map<String, Object> pMap) {
+		//지사 등록 insert here
+		logger.info("Logic : 지사 등록 호출 성공");
+		int result = 0 ; 
+		result = workDao.workAddBranch(pMap);
+		return result;
+	}
+	
+	
+
+
+}
