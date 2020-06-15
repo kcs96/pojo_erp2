@@ -36,6 +36,7 @@ public class WorkController implements Controller {
 			List<Map<String,Object>> rlist = null;
 			pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
 		    rlist = workLogic.workSelectSearchSign(pMap);
+		    req.setAttribute("workSelectSearchSignList",rlist);
 			path = "forward:xxx.jsp";
 			
 		}else if(cud.equals("workAddDocument")) { 
@@ -68,6 +69,7 @@ public class WorkController implements Controller {
 			List<Map<String,Object>> rlist = null;
 		    pMap = new HashMap<>();
 			rlist = workLogic.workSelectPerson(pMap);
+			req.setAttribute("workSelectPersonList", rlist);
 			path = "forward:xxx.jsp";
 			
 		}else if(cud.equals("workAddSendDoc")) {
@@ -85,6 +87,7 @@ public class WorkController implements Controller {
 		    pMap = new HashMap();
 		    pMap.put("empno", empno);
 			rlist = workLogic.workSelectOverView(pMap);
+			req.setAttribute("workSelectOverViewList", rlist);
 			path = "forward:xxx.jsp";
 			
 		}else if(cud.equals("workSelectSearchEmp")) {
@@ -93,6 +96,7 @@ public class WorkController implements Controller {
 			List<Map<String,Object>> rlist = null;
 			pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
 			rlist = workLogic.workSelectSearchEmp(pMap);
+			req.setAttribute("workSelectSearchEmp", rlist);
 			path = "forward:xxx.jsp";
 			
 		}else if(cud.equals("workSelectEmp")) {
@@ -102,6 +106,7 @@ public class WorkController implements Controller {
 			pMap = new HashMap(); 
 			pMap.put("empno", empno);
 			rlist = workLogic.workSelectEmp(pMap);
+			req.setAttribute("workSelectEmp", rlist);
 			path = "forward:xxx.jsp";
 			
 		}else if(cud.equals("workAddEmp")) {
@@ -133,6 +138,7 @@ public class WorkController implements Controller {
 			List<Map<String,Object>> rlist = null;
 			pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
 			rlist = workLogic.workSelectSearchRetire(pMap);
+			req.setAttribute("workSelectSearchRetireList", rlist);
 			path = " forward:xxx.jsp";
 			
 		}
@@ -143,6 +149,7 @@ public class WorkController implements Controller {
 			List<Map<String,Object>> rlist = null;
 			pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
 			rlist = workLogic.workSelectSearchDispatcher(pMap);
+			req.setAttribute("workSelectSearchDispatcherList", rlist);
 			path = " forward:xxx.jsp";
 		}
 		
