@@ -26,7 +26,9 @@ public class EmpController implements Controller {
 	@Override
 	public String process(String cud, HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		String path = null;
-		if("login".equals("cud")) {
+		int result = 0;
+		if("login".equals(cud)) {
+			logger.info("EmpController => 로그인 호출");
 			Map<String,String[]> pMap = (Map<String,String[]>)req.getParameterMap();
 			Map<String,Object> loginMap= HashMapBuilder.hashMapBuilder(pMap);
 			Map<String,Object> rMap = new HashMap<>();
@@ -36,7 +38,15 @@ public class EmpController implements Controller {
 			HttpSession session = req.getSession();
 			session.setAttribute("emp_no",empno);
 			session.setAttribute("emp_name",ename);
-			path="redirect:main/indexMain.erp";
+			path="redirect:/main/indexMain.erp";
+		}else if("myUpdImformation".equals(cud)) {
+			logger.info("EmpController => 내 정보 수정 호출");
+			HttpSession session = req.getSession();
+			Map<String,Object> pMap = new HashMap<>();
+			pMap.put("emp_no", session.getAttribute("emp_no"));
+			result =empLogic.myUpdImformation(pMap);
+			if(result == 1) path="redirect:xxx.jsp"; 
+			else if(result == 0) path="redirect:error.jsp"; 
 		}
 		return path;
 	}
@@ -59,7 +69,12 @@ public class EmpController implements Controller {
 			mav.addObject("todayList", todayList);
 			List<Map<String,Object>> roomList = empLogic.roomList(pMap);
 			mav.addObject("roomList", roomList);
-			mav.setViewName("indexMain");
+			mav.setViewName("");
+		}else if("empEdit".equals(requestName)) {
+			logger.info("내정보 수정 호출");
+			Map<String,Object> myInfoMap = empLogic.myInfoMap(pMap);
+			mav.addObject("myInfoMap", myInfoMap);
+			mav.setViewName("");
 		}
 		return mav;
 	}

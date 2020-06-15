@@ -32,7 +32,7 @@ public class MyServiceController implements Controller {
 		int result = 0;
 		if(cud.equals("myGoWork")) { //insert 출근테이블에 오늘 출근 row추가
 			//출근버튼 눌렀을때
-			logger.info("myGoWork 실행");
+			logger.info("MyService => 출근버튼 실행");
 			pMap.put("empno",empno);
 			result = myServiceLogic.myGoWork(pMap);
 			if(result == 1) {
@@ -42,7 +42,7 @@ public class MyServiceController implements Controller {
 			}
 		}else if(cud.equals("myGoHome")) { //update 오늘 출근row에 퇴근값 추가
 			//퇴근버튼 눌렀을때
-			logger.info("myGoHome 실행");
+			logger.info("MyService => 퇴근버튼 실행");
 			pMap.put("empno",empno);
 			result=myServiceLogic.myGoHome(pMap);
 			if(result == 1) {
@@ -52,7 +52,7 @@ public class MyServiceController implements Controller {
 			}
 		}else if(cud.equals("myGoOut")) { //update 상태컬럼 : 정상 -> 외출
 			//외출버튼 눌렀을 때
-			logger.info("myGoOut 실행");
+			logger.info("MyService => 외출버튼 실행");
 			pMap.put("empno",empno);
 			result = myServiceLogic.myGoOut(pMap);
 			if(result == 1) {
@@ -62,7 +62,7 @@ public class MyServiceController implements Controller {
 			}
 		}else if(cud.equals("myAddSchedule")) { //insert 일정 추가
 			//내 일정 내용 추가
-			logger.info("myAddSchedule 실행");
+			logger.info("MyService => 내 일정 추가 실행");
 			pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
 			pMap.put("empno",empno);
 			result = myServiceLogic.myAddSchedule(pMap);
@@ -73,7 +73,7 @@ public class MyServiceController implements Controller {
 			}
 		}else if(cud.equals("myUpdSchedule")) { //update 일정 수정
 			//내 일정 내용 수정
-			logger.info("myUpdSchedule 실행");
+			logger.info("MyService => 내 일정 변경 실행");
 			pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
 			pMap.put("empno",empno);
 			result=myServiceLogic.myUpdSchedule(pMap);
@@ -84,9 +84,10 @@ public class MyServiceController implements Controller {
 			}
 		}else if(cud.equals("myDelSchedule")) { //delete 일정 삭제
 			//내 일정 삭제
-			logger.info("myDelSchedule 실행");
+			logger.info("MyService => 내 일정 삭제 실행");
 			pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
 			pMap.put("empno",empno); 
+			pMap.put("글PK",""); 
 			result = myServiceLogic.myDelSchedule(pMap);
 			if(result == 1) {
 				path="redirect:xxx.jsp";
@@ -107,25 +108,25 @@ public class MyServiceController implements Controller {
 		pMap.put("emp_no", session.getAttribute("emp_no"));
 		if(requestName.equals("inOutManager")) {
 			//출퇴관리 insert here
-			logger.info("출퇴관리 실행");
+			logger.info("MAV => 출퇴관리 실행");
 			rMap = myServiceLogic.inOutManager(pMap);
 			mav.addObject("inOutMap", rMap);
 			mav.setViewName("");
 		}else if(requestName.equals("monthPay")) {
 			//당월급여 insert here
-			logger.info("당월급여 실행");
+			logger.info("MAV => 당월급여 실행");
 			rMap = myServiceLogic.monthPay(pMap);
 			mav.addObject("monthPayMap", rMap);
 			mav.setViewName("");
 		}else if(requestName.equals("allPay")) {
 			//전체급여 insert here
-			logger.info("전체급여 실행");
+			logger.info("MAV => 전체급여 실행");
 			List<Map<String,Object>> rList = myServiceLogic.allPay(pMap);
 			mav.addObject("allPayList", rList);
 			mav.setViewName("");
 		}else if(requestName.equals("mySchedule")) {
 			//개인일정 insert here
-			logger.info("개인일정 실행");
+			logger.info("MAV => 개인일정 실행");
 			List<Map<String,Object>> rList = myServiceLogic.mySchedule(pMap);
 			mav.addObject("myScheduleList", rList);
 			mav.setViewName("");

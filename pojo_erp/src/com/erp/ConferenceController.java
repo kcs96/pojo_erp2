@@ -11,10 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 public class ConferenceController implements Controller {
 	String requestName = null;
 	ConferenceLogic conLogic = null;
+	Logger logger = Logger.getLogger(ConferenceController.class);
 	public ConferenceController(String requestName) {
+		logger.info("ConferenceController 호출 성공");
 		this.requestName = requestName;
 		conLogic = new ConferenceLogic();
 	}
@@ -28,6 +32,7 @@ public class ConferenceController implements Controller {
 		String empno = (String)session.getAttribute("empno");
 		if(cud.equals("conAddRoom")) {//insert
 			//회의실예약 insert here
+			logger.info("ConferenceController[String] => 회의실예약 호출");
 			int result = 0;
 			pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
 			pMap.put("empno",empno);
@@ -39,6 +44,7 @@ public class ConferenceController implements Controller {
 			}
 		}else if(cud.equals("conDelRoom")) {//delete
 			//회의실예약취소 insert here
+			logger.info("ConferenceController[String] => 회의실예약취소 호출");
 			int result = 0;
 			pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
 			pMap.put("empno",empno);
@@ -59,6 +65,7 @@ public class ConferenceController implements Controller {
 			ModelAndView mav = new ModelAndView();
 			if(requestName.equals("allRes")) {
 				//회의실예약 insert here
+				logger.info("ConferenceController[String] => 회의실예약탭  호출");
 				List<Map<String,Object>> rList = new ArrayList<>();
 				rList = conLogic.allRes();
 				mav.addObject("allResList", rList);
