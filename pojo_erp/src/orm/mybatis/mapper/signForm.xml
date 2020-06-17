@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="orm.mybatis.mapper.signFormMapper">
+	
+	<resultMap id="bmap" type="java.util.Map"/>
+	<select id="proc_boardList" parameterType="map" statementType="CALLABLE">
+		{ call proc_boardList(#{key, jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=bmap})}
+	</select>
+</mapper> 
