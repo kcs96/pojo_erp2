@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="orm.mybatis.mapper.empManagermentMapper">
+	
+	<resultMap id="bmap" type="map"/>
+	
+	<select id="proc_myschedule" parameterType="map" statementType="CALLABLE">
+		{ call proc_empLogin(#{u_id},#{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=bmap}
+		                                  
+	</select>
+</mapper> 

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="orm.mybatis.mapper.myPageMapper">
+	
+	<resultMap id="bmap" type="map"/>
+	
+	
+	<select id="proc_empLogin" parameterType="map" statementType="CALLABLE">
+		{ call proc_empLogin(#{emp_no},#{emp_pw},#{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=bmap})}
+		                                  
+	</select>
+	
+	<select id="proc_myschedule" parameterType="map" statementType="CALLABLE">
+		{ call proc_myschedule(#{u_id},#{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=bmap})}
+		                                  
+	</select>
+	
+	<select id="proc_taskTime" parameterType="map" statementType="CALLABLE">
+		{ call proc_taskTime(#{u_id},#{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=bmap})}
+		                                  
+	</select>
+	
+	<select id="proc_todaycfr" parameterType="map" statementType="CALLABLE">
+		{ call proc_todaycfr( #{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=bmap})}
+		                                  
+	</select>
+	
+	<select id="proc_commute" parameterType="map" statementType="CALLABLE">
+		{ call proc_commute(#{u_id}, #{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=bmap})}
+		                                  
+	</select>
+	
+	<select id="proc_gotowork" parameterType="map" statementType="CALLABLE">
+		{ call proc_gotowork(#{i_id}, #{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=bmap})}      
+	</select>
+	
+	<select id="proc_inout" parameterType="map" statementType="CALLABLE">
+		{ call proc_inout(#{btn_type},#{u_id}, #{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=bmap})}
+		                                  
+	</select>
+	
+	<select id="proc_weekInOut" parameterType="map" statementType="CALLABLE">
+		{ call proc_weekInOut(#{i_id}, #{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=bmap})}
+		                                  
+	</select>
+	
+	<select id="proc_sal" parameterType="map" statementType="CALLABLE">
+		{ call proc_sal(#{i_type},#{i_id},#{i_payday}, #{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=bmap})}                    
+	</select>
+	
+	<select id="proc_mysdlist" parameterType="map" statementType="CALLABLE">
+		{ call proc_mysdlist(#{i_id}, #{i_month}, #{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=bmap})}
+		                                  
+	</select>
+	<select id="proc_mysdadd" parameterType="map" statementType="CALLABLE">
+		{ call proc_mysdadd(#{i_id} ,#{i_title},#{i_memo} ,#{i_sdate} ,#{i_edate} 
+		,#{i_type}	,#{i_allday} ,#{i_bgcolor}	#{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=bmap})}
+		                                  
+	</select>
+	<select id="proc_mysdupd" parameterType="map" statementType="CALLABLE">
+		{ call proc_mysdupd(#{i_id}, #{i_title}, #{i_sdate}, #{i_edate}, #{i_type},
+		#{i_allday}, #{i_bgcolor}, #{i_memo}, #{i_pk}, #{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=bmap})}
+		                                  
+	</select>
+	
+	<delete id="my_schedule_del" parameterType="map"> <!-- 개인 일정 삭제 쿼리문처리 -->
+		delete from my_schedule
+		 WHERE emp_no = #{emp_no}
+       	 AND my_no = #{my_no}
+	</delete>
+	
+	<select id="proc_conreslist" parameterType="map" statementType="CALLABLE">
+		{ call "proc_conreslist"(#{i_month}, #{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=bmap})}
+		                                  
+	</select>
+	
+	<select id="proc_conresadd" parameterType="map" statementType="CALLABLE">
+		{ call proc_conresadd(#{i_title},#{i_sdate},#{i_edate},#{i_type},
+		#{i_allday},#{i_bgcolor},#{i_cfrNo},#{i_memo},
+		#{i_id}							   , #{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=bmap})}
+	</select>
+	
+	<delete id="conferenceres_del" parameterType="map"> <!-- 회의실 예약 삭제 쿼리문-->
+		DELETE FROM conferenceres 
+		WHERE cfr_no = #{cft_no}
+	</delete>
+	
+</mapper> 
+
+
+
+
+
+
+
+

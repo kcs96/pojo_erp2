@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="orm.mybatis.mapper.mySignMapper">
+	
+	<resultMap id="bmap" type="java.util.Map"/>
+	
+	<select id="proc_r_signlist" parameterType="map" statementType="CALLABLE">
+		{ call proc_r_signlist(#{u_empno}, #{key, jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=bmap})}
+	</select>
+	
+	<select id="proc_searchsign" parameterType="map" statementType="CALLABLE">
+		{ call proc_searchsign(#{u_input1},
+		#{u_input2},	#{u_empno},		   ,#{key, jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=bmap})}
+	</select>
+	
+	<select id="proc_signform" parameterType="map" statementType="CALLABLE">
+		{ call proc_signform( #{key, jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=bmap})}
+	</select>
+	<select id="proc_s_signlist" parameterType="map" statementType="CALLABLE">
+		{ call proc_s_signlist(#{u_empno}, #{key, jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=bmap})}
+	</select>
+	
+</mapper> 

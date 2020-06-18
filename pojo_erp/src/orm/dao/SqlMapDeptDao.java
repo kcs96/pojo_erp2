@@ -12,28 +12,33 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.log4j.Logger;
 
 public class SqlMapDeptDao {
-	Logger logger = Logger.getLogger(SqlMapEmpDao.class); 
+	Logger logger = Logger.getLogger(SqlMapDeptDao.class);
+	SqlSession SqlSes = null;
+	String resource="orm/mybatis/Configuration.xml";
 	SqlSessionFactory sqlMapper = null;
-	public List<Map<String,Object>> deptList(){
-		logger.info("bookList 호출 성공");
-		List<Map<String,Object>> dlist = null;
-		String resource = "orm/mybatis/Configuration.xml";
-		try {
-			Reader reader = Resources.getResourceAsReader(resource);
-			sqlMapper = new SqlSessionFactoryBuilder().build(reader);
-			//sql문을 요청하기 위한 SqlSession객체 생성하기
-			SqlSession sqlSec = sqlMapper.openSession();
-			//커넥션 얻기 성공 ===> sql Ses
-			dlist = sqlSec.selectList("deptList");
-			System.out.println("조회한 로우 수 : "+dlist.size());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return dlist;
-		}
 	
-	public static void main(String[] args) {
-		SqlMapDeptDao eDao = new SqlMapDeptDao();
-		List<Map<String,Object>> deptList =eDao.deptList();
+	public List<Map<String,Object>> proc_empLogin(Map<String,Object> pMap){
+		List<Map<String,Object>> plist = new ArrayList<Map<String,Object>>();
+		SqlSes.selectOne("proc_empLogin",pMap);
+		plist = (List<Map<String,Object>>)pMap.get("key");    
+		logger.info("plist.size() : " + plist.size());
+		for(int i=0; i<plist.size(); i++) {
+			Map<String,Object> rMap = plist.get(i);
+			logger.info(rMap.get("emp_no").toString());
+			logger.info(rMap.get("emp_pw").toString());
+		}
+		return plist;
 	}
+
+	
+
+	public static void main(String[] args) {
+		SqlMapDeptDao md = new SqlMapDeptDao();
+		Map<String, Object> pMap = new HashMap();
+		pMap.put("emp_no", "1001");
+		pMap.put("emp_pw", "1234");
+		md.proc_empLogin(pMap);
+		
+	}
+	
 }

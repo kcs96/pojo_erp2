@@ -25,7 +25,8 @@ public class EmpDao {
 		//로그인 이벤트
 		logger.info("EmpDao() => 로그인"); 
 		Map<String, Object> rMap = new HashMap<>();
-		rMap=sqlSec.selectOne("monthPay",loginMap);
+		rMap=sqlSec.selectOne("proc_empLogin",loginMap);
+		
 		return rMap;
 	}
 

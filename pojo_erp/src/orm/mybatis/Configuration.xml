@@ -10,9 +10,9 @@
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
-				<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:orcl11" />
-				<property name="username" value="${username}" />
-				<property name="password" value="${password}" />
+				<property name="url" value="jdbc:oracle:thin:@192.168.0.238:1521:orcl11" />
+				<property name="username" value="erp" />
+				<property name="password" value="tiger" />
 			</dataSource>
 		</environment>
 	</environments>
@@ -20,9 +20,10 @@
 <!-- xml 주석
 DML 구문 즉 SELECT, INSERT, UPDATE, DELETE을 작성된 xml파일의 물리적인 위치와 파일명을 등록하기
 -->
-		<mapper resource="orm/mybatis/mapper/deptScheduleMapper.xml" />
+		<mapper resource="orm/mybatis/mapper/myPageMapper.xml" />
 		<mapper resource="orm/mybatis/mapper/empManagermentMapper.xml" />
 		<mapper resource="orm/mybatis/mapper/mySignMapper.xml" />
+		<mapper resource="orm/mybatis/mapper/deptScheduleMapper.xml" />
 		<mapper resource="orm/mybatis/mapper/signFormMapper.xml" />
 		<mapper resource="orm/mybatis/mapper/signSendMapper.xml" />
 		<mapper resource="orm/mybatis/mapper/webSignMapper.xml" />

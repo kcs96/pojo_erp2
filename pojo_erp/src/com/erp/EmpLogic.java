@@ -7,9 +7,15 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import orm.dao.SqlMapDeptDao;
+
 public class EmpLogic {
 	Logger logger = Logger.getLogger(EmpLogic.class);	
 	EmpDao empDao = null;
+	
+	//테스트
+	SqlMapDeptDao smd = null;
+	
 	private int result =0;
 	public EmpLogic() {
 		logger.info("EmpLogic 호출 성공");
@@ -21,6 +27,7 @@ public class EmpLogic {
 		logger.info("EmpLogic => 로그인 버튼");
 		Map<String, Object> rMap = new HashMap<>();
 		rMap = empDao.login(loginMap);
+		//rMap = smd.deptList(loginMap); //sqlMapDeptDao로 연결해서 뭐하려고했는데 일단 패스 
 		return  rMap;
 	}
 

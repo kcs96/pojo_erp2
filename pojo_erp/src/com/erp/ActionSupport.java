@@ -21,10 +21,11 @@ public class ActionSupport extends HttpServlet {
 		
 		int end = command.lastIndexOf(".");
 		command = command.substring(0,end);
-		
+		logger.info("command :" + command);
 		Controller controller = null;
 		
 		String cud = req.getParameter("cud");
+		logger.info("cud :" + cud);
 		try {
 			controller = ControllerMapper.getController(command);
 		} catch (Exception e) {
