@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="orm.mybatis.mapper.empMapper">
+	<resultMap id="bbmap" type="java.util.Map"/>
+	
+<!--=====================================로그인 화면 ======================================-->
+	<!-- 로그인 프로시저  -->
+	<select id="proc_empLogin" parameterType="map" statementType="CALLABLE">
+		{call proc_empLogin(#{emp_no},#{emp_pw}
+										   ,#{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=bbmap})}
+	</select>
+<!--=====================================로그인 화면 끝 ======================================-->
+
+
+<!--=====================================메인 화면 탭 ======================================-->
+	<!-- 내정보 수정클릭시 내 리스트 -->
+  	<select id="PROC_NEMPLIST" parameterType="map" statementType="CALLABLE">
+		{ call PROC_NEMPLIST(#{btn_type},#{emp_no},#{pay_day}
+										   ,#{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=bbmap})}
+	</select>
+	
+	<!-- 패스워드 변경 검증 -->
+  	<select id="proc_newPassword" parameterType="map" statementType="CALLABLE" resultType="String">
+		{ call proc_newPassword(#{emp_no},#{emp_pw},#{new_pw},#{new_repw}
+										   , #{msg,mode=OUT,jdbcType=VARCHAR})}
+	</select>
+	
+	
+  	<!-- 오늘 나의 일정 가져오기 -->
+  	<select id="proc_myschedule" parameterType="map" statementType="CALLABLE">
+		{ call proc_myschedule(#{emp_no},#{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=bbmap})}
+	</select>
+	<!-- 오늘 나의 업무시간 가져오기  -->
+	<select id="proc_taskTime" parameterType="map" statementType="CALLABLE">
+		{ call proc_taskTime(#{emp_no},#{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=bbmap})}
+	</select>
+	
+	<!-- 오늘 회의 예약시간 가져오기 -->
+	<select id="proc_todaycfr" parameterType="map" statementType="CALLABLE">
+		{ call proc_todaycfr( #{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=bbmap})}
+	</select>
+	
+	<!-- 오늘 나의 출퇴시간 가져오기 -->
+	<select id="proc_commute" parameterType="map" statementType="CALLABLE">
+		{ call proc_commute(#{emp_no}, #{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=bbmap})}
+	</select>
+	
+	<!-- 회원 수정 버튼 클릭 이벤트 -->
+	<insert id="myUpdImformation" parameterType="map">
+		UPDATE EMP SET    
+		EMP_NAME = #{EMP_NAME}
+      ,EMP_RESNUM = #{EMP_RESNUM}
+      ,EMP_PHOTO = #{EMP_PHOTO}
+      ,EMP_PW  = #{EMP_PW}
+      ,EMP_PHONE  = #{EMP_PHONE}
+      ,EMP_EMAIL = #{EMP_EMAIL}
+      ,EMP_NO  = #{EMP_NO}
+      ,DEPT_NO =  #{DEPT_NO}
+      ,EMP_EXTEND  = #{EMP_EXTEND}
+      ,EMP_POSITION = #{EMP_POSITION}
+      ,EMP_SALARY  = #{EMP_SALARY}
+      ,EMP_HIREDATE  = #{EMP_HIREDATE}
+      ,EMP_RETIREDATE  = #{EMP_RETIREDATE}
+      ,EMP_STATE = #{EMP_STATE}
+      ,EMP_ADDRESS = #{EMP_ADDRESS}
+WHERE EMP_NO = #{EMP_NO}
+	</insert>
+<!--=====================================메인 화면 탭 끝======================================-->
+	
+</mapper>
+  

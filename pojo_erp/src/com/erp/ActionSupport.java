@@ -39,10 +39,10 @@ public class ActionSupport extends HttpServlet {
 				Object robj = null;
 				if(cud==null) { 
 					logger.info("cud가 null일때로 처리");
-					robj = controller.process(command, req,res);
+					robj = controller.process(req,res);
 				}else { 
 					logger.info("cud가 null이 아닐때로 처리");
-					robj = controller.process(req,res);   
+					robj = controller.process(cud,req,res);   
 				}
 
 				

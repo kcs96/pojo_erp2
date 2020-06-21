@@ -16,30 +16,36 @@ public class MyServiceLogic {
 		this.myServiceDao=new MyServiceDao();
 	}
  
-	public Map<String,Object> inOutManager(Map<String,Object> pMap) {
+	public List<Map<String, Object>> inOutManager(Map<String,Object> pMap) {
 		//출퇴관리 탭 이벤트
 		logger.info("MyServiceLogic => 출퇴관리 호출");
-		Map<String,Object> rMap = new HashMap<>();
-		rMap= myServiceDao.myInOutInfo(pMap); //today에 대한 내 정보
-		List<Map<String,Object>> rList = new ArrayList<>();
-		rList = myServiceDao.weekInOutInfo(pMap);
-		return rMap;
+		List<Map<String, Object>> rList = new ArrayList<>();
+		rList = myServiceDao.myInOutInfo(pMap); //today에 대한 내 정보
+		return rList;
+	}
+	
+	public List<Map<String, Object>> weekInOutInfo(Map<String,Object> pMap) {
+		//출퇴관리 탭 이벤트
+		logger.info("MyServiceDao => 주 단위 출퇴 리스트"); 
+		List<Map<String, Object>> rList = new ArrayList<>();
+		rList = myServiceDao.weekInOutInfo(pMap); //today에 대한 내 정보
+		return rList;
 	}
 
-	public Map<String, Object> monthPay(Map<String, Object> pMap) {
+	public List<Map<String, Object>> monthPay(Map<String, Object> pMap) {
 		//당월급여 조회 탭 이벤트
 		logger.info("MyServiceLogic => 당월 급여 호출");
-		Map<String,Object> rMap = new HashMap<>();
-		rMap = myServiceDao.monthPay(pMap);		
-		return rMap;
+		List<Map<String, Object>> rList = new ArrayList<>();
+		rList = myServiceDao.monthPay(pMap);		
+		return rList;
 	}
 
 	public List<Map<String, Object>> allPay(Map<String, Object> pMap) {
 		//전체 급여 조회 탭 이벤트
 		logger.info("MyServiceLogic => 전체급여 호출");
-		List<Map<String, Object>> rList = null;
+		List<Map<String, Object>> rList = new ArrayList<>();
 		rList = myServiceDao.allPay(pMap);		
-		return rList;
+		return rList; 
 	}
 
 	public List<Map<String, Object>> mySchedule(Map<String, Object> pMap) {

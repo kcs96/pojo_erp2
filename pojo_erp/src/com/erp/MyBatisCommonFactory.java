@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.Reader;
 
 import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
@@ -24,5 +25,11 @@ public class MyBatisCommonFactory {
 	public static SqlSessionFactory getSqlSessionFactory() {
 		init();
 		return sqlSessionFactory;
+	}
+	
+	public static void main(String[] args) {
+		SqlSessionFactory sqlMapper = null;
+		sqlMapper= MyBatisCommonFactory.getSqlSessionFactory();
+		System.out.println(sqlMapper);
 	}
 }

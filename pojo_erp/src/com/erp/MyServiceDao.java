@@ -21,36 +21,40 @@ public class MyServiceDao {
 		sqlSec = sqlMapper.openSession(true);
 	}
 	
-	public Map<String, Object> myInOutInfo(Map<String, Object> pMap) {
+	public List<Map<String, Object>> myInOutInfo(Map<String, Object> pMap) {
 		//출퇴관리 탭 이벤트
 		logger.info("MyServiceDao => 출퇴관리 호출"); 
-		Map<String, Object> rMap = new HashMap<>();
-		rMap=sqlSec.selectOne("monthPay",pMap);
-		return rMap;
+		List<Map<String, Object>> rList = new ArrayList<>();
+		sqlSec.selectOne("proc_gotowork",pMap);
+		rList = (List<Map<String,Object>>)pMap.get("key");
+		return rList;
 	}
 
 	public List<Map<String, Object>> weekInOutInfo(Map<String, Object> pMap) {
 		//주 단위 내 출퇴관리 정보
 		logger.info("MyServiceDao => 주 단위 출퇴 리스트"); 
 		List<Map<String, Object>> rList = new ArrayList<>();
-		rList=sqlSec.selectList("weekInOutInfo",pMap);
+		sqlSec.selectList("proc_weekInOut",pMap);
+		rList= (List<Map<String, Object>>)pMap.get("key");
 		return rList;
 	}
 
 
-	public Map<String, Object> monthPay(Map<String, Object> pMap) {
+	public List<Map<String, Object>> monthPay(Map<String, Object> pMap) {
 		//당월급여 조회  이벤트
 		logger.info("MyServiceDao => 당월급여 호출"); 
-		Map<String, Object> rMap = new HashMap<>();
-		rMap=sqlSec.selectOne("monthPay",pMap);
-		return rMap;
+		List<Map<String, Object>> rList = new ArrayList<>();
+		sqlSec.selectOne("proc_sal",pMap);
+		rList = (List<Map<String, Object>>)pMap.get("key");
+		return rList;
 	}
 
 	public List<Map<String, Object>> allPay(Map<String, Object> pMap) {
 		//전체 급여 조회 이벤트
 		logger.info("MyServiceDao => 출퇴관리 호출"); 
 		List<Map<String, Object>> rList = new ArrayList<>();
-		rList=sqlSec.selectList("allPay",pMap);
+		sqlSec.selectOne("proc_sal",pMap);
+		rList = (List<Map<String, Object>>)pMap.get("key");
 		return rList;
 	}
 
@@ -58,27 +62,28 @@ public class MyServiceDao {
 		//내 일정 관리  이벤트
 		logger.info("MyServiceDao => 내 일정 관리 호출"); 
 		List<Map<String, Object>> rList = new ArrayList<>();
-		rList=sqlSec.selectList("mySchedule",pMap);
+		sqlSec.selectOne("proc_mySdList",pMap);
+		rList= (List<Map<String, Object>>)pMap.get("key");
 		return rList;
 	}
 	public int myGoWork(Map<String, Object> pMap) {
 		//출근 버튼 이벤트
 		logger.info("MyServiceDao => 출근 버튼 호출"); 
-		result=sqlSec.insert("myGoWork",pMap);
+		result=sqlSec.insert("proc_inout",pMap);
 		return result;
 	}
 
 	public int myGoOut(Map<String, Object> pMap) {
 		//외출 버튼 이벤트
 		logger.info("MyServiceDao => 외출 버튼 호출"); 
-		result=sqlSec.update("myGoOut",pMap);
+		result=sqlSec.update("proc_inout",pMap);
 		return result;
 	}
 
 	public int myGoHome(Map<String, Object> pMap) {
 		//퇴근 버튼 이벤트 탭 이벤트
 		logger.info("MyServiceDao => 퇴근 버튼 호출"); 
-		result=sqlSec.update("myGoOut",pMap);
+		result=sqlSec.update("proc_inout",pMap);
 		return result;
 	}
 	
@@ -99,7 +104,7 @@ public class MyServiceDao {
 	public int myDelSchedule(Map<String, Object> pMap) {
 		//일정삭제 버튼 이벤트
 		logger.info("MyServiceDao => 개인 일정 삭제 호출"); 
-		result=sqlSec.update("myDelSchedule",pMap);
+		result=sqlSec.delete("my_sdDel",pMap);
 		return result;
 	}
 

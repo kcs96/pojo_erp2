@@ -1,5 +1,6 @@
 package com.erp;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -30,11 +31,11 @@ public class ConferenceLogic {
 		return result;
 	}
 
-	public List<Map<String, Object>> allRes() {
+	public List<Map<String, Object>> allRes(Map<String, Object> pMap) {
 		//전체 회의실 예약 정보 가져오기
 		logger.info("ConferenceLogic => 전체 회의실 예약리스트");
-		List<Map<String, Object>> rList = null;
-		rList = cdao.allRes();
+		List<Map<String, Object>> rList = new ArrayList<>();
+		rList = cdao.allRes(pMap);
 		return rList;
 	}
 

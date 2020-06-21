@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="orm.mybatis.mapper.conferenceMapper">
+	<resultMap id="cmap" type="map"/>
+	
+<!--=====================================회의실 예약 탭 ======================================-->
+	<!-- 회의실 예약리스트 (당월) -->
+	<select id="proc_conResList" parameterType="map" statementType="CALLABLE">
+		{call proc_conResList(#{cfr_day}
+										   ,#{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=cmap})}
+	</select>
+	
+	<!-- 회의실 예약 추가하기 -->
+	<select id="proc_conResAdd" parameterType="map" statementType="CALLABLE">
+		{ call proc_conResAdd(#{i_title},#{i_sdate},#{i_edate},#{i_type},
+		#{i_allday},#{i_bgcolor},#{i_cfrNo},#{i_memo},
+		#{i_id}							   , #{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=cmap})}
+	</select>
+
+	<!-- 회의실 예약 수정하기 -->
+	<select id="proc_conResUpd" parameterType="map" statementType="CALLABLE">
+		{ call proc_conResUpd(#{i_title},#{i_sdate},#{i_edate},#{i_type},
+		#{i_allday},#{i_bgcolor},#{i_cfrNo},#{i_memo},#{i_id}
+										   , #{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=cmap})}
+	</select>
+	
+	<!-- 회의실 예약 삭제하기 -->
+	<delete id="conResDel" parameterType="map"> <!-- 회의실 예약 삭제 쿼리문-->
+		DELETE FROM conferenceres 
+		WHERE cfr_no = #{cfr_no}
+	</delete>
+	
+<!--=====================================회의실 예약 탭 끝 ======================================-->
+</mapper>

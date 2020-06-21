@@ -61,14 +61,16 @@ public class ConferenceController implements Controller {
 	@Override
 		public ModelAndView process(HttpServletRequest req, HttpServletResponse res)
 				throws ServletException, IOException {
-			// TODO Auto-generated method stub
 			ModelAndView mav = new ModelAndView();
+			Map<String,Object> pMap = new HashMap<>();
+			pMap.put("cfr_day", "2020-06-01");
 			if(requestName.equals("allRes")) {
 				//회의실예약 insert here
 				logger.info("ConferenceController[String] => 회의실예약탭  호출");
-				List<Map<String,Object>> rList = new ArrayList<>();
-				rList = conLogic.allRes();
-				mav.addObject("allResList", rList);
+				List<Map<String,Object>> allResList = new ArrayList<>();
+				allResList = conLogic.allRes(pMap);
+				System.out.println("회의실예약 리스트 => "+allResList.size());
+				mav.addObject("allResList", allResList);
 				mav.setViewName("");
 			}
 			return mav;

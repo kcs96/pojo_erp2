@@ -7,14 +7,10 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import orm.dao.SqlMapDeptDao;
-
 public class EmpLogic {
 	Logger logger = Logger.getLogger(EmpLogic.class);	
 	EmpDao empDao = null;
 	
-	//테스트
-	SqlMapDeptDao smd = null;
 	
 	private int result =0;
 	public EmpLogic() {
@@ -27,7 +23,6 @@ public class EmpLogic {
 		logger.info("EmpLogic => 로그인 버튼");
 		Map<String, Object> rMap = new HashMap<>();
 		rMap = empDao.login(loginMap);
-		//rMap = smd.deptList(loginMap); //sqlMapDeptDao로 연결해서 뭐하려고했는데 일단 패스 
 		return  rMap;
 	}
 
@@ -62,11 +57,17 @@ public class EmpLogic {
 		return result;
 	}
 
-	public Map<String, Object> myInfoMap(Map<String, Object> pMap) {
+	public List<Map<String, Object>> myInfoMap(Map<String, Object> pMap) {
 		//내 정보 리스트
 		logger.info("EmpLogic => 내 정보 리스트");
-		Map<String, Object> rMap = new HashMap<>();
-		rMap = empDao.myInfoMap(pMap);
+		List<Map<String, Object>> rList= new ArrayList<Map<String,Object>>();
+		rList = empDao.myInfoMap(pMap);
+		return rList;
+	}
+
+	public Map<String,Object> newPassword(Map<String, Object> pMap) {
+		logger.info("EmpLogic => 내 정보 리스트 => password 설정");
+		Map<String,Object> rMap = empDao.newPassword(pMap);
 		return rMap;
 	}
 

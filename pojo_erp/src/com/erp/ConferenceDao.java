@@ -1,5 +1,6 @@
 package com.erp;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -34,11 +35,12 @@ public class ConferenceDao {
 		return result;
 	}
 
-	public List<Map<String, Object>> allRes() {
+	public List<Map<String, Object>> allRes(Map<String, Object> pMap) {
 		//전체 회의실 예약 정보 가져오기
 		logger.info("ConferenceDao() => 회의실 전체예약정보"); 
-		List<Map<String, Object>> rList = null;
-		rList = sqlSec.selectList("allRes");
+		List<Map<String, Object>> rList = new ArrayList<>();
+		sqlSec.selectOne("proc_conResList",pMap);
+		rList = (List<Map<String, Object>>)pMap.get("key");
 		return rList;
 	}
 }
