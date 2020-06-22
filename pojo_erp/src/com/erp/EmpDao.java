@@ -88,14 +88,11 @@ public class EmpDao {
 		return myInfoList;
 	}
 
-	public Map<String,Object> newPassword(Map<String, Object> pMap) {
+	public String newPassword(Map<String, Object> pMap) {
 		logger.info("EmpLogic => 내 정보 리스트 => password 설정");
-		Map<String,Object> rMap = new HashMap<String, Object>();
 		sqlSec.selectOne("proc_newPassword",pMap);
-		rMap =(Map<String, Object>) pMap.get("key");
-		
-		System.out.println(rMap.size());
-		return rMap;
+		String result = pMap.get("msg").toString();
+		return result;
 	}
 	
 }

@@ -15,19 +15,17 @@ public class ConferenceLogic {
 		cdao = new ConferenceDao();
 	}
 	
-	public int conAddRoom(Map<String, Object> pMap) {
+	public String conAddRoom(Map<String, Object> pMap) {
 		//회의실예약 버튼 이벤트
 		logger.info("ConferenceLogic => 회의실예약");
-		int result = 0;
-		result = cdao.conAddRoom(pMap);
+		String result = cdao.conAddRoom(pMap);
 		return result;
 	}
 
 	public int conDelRoom(Map<String, Object> pMap) {
 		//회의실 삭제 이벤트
 		logger.info("ConferenceLogic => 회의실삭제");
-		int result = 0;
-		result = cdao.conDelRoom(pMap);
+		int result = cdao.conDelRoom(pMap);
 		return result;
 	}
 
@@ -37,6 +35,12 @@ public class ConferenceLogic {
 		List<Map<String, Object>> rList = new ArrayList<>();
 		rList = cdao.allRes(pMap);
 		return rList;
+	}
+
+	public String conUpdRoom(Map<String, Object> pMap) {
+		logger.info("ConferenceLogic => 회의실예약 수정");
+		String result = cdao.conUpdRoom(pMap);
+		return result;
 	}
 
 }

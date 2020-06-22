@@ -55,42 +55,50 @@ public class MyServiceLogic {
 		rList = myServiceDao.mySchedule(pMap);
 		return rList;
 	}
-	public int myGoWork(Map<String, Object> pMap) {
+	public String myGoWork(Map<String, Object> pMap) {
 		//출근 버튼 이벤트 탭 이벤트
 		logger.info("MyServiceLogic => 출근 버튼  호출");
-		int result = 0;
+		String result = "";
 		result = myServiceDao.myGoWork(pMap);
 		return result;
 		
 	}
-	public int myGoHome(Map<String, Object> pMap) {
+	public String myGoHome(Map<String, Object> pMap) {
 		//퇴근 버튼 이벤트 탭 이벤트
 		logger.info("MyServiceLogic => 퇴근 버튼  호출");
-		int result = 0;
+		String result = "";
 		result = myServiceDao.myGoHome(pMap);
 		return result;
 		
 	}
-	public int myGoOut(Map<String, Object> pMap) {
+	public String myGoOut(Map<String, Object> pMap) {
 		//외출 버튼 이벤트
 		logger.info("MyServiceLogic => 외출 버튼 호출");
-		int result = 0;
+		String result ="";
 		result = myServiceDao.myGoOut(pMap);
 		return result;
 	}
+	public String myComBack(Map<String, Object> pMap) {
+		//외출복귀 버튼 이벤트
+		logger.info("MyServiceLogic => 외출복귀 버튼 호출");
+		String result ="";
+		result = myServiceDao.myComBack(pMap);
+		return result;
+	}
+	
 
-	public int myAddSchedule(Map<String, Object> pMap) {
+	public String myAddSchedule(Map<String, Object> pMap) {
 		//일정추가 버튼 이벤트
 		logger.info("MyServiceLogic => 개인 일정 추가  호출");
-		int result = 0;
+		String result = "";
 		result = myServiceDao.myAddSchedule(pMap);
 		return result;
 	}
 
-	public int myUpdSchedule(Map<String, Object> pMap) {
+	public String myUpdSchedule(Map<String, Object> pMap) {
 		//일정수정 버튼 이벤트
 		logger.info("MyServiceLogic => 개인 일정 수정  호출");
-		int result = 0;
+		String result = "";
 		result = myServiceDao.myUpdSchedule(pMap);
 		return result;
 	}
@@ -103,5 +111,7 @@ public class MyServiceLogic {
 		return result;
 		
 	}
+
+	
 
 }

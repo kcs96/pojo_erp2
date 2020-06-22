@@ -65,10 +65,10 @@ public class EmpLogic {
 		return rList;
 	}
 
-	public Map<String,Object> newPassword(Map<String, Object> pMap) {
+	public String newPassword(Map<String, Object> pMap) {
 		logger.info("EmpLogic => 내 정보 리스트 => password 설정");
-		Map<String,Object> rMap = empDao.newPassword(pMap);
-		return rMap;
+		String result = empDao.newPassword(pMap);
+		return result;
 	}
 
 }

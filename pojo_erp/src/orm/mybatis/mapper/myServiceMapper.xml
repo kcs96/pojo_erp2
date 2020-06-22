@@ -12,11 +12,9 @@
 	</select>
 	
 	<!-- 출근,퇴근,외출,외출복귀 버튼 프로시저 -->
-	<select id="proc_inout" parameterType="map" statementType="CALLABLE">
-		{ call proc_inout(#{btn_type},#{u_id}, #{key,jdbcType=CURSOR
-		                                   , mode=OUT
-		                                   , javaType=java.sql.ResultSet
-		                                   , resultMap=smap})}
+	<select id="proc_inout" parameterType="map" statementType="CALLABLE" resultType="String">
+		{ call proc_inout(#{btn_type},#{emp_no}
+								        , #{msg,mode=OUT,jdbcType=VARCHAR})}
 	</select>
 	
 	<!-- 주간 출근 시간 그래프 프로시저 -->
@@ -55,21 +53,17 @@
 	</select>
 	
 	<!-- 개인 일정 추가하기  -->
-	<select id="proc_mySdAdd" parameterType="map" statementType="CALLABLE">
-		{ call proc_mySdAdd(#{i_id} ,#{i_title},#{i_memo} ,#{i_sdate} ,#{i_edate} 
-		,#{i_type}	,#{i_allday} ,#{i_bgcolor}	#{key,jdbcType=CURSOR
-		                                   , mode=OUT
-		                                   , javaType=java.sql.ResultSet
-		                                   , resultMap=smap})}
+	<select id="proc_mySdAdd" parameterType="map" statementType="CALLABLE" resultType="String">
+		{ call proc_mySdAdd(#{emp_no} ,#{my_title},#{my_memo} ,#{my_sdate} ,#{my_edate} 
+							,#{my_type}	,#{my_allday} ,#{my_bgcolor}
+							, #{msg,mode=OUT,jdbcType=VARCHAR})}
 	</select>
 	
 	<!-- 개인 일정 수정하기  -->
-	<select id="proc_mySdUpd" parameterType="map" statementType="CALLABLE">
-		{ call proc_mySdUpd(#{i_id}, #{i_title}, #{i_sdate}, #{i_edate}, #{i_type},
-		#{i_allday}, #{i_bgcolor}, #{i_memo}, #{i_pk}, #{key,jdbcType=CURSOR
-		                                   , mode=OUT
-		                                   , javaType=java.sql.ResultSet
-		                                   , resultMap=smap})}
+	<select id="proc_mySdUpd" parameterType="map" statementType="CALLABLE" resultType="String">
+		{ call proc_mySdUpd(#{emp_no}, #{my_title}, #{my_sdate}, #{my_edate}, #{my_type}
+									, #{my_allday}, #{my_bgcolor}, #{my_memo}, #{my_no}
+									, #{msg,mode=OUT,jdbcType=VARCHAR})}
 	</select>
 	
 	<!-- 개인 일정 삭제하기  -->

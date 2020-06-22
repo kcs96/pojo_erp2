@@ -18,7 +18,7 @@ public class MyServiceDao {
 	public MyServiceDao() {
 		logger.info("MyServiceDao() 호출 성공"); 
 		sqlMapper= MyBatisCommonFactory.getSqlSessionFactory();
-		sqlSec = sqlMapper.openSession(true);
+		sqlSec = sqlMapper.openSession();
 	}
 	
 	public List<Map<String, Object>> myInOutInfo(Map<String, Object> pMap) {
@@ -66,38 +66,57 @@ public class MyServiceDao {
 		rList= (List<Map<String, Object>>)pMap.get("key");
 		return rList;
 	}
-	public int myGoWork(Map<String, Object> pMap) {
+	public String myGoWork(Map<String, Object> pMap) {
 		//출근 버튼 이벤트
 		logger.info("MyServiceDao => 출근 버튼 호출"); 
-		result=sqlSec.insert("proc_inout",pMap);
+		String result ="";
+		sqlSec.selectOne("proc_inout",pMap);
+		result=pMap.get("msg").toString();
 		return result;
 	}
 
-	public int myGoOut(Map<String, Object> pMap) {
+	public String myGoOut(Map<String, Object> pMap) {
 		//외출 버튼 이벤트
 		logger.info("MyServiceDao => 외출 버튼 호출"); 
-		result=sqlSec.update("proc_inout",pMap);
-		return result;
-	}
-
-	public int myGoHome(Map<String, Object> pMap) {
-		//퇴근 버튼 이벤트 탭 이벤트
-		logger.info("MyServiceDao => 퇴근 버튼 호출"); 
-		result=sqlSec.update("proc_inout",pMap);
+		String result ="";
+		sqlSec.selectOne("proc_inout",pMap);
+		result=pMap.get("msg").toString();
 		return result;
 	}
 	
-	public int myAddSchedule(Map<String, Object> pMap) {
+	public String myComBack(Map<String, Object> pMap) {
+		//외출 버튼 이벤트
+		logger.info("MyServiceDao => 외출복귀 버튼 호출"); 
+		String result ="";
+		sqlSec.selectOne("proc_inout",pMap);
+		result=pMap.get("msg").toString();
+		return result;
+	}
+	
+	public String myGoHome(Map<String, Object> pMap) {
+		//퇴근 버튼 이벤트 탭 이벤트
+		logger.info("MyServiceDao => 퇴근 버튼 호출"); 
+		String result ="";
+		sqlSec.selectOne("proc_inout",pMap);
+		result=pMap.get("msg").toString();
+		return result;
+	}
+	
+	public String myAddSchedule(Map<String, Object> pMap) {
 		//일정추가 버튼 이벤트
 		logger.info("MyServiceDao => 개인 일정 추가 호출"); 
-		result=sqlSec.insert("myAddSchedule",pMap);
+		String result ="";
+		sqlSec.selectOne("proc_mySdAdd",pMap);
+		result=pMap.get("msg").toString();
 		return result;
 	}
 
-	public int myUpdSchedule(Map<String, Object> pMap) {
+	public String myUpdSchedule(Map<String, Object> pMap) {
 		//일정수정 버튼 이벤트
 		logger.info("MyServiceDao => 개인 일정 수정 호출"); 
-		result=sqlSec.update("myUpdSchedule",pMap);
+		String result ="";
+		sqlSec.selectOne("proc_mySdUpd",pMap);
+		result=pMap.get("msg").toString();
 		return result;
 	}
 
@@ -107,5 +126,7 @@ public class MyServiceDao {
 		result=sqlSec.delete("my_sdDel",pMap);
 		return result;
 	}
+
+
 
 }

@@ -17,7 +17,7 @@
 <!--=====================================메인 화면 탭 ======================================-->
 	<!-- 내정보 수정클릭시 내 리스트 -->
   	<select id="PROC_NEMPLIST" parameterType="map" statementType="CALLABLE">
-		{ call PROC_NEMPLIST(#{btn_type},#{emp_no},#{pay_day}
+		{ call PROC_NEMPLIST(#{emp_no}
 										   ,#{key,jdbcType=CURSOR
 		                                   , mode=OUT
 		                                   , javaType=java.sql.ResultSet
@@ -64,24 +64,15 @@
 	
 	<!-- 회원 수정 버튼 클릭 이벤트 -->
 	<insert id="myUpdImformation" parameterType="map">
-		UPDATE EMP SET    
-		EMP_NAME = #{EMP_NAME}
-      ,EMP_RESNUM = #{EMP_RESNUM}
-      ,EMP_PHOTO = #{EMP_PHOTO}
-      ,EMP_PW  = #{EMP_PW}
-      ,EMP_PHONE  = #{EMP_PHONE}
-      ,EMP_EMAIL = #{EMP_EMAIL}
-      ,EMP_NO  = #{EMP_NO}
-      ,DEPT_NO =  #{DEPT_NO}
-      ,EMP_EXTEND  = #{EMP_EXTEND}
-      ,EMP_POSITION = #{EMP_POSITION}
-      ,EMP_SALARY  = #{EMP_SALARY}
-      ,EMP_HIREDATE  = #{EMP_HIREDATE}
-      ,EMP_RETIREDATE  = #{EMP_RETIREDATE}
-      ,EMP_STATE = #{EMP_STATE}
-      ,EMP_ADDRESS = #{EMP_ADDRESS}
-WHERE EMP_NO = #{EMP_NO}
+		UPDATE emp SET    
+	        emp_photo = #{emp_photo}
+	        ,emp_pw  = #{emp_pw}
+	        ,emp_phone  = #{emp_phone}
+	        ,emp_email = #{emp_email}
+	      ,emp_address = #{emp_address}
+	WHERE emp_no = #{emp_no}
 	</insert>
+	
 <!--=====================================메인 화면 탭 끝======================================-->
 	
 </mapper>

@@ -19,19 +19,26 @@ public class ConferenceDao {
 		sqlSec = sqlMapper.openSession();
 	}
 
-	public int conAddRoom(Map<String, Object> pMap) {
+	public String conAddRoom(Map<String, Object> pMap) {
 		//회의실예약 버튼 이벤트
 		logger.info("ConferenceDao() => 회의실 예약"); 
-		int result = 0;
-		result = sqlSec.insert("conAddRoom",pMap);
+		sqlSec.selectOne("proc_conResAdd",pMap);
+		String result=pMap.get("msg").toString();
 		return result;
 	}
 
+	public String conUpdRoom(Map<String, Object> pMap) {
+		//회의실 예약 수정 버튼 클릭
+		logger.info("ConferenceDao() => 회의실 예약"); 
+		sqlSec.selectOne("proc_conResUpd",pMap);
+		String result=pMap.get("msg").toString();
+		return result;
+	}
+	
 	public int conDelRoom(Map<String, Object> pMap) {
 		//회의실 삭제 이벤트
 		logger.info("ConferenceDao() => 회의실 삭제"); 
-		int result = 0;
-		result = sqlSec.delete("conDelRoom",pMap);
+		int result = sqlSec.delete("conResDel",pMap);
 		return result;
 	}
 
@@ -43,4 +50,5 @@ public class ConferenceDao {
 		rList = (List<Map<String, Object>>)pMap.get("key");
 		return rList;
 	}
+
 }

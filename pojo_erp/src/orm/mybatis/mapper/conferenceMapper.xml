@@ -14,28 +14,23 @@
 	
 	<!-- 회의실 예약 추가하기 -->
 	<select id="proc_conResAdd" parameterType="map" statementType="CALLABLE">
-		{ call proc_conResAdd(#{i_title},#{i_sdate},#{i_edate},#{i_type},
-		#{i_allday},#{i_bgcolor},#{i_cfrNo},#{i_memo},
-		#{i_id}							   , #{key,jdbcType=CURSOR
-		                                   , mode=OUT
-		                                   , javaType=java.sql.ResultSet
-		                                   , resultMap=cmap})}
+		{ call proc_conResAdd(#{cfr_title},#{cfr_sdate},#{cfr_edate},#{cfr_type},
+		#{cfr_allday},#{cfr_bgcolor},#{cfr_memo},#{emp_no}	
+								    , #{msg,mode=OUT,jdbcType=VARCHAR})}
 	</select>
 
 	<!-- 회의실 예약 수정하기 -->
 	<select id="proc_conResUpd" parameterType="map" statementType="CALLABLE">
-		{ call proc_conResUpd(#{i_title},#{i_sdate},#{i_edate},#{i_type},
-		#{i_allday},#{i_bgcolor},#{i_cfrNo},#{i_memo},#{i_id}
-										   , #{key,jdbcType=CURSOR
-		                                   , mode=OUT
-		                                   , javaType=java.sql.ResultSet
-		                                   , resultMap=cmap})}
+		{ call proc_conResUpd(#{cfr_title},#{cfr_sdate},#{cfr_edate},#{cfr_type},
+		#{cfr_allday},#{cfr_bgcolor},#{cfr_no},#{cfr_memo},#{emp_no}
+								    , #{msg,mode=OUT,jdbcType=VARCHAR})}
 	</select>
 	
 	<!-- 회의실 예약 삭제하기 -->
 	<delete id="conResDel" parameterType="map"> <!-- 회의실 예약 삭제 쿼리문-->
 		DELETE FROM conferenceres 
 		WHERE cfr_no = #{cfr_no}
+		  AND emp_no = #{emp_no}
 	</delete>
 	
 <!--=====================================회의실 예약 탭 끝 ======================================-->
