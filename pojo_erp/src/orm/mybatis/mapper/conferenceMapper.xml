@@ -5,7 +5,7 @@
 <!--=====================================회의실 예약 탭 ======================================-->
 	<!-- 회의실 예약리스트 (당월) -->
 	<select id="proc_conResList" parameterType="map" statementType="CALLABLE">
-		{call proc_conResList(#{cfr_day}
+		{ call proc_conResList(#{cfr_day}
 										   ,#{key,jdbcType=CURSOR
 		                                   , mode=OUT
 		                                   , javaType=java.sql.ResultSet

@@ -121,22 +121,23 @@ public class ConferenceController implements Controller {
 	}
 
 	@Override
-		public ModelAndView process(HttpServletRequest req, HttpServletResponse res)
-				throws ServletException, IOException {
-			ModelAndView mav = new ModelAndView();
+	public ModelAndView process(HttpServletRequest req, HttpServletResponse res)
+			throws ServletException, IOException {
+			ModelAndView mav = new ModelAndView(req,res);
+			HttpSession session = req.getSession();
 			Map<String,Object> pMap = new HashMap<>();
 			pMap.put("cfr_day", "2020-06-01");//테스트
 			//pMap.put("cfr_day", req.getParameter("cfr_day"));  실제
+			
 			if(requestName.equals("allRes")) {
 				//회의실예약 insert here
 				logger.info("ConferenceController[String] => 회의실예약탭  호출");
 				List<Map<String,Object>> allResList = new ArrayList<>();
 				allResList = conLogic.allRes(pMap);
-				System.out.println("회의실예약 리스트 => "+allResList.size());
-				//mav.addObject("dsfds", allResList);
+			    System.out.println("회의실예약 리스트 => "+allResList.size());
+				mav.addObject("dsfds", "123123");
 				mav.setViewName("");
 			}
-			System.out.println(mav);
 			return mav;
 		}
 }
