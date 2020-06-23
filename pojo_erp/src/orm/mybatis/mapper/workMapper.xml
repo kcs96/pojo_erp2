@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="orm.mybatis.mapper.workMapper">
+<resultMap id="wmap" type="java.util.Map"/>
+	<!-- ================================= 보낸 결재문서함  =========================================-->
+		<select id="proc_s_SignList" parameterType="map" statementType="CALLABLE">
+		{call proc_s_SignList(#{emp_no},#{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=wmap})}
+	    </select>
+	<!-- ================================= 보낸 결재문서함 끝  =========================================-->
+	
+	<!-- =============================== 내 받은 결재문서함 시작 ======================================== -->
+	<select id="proc_r_SignList" parameterType="map" statementType="CALLABLE">
+		{call proc_r_SignList(#{emp_no},#{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=wmap})}
+	</select>
+	<!-- ===============================  내 받은 결재함 문서 끝======================================== -->
+	
+	<!-- ================================== 결재폼양식 ========================================== -->
+	<select id="proc_SignForm" parameterType="map" statementType="CALLABLE">
+		{call proc_SignForm(#{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=wmap})}
+	</select>
+	<!-- ================================== 결재폼양식 끝  ============================================ -->	
+	
+	<!-- ================================== 정보수정 ================================================ -->
+		<select id="PROC_EMPLIST_INSA" parameterType="map" statementType="CALLABLE">
+		{call PROC_EMPLIST_INSA(#{emp_no},#{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=wmap})}
+		</select>
+	
+	<!-- =================================== 정보수정 끝============================================== -->
+	
+	<!-- =================================== 정보수정 저장버튼  ========================================== -->
+	  <update id="workUpdEmp" parameterType="map">
+	   UPDATE EMP
+	   SET EMP_NAME = #{EMP_NAME}
+      ,EMP_RESNUM = #{EMP_RESNUM}
+      ,EMP_PHOTO = #{EMP_PHOTO}
+      ,EMP_PW  = #{EMP_PW}
+      ,EMP_PHONE  = #{EMP_PHONE}
+      ,EMP_EMAIL = #{EMP_EMAIL}
+      ,EMP_NO  = #{EMP_NO}
+      ,DEPT_NO =  #{DEPT_NO}
+      ,EMP_EXTEND  = #{EMP_EXTEND}
+      ,EMP_POSITION = #{EMP_POSITION}
+      ,EMP_SALARY  = #{EMP_SALARY}
+      ,EMP_HIREDATE  = TO_DATE(#{EMP_HIREDATE},'YYYY-MM-DD')
+      ,EMP_RETIREDATE  = TO_DATE(#{EMP_RETIREDATE},'YYYY-MM-DD')
+      ,EMP_STATE = #{EMP_STATE}
+      ,EMP_ADDRESS = #{EMP_ADDRESS}
+       WHERE EMP_NO = #{EMP_NO}
+      </update>
+	<!-- =================================== 정보수정 저장버튼 끝========================================== -->
+	
+	<!-- ===================================인사탭 비밀번호 변경 ============================================== -->
+		<select id="PROC_CHANGEPW" parameterType="map" statementType="CALLABLE" resultType="String">
+		{call PROC_CHANGEPW(#{U_IN_PW},#{U_IN_RPW},#{MSG,jdbcType=VARCHAR,mode=OUT})}
+	   </select>
+	<!-- ===================================인사탭 비밀번호 변경 끝 ============================================== -->
+
+	<!-- ================================== 사원관리 ================================================ -->
+	<select id="proc_empList" parameterType="map" statementType="CALLABLE">
+		{call proc_empList(#{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=wmap})}
+	</select>
+	<!-- ================================== 사원관리 끝 ================================================ -->
+	
+	<!-- ================================== 퇴직사원 조회 =============================================== -->
+	<select id="PROC_RETIREMENT" parameterType="map" statementType="CALLABLE">
+		{call PROC_RETIREMENT(#{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=wmap})}
+	</select>
+	<!-- ================================== 퇴직사원조회 끝 =============================================== -->
+	
+	
+	<!-- ================================== 사원등록 저장버튼 =================================================== -->
+	<insert id="workAddEmp" parameterType="map">
+	INSERT INTO EMP(emp_name,emp_resnum,emp_gender,emp_photo,emp_pw
+               ,emp_phone,emp_email,emp_no
+               ,dept_no,emp_extend,emp_position
+               ,emp_salary,emp_hiredate,emp_retiredate,emp_state
+               ,emp_address,emp_zipcode,emp_detailaddress)
+    VALUES(#{emp_name},#{emp_resnum},#{emp_gender},#{emp_photo},#{emp_pw}
+               ,#{emp_phone},#{emp_email},#{emp_no}
+               ,#{dept_no},#{emp_extend},#{emp_position}
+               ,#{emp_salary},to_date(#{emp_hiredate},'YYYY-MM-DD'),TO_DATE(#{emp_retiredate},'YYYY-MM-DD'),#{emp_state}
+  			   ,#{emp_address},#{emp_zipcode},#{emp_detailaddress})
+	</insert>
+	<!-- ================================== 사원등록 저장버튼 끝=================================================== -->
+	
+	
+	<!-- ================================== 총사원보여주기 =============================================== -->
+	<select id="proc_tot_empList" parameterType="map" statementType="CALLABLE">
+		{call proc_tot_empList(     #{key, 
+		                     	    jdbcType=CURSOR, 
+		                     		mode=OUT, 
+		                     		javaType=java.sql.ResultSet, 
+		                     		resultMap=wmap})}
+	</select>
+	<!-- ================================== 총사원보여주기 끝 =============================================== -->
+	
+	<!-- ================================== 파견맵 보여주기 =============================================== -->
+	<select id="PROC_MapView" parameterType="map" statementType="CALLABLE">
+		{call PROC_MapView(#{dl_no},#{key, 
+		                     	    jdbcType=CURSOR, 
+		                     		mode=OUT, 
+		                     		javaType=java.sql.ResultSet, 
+		                     		resultMap=wmap})}
+	</select>
+	<!-- ================================== 지사 관리 ================================================== -->
+	<select id="PROC_BRANCHLIST" parameterType="map" statementType="CALLABLE">
+		{call PROC_BRANCHLIST(#{key, 
+		                        jdbcType=CURSOR, 
+		                     	mode=OUT, 
+		                     	javaType=java.sql.ResultSet, 
+		                     	resultMap=wmap})}
+	</select>
+	<!-- ================================== 지사관리 끝 ====================================================== -->
+	
+	<!-- ==================================  지사등록 ===================================================== -->
+	<insert id="addBranch" parameterType="map">
+		INSERT INTO DISPATCH_LOC(DL_NO,DL_LATITUDE,DL_LONGITUDE,DL_NAME,
+               DL_TEL,DL_ADDRESS)
+        VALUES(SEQ_DL_NO.NEXTVAL,#{DL_LATITUDE},#{DL_LONGITUDE},#{DL_NAME},#{DL_TEL},#{DL_ADDRESS})
+	</insert>	
+	<!-- ================================== 지사등록 끝 =================================================== -->
+	
+	<!-- ================================== 지사관리삭제 =============================================== -->
+	<select id="PROC_DELBRANCH" parameterType="map" statementType="CALLABLE" resultType="String">
+		{call PROC_DELBRANCH(#{U_INPUT},#{U_NUM},#{MSG, mode=OUT,jdbcType=VARCHAR})}
+	</select>
+	<!-- ================================== 지사관리 삭제 끝=============================================== -->
+	
+	
+	<!-- ================================== 파견사원 조회 =============================================== -->
+	<select id="proc_dispatch" parameterType="map" statementType="CALLABLE">
+		{call proc_dispatch(#{key, 
+		                        jdbcType=CURSOR, 
+		                     	mode=OUT, 
+		                     	javaType=java.sql.ResultSet, 
+		                     	resultMap=wmap})}
+	</select>
+	<!-- ================================== 파견사원 조회 끝=============================================== -->
+	
+	
+	
+	<!-- ================================== 부서일정 리스트 =============================================== -->
+	<select id="proc_deptSchList" parameterType="map" statementType="CALLABLE">
+		{call proc_deptSchList(#{emp_no},#{dept_day},#{key, 
+		                     	    jdbcType=CURSOR, 
+		                     		mode=OUT, 
+		                     		javaType=java.sql.ResultSet, 
+		                     		resultMap=wmap})}
+	</select>
+	<!-- ================================== 부서일정 리스트 끝=============================================== -->
+	
+	
+</mapper>
+  

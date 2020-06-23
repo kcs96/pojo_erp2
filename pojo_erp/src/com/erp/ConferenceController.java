@@ -135,7 +135,7 @@ public class ConferenceController implements Controller {
 				List<Map<String,Object>> allResList = new ArrayList<>();
 				allResList = conLogic.allRes(pMap);
 			    System.out.println("회의실예약 리스트 => "+allResList.size());
-				mav.addObject("dsfds", "123123");
+				mav.addObject("allResList", allResList);
 				mav.setViewName("");
 			}
 			return mav;

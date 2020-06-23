@@ -49,7 +49,7 @@ public class WorkLogic {
 	}
 	public List<Map<String, Object>> empList(Map<String, Object> pMap) {
 		//사원조회 탭
-		logger.info("Logic : 사원조회 호출 성공");
+		logger.info("Logic : 사원관리 호출 성공");
 		List<Map<String,Object>> rlist = null;
 		rlist = workDao.empList(pMap);
 		return rlist;
@@ -75,7 +75,7 @@ public class WorkLogic {
 		rlist = workDao.branchList(pMap);
 		return rlist;
 	}
-	public List deptSchedule(Map<String,Object> pMap) {
+	public List<Map<String, Object>> deptSchedule(Map<String,Object> pMap) {
 		//부서일정 이벤트 탭
 		logger.info("Logic : 부서일정 호출 성공");
 		List<Map<String,Object>> rlist = null;
@@ -155,6 +155,12 @@ public class WorkLogic {
 		return rlist;
 		
 	}
+	public int workUpdEmp(Map<String, Object> pMap) {
+		//정보수정 저장 버튼 눌렀을 경우 insert here
+		int result = 0;
+		result = workDao.workUpdEmp(pMap);
+		return result;
+	}
 	public int workAddEmp(Map<String, Object> pMap) {
 		//신규사원 등록 이벤트 탭 insert here
 		logger.info("Logic : 신규사원 등록 호출 성공");
@@ -162,18 +168,11 @@ public class WorkLogic {
 		result = workDao.workAddEmp(pMap);
 		return result;
 	}
-	public int workUpdPw(Map<String, Object> pMap) {
-		//재직사원 비밀번호 변경 insert here
+	public String workUpdPw(Map<String, Object> pMap) {
+		//인사탭 비밀번호 변경 insert here
 		logger.info("Logic : 재직사원 비밀번호 변경 호출 성공");
-		int result = 0;
+		String result = null;
 		result = workDao.workUpdPw(pMap);
-		return result;
-	}
-	public int workUpdProfile(Map<String,Object> pMap) {
-		//재직사원 정보 변경 insert here
-		logger.info("Logic : 재직사원 정보 변경 호출 성공");
-		int result = 0;
-		result = workDao.workUpdProfile(pMap);
 		return result;
 	}
 	public List<Map<String, Object>> workSelectSearchRetire(Map<String, Object> pMap) {
@@ -190,10 +189,10 @@ public class WorkLogic {
 		rlist = workDao.workSelectSearchDispatcher(pMap);
 		return rlist;
 	}
-	public int workDelBranch(Map<String, Object> pMap) {
+	public String workDelBranch(Map<String, Object> pMap) {
 		//지사 삭제 insert here
 		logger.info("Logic : 지사 삭제 호출 성공");
-		int result = 0 ; 
+		String result = null; 
 		result = workDao.workDelBranch(pMap);
 		return result;
 	}
@@ -204,7 +203,16 @@ public class WorkLogic {
 		result = workDao.workAddBranch(pMap);
 		return result;
 	}
-	
+	public List<Map<String,Object>> workSelMapView(Map<String, Object> pMap) {
+		List<Map<String,Object>> rlist = null;
+		rlist = workDao.workSelMapView(pMap);
+		return rlist;
+	}
+	public List<Map<String, Object>> tot_empList(Map<String, Object> pMap) {
+		List<Map<String,Object>> rlist = null;
+		rlist = workDao.tot_empList(pMap);
+		return rlist;
+	}
 	
 
 
