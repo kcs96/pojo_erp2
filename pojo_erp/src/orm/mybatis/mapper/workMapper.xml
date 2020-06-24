@@ -31,6 +31,41 @@
 	</select>
 	<!-- ================================== 결재폼양식 끝  ============================================ -->	
 	
+	
+	
+	<!-- ================================== 전자결재 항목  ============================================ -->	
+	<!-- 승인버튼 눌렀을 때 -->
+	<select id="proc_accept" parameterType="map" statementType="CALLABLE" resultType="String">
+		{call proc_accept(#{emp_no},#{ap_no},#{msg,jdbcType=VARCHAR,mode=OUT})}
+	</select>
+	   
+	 <!-- 결제신청시 수신자테이블에 insert -->
+	<select id="proc_reason" parameterType="map" statementType="CALLABLE" resultType="String">
+		{call proc_reason(#{emp_no},#{ap_no},#{ap_reason},#{msg,jdbcType=VARCHAR,mode=OUT})}
+	</select>
+	   
+	<!--결제신청 버튼 눌렀을때 -->
+	<insert id="workAddDoc" parameterType="map">
+		INSERT INTO APPROVE(ap_no,fr_no,ap_title,ap_state,ap_reporter,ap_appdate
+                   ,ap_closedate,ap_content,ap_dname,ap_hiredate
+                   ,ap_phone,ap_prosessingdate,ap_instructions,ap_bego,ap_sign)
+		VALUES(seq_ar.nextval,#{fr_no},#{ap_title},#{ap_state}
+    			  ,#{ap_reporter},to_date(#{ap_appdate},'yyyy-mm-dd'),to_date(#{ap_closedate},'yyyy-mm-dd')
+    			  ,#{ap_content},#{ap_dname},to_date(#{ap_hiredate},'yyyy-mm-dd')
+    			  ,#{ap_phone},#{ap_prosessingdate},#{ap_instructions},#{ap_bego},#{ap_sign})
+	</insert>
+	
+	<!-- 결제신청시 수신자테이블에 insert -->
+	<select id="proc_addRev" parameterType="map" statementType="CALLABLE" resultType="String">
+		{call proc_addRev(#{emp_no},#{ap_no},#{count},#{msg,jdbcType=VARCHAR,mode=OUT})}
+	   </select>
+	
+	
+	<!-- ================================== 전자결재 항목 끝 ============================================ -->	
+	
+	
+	
+	
 	<!-- ================================== 정보수정 ================================================ -->
 		<select id="PROC_EMPLIST_INSA" parameterType="map" statementType="CALLABLE">
 		{call PROC_EMPLIST_INSA(#{emp_no},#{key,jdbcType=CURSOR
@@ -44,22 +79,25 @@
 	<!-- =================================== 정보수정 저장버튼  ========================================== -->
 	  <update id="workUpdEmp" parameterType="map">
 	   UPDATE EMP
-	   SET EMP_NAME = #{EMP_NAME}
-      ,EMP_RESNUM = #{EMP_RESNUM}
-      ,EMP_PHOTO = #{EMP_PHOTO}
-      ,EMP_PW  = #{EMP_PW}
-      ,EMP_PHONE  = #{EMP_PHONE}
-      ,EMP_EMAIL = #{EMP_EMAIL}
-      ,EMP_NO  = #{EMP_NO}
-      ,DEPT_NO =  #{DEPT_NO}
-      ,EMP_EXTEND  = #{EMP_EXTEND}
-      ,EMP_POSITION = #{EMP_POSITION}
-      ,EMP_SALARY  = #{EMP_SALARY}
-      ,EMP_HIREDATE  = TO_DATE(#{EMP_HIREDATE},'YYYY-MM-DD')
-      ,EMP_RETIREDATE  = TO_DATE(#{EMP_RETIREDATE},'YYYY-MM-DD')
-      ,EMP_STATE = #{EMP_STATE}
-      ,EMP_ADDRESS = #{EMP_ADDRESS}
-       WHERE EMP_NO = #{EMP_NO}
+			   SET emp_name = #{emp_name}
+		      ,emp_resnum = #{emp_resnum}
+		      ,emp_photo = #{emp_photo}
+		      ,emp_pw  = #{emp_pw}
+		      ,emp_phone  = #{emp_phone}
+		      ,emp_email = #{emp_email}
+		      ,dept_no =  #{dept_no}
+		      ,emp_extend  = #{emp_extend}
+		      ,emp_position = #{emp_position}
+		      ,emp_salary  = #{emp_salary}
+		      ,emp_hiredate  = TO_DATE(#{emp_hiredate},'YYYY-MM-DD')
+		      ,emp_retiredate  = TO_DATE(#{emp_retiredate},'YYYY-MM-DD')
+		      ,emp_state = #{emp_state}
+		      ,emp_address = #{emp_address}
+		      ,emp_zipcode = #{emp_zipcode}
+		      ,emp_detailaddress = #{emp_detailaddress}
+		      ,emp_bank = #{emp_bank}
+		      ,emp_account = #{emp_account}
+		 WHERE emp_no = #{emp_no}
       </update>
 	<!-- =================================== 정보수정 저장버튼 끝========================================== -->
 	
@@ -94,12 +132,12 @@
                ,emp_phone,emp_email,emp_no
                ,dept_no,emp_extend,emp_position
                ,emp_salary,emp_hiredate,emp_retiredate,emp_state
-               ,emp_address,emp_zipcode,emp_detailaddress)
+               ,emp_address,emp_zipcode,emp_detailaddress,emp_bank,emp_account)
     VALUES(#{emp_name},#{emp_resnum},#{emp_gender},#{emp_photo},#{emp_pw}
                ,#{emp_phone},#{emp_email},#{emp_no}
                ,#{dept_no},#{emp_extend},#{emp_position}
                ,#{emp_salary},to_date(#{emp_hiredate},'YYYY-MM-DD'),TO_DATE(#{emp_retiredate},'YYYY-MM-DD'),#{emp_state}
-  			   ,#{emp_address},#{emp_zipcode},#{emp_detailaddress})
+  			   ,#{emp_address},#{emp_zipcode},#{emp_detailaddress},#{emp_bank},#{emp_account})
 	</insert>
 	<!-- ================================== 사원등록 저장버튼 끝=================================================== -->
 	
@@ -159,7 +197,8 @@
 	
 	
 	
-	<!-- ================================== 부서일정 리스트 =============================================== -->
+	<!-- ==================================== 부서일정  ================================================== -->
+	<!--부서 일정 리스트  -->
 	<select id="proc_deptSchList" parameterType="map" statementType="CALLABLE">
 		{call proc_deptSchList(#{emp_no},#{dept_day},#{key, 
 		                     	    jdbcType=CURSOR, 
@@ -167,6 +206,28 @@
 		                     		javaType=java.sql.ResultSet, 
 		                     		resultMap=wmap})}
 	</select>
+	
+	<!--부서 일정 추가  -->
+	<select id="proc_deptSchAdd" parameterType="map" statementType="CALLABLE" resultType="String">
+		{call proc_deptSchAdd(#{ds_title},#{ds_memo},#{ds_sdate},#{ds_edate}
+							 ,#{ds_allday},#{ds_type},#{ds_bgcolor},#{emp_no}
+						     ,#{msg, mode=OUT,jdbcType=VARCHAR})}
+	</select>
+	
+	<!--부서 일정 변경  -->
+	<select id="proc_deptSchUpd" parameterType="map" statementType="CALLABLE" resultType="String">
+		{call proc_deptSchUpd(#{ds_title},#{ds_memo},#{ds_sdate},#{ds_edate}
+							 ,#{ds_allday},#{ds_type},#{ds_bgcolor},#{ds_no},#{emp_no}
+						     ,#{msg, mode=OUT,jdbcType=VARCHAR})}
+	</select>
+	
+	<!-- 개인 일정 삭제하기  -->
+	<delete id="work_deptSchDel" parameterType="map"> 
+		DELETE FROM dept_schedule
+		 WHERE emp_no = #{emp_no}
+  		   AND ds_no = #{ds_no}
+	</delete>
+	
 	<!-- ================================== 부서일정 리스트 끝=============================================== -->
 	
 	

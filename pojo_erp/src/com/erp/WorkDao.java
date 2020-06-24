@@ -51,13 +51,6 @@ public class WorkDao {
 		logger.info("rlist : " + rlist.size());
 		return rlist;
 	}
-	public List<Map<String, Object>> signSend(Map<String, Object> pMap) {
-		//결재신청 이벤트 탭
-		logger.info("Dao : 결재신청 호출 성공");
-		List<Map<String,Object>> rlist = null;
-		rlist = sqlSes.selectList("signSend",pMap);
-		return rlist;
-	}
 	public List<Map<String, Object>> empList(Map<String, Object> pMap) {
 		//사원조회 이벤트 탭
 		logger.info("Dao : 사원관리 호출 성공");
@@ -123,32 +116,25 @@ public class WorkDao {
 		result = sqlSes.insert("workAddDocument",pMap);
 		return result;
 	}
-	public int workAgree(Map<String, Object> pMap) {
+	public String workAgree(Map<String, Object> pMap) {
 		//결재 승인 이벤트 insert here
 		logger.info("Dao : 결재 승인 호출 성공");
-		int result = 0;
-		result = sqlSes.update("workAgree",pMap);
+		sqlSes.selectOne("proc_accept",pMap);
+		String result = pMap.get("msg").toString();
 		return result;
 	}
-	public int workDeny(Map<String, Object> pMap) {
+	public String workDeny(Map<String, Object> pMap) {
 		//결재 기각 이벤트 insert here
 		logger.info("Dao : 결재 기각 호출 성공");
-		int result = 0;
-		result = sqlSes.update("workDeny",pMap);
+		sqlSes.selectOne("proc_reason",pMap);
+		String result = pMap.get("msg").toString();
 		return result;
 	}
-	public List<Map<String, Object>> workSelectPerson(Map<String, Object> pMap) {
-		//결재신청 수신자 추가 탭 insert here
-		logger.info("Dao : 결재 신청 수신자 추가 호출 성공");
-		List<Map<String,Object>> rlist = null;
-		rlist = sqlSes.selectList("workSelectPerson",pMap);
-		return rlist;
-	}
-	public int workAddSendDoc(Map<String, Object> pMap) {
+	public String workAddSendDoc(Map<String, Object> pMap) {
 		//결재 신청 이벤트 탭 insert here
 		logger.info("Dao : 결재 신청 호출 성공");
-		int result = 0;
-		result = sqlSes.insert("workAddSendDoc",pMap);
+		sqlSes.selectOne("proc_addRev",pMap);
+		String result = pMap.get("msg").toString();
 		return result;
 	}
 	public List<Map<String, Object>> SelectOverView(Map<String, Object> pMap) {
@@ -169,7 +155,7 @@ public class WorkDao {
 		//정보수정 이벤트 탭 insert here
 		logger.info("Dao : 정보수정 이벤트 호출 성공");
 		List<Map<String,Object>> rlist = null;
-	    	sqlSes.selectOne("PROC_NEMPLIST",pMap);
+	    	sqlSes.selectOne("PROC_EMPLIST_INSA",pMap);
 	    	rlist = (List<Map<String,Object>>)pMap.get("key");
 	    	logger.info("Dao workSelEmp : " + rlist.size());
 		return rlist;
@@ -244,12 +230,30 @@ public class WorkDao {
 		logger.info("Dao workSelMapView 호출 성공 : " + rlist.size());
 		return rlist;
 	}
-	public List<Map<String, Object>> tot_empList(Map<String, Object> pMap) {
-		logger.info("Dao : tot_empList 호출 성공");
-		List<Map<String,Object>> rlist = null;
-		sqlSes.selectOne("proc_tot_empList",pMap);
-		rlist = (List<Map<String,Object>>)pMap.get("key");
-		logger.info("Dao tot_empList : " + rlist.size());
-		return rlist;
+	public String deptAddSchedule(Map<String, Object> pMap) {
+		//부서일정추가 버튼 이벤트
+		logger.info("workDao => 부서 일정 추가 호출"); 
+		String result ="";
+		sqlSes.selectOne("proc_deptSchAdd",pMap);
+		result=pMap.get("msg").toString();
+		return result;
+	}
+	public String deptUpdSchedule(Map<String, Object> pMap) {
+		//부서일정추가 버튼 이벤트
+		logger.info("workDao => 부서 일정 수정 호출"); 
+		String result ="";
+		sqlSes.selectOne("proc_deptSchUpd",pMap);
+		result=pMap.get("msg").toString();
+		return result;
+	}
+	public int deptDelSchedule(Map<String, Object> pMap) {
+		logger.info("workDao => 개인 일정 삭제 호출"); 
+		int result=sqlSes.delete("work_deptSchDel",pMap);
+		return result;
+	}
+	public int workAddDoc(Map<String, Object> pMap) {
+		logger.info("workDao => 결제 신청버튼 호출 (결제입력)"); 
+		int result=sqlSes.insert("workAddDoc",pMap);
+		return result;
 	}
 }

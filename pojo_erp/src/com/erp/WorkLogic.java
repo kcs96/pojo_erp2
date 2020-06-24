@@ -40,13 +40,6 @@ public class WorkLogic {
 		rlist = workDao.signForm(pMap);
 		return rlist;
 	}
-	public List<Map<String,Object>> signSend(Map<String, Object> pMap) {
-		//결재신청 이벤트 탭
-		logger.info("Logic : 결재신청 호출 성공");
-		List<Map<String,Object>> rlist = null;
-		rlist = workDao.signSend(pMap);
-		return rlist;
-	}
 	public List<Map<String, Object>> empList(Map<String, Object> pMap) {
 		//사원조회 탭
 		logger.info("Logic : 사원관리 호출 성공");
@@ -105,32 +98,22 @@ public class WorkLogic {
 		result = workDao.workAddDocument(pMap);
 		return result;
 	}
-	public int workAgree(Map<String, Object> pMap) {
+	public String workAgree(Map<String, Object> pMap) {
 		//결재 승인 이벤트 insert here
 		logger.info("Logic : 결재 승인 호출 성공");
-		int result = 0;
-		result = workDao.workAgree(pMap);
+		String result = workDao.workAgree(pMap);
 		return result;
 	}
-	public int workDeny(Map<String, Object> pMap) {
+	public String workDeny(Map<String, Object> pMap) {
 		//결재 기각 이벤트 insert here
 		logger.info("Logic : 결재 기각 호출 성공");
-		int result = 0;
-		result = workDao.workDeny(pMap);
+		String result = workDao.workDeny(pMap);
 		return result;
 	}
-	public List<Map<String, Object>> workSelectPerson(Map<String, Object> pMap) {
-		//결재신청 수신자 추가 탭 insert here
-		logger.info("Logic : 결재 신청 수신자 추가 호출 성공");
-		List<Map<String,Object>> rlist = null;
-		rlist = workDao.workSelectPerson(pMap);
-		return rlist;
-	}
-	public int workAddSendDoc(Map<String, Object> pMap) {
+	public String workAddSendDoc(Map<String, Object> pMap) {
 		//결재 신청 이벤트 탭 insert here
 		logger.info("Logic : 결재 신청 호출 성공");
-		int result = 0;
-		result = workDao.workAddSendDoc(pMap);
+		String result = workDao.workAddSendDoc(pMap);
 		return result;
 	}
 	public List<Map<String, Object>> workSelectOverView(Map<String, Object> pMap) {
@@ -208,10 +191,33 @@ public class WorkLogic {
 		rlist = workDao.workSelMapView(pMap);
 		return rlist;
 	}
-	public List<Map<String, Object>> tot_empList(Map<String, Object> pMap) {
-		List<Map<String,Object>> rlist = null;
-		rlist = workDao.tot_empList(pMap);
-		return rlist;
+	public String deptAddSchedule(Map<String, Object> pMap) {
+		//부서일정 추가하기
+		logger.info("workDao => 부서 일정 추가  호출");
+		String result = "";
+		result = workDao.deptAddSchedule(pMap);
+		return result;
+	}
+	public String deptUpdSchedule(Map<String, Object> pMap) {
+		//부서일정 수정하기
+		logger.info("workDao => 부서 일정 수정  호출");
+		String result = "";
+		result = workDao.deptUpdSchedule(pMap);
+		return result;
+	}
+	public int deptDelSchedule(Map<String, Object> pMap) {
+		//일정삭제 버튼 이벤트
+		logger.info("workDao => 부서 일정 삭제  호출");
+		int result = 0;
+		result = workDao.deptDelSchedule(pMap);
+		return result;
+	}
+	public int workAddDoc(Map<String, Object> pMap) {
+		//결재신청 이벤트 - 결재테이블 등록
+		logger.info("workDao => 결제 신청버튼 호출");
+		int result = 0;
+		result = workDao.workAddDoc(pMap);
+		return result;
 	}
 	
 
