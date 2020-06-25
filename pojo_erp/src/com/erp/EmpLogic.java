@@ -18,10 +18,10 @@ public class EmpLogic {
 		this.empDao = new EmpDao();
 	}
 	
-	public Map<String, Object> login(Map<String, Object> loginMap) {
+	public List<Map<String, Object>> login(Map<String, Object> loginMap) {
 		//로그인 이벤트 시작
 		logger.info("EmpLogic => 로그인 버튼");
-		Map<String, Object> rMap = new HashMap<>();
+		List<Map<String, Object>> rMap = new ArrayList<>();
 		rMap = empDao.login(loginMap);
 		return  rMap;
 	}

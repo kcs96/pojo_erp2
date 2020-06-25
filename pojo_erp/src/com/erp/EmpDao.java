@@ -22,16 +22,16 @@ public class EmpDao {
 		sqlSec = sqlMapper.openSession();
 	}
 	
-	public Map<String, Object> login(Map<String, Object> loginMap) {
+	public List<Map<String, Object>> login(Map<String, Object> loginMap) {
 		//로그인 이벤트
 		logger.info("EmpDao() => 로그인"); 
-		Map<String, Object> rMap = new HashMap<>();
+		List<Map<String, Object>> rMap = new ArrayList<>();
 		System.out.println(loginMap.get("emp_no"));
 		System.out.println(loginMap.get("emp_pw"));
 		sqlSec.selectOne("proc_empLogin",loginMap);
-		List<Map<String,Object>> pMap=(List<Map<String,Object>>)loginMap.get("key");
-		System.out.println(pMap.get(0).get("EMP_NO"));
-		System.out.println(pMap.get(0).get("EMP_NAME"));
+		rMap = (List<Map<String,Object>>) loginMap.get("key");
+		System.out.println(rMap.get(0).get("EMP_NO"));
+		System.out.println(rMap.get(0).get("EMP_NAME"));
 		return rMap;
 	}
    
