@@ -15,7 +15,7 @@ public class WorkDao {
 	Logger logger = Logger.getLogger(WorkDao.class);
 	public WorkDao() {
 		sqlMapper = MyBatisCommonFactory.getSqlSessionFactory();
-		sqlSes = sqlMapper.openSession();
+		sqlSes = sqlMapper.openSession(true);
 	}
 	public List<Map<String, Object>> personManageMent(Map<String, Object> pMap) {
 		//인사 관리 탭 insert here

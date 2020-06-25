@@ -34,8 +34,7 @@ public class EmpController implements Controller {
 		if("login".equals(cud)) {
 			logger.info("EmpController => 로그인 호출");
 			/////////////////////// 실제 코드    /////////////////////
-			Map<String,String[]> pMap = (Map<String,String[]>)req.getParameterMap();
-			Map<String,Object> loginMap= HashMapBuilder.hashMapBuilder(pMap);
+			Map<String,Object> loginMap= HashMapBuilder.hashMapBuilder(req.getParameterMap());
 			Map<String,Object> rMap = new HashMap<>();
 			rMap =empLogic.login(loginMap);
 			
@@ -68,7 +67,6 @@ public class EmpController implements Controller {
 			System.out.println("회원정보 등록 성공 여부 : "+result);
 			if(result == 1) path="redirect:xxx.jsp"; 
 			else if(result == 0) path="redirect:error.jsp"; 
-			
 			///////////////////////  테스트 코드   /////////////////////
 			/*
 			Map<String,Object> pMap = new HashMap<>();
@@ -99,8 +97,8 @@ public class EmpController implements Controller {
 			Map<String,Object> pMap = new HashMap<>();
 			pMap.put("emp_no", 10001);
 			pMap.put("emp_pw", 1234);
-			pMap.put("new_pw", 1234);
-			pMap.put("new_repw", 1234);
+			pMap.put("new_pw", 123);
+			pMap.put("new_repw", 123);
 			String new_pw =empLogic.newPassword(pMap);
 			System.out.println(new_pw);
 			if(new_pw.equals("1")) path="redirect:xxx.jsp"; 
@@ -132,7 +130,7 @@ public class EmpController implements Controller {
 			List<Map<String,Object>> roomList = empLogic.roomList(pMap);
 			System.out.println("오늘 회의실 예약 리스트 => "+roomList.size());
 			mav.addObject("roomList", roomList);
-			List<Map<String,Object>> taskTimeList = empLogic.roomList(pMap);
+			List<Map<String,Object>> taskTimeList = empLogic.commuteList(pMap);
 			System.out.println("오늘 업무시간 리스트 => "+taskTimeList.size());
 			mav.addObject("taskTimeList", taskTimeList);
 			mav.setViewName("");

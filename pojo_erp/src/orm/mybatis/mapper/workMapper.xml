@@ -47,12 +47,12 @@
 	<!--결제신청 버튼 눌렀을때 -->
 	<insert id="workAddDoc" parameterType="map">
 		INSERT INTO APPROVE(ap_no,fr_no,ap_title,ap_state,ap_reporter,ap_appdate
-                   ,ap_closedate,ap_content,ap_dname,ap_hiredate
-                   ,ap_phone,ap_prosessingdate,ap_instructions,ap_bego,ap_sign)
-		VALUES(seq_ar.nextval,#{fr_no},#{ap_title},#{ap_state}
-    			  ,#{ap_reporter},to_date(#{ap_appdate},'yyyy-mm-dd'),to_date(#{ap_closedate},'yyyy-mm-dd')
-    			  ,#{ap_content},#{ap_dname},to_date(#{ap_hiredate},'yyyy-mm-dd')
-    			  ,#{ap_phone},#{ap_prosessingdate},#{ap_instructions},#{ap_bego},#{ap_sign})
+                   ,ap_closedate,ap_content,ap_dname,ap_retiredate
+                   ,ap_contact,ap_prosessingdate,ap_instructions,ap_bego,ap_sign)
+        VALUES(seq_ar.nextval,#{fr_no},#{ap_title},#{ap_state}
+                  ,#{ap_reporter},to_date(#{ap_appdate},'yyyy-mm-dd'),to_date(#{ap_closedate},'yyyy-mm-dd')
+                  ,#{ap_content},#{ap_dname},to_date(#{ap_retiredate},'yyyy-mm-dd')
+                  ,#{ap_contact},#{ap_prosessingdate},#{ap_instructions},#{ap_bego},#{ap_sign})
 	</insert>
 	
 	<!-- 결제신청시 수신자테이블에 insert -->

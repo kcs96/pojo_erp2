@@ -29,7 +29,6 @@ public class ConferenceController implements Controller {
 		// TODO Auto-generated method stub
 		String path =null;
 		HttpSession session = req.getSession();
-		//String empno = (String)session.getAttribute("empno");
 		if(cud.equals("conAddRoom")) {//insert
 			//회의실예약 insert here
 			logger.info("ConferenceController[String] => 회의실예약 호출");

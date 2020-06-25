@@ -53,7 +53,7 @@ public class EmpDao {
 		return todayList;
 	}
 	
-	public List<Map<String, Object>> taskTime(Map<String, Object> pMap) {
+	public List<Map<String, Object>> commuteList(Map<String, Object> pMap) {
 		//오늘 일정 얻어오기
 		logger.info("EmpDao() => 메인페이지 오늘 일정 정보 담기"); 
 		List<Map<String, Object>> todayTaskList = new ArrayList<>();
@@ -89,10 +89,12 @@ public class EmpDao {
 	}
 
 	public String newPassword(Map<String, Object> pMap) {
-		logger.info("EmpLogic => 내 정보 리스트 => password 설정");
+		//비밀번호 재설정
+		logger.info("EmpDao => 내 정보 리스트 => password 설정");
 		sqlSec.selectOne("proc_newPassword",pMap);
 		String result = pMap.get("msg").toString();
 		return result;
 	}
+
 	
 }

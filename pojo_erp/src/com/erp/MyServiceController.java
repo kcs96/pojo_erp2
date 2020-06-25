@@ -47,7 +47,7 @@ public class MyServiceController implements Controller {
 			///////////////////////  테스트 코드   /////////////////////
 			/*
 			Map<String, Object> pMap = new HashMap<>();
-			pMap.put("emp_no",10001);
+			pMap.put("emp_no",10006);
 			pMap.put("btn_type","출근");
 			String result = myServiceLogic.myGoWork(pMap);
 			System.out.println("출근 버튼 성공 여부 :"+result);
@@ -68,11 +68,10 @@ public class MyServiceController implements Controller {
 			String result=myServiceLogic.myGoHome(pMap);
 			if(result.equals("1")) {path="redirect:xxx.jsp";}
 			else {path="redirect:errorPage.jsp";}
-		
 			///////////////////////  테스트 코드   /////////////////////
 			/*
 			Map<String, Object> pMap = new HashMap<>();
-			pMap.put("emp_no",10001);
+			pMap.put("emp_no",10006);
 			pMap.put("btn_type","퇴근");
 			String result=myServiceLogic.myGoHome(pMap);
 			System.out.println("퇴근버튼 성공 여부 :"+result);
@@ -97,7 +96,7 @@ public class MyServiceController implements Controller {
 			///////////////////////  테스트 코드   /////////////////////
 			/*
 			Map<String, Object> pMap = new HashMap<>();
-			pMap.put("emp_no",10001);
+			pMap.put("emp_no",10006);
 			pMap.put("btn_type","외출");
 			String result = myServiceLogic.myGoOut(pMap);
 			System.out.println("외출버튼 성공 여부 :"+result);
@@ -118,11 +117,10 @@ public class MyServiceController implements Controller {
 			String result = myServiceLogic.myComBack(pMap);
 			if(result.equals("1")) {path="redirect:xxx.jsp";}
 			else {path="redirect:errorPage.jsp";}
-			
 			///////////////////////  테스트 코드   /////////////////////
 			/*
 			Map<String, Object> pMap = new HashMap<>();
-			pMap.put("emp_no",10001);
+			pMap.put("emp_no",10006);
 			pMap.put("btn_type","외출복귀");
 			String result = myServiceLogic.myComBack(pMap);
 			System.out.println("외출복귀버튼 성공 여부 :"+result);
@@ -144,7 +142,6 @@ public class MyServiceController implements Controller {
 			String result = myServiceLogic.myAddSchedule(pMap);
 			if(result.equals("1")) {path="redirect:xxx.jsp";}
 			else {path="redirect:errorPage.jsp";}
-			
 			///////////////////////  테스트 코드   /////////////////////
 			/*
 			Map<String, Object> pMap = new HashMap<>();
@@ -165,12 +162,11 @@ public class MyServiceController implements Controller {
 				path="errorPage.jsp";
 			}
 			*/
-			
 		}
 		else if(cud.equals("myUpdSchedule")) { //update 일정 수정
 			//내 일정 내용 수정
 			logger.info("MyService => 내 일정 변경 실행");
-			/////////////////////// 실제 코드    /////////////////////		
+			/////////////////////// 실제 코드    /////////////////////	
 			Map<String,String[]> myMap = (Map<String,String[]>)req.getParameterMap();
 			Map<String,Object> pMap= HashMapBuilder.hashMapBuilder(myMap);
 			pMap.put("emp_no", session.getAttribute("emp_no"));

@@ -40,11 +40,12 @@ public class WorkController implements Controller {
 			String result_accept = workLogic.workAgree(pMap);
 			if(result_accept.equals("1")) {path="redirect:xxx.jsp";}
 			else {path="redirect:errorPage.jsp";}
+			
 			///////////////////////  테스트 코드   //////////////////////
 			/*
 			pMap = new HashMap<>();
 			pMap.put("emp_no",10001);
-			pMap.put("ap_no",14);
+			pMap.put("ap_no",6);
 			String result_accept = workLogic.workAgree(pMap);
 			System.out.println(result_accept);
 			if(result_accept.equals("1")) {path="redirect:xxx.jsp";}
@@ -62,11 +63,12 @@ public class WorkController implements Controller {
 				{path="redirect:xxx.jsp?result=결재가 마감된 문서입니다.";}
 			}
 			else {path="redirect:errorPage.jsp";}
+			
 		    ///////////////////////  테스트 코드   //////////////////////
-		    /*
+			/*
 		    pMap = new HashMap<>();
-			pMap.put("emp_no",10002);
-			pMap.put("ap_no","14");
+			pMap.put("emp_no",10001);
+			pMap.put("ap_no",6);
 			pMap.put("ap_reason","기각사유입니다.");
 			String result_deny = workLogic.workDeny(pMap);
 			if(result_deny.equals("1")) {path="redirect:xxx.jsp?result=결재성공";}
@@ -108,10 +110,10 @@ public class WorkController implements Controller {
 			}else {
 				path="redirect:errorPage.jsp";
 			}
-			
 			///////////////////////  테스트 코드   //////////////////////
-			/*
+		    /*
 			 			//결재테이블에 등록하기
+			pMap=new HashMap<>();
 			pMap.put("fr_no", 1);
 		    pMap.put("ap_title", "[휴가]연차휴가 나갑니다.");
 		    pMap.put("ap_state", "결재대기");
@@ -120,8 +122,8 @@ public class WorkController implements Controller {
 		    pMap.put("ap_closedate", "2020-06-21");
 		    pMap.put("ap_content", "문서내용입니다");
 		    pMap.put("ap_dname", "개발부");
-		    pMap.put("ap_hiredate", "2011-06-05");
-		    pMap.put("ap_phone", "010-1234-5678");
+		    pMap.put("ap_retiredate", "2011-06-05");
+		    pMap.put("ap_contact", "010-1234-5678");
 		    pMap.put("ap_prosessingdate", "2020-06-01 ~ 2020-06-05");
 		    pMap.put("ap_instructions", "지시사항 내용입니다.");
 		    pMap.put("ap_bego", "비고 내용입니다.");
@@ -135,7 +137,7 @@ public class WorkController implements Controller {
 			for(int i=0; i<receiver.length;i++) {
 				pMap = new HashMap<>();
 				pMap.put("emp_no",receiver[i]); //수신자 pk담기
-				pMap.put("ap_no",14); //수신될 문서번호 담기
+				pMap.put("ap_no",3); //수신될 문서번호 담기
 				pMap.put("count",receiver.length); //수신자수 담기
 				String str_count = workLogic.workAddSendDoc(pMap);
 				if(str_count.equals("1")) {
@@ -147,7 +149,6 @@ public class WorkController implements Controller {
 			}
 			else {path="redirect:errorPage.jsp";}
 			*/
-			
 		}else if(cud.equals("workSelectOverView")) {/////////////////////////쿼리문 없음
 			//내결재함 오버뷰 insert here
 			logger.info("Controller : 내결재함 오버뷰 호출 성공");
@@ -157,7 +158,6 @@ public class WorkController implements Controller {
 			rlist = workLogic.workSelectOverView(pMap);
 			req.setAttribute("workSelectOverViewList", rlist);
 			path = "forward:xxx.jsp";
-			
 		}else if(cud.equals("workSelectEmp")) { ////성공
 			//정보수정 이벤트 탭 insert here
 			logger.info("Controller : 인사 정보수정 이벤트 호출 성공");
@@ -183,20 +183,20 @@ public class WorkController implements Controller {
 			/*
 			pMap = new HashMap<>(); 
 			pMap.put("emp_no", 10008);
-			pMap.put("emp_name", "사원명");
+			pMap.put("emp_name", "손오공");
 			pMap.put("emp_resnum", "960121-1023312");
 			pMap.put("emp_photo", "test12.png");
 			pMap.put("emp_pw", "1234");
 			pMap.put("emp_phone", "010-1234-5678");
-			pMap.put("emp_email", "test13@naver.com");
+			pMap.put("emp_email", "dhrhd@naver.com");
 			pMap.put("emp_gender", "남");
 			pMap.put("dept_no", 10);
 			pMap.put("emp_extend", "466-4516");
-			pMap.put("emp_position", "인사사원");
+			pMap.put("emp_position", "인사1팀사원");
 			pMap.put("emp_salary", 2900);
-			pMap.put("emp_hiredate", "2020-01-01");
+			pMap.put("emp_hiredate", "2017-03-01");
 			pMap.put("emp_retiredate", "");
-			pMap.put("emp_state", "재직");
+			pMap.put("emp_state", "정상");
 			pMap.put("emp_address", "경기도 안양시 만안구 박달로121");
 			pMap.put("emp_zipcode", "13525");
 			pMap.put("emp_detailaddress", "떙떙이 아파트 100동 100호");
@@ -218,15 +218,15 @@ public class WorkController implements Controller {
 			///////////////////////  테스트 코드   /////////////////////
 			/*
 			pMap = new HashMap<>(); 
-			pMap.put("emp_no", 10009);
-			pMap.put("emp_name", "사원명");
+			pMap.put("emp_no", 40002);
+			pMap.put("emp_name", "test");
 			pMap.put("emp_resnum", "960121-1023312");
 			pMap.put("emp_photo", "test12.png");
 			pMap.put("emp_pw", "1234");
 			pMap.put("emp_phone", "010-1234-5678");
 			pMap.put("emp_email", "test13@naver.com");
 			pMap.put("emp_gender", "남");
-			pMap.put("dept_no", 10);
+			pMap.put("dept_no", 40);
 			pMap.put("emp_extend", "466-4516");
 			pMap.put("emp_position", "인사사원");
 			pMap.put("emp_salary", 2800);
@@ -244,33 +244,30 @@ public class WorkController implements Controller {
 			*/
 		}else if(cud.equals("workUpdPw")) {    ///성공
 			//인사탭 사원비밀번호 변경 insert here 
-			String results = null;
 			logger.info("Controller : 재직사원 비밀번호 변경 호출 성공");
 			/////////////////////// 실제 코드    /////////////////////
 			pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
-			results = workLogic.workUpdPw(pMap);
+			String results = workLogic.workUpdPw(pMap);
 			if(result==1) {path="redirect:xxx.jsp";}
 			else {path="redirect:errorPage.jsp";}
-			
 			///////////////////////  테스트 코드   /////////////////////
 			/*
 			pMap = new HashMap<>(); 
 			pMap.put("U_IN_PW", "1234");
 			pMap.put("U_IN_RPW", "123");
-			results = workLogic.workUpdPw(pMap);
+			String results = workLogic.workUpdPw(pMap);
 			if(result==1) {path="redirect:xxx.jsp";}
 			else {path="redirect:errorPage.jsp";}
 			*/
 		}else if(cud.equals("workDelBranch")) {      ///성공
 			//지사 삭제 insert here
 			logger.info("Controller : 지사 삭제 호출 성공");
-			String results = null;
 			pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
 			pMap.put("U_INPUT","예");
 			pMap.put("U_NUM","9");
-			results = workLogic.workDelBranch(pMap);
-			if(result==1) {path="redirect:xxx.jsp";}
-			else {path="redirect:errorPage.jsp";}
+			String results = workLogic.workDelBranch(pMap);
+			if(results.equals("1")) {path="redirect:xxx.jsp";}
+			else {results="redirect:errorPage.jsp";}
 			
 		}else if(cud.equals("workAddBranch")) {     ///성공
 			//지사 등록 insert here
@@ -297,14 +294,13 @@ public class WorkController implements Controller {
 		}else if(cud.equals("MapView")) {  ///성공
 			//파견지역 맵 뷰 insert here
 			logger.info("Controller : 맵 호출");
-			/////////////////////// 실제 코드    /////////////////////		
+			/////////////////////// 실제 코드    /////////////////////	
 			pMap = new HashMap<>();
 			pMap.put("dl_no", req.getParameter("dl_no"));
 			List<Map<String,Object>> rlist = null;
 			rlist = workLogic.workSelMapView(pMap);
 			req.setAttribute("MapViewList", rlist);
 			path = " forward:xxx.jsp"; 
-			
 			///////////////////////  테스트 코드   /////////////////////
 			/*
 			List<Map<String,Object>> rlist = null;
@@ -431,15 +427,15 @@ public class WorkController implements Controller {
 			///////////////////////  테스트 코드   /////////////////////
 			/*
 			List<Map<String,Object>> slist = new ArrayList<>();
-		    pMap = new HashMap();
+		    pMap = new HashMap<>();
 		    pMap.put("emp_no",10001);
 		    slist = workLogic.smySign(pMap);
 		    mav.addObject("smySignList", slist);
 		
 		    List<Map<String,Object>> rlist = null;
-		    rMap = new HashMap();
+		    rMap = new HashMap<>();
 		    pMap.put("emp_no",10001);
-			rlist = workLogic.rmySign(rMap);
+			rlist = workLogic.rmySign(pMap);
 			mav.addObject("rmySignList", rlist);
 			mav.setViewName("");
 			*/
@@ -501,7 +497,6 @@ public class WorkController implements Controller {
 			rlist = workLogic.deptSchedule(pMap);
 			mav.addObject("deptScheduleList", rlist);
 			mav.setViewName("");
-			
 			///////////////////////  테스트 코드   /////////////////////
 			/*
 			List<Map<String,Object>> rlist = new ArrayList<>();

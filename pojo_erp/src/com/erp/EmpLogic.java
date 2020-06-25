@@ -49,6 +49,14 @@ public class EmpLogic {
 		rList = empDao.roomList(pMap);
 		return rList;
 	}
+	
+	public List<Map<String, Object>> commuteList(Map<String, Object> pMap) {
+		//메인페이지 오늘 출퇴시간 정보
+		logger.info("EmpLogic => 메인페이지 출퇴시간 정보");
+		List<Map<String, Object>> rList = new ArrayList<>();
+		rList = empDao.commuteList(pMap);
+		return rList;
+	}
 
 	public int myUpdImformation(Map<String, Object> pMap) {
 		//내 정보 수정
