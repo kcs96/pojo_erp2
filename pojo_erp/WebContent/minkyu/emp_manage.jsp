@@ -88,7 +88,7 @@ pageEncoding="UTF-8"%>
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 	<!-- 수정버튼 클릭햇을때 테이블 정보불러오기 -->
-<!-- 
+
 	<script>
       var $table = $("#table");
 
@@ -103,10 +103,11 @@ pageEncoding="UTF-8"%>
       window.operateEvents = {
         "click .button": function (e, value, row, index) {
           alert("You click like action, row: " + JSON.stringify(row));
+          window.location.href = "/emp_edit_all.jsp?id=" + row.emp_no;
         },
       };
     </script>
- -->
+
 
 	<!-- 탑메뉴 사용 -->
 	<script src="../common/js/topNav.js"></script>

@@ -234,5 +234,48 @@ pageEncoding="UTF-8"%>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
 	<script src="../common/scripts.js"></script>
 	<!-- 버거 메뉴 활성화 -->
+	
+	
+    <script>
+      fetch("jsonEmpList.json") // 제이슨파일받아오기
+        .then(async (res) => {
+          const userData = await res.json(); // 제이슨파일받아온걸 정의
+          function getParam(sname) {
+            //url 파라미터 값을 가져오는거
+            let params = location.search.substr(
+              location.search.indexOf("?") + 1
+            );
+            let userId = "";
+            params = params.split("&");
+            for (var i = 0; i < params.length; i++) {
+              temp = params[i].split("=");
+              if ([temp[0]] == sname) {
+                userId = temp[1];
+              }
+            }
+            return userId;
+          }
+          const userId = JSON.parse(getParam("id")); // 가져온걸 number로 전환
+          const loadUser = userData.filter((val) => {
+            // json에서 가져온 파일에서 id로된값을 필터링
+            return userId === val.emp_no;
+          });
+          Object.entries(loadUser[0]).map((val) => {
+            // 필터링에서 나온 값을 인풋value로 삽입
+            console.log(val[0]);
+            const id = document.querySelector(`#${val[0]}`);
+            if (id === null) {
+              id.value = "";
+            } else if (id === emp_photo) {
+              id.value = "";
+            } else {
+              id.value = val[1];
+            }
+          });
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    </script>	
 </body>
 </html>
