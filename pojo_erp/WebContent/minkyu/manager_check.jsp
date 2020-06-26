@@ -27,7 +27,7 @@ pageEncoding="UTF-8"%>
         <main id="input_div">
         	<div id="frame_div" style="border: 1px solid black;">
 				<div id="page_title" style="border: 1px solid red; margin: 10px 30px;"><h2>관리자</h2></div>
-				<div id="page_contents" class="container" style="border: 1px solid yellow; margin: 50px 50px;">
+				<div id="page_contents" style="max-width: 1730px; border: 1px solid yellow; margin: 50px 50px;">
           		<!-- 컨텐츠 들어갈내용 시작-->
 
 				<div align="center">
