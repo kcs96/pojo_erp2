@@ -28,7 +28,7 @@
 		$("#loginForm").attr('action','login.erp');
 		$("#loginForm").submit();
 	}
-
+//
 </script>
 </head>
 <body>
