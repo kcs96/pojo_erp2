@@ -99,7 +99,7 @@ pageEncoding="UTF-8"%>
 		<div id="layoutSidenav_content">
 			<main id="input_div">
 				<div id="frame_div" style="border: 1px solid black;">
-					<div id="page_title" style="border: 1px solid red; margin: 10px 30px;">
+					<div id="page_title" style="border-bottom: 2px solid gray; margin: 50px 30px;">
 						<h2>정보수정</h2>
 					</div>
 					<div id="page_contents" style="max-width: 1730px; border: 1px solid yellow; margin: 50px 50px;">
@@ -260,8 +260,8 @@ pageEncoding="UTF-8"%>
 						<div class="container" align="right">
 							<tr>
 								<td colspan="2">
-									<button type="button" class="btn btn-info" style="border: 3px solid white; border-radius: 10px;" onClick="javascript:save()">저장</button>
-									<button type="button" class="btn btn-info" style="border: 3px solid white; border-radius: 10px;" onClick="location.href='../main/main.jsp'">닫기</button>
+									<button type="button" class="btn btn-info" style="border: 3px solid white; border-radius: 10px;" onclick="javascript:save()">저장</button>
+									<button type="button" class="btn btn-info" style="border: 3px solid white; border-radius: 10px;" onclick="location.href='javascript:history.back();'">닫기</button>
 								<!--<input type="submit" class="btn btn-primary" value="저장" onclick="main()">  
 								    <input type="reset" class="btn btn-danger" value="닫기" onclick="main()"> -->
 								</td>

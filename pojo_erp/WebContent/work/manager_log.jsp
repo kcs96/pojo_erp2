@@ -44,8 +44,8 @@ pageEncoding="UTF-8"%>
       <div id="layoutSidenav_content">
         <main id="input_div">
         	<div id="frame_div" style="border: 1px solid black;">
-				<div id="page_title" style="border: 1px solid red; margin: 10px 30px;"><h2>관리자 로그</h2></div>
-				<div id="page_contents" style="max-width: 1730px; border: 1px solid yellow; margin: 50px 50px;">
+				<div id="page_title" style="border-bottom: 2px solid gray; margin: 50px 30px;"><h2>관리자 로그</h2></div>
+				<div id="page_contents" style="max-width: 1730px; margin: 10px 100px;">
           		<!-- 컨텐츠 들어갈내용 시작-->
 		            <ol class="breadcrumb mb-4">
 		              <li class="breadcrumb-item">
@@ -54,7 +54,8 @@ pageEncoding="UTF-8"%>
 		              <li class="breadcrumb-item active">관리자 로그</li>
 		            </ol>
 		             <div class="card-header">
-		                <i class="fas fa-table mr-1"></i><input type="button" id="b" value="로그 조회" onClick="manager_log_content()">
+		                <i class="fas fa-table mr-1"></i>
+		                <button type="button" class="btn btn-info float-" id="b" value="로그 조회" onClick="manager_log_content()" style="border: 3px solid white; border-radius: 10px;">로그조회</button>
 		                <button type="button" class="btn btn-info float-right" style="border: 3px solid white; border-radius: 10px; padding-bottom: 5px; margin-bottom: 15px;"onClick="window.print()">출력</button>
 		              </div>
 		              
@@ -76,7 +77,6 @@ pageEncoding="UTF-8"%>
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
       crossorigin="anonymous"
     ></script>
-    <script src="../dist/js/scripts.js"></script>
     <script
       src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
       crossorigin="anonymous"
@@ -85,7 +85,6 @@ pageEncoding="UTF-8"%>
       src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
       crossorigin="anonymous"
     ></script>
-    <script src="../dist/assets/demo/datatables-demo.js"></script>
     
 
     <!-- 탑메뉴 사용 -->
@@ -96,5 +95,10 @@ pageEncoding="UTF-8"%>
     <script src="../common/scripts.js"></script>
     
 <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
   </body>
 </html>

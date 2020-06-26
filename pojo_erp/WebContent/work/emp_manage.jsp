@@ -53,10 +53,10 @@ pageEncoding="UTF-8"%>
 		<div id="layoutSidenav_content">
 			<main id="input_div">
 				<div id="frame_div" style="border: 1px solid black;">
-					<div id="page_title" style="border: 1px solid red; margin: 10px 30px;">
+					<div id="page_title" style="border-bottom: 2px solid gray; margin: 50px 30px;">
 						<h2>사원관리</h2>
 					</div>
-					<div id="page_contents" style="max-width: 1730px; border: 1px solid yellow; margin: 50px 50px;">
+					<div id="page_contents" style="max-width: 1730px; margin: 10px 100px;">
 						<!-- 컨텐츠 들어갈내용 시작-->
 
 						<button type="button" class="btn btn-info float-left" style="border: 3px solid white; border-radius: 10px; margin: 5px;" 
