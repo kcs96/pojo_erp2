@@ -40,17 +40,12 @@ public class ActionSupport extends HttpServlet {
 				if(cud==null) { 
 					logger.info("cud가 null일때로 처리");
 					robj = controller.process(req,res);
-<<<<<<< HEAD
 					System.out.println(robj);
-=======
->>>>>>> refs/heads/minkyu
+
 				}else { 
 					logger.info("cud가 null이 아닐때로 처리");
-<<<<<<< HEAD
 					robj = controller.process(cud,req,res);   
-=======
 					robj = controller.process(command,req,res);   
->>>>>>> refs/heads/minkyu
 				}
 
 				
