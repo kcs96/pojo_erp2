@@ -5,27 +5,27 @@
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>FullCalendar Example</title>
+    <title>Conference Schedule</title>
    <%@include file ="../common/fontAwesomeUI.jsp" %>
     <link rel=" shortcut icon" href="../mihyun_cal/image/favicon.ico">
 
     <link rel="stylesheet" href="../mihyun_cal/vendor/css/fullcalendar.min.css" />
-    <link rel="stylesheet" href="../mihyun_cal/vendor/css/bootstrap.min.css?after">
+    <link rel="stylesheet" href="../mihyun_cal/vendor/css/bootstrap.min.css">
     <link rel="stylesheet" href='../mihyun_cal/vendor/css/select2.min.css' />
     <link rel="stylesheet" href='../mihyun_cal/vendor/css/bootstrap-datetimepicker.min.css' />
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,500,600">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-    <link rel="stylesheet" href="../mihyun_cal/css/main.css">
+    <link rel="stylesheet" href="../mihyun_cal/css/main.css?after">
 
 </head>
 <body>
 <nav class="sb-topnav navbar navbar-expand navbar-dark" style="background-color:#282828;">
-            <a class="navbar-brand" href="javascript:history.back();" style="width:20%; padding-top:12px;" >
+            <a id="back" class="navbar-brand" href="javascript:history.back();" style="width:20%; padding-top:12px;" >
             <i class="fas fa-arrow-left" style="width:50px; height:50px; float:left;"></i></a>
-            <a class="navbar-brand" href="./deptSchedule.jsp" style=" width:60%; font-size:25px; padding-top:20px; text-align: center;" >Conference Schedule</a>
-		    <a class="navbar-brand" href="../home/main.jsp" style="width:20%; padding-top:12px;">
+            <a id="textTop" class="navbar-brand" href="./deptSchedule.jsp" style=" width:60%; font-size:25px; padding-top:20px; text-align: center;" >Conference Schedule</a>
+		    <a id="home" class="navbar-brand" href="../home/main.jsp" style="width:20%; padding-top:12px;">
 		    <i class="fas fa-home" style="width:50px; height:50px; float:right;"></i></a>
       </nav>
     <div class="container">

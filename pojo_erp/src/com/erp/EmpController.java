@@ -58,7 +58,7 @@ public class EmpController implements Controller {
 			path="redirect:xxx.jsp";
 			*/
 		}
-		else if("myUpdImformation".equals(cud)) {
+		else if("myUpdInformation".equals(cud)) {
 			logger.info("EmpController => 내정보 수정 버튼 호출");
 			/////////////////////// 실제 코드    /////////////////////
 			Map<String,String[]> myMap = (Map<String,String[]>)req.getParameterMap();

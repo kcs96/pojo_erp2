@@ -1,25 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Personal Schedules</title>
     <%@include file ="../common/fontAwesomeUI.jsp" %>
     <link rel=" shortcut icon" href="../mihyun_cal/image/favicon.ico">
 
     <link rel="stylesheet" href="../mihyun_cal/vendor/css/fullcalendar.min2.css" />
-    <link rel="stylesheet" href="../mihyun_cal/vendor/css/bootstrap.min2.css">
+    <link rel="stylesheet" href="../mihyun_cal/vendor/css/bootstrap.min2.css?after">
     <link rel="stylesheet" href='../mihyun_cal/vendor/css/select2.min.css' />
     <link rel="stylesheet" href='../mihyun_cal/vendor/css/bootstrap-datetimepicker.min.css' />
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,500,600">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-    <link rel="stylesheet" href="../mihyun_cal/css/main1.css">
+    <link rel="stylesheet" href="../mihyun_cal/css/main1.css?after">
 
 </head>
 <body>
@@ -29,13 +28,13 @@
             <a class="navbar-brand" href="./deptSchedule.jsp" style=" width:60%; font-size:25px; padding-top:12px; text-align: center;" >Personal Schedules</a>
 		    <a class="navbar-brand" href="../home/main.jsp" style="width:20%; padding-top:12px;">
 		    <i class="fas fa-home" style="width:50px; height:50px; float:right;"></i></a>
-      </nav>
-    <div class="container">
+		    </nav>
+      <div class="container"> 
 <!-- 일정추가전 생기는 카탈로그 창 -->
         <!-- 일자 클릭시 메뉴오픈 -->
-        <div id="contextMenu" class="dropdown clearfix">
+         <div id="contextMenu" class="dropdown clearfix">
             <ul class="dropdown-menu dropNewEvent" role="menu" aria-labelledby="dropdownMenu"
-                style="display:block;position:static;margin-bottom:5px;">
+                style="display:block;  position:static; margin-bottom:5px;">
                 <li><a tabindex="-1" href="#">일정1</a></li>
                 <li><a tabindex="-1" href="#">일정2</a></li>
                 <li><a tabindex="-1" href="#">일정3</a></li>
@@ -43,7 +42,7 @@
                 <li class="divider"></li>
                 <li><a tabindex="-1" href="#" data-role="close">Close</a></li>
             </ul>
-        </div>
+        </div> 
 
         <div id="wrapper">
             <div id="loading"></div>
@@ -56,9 +55,9 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
+                        <h4 class="modal-title"></h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title"></h4>
                     </div>
                     <div class="modal-body">
 
@@ -184,11 +183,7 @@
         <!-- /.filter panel -->
     </div>
     <!-- /.container -->
-<!-- </div>
-				</div>
-                </main>
-            </div>
-        </div> -->
+
     <script src="../mihyun_cal/vendor/js/jquery.min.js"></script>
     <script src="../mihyun_cal/vendor/js/bootstrap.min.js"></script>
     <script src="../mihyun_cal/vendor/js/moment.min.js"></script>
