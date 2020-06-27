@@ -25,15 +25,15 @@ public class MyServiceController implements Controller {
 	}
 	
 	@Override  
-	public String process(String cud, HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+	public String process(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		String path = null;
 		HttpSession session = req.getSession();
-		
-		if(cud.equals("myGoWork")) { //insert 출근테이블에 오늘 출근 row추가
+		Map<String, Object> pMap = null;
+		if(requestName.equals("myGoWork")) { //insert 출근테이블에 오늘 출근 row추가
 			//출근버튼 눌렀을때
 			logger.info("MyService => 출근버튼 실행");
 			/////////////////////// 실제 코드    /////////////////////
-			Map<String, Object> pMap = new HashMap<>();
+			pMap = new HashMap<>();
 			pMap.put("emp_no", session.getAttribute("emp_no"));
 			pMap.put("btn_type","출근");
 			String result = myServiceLogic.myGoWork(pMap);
@@ -46,7 +46,7 @@ public class MyServiceController implements Controller {
 			}
 			///////////////////////  테스트 코드   /////////////////////
 			/*
-			Map<String, Object> pMap = new HashMap<>();
+			pMap = new HashMap<>();
 			pMap.put("emp_no",10006);
 			pMap.put("btn_type","출근");
 			String result = myServiceLogic.myGoWork(pMap);
@@ -58,11 +58,11 @@ public class MyServiceController implements Controller {
 				path="errorPage.jsp";
 			}
 			*/
-		}else if(cud.equals("myGoHome")) { //update 오늘 출근row에 퇴근값 추가
+		}else if(requestName.equals("myGoHome")) { //update 오늘 출근row에 퇴근값 추가
 			//퇴근버튼 눌렀을때
 			logger.info("MyService => 퇴근버튼 실행");
 			/////////////////////// 실제 코드    /////////////////////
-			Map<String, Object> pMap = new HashMap<>();
+			pMap = new HashMap<>();
 			pMap.put("emp_no", session.getAttribute("emp_no"));
 			pMap.put("btn_type","퇴근");
 			String result=myServiceLogic.myGoHome(pMap);
@@ -70,7 +70,7 @@ public class MyServiceController implements Controller {
 			else {path="redirect:errorPage.jsp";}
 			///////////////////////  테스트 코드   /////////////////////
 			/*
-			Map<String, Object> pMap = new HashMap<>();
+			pMap = new HashMap<>();
 			pMap.put("emp_no",10006);
 			pMap.put("btn_type","퇴근");
 			String result=myServiceLogic.myGoHome(pMap);
@@ -82,20 +82,20 @@ public class MyServiceController implements Controller {
 				path="errorPage.jsp";
 			}
 			*/
-		}else if(cud.equals("myGoOut")) { //update 상태컬럼 : 정상 -> 외출
+		}else if(requestName.equals("myGoOut")) { //update 상태컬럼 : 정상 -> 외출
 			//외출버튼 눌렀을 때
 			logger.info("MyService => 외출버튼 실행");
 			/////////////////////// 실제 코드    /////////////////////
-			Map<String, Object> pMap = new HashMap<>();
+			pMap = new HashMap<>();
 			pMap.put("emp_no", session.getAttribute("emp_no"));
 			pMap.put("btn_type","외출");
 			String result = myServiceLogic.myGoOut(pMap);
 			if(result.equals("1")) {path="redirect:xxx.jsp";}
-			else {path="redirect:errorPage.jsp";}
+			else {path="redirect:dfd.erp?cud=";}
 			
 			///////////////////////  테스트 코드   /////////////////////
 			/*
-			Map<String, Object> pMap = new HashMap<>();
+			pMap = new HashMap<>();
 			pMap.put("emp_no",10006);
 			pMap.put("btn_type","외출");
 			String result = myServiceLogic.myGoOut(pMap);
@@ -107,11 +107,11 @@ public class MyServiceController implements Controller {
 				path="errorPage.jsp";
 			}
 			*/
-		}else if(cud.equals("myComBack")) { //update 상태컬럼 : 정상 -> 외출
+		}else if(requestName.equals("myComBack")) { //update 상태컬럼 : 정상 -> 외출
 			//외출복귀버튼 눌렀을 때
 			logger.info("MyService => 외출복귀버튼 실행");
 			/////////////////////// 실제 코드    /////////////////////
-			Map<String, Object> pMap = new HashMap<>();
+			pMap = new HashMap<>();
 			pMap.put("emp_no", session.getAttribute("emp_no"));
 			pMap.put("btn_type","외출복귀");
 			String result = myServiceLogic.myComBack(pMap);
@@ -119,7 +119,7 @@ public class MyServiceController implements Controller {
 			else {path="redirect:errorPage.jsp";}
 			///////////////////////  테스트 코드   /////////////////////
 			/*
-			Map<String, Object> pMap = new HashMap<>();
+			pMap = new HashMap<>();
 			pMap.put("emp_no",10006);
 			pMap.put("btn_type","외출복귀");
 			String result = myServiceLogic.myComBack(pMap);
@@ -132,12 +132,11 @@ public class MyServiceController implements Controller {
 			}
 			*/
 		}
-		else if(cud.equals("myAddSchedule")) { //insert 일정 추가
+		else if(requestName.equals("myAddSchedule")) { //insert 일정 추가
 			//내 일정 내용 추가
 			logger.info("MyService => 내 일정 추가 실행");
 			/////////////////////// 실제 코드    /////////////////////
-			Map<String,String[]> myMap = (Map<String,String[]>)req.getParameterMap();
-			Map<String,Object> pMap= HashMapBuilder.hashMapBuilder(myMap);
+			pMap= HashMapBuilder.hashMapBuilder(req.getParameterMap());
 			pMap.put("emp_no", session.getAttribute("emp_no"));
 			String result = myServiceLogic.myAddSchedule(pMap);
 			if(result.equals("1")) {path="redirect:xxx.jsp";}
@@ -163,12 +162,11 @@ public class MyServiceController implements Controller {
 			}
 			*/
 		}
-		else if(cud.equals("myUpdSchedule")) { //update 일정 수정
+		else if(requestName.equals("myUpdSchedule")) { //update 일정 수정
 			//내 일정 내용 수정
 			logger.info("MyService => 내 일정 변경 실행");
 			/////////////////////// 실제 코드    /////////////////////	
-			Map<String,String[]> myMap = (Map<String,String[]>)req.getParameterMap();
-			Map<String,Object> pMap= HashMapBuilder.hashMapBuilder(myMap);
+			pMap= HashMapBuilder.hashMapBuilder(req.getParameterMap());
 			pMap.put("emp_no", session.getAttribute("emp_no"));
 			String result=myServiceLogic.myUpdSchedule(pMap);
 			if(result.equals("1")) {path="redirect:xxx.jsp";}
@@ -177,7 +175,6 @@ public class MyServiceController implements Controller {
 			///////////////////////  테스트 코드   /////////////////////
 			/*
 			Map<String, Object> pMap = new HashMap<>();
-			pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
 			pMap.put("emp_no", 10002);
 			pMap.put("my_title", "일정 제목1");
 			pMap.put("my_memo", "메모 내용1");
@@ -197,11 +194,11 @@ public class MyServiceController implements Controller {
 			}
 			*/
 		}
-		else if(cud.equals("myDelSchedule")) { //delete 일정 삭제
+		else if(requestName.equals("myDelSchedule")) { //delete 일정 삭제
 			//내 일정 삭제
 			logger.info("MyService => 내 일정 삭제 실행");
 			/////////////////////// 실제 코드    /////////////////////
-			Map<String, Object> pMap = new HashMap<>();
+			pMap = new HashMap<>();
 			pMap.put("emp_no", session.getAttribute("emp_no"));
 			pMap.put("my_no", req.getParameter("my_no"));
 			int del_result = myServiceLogic.myDelSchedule(pMap);
@@ -225,62 +222,71 @@ public class MyServiceController implements Controller {
 			}
 			*/
 		}
-		return path;
-	}
-
-	@Override
-	public ModelAndView process(HttpServletRequest req, HttpServletResponse res)
-			throws ServletException, IOException {
-		ModelAndView mav = new ModelAndView(req,res);
-		HttpSession session = req.getSession();
-		Map<String,Object> pMap = new HashMap<>();
-		//pMap.put("emp_no", session.getAttribute("emp_no"));  실제
-		pMap.put("emp_no",10002); //테스트
-		if(requestName.equals("inOutManager")) {
+		
+		//////////////////////////////////////////////////////// forward 지역 /////////////////////////////////////////////////////////////////////
+		else if(requestName.equals("inOutManager")) {
 			//출퇴관리 insert here
 			logger.info("MAV => 출퇴관리 실행");
+			pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
+			pMap.put("emp_no", session.getAttribute("emp_no")); 
+			//pMap.put("emp_no", 10002);
 			List<Map<String,Object>> todayInOutList = new ArrayList<>();
 			todayInOutList = myServiceLogic.inOutManager(pMap);
 			System.out.println("오늘 출퇴관리탭 리스트"+todayInOutList.size());
-			mav.addObject("todayInOutList", todayInOutList);
+			req.setAttribute("todayInOutList", todayInOutList);
 			
 			List<Map<String,Object>> weekInOutList = new ArrayList<>();
 			weekInOutList = myServiceLogic.weekInOutInfo(pMap);
-			System.out.println("오늘 출퇴관리탭 리스트"+weekInOutList.size());
-			mav.addObject("weekInOutList", weekInOutList);
-			mav.setViewName("");
-			
-		}else if(requestName.equals("monthPay")) {
+			System.out.println("주간 출퇴관리탭 리스트"+weekInOutList.size());
+			req.setAttribute("weekInOutList", weekInOutList);
+			path="forward:xxx.jsp";
+		}
+		else if("monthPay".equals(requestName)) {
 			//당월급여 insert here
 			logger.info("MAV => 당월급여 실행");
+			pMap = new HashMap<>();
+			pMap.put("emp_no", session.getAttribute("emp_no")); 
 			pMap.put("btn_type", "당월");
 			pMap.put("sal_payday", "2020/06/14");//테스트
 			//pMap.put("sal_payday", req.getParameter("sal_payday")); //실제
 			List<Map<String,Object>> monthPayList = myServiceLogic.monthPay(pMap);
 			System.out.println("당월급여 조회  => "+monthPayList.size());
-			mav.addObject("monthPayList", monthPayList);
-			mav.setViewName("");
-			
-		}else if(requestName.equals("allPay")) {
+			req.setAttribute("monthPayList", monthPayList);
+			path="forward:xxx.jsp";
+		}
+		else if("allPay".equals(requestName)) {
 			//전체급여 insert here
 			logger.info("MAV => 전체급여 실행");
+			pMap = new HashMap<>();
+			pMap.put("emp_no", session.getAttribute("emp_no")); 
 			pMap.put("btn_type", "전체");
 			pMap.put("sal_payday", "2020/06/14");//테스트
 			//pMap.put("sal_payday", req.getParameter("sal_payday")); //실제
 			List<Map<String,Object>> allPayList = myServiceLogic.allPay(pMap);
 			System.out.println("전체급여 조회  => "+allPayList.size());
-			mav.addObject("allPayList", allPayList);
-			mav.setViewName("");
-		}else if(requestName.equals("mySchedule")) {
+			req.setAttribute("allPayList", allPayList);
+			path="forward:xxx.jsp";
+		}
+		else if("mySchedule".equals(requestName)) {
 			//개인일정 insert here
 			logger.info("MAV => 개인일정 실행");
+			pMap = new HashMap<>();
+			pMap.put("emp_no", session.getAttribute("emp_no")); 
 			pMap.put("my_day", "2020-06-01");//테스트
 			//pMap.put("sal_payday", req.getParameter("sal_payday")); //실제
 			List<Map<String,Object>> rList = myServiceLogic.mySchedule(pMap);
 			System.out.println("개인일정 리스트 => "+rList.size());
-			mav.addObject("myScheduleList", rList);
-			mav.setViewName("");
+			req.setAttribute("myScheduleList", rList);
+			path="forward:xxx.jsp";
 		}
+		return path;
+	}
+
+	@Override
+	public ModelAndView process(String cud, HttpServletRequest req, HttpServletResponse res)
+			throws ServletException, IOException {
+		ModelAndView mav = new ModelAndView(req,res);
 		return mav;
+		
 	}
 }

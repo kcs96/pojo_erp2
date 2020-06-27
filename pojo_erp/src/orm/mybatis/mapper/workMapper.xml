@@ -152,15 +152,6 @@
 	</select>
 	<!-- ================================== 총사원보여주기 끝 =============================================== -->
 	
-	<!-- ================================== 파견맵 보여주기 =============================================== -->
-	<select id="PROC_MapView" parameterType="map" statementType="CALLABLE">
-		{call PROC_MapView(#{dl_no},#{key, 
-		                     	    jdbcType=CURSOR, 
-		                     		mode=OUT, 
-		                     		javaType=java.sql.ResultSet, 
-		                     		resultMap=wmap})}
-	</select>
-	<!-- ================================== 지사 관리 ================================================== -->
 	<select id="PROC_BRANCHLIST" parameterType="map" statementType="CALLABLE">
 		{call PROC_BRANCHLIST(#{key, 
 		                        jdbcType=CURSOR, 
@@ -185,14 +176,26 @@
 	<!-- ================================== 지사관리 삭제 끝=============================================== -->
 	
 	
-	<!-- ================================== 파견사원 조회 =============================================== -->
-	<select id="proc_dispatch" parameterType="map" statementType="CALLABLE">
-		{call proc_dispatch(#{key, 
-		                        jdbcType=CURSOR, 
-		                     	mode=OUT, 
-		                     	javaType=java.sql.ResultSet, 
-		                     	resultMap=wmap})}
+	<!-- ================================== 파견사원 조회탭  =============================================== -->
+	<!-- 파견사원 탭 -->
+	<select id="dispatch_List"  resultType="java.util.Map">
+		SELECT e.emp_no as EMP_NO,e.emp_name as EMP_NAME FROM emp e,dispatch dp
+ 		 WHERE e.emp_no = dp.emp_no
+           AND SYSDATE BETWEEN dp.dp_sdate AND dp.dp_edate
 	</select>
+	
+	<!-- 파견사원 조회 -->
+	<select id="sel_empDispatch" parameterType="map" resultType="java.util.Map">
+		SELECT e.emp_no as EMP_NO,dl.dl_name as DL_NAME,dl.dl_tel as DL_TEL
+     		  ,dl.dl_address as DL_ADDRESS,e.emp_name as EMP_NAME,e.emp_phone as EMP_PHONE
+      		  ,dp.dp_sdate as DP_SDATE,dp.dp_edate as DP_EDATE,dl.dl_latitude as DL_LATITUDE,dl.dl_longitude as DL_LONGITUDE
+		 FROM emp e, dispatch dp, dispatch_loc dl
+		WHERE e.emp_name = #{EMP_NAME}
+ 		  AND dl.dl_no = dp.dl_no
+  	      AND SYSDATE BETWEEN dp.dp_sdate AND dp.dp_edate
+	</select>
+	
+	
 	<!-- ================================== 파견사원 조회 끝=============================================== -->
 	
 	

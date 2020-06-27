@@ -54,13 +54,6 @@ public class WorkLogic {
 		rlist = workDao.empRetire(pMap);
 		return rlist;
 	}
-	public List<Map<String, Object>> empSend(Map<String, Object> pMap) {
-		///파견사원 조회
-		logger.info("Logic : 파견사원관리 호출 성공");
-		List<Map<String,Object>> rlist = null;
-		rlist = workDao.empSend(pMap);
-		return rlist;
-	}
 	public List<Map<String, Object>> branchList(Map<String, Object> pMap) {
 		//지사관리 이벤트 탭
 		logger.info("Logic : 지사관리 호출 성공");
@@ -218,6 +211,18 @@ public class WorkLogic {
 		int result = 0;
 		result = workDao.workAddDoc(pMap);
 		return result;
+	}
+	public List<Map<String, Object>> outsideWorker() {
+		logger.info("Logic : 파견사원 조회 호출 성공");
+		List<Map<String,Object>> rlist = null;
+		rlist = workDao.outsideWorker();
+		return rlist;
+	}
+	public List<Map<String, Object>> outsideSEL(Map<String, Object> pMap) {
+		logger.info("Logic : 파견사원 조회 버튼 호출 성공");
+		List<Map<String,Object>> rlist = null;
+		rlist = workDao.outsideSEL(pMap);
+		return rlist;
 	}
 	
 

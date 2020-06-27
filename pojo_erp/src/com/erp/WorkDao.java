@@ -69,14 +69,6 @@ public class WorkDao {
 		logger.info("Dao empRetire rlist.size() : " + rlist.size());
 		return rlist;
 	}
-	public List<Map<String, Object>> empSend(Map<String, Object> pMap) {
-		//파견사원 이벤트 탭
-		logger.info("Dao : 파견사원관리 호출 성공");
-		List<Map<String,Object>> rlist = new ArrayList<>();
-		sqlSes.selectOne("proc_dispatch",pMap);
-		rlist = (List<Map<String,Object>>)pMap.get("key");
-		return rlist;
-	}
 	public List<Map<String, Object>> branchList(Map<String, Object> pMap) {
 		//지사 관리 이벤트 탭
 		logger.info("Dao : 지사관리 호출 성공");
@@ -255,5 +247,19 @@ public class WorkDao {
 		logger.info("workDao => 결제 신청버튼 호출 (결제입력)"); 
 		int result=sqlSes.insert("workAddDoc",pMap);
 		return result;
+	}
+	public List<Map<String, Object>> outsideWorker() {
+		//파견사원 조회 insert here
+		logger.info("Dao : 파견사원 조회 호출 성공");
+		List<Map<String,Object>> rlist = null;
+		rlist = sqlSes.selectList("dispatch_List");
+		return rlist;
+	}
+	public List<Map<String, Object>> outsideSEL(Map<String, Object> pMap) {
+		//파견사원 조회 버튼 insert here
+		logger.info("Dao : 파견사원 조회 버튼 호출 성공");
+		List<Map<String,Object>> rlist = null;
+		rlist = sqlSes.selectList("sel_empDispatch",pMap);
+		return rlist;
 	}
 }
