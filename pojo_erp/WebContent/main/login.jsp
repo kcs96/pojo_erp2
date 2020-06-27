@@ -41,7 +41,6 @@
 				</div>
 
 				<form id="loginForm" class="login100-form validate-form" style="background-color: #282828;">
-				<input type="hidden" name="cud" value="login"/>
 					<span class="login100-form-title" style="color: white;">
 						2RP PROGRAM
 					</span>

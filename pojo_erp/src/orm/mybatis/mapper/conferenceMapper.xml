@@ -24,6 +24,11 @@
 		{ call proc_conResUpd(#{cfr_title},#{cfr_sdate},#{cfr_edate},#{cfr_type},
 		#{cfr_allday},#{cfr_bgcolor},#{cfr_no},#{cfr_memo},#{emp_no}
 								    , #{msg,mode=OUT,jdbcType=VARCHAR})}
+								    
+								    
+								    
+								    
+								    
 	</select>
 	
 	<!-- 회의실 예약 삭제하기 -->

@@ -26,13 +26,12 @@ pageEncoding="UTF-8"%>
    <div id="layoutSidenav_content">
 		<main id="input_div">
 			<div id="frame_div" style="border: 1px solid black;">
-				<div id="page_title" style="border: 1px solid red; margin: 10px 30px;"><h2>내 결재함</h2></div>
-				<div id="page_contents" style="max-width: 1730px; border: 1px solid yellow; margin: 50px 50px;">
+				<div id="page_title" style="border-bottom: 2px solid gray; margin: 50px 30px;"><h2>내 결재함</h2></div>
+				<div id="page_contents" style="max-width: 1730px; margin: 10px 100px;">
      			<!-- 컨텐츠 들어갈내용 시작-->
 				
 		  		<!-- 받은 결재함 테이블 -->
-		  		<h5>받은 결재함</h5>
-		  		<button id="del" class="btn btn-danger">삭제</button>	
+		  		<button id="del" class="btn btn-danger" style="margin-bottom: 15px;">삭제</button>	
 				<table id="table" 
 					data-show-columns="true" 
 					data-pagination="true"
@@ -43,21 +42,26 @@ pageEncoding="UTF-8"%>
 					data-url="../juno/member.json">
 					<thead>
 						<tr>
-							<th data-field="state" data-checkbox="true" ></th>
-							<th data-field="app_no" data-sortable="true" data-align="center" data-width="100px; ">순번</th>
-							<th data-field="app_name" data-sortable="true">보관함</th>
-							<th data-field="app_write" data-sortable="true">이름</th>
-							<th data-field="app_print" data-sortable="true">상태</th>
-							<th data-field="operate" data-formatter="operateFormatter" data-width="100px" data-events="operateEvents" width="100"	data-align="center">작성</th>
+						<center>  		
+		  					<h3>[ 받은 결재함 ]</h3>
+		  				</center>
+							<th data-field="state" data-checkbox="true" data-width="30%;"></th>
+							<th data-field="app_no"  data-align="center" data-width="80%;" data-sortable="true">순번</th>
+							<th data-field="app_name" data-align="center" data-width="300%%;">제목</th>
+							<th data-field="app_write" data-align="center" data-width="150%;">작성자</th>
+							<th data-field="app_print"data-align="center" data-width="200%;">결재 기한</th>
+							<th data-field="app_print"data-align="center" data-width="150%;">결재 상태</th>
+							<th data-field="operate" data-formatter="operateFormatter" data-width="100px" data-events="operateEvents" data-align="center" data-width="150%;">보기</th>
 						</tr>
 					</thead>
 				</table>
 				<!-- 받은 결재함 테이블 끝 -->
+				
 				<div id="page_contents2" style ="margin: 70px 0px;">
 				<hr style="border: 1px solid black;">
 		  		 <!-- 보낸 결재함 테이블 -->
-		  		 <h5>보낸 결재함</h5>
-		  		<button id="del2" class="btn btn-danger">삭제</button>	
+		  		 <div id="page_contents2" style ="margin: 70px 0px;">
+		  		<button id="del2" class="btn btn-danger" style="margin-bottom: 15px;">삭제</button>
 				<table id="table2" 
 					data-show-columns="true" 
 					data-pagination="true"
@@ -68,18 +72,22 @@ pageEncoding="UTF-8"%>
 					data-url="../juno/member2.json">
 					<thead>
 						<tr>
-							<th data-field="state" data-checkbox="true"></th>
-							<th data-field="app_no" data-sortable="true" data-align="center" data-width="100px;">순번</th>
-							<th data-field="app_name" data-sortable="true">보관함</th>
-							<th data-field="app_write" data-sortable="true">이름</th>
-							<th data-field="app_print" data-sortable="true">상태</th>
-							<th data-field="operate" data-formatter="operateFormatter2" data-width="100px" data-events="operateEvents"	data-align="center" >확인</th>
+						<center>  		
+		  					<h3>[ 보낸 결재함 ]</h3>
+		  				</center>
+		  					<th data-field="state" data-checkbox="true" data-width="30%;"></th>
+							<th data-field="app_no"  data-align="center" data-width="80%;" data-sortable="true">순번</th>
+							<th data-field="app_name" data-align="center" data-width="300%%;">제목</th>
+							<th data-field="app_write" data-align="center" data-width="150%;">작성자</th>
+							<th data-field="app_print"data-align="center" data-width="200%;">보낸 날짜</th>
+							<th data-field="app_print"data-align="center" data-width="150%;">결재 상태</th>
+							<th data-field="operate" data-formatter="operateFormatter" data-width="100px" data-events="operateEvents" data-align="center" data-width="150%;">확인</th>
 						</tr>
 					</thead>
 				</table>
 				<!-- 보낸 결재함 테이블 끝 -->
+					</div>
 				</div>
-
 				<!-- 컨텐츠 들어갈내용 끝   -->
      			</div>
 			</div>
@@ -103,7 +111,7 @@ pageEncoding="UTF-8"%>
 	function operateFormatter(value, row) {
 		return [
 	          '<a class="button" href="javascript:void(0)" title="button">',
-	          '<button type="button" class="btn btn-info" style="border: 1px solid white; border-radius: 10px; font-size:12px" align="center">승인</button>',
+	          '<button type="button" class="btn btn-info" style="border: 1px solid white; border-radius: 10px; font-size:12px" align="center">보기</button>',
 	          "</a>  ", ]
 				.join('')
 	}

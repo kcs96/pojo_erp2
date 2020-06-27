@@ -25,11 +25,11 @@ public class ConferenceController implements Controller {
 	}
 
 	@Override
-	public String process(String cud,HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+	public String process(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String path =null;
 		HttpSession session = req.getSession();
-		if(cud.equals("conAddRoom")) {//insert
+		if(requestName.equals("conAddRoom")) {//insert
 			//회의실예약 insert here
 			logger.info("ConferenceController[String] => 회의실예약 호출");
 			/////////////////////// 실제 코드    /////////////////////
@@ -59,12 +59,11 @@ public class ConferenceController implements Controller {
 				path="redirect:errorPage.jsp";
 			}
 			*/
-		}else if(cud.equals("conUpdRoom")) {//delete
+		}else if(requestName.equals("conUpdRoom")) {//delete
 			//회의실예약취소 insert here
 			logger.info("ConferenceController[String] => 회의실예약수정 호출");
 			/////////////////////// 실제 코드    /////////////////////
-			Map<String,String[]> myMap = (Map<String,String[]>)req.getParameterMap();
-			Map<String,Object> pMap= HashMapBuilder.hashMapBuilder(myMap);
+			Map<String,Object> pMap= HashMapBuilder.hashMapBuilder(req.getParameterMap());
 			pMap.put("emp_no", session.getAttribute("emp_no"));
 			String result =conLogic.conUpdRoom(pMap);
 			if(result.equals("1")) path="redirect:xxx.jsp"; 
@@ -91,7 +90,7 @@ public class ConferenceController implements Controller {
 			}
 			*/
 		}
-		else if(cud.equals("conDelRoom")) {//delete
+		else if(requestName.equals("conDelRoom")) {//delete
 			//회의실예약취소 insert here
 			logger.info("ConferenceController[String] => 회의실예약취소 호출");
 			/////////////////////// 실제 코드    /////////////////////
@@ -115,28 +114,25 @@ public class ConferenceController implements Controller {
 				path="redirect:errorPage.jsp";
 			}
 			*/
+		}else if("allRes".equals(requestName)) {
+			//회의실예약 insert here
+			logger.info("ConferenceController[String] => 회의실예약탭  호출");
+			Map<String,Object> pMap = new HashMap<>();
+			pMap.put("cfr_day", "2020-06-01");//테스트
+			//pMap.put("cfr_day", req.getParameter("cfr_day"));  실제
+			List<Map<String,Object>> allResList = new ArrayList<>();
+			allResList = conLogic.allRes(pMap);
+		    System.out.println("회의실예약 리스트 => "+allResList.size());
+			req.setAttribute("allResList", allResList);
+			path="forward:xxx.jsp";
 		}
 		return path;
 	}
 
 	@Override
-	public ModelAndView process(HttpServletRequest req, HttpServletResponse res)
+	public ModelAndView process(String cud,HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 			ModelAndView mav = new ModelAndView(req,res);
-			HttpSession session = req.getSession();
-			Map<String,Object> pMap = new HashMap<>();
-			pMap.put("cfr_day", "2020-06-01");//테스트
-			//pMap.put("cfr_day", req.getParameter("cfr_day"));  실제
-			
-			if(requestName.equals("allRes")) {
-				//회의실예약 insert here
-				logger.info("ConferenceController[String] => 회의실예약탭  호출");
-				List<Map<String,Object>> allResList = new ArrayList<>();
-				allResList = conLogic.allRes(pMap);
-			    System.out.println("회의실예약 리스트 => "+allResList.size());
-				mav.addObject("allResList", allResList);
-				mav.setViewName("");
-			}
 			return mav;
 		}
 }

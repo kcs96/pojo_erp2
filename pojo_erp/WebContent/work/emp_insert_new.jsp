@@ -50,10 +50,10 @@ pageEncoding="UTF-8"%>
 		<div id="layoutSidenav_content">
 			<main id="input_div">
 				<div id="frame_div" style="border: 1px solid black;">
-					<div id="page_title" style="border: 1px solid red; margin: 10px 30px;">
+					<div id="page_title" style="border-bottom: 2px solid gray; margin: 50px 30px;">
 						<h2>신규사원등록</h2>
 					</div>
-					<div id="page_contents" style="max-width: 1730px; border: 1px solid yellow; margin: 50px 50px;">
+					<div id="page_contents" style="max-width: 1730px; margin: 10px 100px;">
 						<!-- 컨텐츠 들어갈내용 시작-->
 						
 						<div class="row">
@@ -61,25 +61,27 @@ pageEncoding="UTF-8"%>
 								<table class="table table-boardered">
 									<tr>
 										<th>사원번호</th>
-										<td><input id="empNo" type="text" class="form-control" name="empNo" placeholder="사원번호를 입력하세요."></td>
+										<td><input id="emp_no" type="text" class="form-control" name="EMP_NO" placeholder="사원번호를 입력하세요." ></td>
 									</tr>
 									<tr>
 										<th>사원명</th>
-										<td><input id="empName" type="text" class="form-control" name="empName"></td>
+										<td><input id="emp_name" type="text" class="form-control" name="EMP_NAME" ></td>
 									</tr>
 									<tr>
 										<th>패스워드</th>
-										<td><input id="empPw" type="password" class="form-control" name="empPw"></td>
+										<td><input id="emp_pw" type="password" class="form-control" name="EMP_PW" ></td>
 										<td>
-											<button data-toggle="modal" class="btn btn-link" data-target="#intro">변경</button>
+											<button data-toggle="modal" class="btn btn-link" data-target="#intro">등록</button>
 											<div id="intro" class="modal fade" role="dialog" aria-labelledby="introHeader" aria-hidden="true" tabindex="-1">
 												<div class="modal-dialog">
 													<div id="modal" class="modal-content" style="padding: 40px; margin: 40px;">
+														<!-- 
 														<div class="form-group">
 															<label for="exampleInputEmail1">이전 비밀번호</label> 
 															<input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="pwHelp" width="50px"> 
 															<small id="pwlHelp" class="form-text text-muted">비밀번호가 생각나지 않으면 인사부로 문의하세요...</small>
 														</div>
+														 -->
 														<div class="form-group">
 															<label for="exampleInputPassword1">새 비밀번호</label> 
 															<input type="password" class="form-control" id="exampleInputPassword1" width="100px">
@@ -101,24 +103,24 @@ pageEncoding="UTF-8"%>
 									</tr>
 									<tr>
 										<th>주민번호</th>
-										<td><input id="empJumin" type="text" class="form-control" name="empJumin"></td>
+										<td><input id="emp_resnum" type="text" class="form-control" name="EMP_RESNUM" ></td>
 									</tr>
 									<tr>
 										<th>사진</th>
-										<td><input id="empPhoto" type="file" class="form-control" name="empPhoto"></td>
+										<td><input id="emp_photo" type="file" class="form-control" name="EMP_PHOTO"></td>
 									</tr>
 									<tr>
 										<th>핸드폰</th>
-										<td><input id="empTel" type="tel" class="form-control" name="empTel"></td>
+										<td><input id="emp_phone" type="tel" class="form-control" name="EMP_PHONE"></td>
 									</tr>
 									<tr>
 										<th>이메일</th>
-										<td><input id="empEmail" type="email" class="form-control" name="empEmail"></td>
+										<td><input id="emp_email" type="email" class="form-control" name="EMP_EMAIL"></td>
 									</tr>
 									<tr>
 										<th>부서명</th>
 										<td>
-											<select id="deptName" name="deptName" class="form-control">
+											<select id="dept_name" name="DEPT_NAME" class="form-control" >
 												<option value="영업부">영업부</option>
 												<option value="개발부">개발부</option>
 												<option value="총무부">총무부</option>
@@ -128,7 +130,7 @@ pageEncoding="UTF-8"%>
 									</tr>
 									<tr>
 										<th>부서번호</th>
-										<td><input id="deptNo" type="text" class="form-control" name="deptNo"></td>
+										<td><input id="dept_no" type="text" class="form-control" name="DEPT_NO" ></td>
 									</tr>
 								</table>
 							</div>
@@ -137,20 +139,20 @@ pageEncoding="UTF-8"%>
 								<table class="table table-boardered">
 									<tr>
 										<th>내선번호</th>
-										<td><input id="deptTel" type="tel" class="form-control" name="deptTel"></td>
+										<td><input id="emp_extend" type="tel" class="form-control" name="EMP_EXTEND" ></td>
 									</tr>
 									<tr>
 										<th>직급</th>
-										<td><input id="empLevel" type="text" class="form-control" name="empLevel"></td>
+										<td><input id="emp_position" type="text" class="form-control" name="EMP_POSITION" ></td>
 									</tr>
 									<tr>
 										<th>연봉</th>
-										<td><input id="empSal" type="text" class="form-control" name="empSal"></td>
+										<td><input id="emp_salary" type="text" class="form-control" name="EMP_SALARY" ></td>
 									</tr>
 									<tr>
 										<th>성별</th>
 										<td>
-											<select id="empGender" name="empGender" class="form-control">
+											<select id="emp_gender" name="EMP_GENDER" class="form-control" >
 												<option value="남성">남성</option>
 												<option value="여성">여성</option>
 											</select>
@@ -158,16 +160,16 @@ pageEncoding="UTF-8"%>
 									</tr>
 									<tr>
 										<th>입사일자</th>
-										<td><input id="empStartdate" type="date" class="form-control" name="empStartDate"></td>
+										<td><input id="emp_hiredate" type="date" class="form-control" name="EMP_HIREDATE" ></td>
 									</tr>
 									<tr>
 										<th>퇴사일자</th>
-										<td><input id="empEndDate" type="date" class="form-control" name="empEndDate"></td>
+										<td><input id="emp_retiredate" type="date" class="form-control" name="EMP_RETIREDATE" ></td>
 									</tr>
 									<tr>
 										<th>근무상태</th>
 										<td>
-											<select id="deptState" name="deptState" class="form-control">
+											<select id="emp_state" name="EMP_STATE" class="form-control" >
 												<option value="재직">재직</option>
 												<option value="파견">파견</option>
 												<option value="퇴사">퇴사</option>
@@ -176,12 +178,12 @@ pageEncoding="UTF-8"%>
 									</tr>
 									<tr>
 										<th>은행</th>
-										<td><input id="empBank" type="text" class="form-control" name="empBank"></td>
+										<td><input id="emp_bank" type="text" class="form-control" name="EMP_BANK" ></td>
 									</tr>
 
 									<tr>
 										<th>계좌번호</th>
-										<td><input id="empBankNum" type="text" class="form-control" name="empBankNum"></td>
+										<td><input id="emp_account" type="text" class="form-control" name="EMP_ACCOUNT" ></td>
 									</tr>
 								</table>
 							</div>
@@ -191,16 +193,16 @@ pageEncoding="UTF-8"%>
 								<table class="table table-boardered">
 									<tr>
 										<th>우편번호</th>
-										<td><input id="i_postcode" type="text" class="form-control" name="i_postcode" align="left"></td>
+										<td><input id="emp_zipcode" type="text" class="form-control" name="EMP_ZIPCODE" align="left"></td>
 										<td><input type="button" class="btn btn-link" onclick="DaumPostcode()" value="주소검색" /></td>
 									</tr>
 									<tr>
 										<th>주소</th>
-										<td><input id="i_address" type="text" class="form-control" name="i_address"></td>
+										<td><input id="emp_address" type="text" class="form-control" name="EMP_ADDRESS"></td>
 									</tr>
 									<tr>
 										<th>상세주소</th>
-										<td><input id="i_addressDesc" type="text" class="form-control" name="i_addressDesc" placeholder="상세 주소를 입력하세요..."></td>
+										<td><input id="emp_detailaddress" type="text" class="form-control" name="EMP_DETAILADDRESS" placeholder="상세 주소를 입력하세요..."></td>
 									</tr>
 								</table>
 							</div>
@@ -211,8 +213,8 @@ pageEncoding="UTF-8"%>
 						<div class="container" align="right">
 							<tr>
 								<td colspan="2">
-									<button type="button" class="btn btn-info" style="border: 3px solid white; border-radius: 10px;" onclick="main()">저장</button>
-									<button type="button" class="btn btn-info" style="border: 3px solid white; border-radius: 10px;" onclick="main()">닫기</button>
+									<button type="button" class="btn btn-info" style="border: 3px solid white; border-radius: 10px;" onclick="javascript:save()">저장</button>
+									<button type="button" class="btn btn-info" style="border: 3px solid white; border-radius: 10px;" onclick="location.href='javascript:history.back();'">닫기</button>
 								<!--<input type="submit" class="btn btn-primary" value="저장" onclick="main()">  
 								    <input type="reset" class="btn btn-danger" value="닫기" onclick="main()"> -->
 								</td>
