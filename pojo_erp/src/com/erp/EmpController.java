@@ -56,20 +56,35 @@ public class EmpController implements Controller {
 				pMap = new HashMap<>();
 				pMap.put("emp_no", emp_no);
 				//pMap.put("emp_no", session.getAttribute("emp_no"));
-				List<Map<String,Object>> inoutList = empLogic.inoutList(pMap);
-				System.out.println("오늘 출근 리스트 사이즈 => "+inoutList.size());
-				req.setAttribute("inOutList", inoutList);
-				List<Map<String,Object>> todayList = empLogic.todayList(pMap);
-				System.out.println("오늘일정 리스트 사이즈 => "+todayList.size());
-				req.setAttribute("todayList", todayList);
-				List<Map<String,Object>> roomList = empLogic.roomList(pMap);
-				System.out.println("오늘 회의실 예약 리스트 => "+roomList.size());
-				req.setAttribute("roomList", roomList);
+//				List<Map<String,Object>> inoutList = empLogic.inoutList(pMap);
+//				System.out.println("오늘 출근 리스트 사이즈 => "+inoutList.size());
+//				req.setAttribute("inOutList", inoutList);
+//				List<Map<String,Object>> todayList = empLogic.todayList(pMap);
+//				System.out.println("오늘일정 리스트 사이즈 => "+todayList.size());
+//				req.setAttribute("todayList", todayList);
+//				List<Map<String,Object>> roomList = empLogic.roomList(pMap);
+//				System.out.println("오늘 회의실 예약 리스트 => "+roomList.size());
+//				req.setAttribute("roomList", roomList);
 				List<Map<String,Object>> taskTimeList = empLogic.commuteList(pMap);
 				System.out.println("오늘 업무시간 리스트 => "+taskTimeList.size());
 				req.setAttribute("taskTimeList", taskTimeList);
 				path="forward:main.jsp";
 			}
+		}
+		else if("roomList".equals(requestName)) {
+			List<Map<String,Object>> roomList = empLogic.roomList(pMap);
+			System.out.println("오늘 회의실 예약 리스트 => "+roomList.size());
+			req.setAttribute("roomList", roomList);
+			path="forward:jsonRoomList.jsp";
+		}
+		else if("inoutList".equals(requestName)) {
+			String emp_no = session.getAttribute("emp_no").toString();
+			pMap = new HashMap<>();
+			pMap.put("emp_no", emp_no);
+			List<Map<String,Object>> inoutList = empLogic.inoutList(pMap);
+			System.out.println("오늘 출근 리스트 사이즈 => "+inoutList.size());
+			req.setAttribute("inOutList", inoutList);
+			path="forward:./jsonInOutList.jsp";
 		}
 		else if("myUpdImformation".equals(requestName)) {
 			logger.info("EmpController => 내정보 수정 버튼 호출");

@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Personal Schedules</title>
     <%@include file ="../common/fontAwesomeUI.jsp" %>
-    <link rel=" shortcut icon" href="../mihyun_cal/image/favicon.ico">
+    <!-- <link rel=" shortcut icon" href="../mihyun_cal/image/favicon.ico"> -->
 
     <link rel="stylesheet" href="../mihyun_cal/vendor/css/fullcalendar.min2.css" />
     <link rel="stylesheet" href="../mihyun_cal/vendor/css/bootstrap.min2.css?after">
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,500,600">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-    <link rel="stylesheet" href="../mihyun_cal/css/main1.css?after">
+    <link rel="stylesheet" href="../mihyun_cal/css/main1.css">
 
 </head>
 <body>
@@ -161,23 +161,6 @@
                         </select>
                     </div>
                 </div>
-
-               <!--  <div class="col-lg-6">
-                    <label for="calendar_view">등록자별</label>
-                    <div class="input-group">
-                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="정연"
-                                checked>정연</label>
-                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="다현"
-                                checked>다현</label>
-                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="사나"
-                                checked>사나</label>
-                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="나연"
-                                checked>나연</label>
-                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="지효"
-                                checked>지효</label>
-                    </div>
-                </div> -->
-
             </div>
         </div>
         <!-- /.filter panel -->

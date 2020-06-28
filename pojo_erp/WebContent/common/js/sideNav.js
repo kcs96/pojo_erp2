@@ -16,7 +16,7 @@ const sideNavMainTitleApi = [
         id: "goto",
         title: "출|퇴관리",
         className: "",
-        ref: "../myService/empCommute.jsp",
+        ref: "../myService/inOutManager.erp",
         onClick: "",
         collapsed: false,
       },

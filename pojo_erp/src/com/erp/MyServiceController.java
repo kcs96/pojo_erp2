@@ -39,7 +39,7 @@ public class MyServiceController implements Controller {
 			String result = myServiceLogic.myGoWork(pMap);
 			System.out.println("출근 버튼 성공 여부 :"+result);
 			if(result.equals("1")) {
-				path="redirect:xxx.jsp";
+				path="redirect:empCommute.jsp";
 				System.out.println(path);
 			}else {
 				path="errorPage.jsp";
@@ -66,7 +66,7 @@ public class MyServiceController implements Controller {
 			pMap.put("emp_no", session.getAttribute("emp_no"));
 			pMap.put("btn_type","퇴근");
 			String result=myServiceLogic.myGoHome(pMap);
-			if(result.equals("1")) {path="redirect:xxx.jsp";}
+			if(result.equals("1")) {path="redirect:empCommute.jsp";}
 			else {path="redirect:errorPage.jsp";}
 			///////////////////////  테스트 코드   /////////////////////
 			/*
@@ -90,7 +90,7 @@ public class MyServiceController implements Controller {
 			pMap.put("emp_no", session.getAttribute("emp_no"));
 			pMap.put("btn_type","외출");
 			String result = myServiceLogic.myGoOut(pMap);
-			if(result.equals("1")) {path="redirect:xxx.jsp";}
+			if(result.equals("1")) {path="redirect:empCommute.jsp";}
 			else {path="redirect:dfd.erp?cud=";}
 			
 			///////////////////////  테스트 코드   /////////////////////
@@ -115,7 +115,7 @@ public class MyServiceController implements Controller {
 			pMap.put("emp_no", session.getAttribute("emp_no"));
 			pMap.put("btn_type","외출복귀");
 			String result = myServiceLogic.myComBack(pMap);
-			if(result.equals("1")) {path="redirect:xxx.jsp";}
+			if(result.equals("1")) {path="redirect:empCommute.jsp";}
 			else {path="redirect:errorPage.jsp";}
 			///////////////////////  테스트 코드   /////////////////////
 			/*
@@ -234,12 +234,32 @@ public class MyServiceController implements Controller {
 			todayInOutList = myServiceLogic.inOutManager(pMap);
 			System.out.println("오늘 출퇴관리탭 리스트"+todayInOutList.size());
 			req.setAttribute("todayInOutList", todayInOutList);
-			
+			path="forward:./empCommute.jsp";
+		}
+		//////////////주간 근무시간 chart json 수정 ///////
+		else if("weekChart".equals(requestName)) {
+		logger.info("MAV => 출퇴관리 실행");
+		pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
+		pMap.put("emp_no", session.getAttribute("emp_no")); 
+			//이건 뭐지..? 주간 차트를 말하는 건가..?
 			List<Map<String,Object>> weekInOutList = new ArrayList<>();
 			weekInOutList = myServiceLogic.weekInOutInfo(pMap);
 			System.out.println("주간 출퇴관리탭 리스트"+weekInOutList.size());
 			req.setAttribute("weekInOutList", weekInOutList);
-			path="forward:xxx.jsp";
+			path="forward:jsonWeekChart.jsp";
+		}
+		//개인일정 json 파일//
+		else if("myScheduleChart".equals(requestName)) {
+			//개인일정 insert here
+			logger.info("MAV => 개인일정 실행");
+			pMap = new HashMap<>();
+			pMap.put("emp_no", session.getAttribute("emp_no")); 
+			//pMap.put("my_day", "2020-06-01");//테스트
+			pMap.put("sal_payday", req.getParameter("sal_payday")); //실제
+			List<Map<String,Object>> rList = myServiceLogic.mySchedule(pMap);
+			System.out.println("개인일정 리스트 => "+rList.size());
+			req.setAttribute("myScheduleChart", rList);
+			path="forward:jsonScheduleChart.jsp";
 		}
 		else if("monthPay".equals(requestName)) {
 			//당월급여 insert here
@@ -272,12 +292,12 @@ public class MyServiceController implements Controller {
 			logger.info("MAV => 개인일정 실행");
 			pMap = new HashMap<>();
 			pMap.put("emp_no", session.getAttribute("emp_no")); 
-			pMap.put("my_day", "2020-06-01");//테스트
-			//pMap.put("sal_payday", req.getParameter("sal_payday")); //실제
+			//pMap.put("my_day", "2020-06-01");//테스트
+			pMap.put("my_day", req.getParameter("my_day")); //실제
 			List<Map<String,Object>> rList = myServiceLogic.mySchedule(pMap);
 			System.out.println("개인일정 리스트 => "+rList.size());
 			req.setAttribute("myScheduleList", rList);
-			path="forward:xxx.jsp";
+			path="forward:jsonMySchedule.jsp";
 		}
 		return path;
 	}

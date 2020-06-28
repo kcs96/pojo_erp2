@@ -165,17 +165,31 @@ var calendar = $('#calendar').fullCalendar({
    *  일정 받아옴 
    * ************** */
   events: function (start, end, timezone, callback) {
+	var today = new Date();
+	var yyyy = today.getFullYear().toString(); 
+	var month = (today.getMonth()+1).toString();
+	var date = today.getDate().toString();
+	var msg = yyyy+"-"+month+"-"+date;
     $.ajax({
       type: "get",
-      url: "./data1.json",//일정을 가져옴 전체일정이 아닌 월 단위로 가져오기
-      data: {
-        // 실제 사용시, 날짜를 전달해 일정기간 데이터만 받아오기를 권장
-      },
-      success: function (response) {
-        var fixedDate = response.map(function (array) {
-          if (array.allDay && array.start !== array.end) {
+      url: "mySchedule.erp?my_day="+msg,//일정을 가져옴 전체일정이 아닌 월 단위로 가져오기
+//      data: {
+//        // 실제 사용시, 날짜를 전달해 일정기간 데이터만 받아오기를 권장
+//    	_id:MY_NO
+//    	,tiltle: MY_TITLE
+//    	,description: MY_MEMO
+//    	,start:MY_SDATE
+//    	,end: MY_EDATE
+//    	,type:MY_TYPE
+//    	,allday: MY_ALLDAY
+//    	,backgroundColor: MY_BGCOLOR
+//    	,textColor:MY_TEXTCOLOR
+//      },
+      success: function (data) {
+        var fixedDate = data.map(function (array) {
+          if (array.MY_ALLDAY&& array.MY_SDATE !== array.MY_EDATE) {
             // 이틀 이상 AllDay 일정인 경우 달력에 표기시 하루를 더해야 정상출력
-            array.end = moment(array.end).add(1, 'days');
+            array.MY_EDATE = moment(array.MY_EDATE).add(1, 'days');
           }
           return array;
         })
@@ -326,7 +340,7 @@ var calendar = $('#calendar').fullCalendar({
   },
   eventLimitClick: 'week', //popover
   navLinks: true,
-  defaultDate: moment('2020-06'), //실제 사용시 삭제
+  //defaultDate: moment('2020-06'), //실제 사용시 삭제
   timeFormat: 'HH:mm',
   defaultTimedEventDuration: '01:00:00',
   editable: true,
