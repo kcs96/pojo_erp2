@@ -461,17 +461,17 @@ public class WorkController implements Controller {
 			req.setAttribute("branchList", rlist);
 			path = "forward:xxx.jsp";
 		}
-		else if("deptSchedule".equals(requestName)) {
-			//부서일정 insert here
-			logger.info("Controller : 부서일정 호출 성공");
-			/////////////////////// 실제 코드    /////////////////////
-			List<Map<String,Object>> rlist =  new ArrayList<>();
-			pMap = new HashMap<>();
-			pMap.put("emp_no", session.getAttribute("emp_no"));
-			pMap.put("dept_day",req.getParameter("dept_day"));
-			rlist = workLogic.deptSchedule(pMap);
-			req.setAttribute("deptScheduleList", rlist);
-			path = "forward:xxx.jsp";
+//		else if("deptSchedule".equals(requestName)) {
+//			//부서일정 insert here
+//			logger.info("Controller : 부서일정 호출 성공");
+//			/////////////////////// 실제 코드    /////////////////////
+//			List<Map<String,Object>> rlist =  new ArrayList<>();
+//			pMap = new HashMap<>();
+//			pMap.put("emp_no", session.getAttribute("emp_no"));
+//			pMap.put("dept_day",req.getParameter("dept_day"));
+//			rlist = workLogic.deptSchedule(pMap);
+//			req.setAttribute("deptScheduleList", rlist);
+//			path = "forward:xxx.jsp";
 			///////////////////////  테스트 코드   /////////////////////
 			/*
 			List<Map<String,Object>> rlist = new ArrayList<>();
@@ -482,17 +482,30 @@ public class WorkController implements Controller {
 			System.out.println("부서일정 리스트 =>"+rlist.size());
 			req.setAttribute("deptScheduleList", rlist);
 			path = "forward:xxx.jsp";
-			*/
-		}
+			
+		}*/
 		return path;
 	}
 
 	@Override
-	public ModelAndView process(String cud, HttpServletRequest req, HttpServletResponse res)
+	public ModelAndView process(String cud, HttpServletRequest req, HttpServletResponse res) 
 			throws ServletException, IOException {
 		ModelAndView mav = new ModelAndView(req,res);
-	
-		return mav;
+		HttpSession session = req.getSession();
+		Map<String, Object> pMap = null;
+		 if("deptSchedule".equals(cud)) {
+				//부서일정 insert here
+				logger.info("Controller : 부서일정 호출 성공");
+				/////////////////////// 실제 코드    /////////////////////
+				List<Map<String,Object>> rlist =  new ArrayList<>();
+				pMap = new HashMap<>();
+				pMap.put("emp_no", session.getAttribute("emp_no"));
+				//pMap.put("emp_no", 10001);
+				pMap.put("dept_day",req.getParameter("dept_day"));
+				rlist = workLogic.deptSchedule(pMap);
+				mav.addObject("deptScheduleList", rlist);
+				mav.setViewName("jsonDeptSchedule");
+		 }
+		 return mav;
 	}
-
 }

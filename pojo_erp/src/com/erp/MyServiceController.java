@@ -2,6 +2,7 @@ package com.erp;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -125,7 +126,7 @@ public class MyServiceController implements Controller {
 			String result = myServiceLogic.myComBack(pMap);
 			System.out.println("외출복귀버튼 성공 여부 :"+result);
 			if(result.equals("1")) {
-				path="redirect:xxx.jsp";
+				path="redirect:xxx.jsp"; 
 				System.out.println(path);
 			}else {
 				path="errorPage.jsp";
@@ -139,8 +140,16 @@ public class MyServiceController implements Controller {
 			pMap= HashMapBuilder.hashMapBuilder(req.getParameterMap());
 			pMap.put("emp_no", session.getAttribute("emp_no"));
 			String result = myServiceLogic.myAddSchedule(pMap);
-			if(result.equals("1")) {path="redirect:xxx.jsp";}
-			else {path="redirect:errorPage.jsp";}
+			if(result.equals("1")) {
+				Calendar cal = Calendar.getInstance();
+				logger.info("MyService => 내 일정 추가 Cal:"+cal);
+				int year = cal.get(Calendar.YEAR);
+				int month = cal.get(Calendar.MONTH)+1;
+				int date = cal.get(Calendar.DATE);
+				String msg = year+"-"+month+"-"+date;
+				logger.info("MyService => 내 일정 추가 CalMsg:"+msg);
+				path="redirect:mySchedule.erp?cud=mySchedule+&my_day="+msg;
+			}else {path="redirect:errorPage.jsp";}
 			///////////////////////  테스트 코드   /////////////////////
 			/*
 			Map<String, Object> pMap = new HashMap<>();
@@ -169,7 +178,16 @@ public class MyServiceController implements Controller {
 			pMap= HashMapBuilder.hashMapBuilder(req.getParameterMap());
 			pMap.put("emp_no", session.getAttribute("emp_no"));
 			String result=myServiceLogic.myUpdSchedule(pMap);
-			if(result.equals("1")) {path="redirect:xxx.jsp";}
+			if(result.equals("1")) {
+				Calendar cal = Calendar.getInstance();
+				logger.info("MyService => 내 일정 추가 Cal:"+cal);
+				int year = cal.get(Calendar.YEAR);
+				int month = cal.get(Calendar.MONTH)+1;
+				int date = cal.get(Calendar.DATE);
+				String msg = year+"-"+month+"-"+date;
+				logger.info("MyService => 내 일정 추가 CalMsg:"+msg);
+				path="redirect:mySchedule.erp?cud=mySchedule+&my_day="+msg;
+			}
 			else {path="redirect:errorPage.jsp";}
 			
 			///////////////////////  테스트 코드   /////////////////////
@@ -202,7 +220,16 @@ public class MyServiceController implements Controller {
 			pMap.put("emp_no", session.getAttribute("emp_no"));
 			pMap.put("my_no", req.getParameter("my_no"));
 			int del_result = myServiceLogic.myDelSchedule(pMap);
-			if(del_result==1) {path="redirect:xxx.jsp";}
+			if(del_result==1) {
+				Calendar cal = Calendar.getInstance();
+				logger.info("MyService => 내 일정 추가 Cal:"+cal);
+				int year = cal.get(Calendar.YEAR);
+				int month = cal.get(Calendar.MONTH)+1;
+				int date = cal.get(Calendar.DATE);
+				String msg = year+"-"+month+"-"+date;
+				logger.info("MyService => 내 일정 추가 CalMsg:"+msg);
+				path="redirect:mySchedule.erp?cud=mySchedule+&my_day="+msg;
+			}
 			else {path="redirect:errorPage.jsp";}
 			
 			///////////////////////  테스트 코드   /////////////////////
@@ -236,31 +263,30 @@ public class MyServiceController implements Controller {
 			req.setAttribute("todayInOutList", todayInOutList);
 			path="forward:./empCommute.jsp";
 		}
-		//////////////주간 근무시간 chart json 수정 ///////
-		else if("weekChart".equals(requestName)) {
-		logger.info("MAV => 출퇴관리 실행");
-		pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
-		pMap.put("emp_no", session.getAttribute("emp_no")); 
-			//이건 뭐지..? 주간 차트를 말하는 건가..?
-			List<Map<String,Object>> weekInOutList = new ArrayList<>();
-			weekInOutList = myServiceLogic.weekInOutInfo(pMap);
-			System.out.println("주간 출퇴관리탭 리스트"+weekInOutList.size());
-			req.setAttribute("weekInOutList", weekInOutList);
-			path="forward:jsonWeekChart.jsp";
-		}
-		//개인일정 json 파일//
-		else if("myScheduleChart".equals(requestName)) {
-			//개인일정 insert here
-			logger.info("MAV => 개인일정 실행");
-			pMap = new HashMap<>();
-			pMap.put("emp_no", session.getAttribute("emp_no")); 
-			//pMap.put("my_day", "2020-06-01");//테스트
-			pMap.put("sal_payday", req.getParameter("sal_payday")); //실제
-			List<Map<String,Object>> rList = myServiceLogic.mySchedule(pMap);
-			System.out.println("개인일정 리스트 => "+rList.size());
-			req.setAttribute("myScheduleChart", rList);
-			path="forward:jsonScheduleChart.jsp";
-		}
+//		//////////////주간 근무시간 chart json 수정 ///////
+//		else if("weekChart".equals(requestName)) {
+//		logger.info("MAV => 출퇴관리 실행");
+//		pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
+//		pMap.put("emp_no", session.getAttribute("emp_no")); 
+//			//이건 뭐지..? 주간 차트를 말하는 건가..?
+//			List<Map<String,Object>> weekInOutList = new ArrayList<>();
+//			weekInOutList = myServiceLogic.weekInOutInfo(pMap);
+//			System.out.println("주간 출퇴관리탭 리스트"+weekInOutList.size());
+//			req.setAttribute("weekInOutList", weekInOutList);
+//			path="forward:jsonWeekChart.jsp";
+//		}
+//		//개인일정chart json 파일//////////////////////////////////////
+//		else if("myScheduleChart".equals(requestName)) {
+//			//개인일정 insert here
+//			logger.info("MAV => 개인일정 실행");
+//			pMap = new HashMap<>();
+//			pMap.put("emp_no", session.getAttribute("emp_no")); 
+//			List<Map<String,Object>> rList = myServiceLogic.mySchedule(pMap);
+//			System.out.println("개인일정 리스트 => "+rList.size());
+//			req.setAttribute("myScheduleChart", rList);
+//			path="forward:jsonMyScheduleChart.jsp";
+//		}
+		
 		else if("monthPay".equals(requestName)) {
 			//당월급여 insert here
 			logger.info("MAV => 당월급여 실행");
@@ -287,18 +313,18 @@ public class MyServiceController implements Controller {
 			req.setAttribute("allPayList", allPayList);
 			path="forward:xxx.jsp";
 		}
-		else if("mySchedule".equals(requestName)) {
-			//개인일정 insert here
-			logger.info("MAV => 개인일정 실행");
-			pMap = new HashMap<>();
-			pMap.put("emp_no", session.getAttribute("emp_no")); 
-			//pMap.put("my_day", "2020-06-01");//테스트
-			pMap.put("my_day", req.getParameter("my_day")); //실제
-			List<Map<String,Object>> rList = myServiceLogic.mySchedule(pMap);
-			System.out.println("개인일정 리스트 => "+rList.size());
-			req.setAttribute("myScheduleList", rList);
-			path="forward:jsonMySchedule.jsp";
-		}
+//		else if("mySchedule".equals(requestName)) {
+//			//개인일정 insert here
+//			logger.info("MAV => 개인일정 실행");
+//			pMap = new HashMap<>();
+//			pMap.put("emp_no", session.getAttribute("emp_no")); 
+//			//pMap.put("my_day", "2020-06-01");//테스트
+//			pMap.put("my_day", req.getParameter("my_day")); //실제
+//			List<Map<String,Object>> rList = myServiceLogic.mySchedule(pMap);
+//			System.out.println("개인일정 리스트 => "+rList.size());
+//			req.setAttribute("myScheduleList", rList);
+//			path="forward:jsonMySchedule.jsp";
+//		}
 		return path;
 	}
 
@@ -306,6 +332,43 @@ public class MyServiceController implements Controller {
 	public ModelAndView process(String cud, HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 		ModelAndView mav = new ModelAndView(req,res);
+		HttpSession session = req.getSession();
+		Map<String, Object> pMap = null;
+		
+//////////////주간 근무시간 chart json 수정 ///////
+		if("weekChart".equals(cud)) {
+			logger.info("MAV => 출퇴관리 실행");
+			pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
+			pMap.put("emp_no", session.getAttribute("emp_no")); 
+			//이건 뭐지..? 주간 차트를 말하는 건가..?
+			List<Map<String,Object>> weekInOutList = new ArrayList<>();
+			weekInOutList = myServiceLogic.weekInOutInfo(pMap);
+			System.out.println("주간 출퇴관리탭 리스트"+weekInOutList.size());
+			mav.addObject("weekInOutList", weekInOutList);
+			mav.setViewName("jsonWeekChart");
+		}else if("myScheduleChart".equals(cud)) {
+			//개인일정 insert here
+			logger.info("MAV => 개인일정 실행");
+			pMap = new HashMap<>();
+			pMap.put("emp_no", session.getAttribute("emp_no")); 
+			List<Map<String,Object>> rList = myServiceLogic.mySchedule(pMap);
+			System.out.println("개인일정 리스트 => "+rList.size());
+			mav.addObject("myScheduleChart", rList);
+			mav.setViewName("jsonMyScheduleChart");
+		}
+		//개인일정달력 select json
+		else if("mySchedule".equals(cud)) {
+			//개인일정 insert here
+			logger.info("MAV => 개인일정달력 실행");
+			pMap = new HashMap<>();
+			pMap.put("emp_no", session.getAttribute("emp_no")); 
+			//pMap.put("my_day", "2020-06-01");//테스트
+			pMap.put("my_day", req.getParameter("my_day")); //실제
+			List<Map<String,Object>> rList = myServiceLogic.mySchedule(pMap);
+			System.out.println("개인일정 리스트 => "+rList.size());
+			mav.addObject("myScheduleList", rList);
+			mav.setViewName("jsonMySchedule");
+		}
 		return mav;
 		
 	}

@@ -152,7 +152,7 @@ pageEncoding="UTF-8"%>
 		<div id="emp_table" style="width: 100%; height: 300px;">
 			<div class="table-responsive">
 				<table id="testTable" class="table table-hover" data-toggle="table"
-					data-url="inoutList.erp">
+					data-url="inoutList.erp?cud=inoutList">
 					<thead class="thead-light">
 						<tr>
 							<th data-field="CM_GOTOWORK">출근</th>
@@ -172,7 +172,7 @@ pageEncoding="UTF-8"%>
 		<h2 style="text-align: center;">회의실</h2>
 		<div id="cf_table" style="width: 100%;; height: 300px;"></div>
 		<!-- <script src="../mihyun_main/js/react/cfTableContainer.bundle.js"></script> -->
-		<script src="./cfTableContainer.bundle.js"></script>
+		<script src="../mihyun_main/js/react/cfTableContainer.bundle.js"></script>
 		<hr>
 	</div>
 </div>

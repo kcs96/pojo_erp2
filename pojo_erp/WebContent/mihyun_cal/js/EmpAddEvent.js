@@ -54,9 +54,9 @@ var newEvent = function (start, end, eventType) {
     modifyBtnContainer.hide();
     eventModal.modal('show');
 
-    /******** 임시 RAMDON ID - 실제 DB 연동시 삭제 **********/
-    var eventId = 1 + Math.floor(Math.random() * 1000);
-    /******** 임시 RAMDON ID - 실제 DB 연동시 삭제 **********/
+//    /******** 임시 RAMDON ID - 실제 DB 연동시 삭제 **********/
+//    var eventId = 1 + Math.floor(Math.random() * 1000);
+//    /******** 임시 RAMDON ID - 실제 DB 연동시 삭제 **********/
 
     //새로운 일정 저장버튼 클릭
     $('#save-event').unbind();
@@ -64,7 +64,7 @@ var newEvent = function (start, end, eventType) {
     	alert('start: '+editStart.val());
         alert('end: '+editEnd.val());
         var eventData = {
-            _id: eventId,
+           // _id: eventId,
             title: editTitle.val(),
             start: editStart.val(),
             end: editEnd.val(),
@@ -106,10 +106,13 @@ var newEvent = function (start, end, eventType) {
         //새로운 일정 저장
         $.ajax({
             type: "get",
-            url: "",
-            data: {
-                //.....
-            },
+            url: "myUpdSchedule.erp?my_title="+eventData.title+"&my_memo="+eventData.description+
+            "&my_sdate="+eventData.start+"&my_edate="+eventData.end+
+            "&my_type="+eventData.type+"&my_allday="+eventData.allDay+
+            "&my_bgcolor="+eventData.backgroundColor,
+//            data: {
+//                //.....
+//            },
             success: function (response) {
                 //DB연동시 중복이벤트 방지를 위한
                 //$('#calendar').fullCalendar('removeEvents');

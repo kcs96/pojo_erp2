@@ -4,6 +4,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <%
+	String emp_name = (String)session.getAttribute("emp_name");
+	String dept_name = (String)session.getAttribute("dept_name");
 	List<Map<String, Object>> rList = (List<Map<String, Object>>)request.getAttribute("todayInOutList");
 %>
 <!DOCTYPE html>
@@ -40,7 +42,7 @@ pageEncoding="UTF-8"%>
 		var date = today.getDate().toString(); 
 		var msg = yyyy+"-"+month+"-"+date;
 		var jsonData = $.ajax({
-			url: "myschedulechart.jsp?sal_payday="+msg
+			url: "myScheduleChart.erp?cud=myScheduleChart"
 			,dataType: "json"
 			,async: false
 		}).responseText;
@@ -61,6 +63,10 @@ pageEncoding="UTF-8"%>
 				,pieStartAngle: 180
 				,legend: 'none'
 				, slices: {0: {offset: 0.2}}/* jsonData.length  */
+				,tooltip: {
+			        trigger: 'selection'
+			    },
+	    		pieResidueSliceColor: "yellow"
 		};
 		var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 			chart.draw(pieData, pieOptions);
@@ -73,7 +79,7 @@ pageEncoding="UTF-8"%>
 
     function curvDrawChart() {
 	var jsonData1 = $.ajax({
-				url: "weekChart.erp"
+				url: "weekChart.erp?cud=weekChart"
 				,dataType: "json"
 				,async: false
 	}).responseText;
@@ -249,11 +255,11 @@ pageEncoding="UTF-8"%>
 							</thead>
 							<tbody>
 								<tr >
+									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;"><%=dept_name %></td>
+									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;"><%=emp_name %></td>
 								<%
 								if(rList.size() == 0){
 								%>
-									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;">-</td>
-									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;">-</td>
 									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;" id="go">-</td>
 									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;" id="leave">-</td>
 									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;" id="out">-</td>
@@ -264,12 +270,10 @@ pageEncoding="UTF-8"%>
 		Map<String, Object> rMap = rList.get(0);
 	
 %>
-									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;"><%=rMap.get("DEPT_NAME") %></td>
-									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;"><%=rMap.get("EMP_NAME") %></td>
 									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;" id="go"><%=rMap.get("CM_GOTOWORK") %></td>
 									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;" id="leave"><%=rMap.get("CM_GOTOHOME") %></td>
 									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;" id="out"><%=rMap.get("CM_OUTTIME")%></td>
-									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;" id="comeBack">-</td>
+									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;" id="comeBack"><%=rMap.get("CM_COMEBACK")%></td>
 									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;">-</td>
 								<%
 	}

@@ -172,7 +172,7 @@ var calendar = $('#calendar').fullCalendar({
 	var msg = yyyy+"-"+month+"-"+date;
     $.ajax({
       type: "get",
-      url: "mySchedule.erp?my_day="+msg,//일정을 가져옴 전체일정이 아닌 월 단위로 가져오기
+      url: "mySchedule.erp?cud=mySchedule&my_day="+msg,//일정을 가져옴 전체일정이 아닌 월 단위로 가져오기
 //      data: {
 //        // 실제 사용시, 날짜를 전달해 일정기간 데이터만 받아오기를 권장
 //    	_id:MY_NO
@@ -187,9 +187,9 @@ var calendar = $('#calendar').fullCalendar({
 //      },
       success: function (data) {
         var fixedDate = data.map(function (array) {
-          if (array.MY_ALLDAY&& array.MY_SDATE !== array.MY_EDATE) {
+          if (array.allDay&& array.start !== array.end) {
             // 이틀 이상 AllDay 일정인 경우 달력에 표기시 하루를 더해야 정상출력
-            array.MY_EDATE = moment(array.MY_EDATE).add(1, 'days');
+            array.end = moment(array.end).add(1, 'days');
           }
           return array;
         })

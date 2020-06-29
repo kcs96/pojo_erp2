@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+        <%
+    	String emp_name = (String)session.getAttribute("emp_name");
+    %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -36,10 +39,10 @@
         <div id="contextMenu" class="dropdown clearfix">
             <ul class="dropdown-menu dropNewEvent" role="menu" aria-labelledby="dropdownMenu"
                 style="display:block;position:static;margin-bottom:5px;">
-                <li><a tabindex="-1" href="#">일정1</a></li>
-                <li><a tabindex="-1" href="#">일정2</a></li>
-                <li><a tabindex="-1" href="#">일정3</a></li>
-                <li><a tabindex="-1" href="#">일정4</a></li>
+                <li><a tabindex="-1" href="#">부서일정1</a></li>
+                <li><a tabindex="-1" href="#">부서일정2</a></li>
+                <li><a tabindex="-1" href="#">부서일정3</a></li>
+                <li><a tabindex="-1" href="#">부서일정4</a></li>
                 <li class="divider"></li>
                 <li><a tabindex="-1" href="#" data-role="close">Close</a></li>
             </ul>
@@ -80,7 +83,7 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <label class="col-xs-4" for="edit-username">등록자</label>
-                                <input class="inputModal" type="text" name="edit-username" id="edit-username" required="required" />
+                                <input class="inputModal" type="text" name="edit-username" id="edit-username" value="<%=emp_name %>" disabled />
                             </div>
                         </div>
                         <div class="row">
@@ -155,10 +158,10 @@
                     <label for="calendar_view">카테고리</label>
                     <div class="input-group">
                         <select class="filter" id="type_filter" multiple="multiple">
-                            <option value="일정1">일정1</option>
-                            <option value="일정2">일정2</option>
-                            <option value="일정3">일정3</option>
-                            <option value="일정4">일정4</option>
+                            <option value="부서일정1">부서일정1</option>
+                            <option value="부서일정2">부서일정2</option>
+                            <option value="부서일정3">부서일정3</option>
+                            <option value="부서일정4">부서일정4</option>
                         </select>
                     </div>
                 </div>

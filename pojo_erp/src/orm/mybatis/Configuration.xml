@@ -11,7 +11,9 @@
 			<dataSource type="POOLED">
 				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
 				<!-- <property name="url" value="jdbc:oracle:thin:@192.168.219.105:1521:orcl11" /> -->
-				<property name="url" value="jdbc:oracle:thin:@172.24.0.12:1521:orcl11" />
+				<!-- <property name="url" value="jdbc:oracle:thin:@172.24.0.12:1521:orcl11" /> -->
+				  <!-- <property name="url" value="jdbc:oracle:thin:@192.168.0.23:1521:orcl11" />   -->
+				   <property name="url" value="jdbc:oracle:thin:@192.168.0.248:1521:orcl11" />   
 				<property name="username" value="${username}" />
 				<property name="password" value="${password}" />
 			</dataSource>
@@ -25,7 +27,5 @@ DML 구문 즉 SELECT, INSERT, UPDATE, DELETE을 작성된 xml파일의 물리�
 		<mapper resource="orm/mybatis/mapper/myServiceMapper.xml"/>
 		<mapper resource="orm/mybatis/mapper/conferenceMapper.xml"/>
 		<mapper resource="orm/mybatis/mapper/workMapper.xml"/>
-
-
 	</mappers>
 </configuration> 

@@ -165,9 +165,14 @@ var calendar = $('#calendar').fullCalendar({
    *  일정 받아옴 
    * ************** */
   events: function (start, end, timezone, callback) {
+	var today = new Date();
+	var yyyy = today.getFullYear().toString(); 
+	var month = (today.getMonth()+1).toString();
+	var date = today.getDate().toString();
+	var msg = yyyy+"-"+month+"-"+date;
     $.ajax({
       type: "get",
-      url: "./data1.json",//일정을 가져옴 전체일정이 아닌 월 단위로 가져오기
+      url: "deptSchedule.erp?cud=deptSchedule&dept_day="+msg,//일정을 가져옴 전체일정이 아닌 월 단위로 가져오기
       data: {
         // 실제 사용시, 날짜를 전달해 일정기간 데이터만 받아오기를 권장
       },

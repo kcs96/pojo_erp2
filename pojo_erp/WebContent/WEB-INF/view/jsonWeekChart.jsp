@@ -12,8 +12,8 @@
 %>
 {
 	"cols": [
-		{"id":"","label":"SCHEDULE","pattern":"","type":"string"},
-		{"id":"","label":"TIME","pattern":"","type":"number"}
+		{"id":"","label":"DAY","pattern":"","type":"string"},
+		{"id":"","label":"TIME( 분[Min] )","pattern":"","type":"number"}
 	
 	],   
 	"rows": [

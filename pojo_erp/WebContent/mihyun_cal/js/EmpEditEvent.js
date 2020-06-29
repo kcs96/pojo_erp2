@@ -83,7 +83,10 @@ var editEvent = function (event, element, view) {
         //일정 업데이트
         $.ajax({
             type: "get",
-            url: "",
+            url: "myUpdSchedule.erp?my_title="+event.title+"&my_memo="+event.description+
+            "&my_sdate="+event.start+"&my_edate="+event.end+
+            "&my_type="+event.type+"&my_allday="+event.allDay+
+            "&my_bgcolor="+event.backgroundColor,
             data: {
                 //...
             },
@@ -105,10 +108,10 @@ $('#deleteEvent').on('click', function () {
     //삭제시
     $.ajax({
         type: "get",
-        url: "",
-        data: {
-            //...
-        },
+        url: "myDelSchedule.erp?my_no="+$(this).data('id'),
+//        data: {
+//            //...
+//        },
         success: function (response) {
             alert('삭제되었습니다.');
         }

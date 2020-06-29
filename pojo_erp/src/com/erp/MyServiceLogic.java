@@ -48,6 +48,13 @@ public class MyServiceLogic {
 		return rList; 
 	}
 
+	public List<Map<String, Object>> myScheduleChart(Map<String, Object> pMap) {
+		//내 일정 관리 탭 이벤트
+		logger.info("MyServiceLogic => 개인 일정  호출");
+		List<Map<String, Object>> rList = null;
+		rList = myServiceDao.myScheduleChart(pMap);
+		return rList;
+	}
 	public List<Map<String, Object>> mySchedule(Map<String, Object> pMap) {
 		//내 일정 관리 탭 이벤트
 		logger.info("MyServiceLogic => 개인 일정  호출");
