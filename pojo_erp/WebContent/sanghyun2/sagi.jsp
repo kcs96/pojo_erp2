@@ -77,11 +77,15 @@
     }
 }
    </style> 
+   <script type="text/javascript">
+   
+   </script>
    </head> 
 <body>  
         <div class="page">
             <div class="subpage" id="content">
-
+<form id="forms_name">
+<input type="hidden" name="cud" value="workAddSendDoc">
 <table style="margin-left: auto; margin-right: auto;" border="2" width="650" 
 		 cellspacing=0>
 	<tr id="tableTr">
@@ -103,11 +107,11 @@
 	<tr>
     <th width="123"  class="auto-style3">성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명 </th>
     <td width="201">
-    <input type="text"  class="wrap2"style=" height:50px;line-height: 45px; width:98%; border: 0;">
+    <input type="text" name="ap_reporter" id="ap_reporter" class="wrap2"style=" height:50px;line-height: 45px; width:98%; border: 0;">
     </td>
     <th width="111" class="auto-style3">부 서 명</th>
     <td width="209">
-    	<input class="wrap2" type="text"   style=" height:50px;line-height: 75px; width:98%; border: 0;">
+    	<input class="wrap2" type="text" name="ap_dname" id="ap_dname"  style=" height:50px;line-height: 75px; width:98%; border: 0;">
     </td>
     </tr>
   	<tr>
@@ -115,18 +119,18 @@
    		 입 사 일 자
    	 </th>
     <td colspan="3" height="100px;">
-    	<input class="wrap2" type="text"   style=" height:100%;line-height: 75px; width:99%; border: 0;">
+    	<input class="wrap2" type="text" id="ap_prosessingdate" name="ap_prosessingdate"style=" height:100%;line-height: 75px; width:99%; border: 0;">
     </td>
   	</tr>
   	<tr>
     <th width="123" class="auto-style3">사 직  내 용 </th>
     <td colspan="3">
-    <textarea class="wrap2" style=" border:0; line-height:2; width:99%;" cols="60" rows="4" ></textarea>
+    <textarea class="wrap2"  name="ap_content" id="ap_content" style=" border:0;line-height:2; width:99%;" cols="60" rows="4" ></textarea>
     </td>
     </tr>
     <tr>
     <th width="123" class="auto-style3">연 락 처</th>
-    <td colspan="3" height="60"><input  class="wrap2" type="text"   style=" line-height: 75px; width:98%; border: 0;"></td>
+    <td colspan="3" height="60"><input name="ap_contact" id="ap_contact"class="wrap2" type="text"   style=" line-height: 75px; width:98%; border: 0;"></td>
   </tr>
 <tr>
 <td style="border-right:0;border-left:0;border-top:0;border-bottom:0;"  colspan="6">
@@ -151,15 +155,15 @@
 <br>
 <br>
 <div class="wrap2" style="text-align:center;">
-<input type="text"  style="font-size:20px; line-height: 35px; width:48px; border: 0;"align="center">년
-<input type="text"  style="font-size:20px; line-height: 30px; width:30px; border: 0;"align="center">월
-<input type="text"  style="font-size:20px; line-height: 30px; width:30px; border: 0;"align="center">일
+<input type="text" id="ap_year" name="year" style="font-size:20px; line-height: 35px; width:48px; border: 0;"align="center">년
+<input type="text" id="ap_month" name="month" style="font-size:20px; line-height: 30px; width:30px; border: 0;"align="center">월
+<input type="text" id="ap_today" name="today" style="font-size:20px; line-height: 30px; width:30px; border: 0;"align="center">일
 <div>
 <br>
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;신  청  인:
-<input type="text"  style="font-size:20px;  width:80px; border: 0;"align="center">(인)</p>
+<input type="text" id="ap_namein" name="namein" style="font-size:20px;  width:80px; border: 0;"align="center">(인)</p>
 <br>
 <br>
 <br>
@@ -169,6 +173,7 @@
 </td>
 </tr>
 </table>
+</form>
 </div>
 </div>
 </div>

@@ -36,10 +36,12 @@ public class WorkController implements Controller {
 			logger.info("Controller : 결재 승인 호출 성공");
 			/////////////////////// 실제 코드    /////////////////////
 			pMap = new HashMap<>();
-			pMap.put("emp_no",session.getAttribute("emp_no"));
+			//pMap.put("emp_no",session.getAttribute("emp_no"));
+			pMap.put("emp_no","10001");
 			pMap.put("ap_no",req.getParameter("ap_no"));
 			String result_accept = workLogic.workAgree(pMap);
-			if(result_accept.equals("1")) {path="redirect:xxx.jsp";}
+			
+			if(result_accept.equals("1")) {path="redirect:approval_my.jsp";}
 			else {path="redirect:errorPage.jsp";}
 			
 			///////////////////////  테스트 코드   //////////////////////
@@ -57,9 +59,12 @@ public class WorkController implements Controller {
 			logger.info("Controller : 결재 기각 호출 성공");
 			/////////////////////// 실제 코드    /////////////////////
 		    pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
-		    pMap.put("emp_no", session.getAttribute("emp_no"));
+		    //pMap.put("emp_no", session.getAttribute("emp_no"));
+		    pMap.put("emp_no","10001");
 		    String result_deny = workLogic.workDeny(pMap);
-			if(result_deny.equals("1")) {path="redirect:xxx.jsp?result=결재성공";}
+		    logger.info("result_deny : "+ result_deny);
+			if(result_deny.equals("1")) {path="redirect:approval_my.jsp";}
+			//{path="redirect:xxx.jsp?result=결재성공";}
 			else if(result_deny.equals("결재가 마감된 문서입니다.")) {
 				{path="redirect:xxx.jsp?result=결재가 마감된 문서입니다.";}
 			}
@@ -490,8 +495,33 @@ public class WorkController implements Controller {
 	@Override
 	public ModelAndView process(String cud, HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
+		HttpSession session = req.getSession();
 		ModelAndView mav = new ModelAndView(req,res);
-	
+		Map<String,Object> pMap = null;
+		if("app_get".equals(cud)) {   //완료
+	         //사원조회 insert here
+	         logger.info("Controller : 받은결재함 호출 성공");
+	         List<Map<String,Object>> applist =  new ArrayList<>();
+	         pMap = new HashMap<>();
+	         //pMap.put("emp_no",session.getAttribute("emp_no"));    
+	         pMap.put("emp_no","10001");
+	         applist = workLogic.app_get(pMap); 
+	         mav.addObject("app_getList", applist);
+	         mav.setViewName("jsonapp_getList");
+	      } 
+		else if("app_set".equals(cud)) {	//보낸 문서함
+			//전자결재 insert here
+			logger.info("Controller : 보낸 결재함 호출 성공");
+			/////////////////////// 실제 코드    /////////////////////
+			List<Map<String,Object>> applist = new ArrayList<>();
+			pMap = new HashMap<>();
+			//pMap.put("emp_no",session.getAttribute("emp_no"));    
+			pMap.put("emp_no","10001");
+			applist = workLogic.app_set(pMap); 
+			mav.addObject("app_setList", applist);
+	        mav.setViewName("jsonapp_setList");
+		}
+		
 		return mav;
 	}
 

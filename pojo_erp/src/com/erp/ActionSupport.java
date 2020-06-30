@@ -87,5 +87,6 @@ public class ActionSupport extends HttpServlet {
 	 	      HttpServletResponse res) throws ServletException, IOException {
 		logger.info("doPost 호출 성공");
 		doService(req,res);
+		System.out.println();
 	}
 }
