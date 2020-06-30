@@ -239,7 +239,7 @@ public class WorkDao {
 		return result;
 	}
 	public int deptDelSchedule(Map<String, Object> pMap) {
-		logger.info("workDao => 개인 일정 삭제 호출"); 
+		logger.info("workDao => 부서 일정 삭제 호출"); 
 		int result=sqlSes.delete("work_deptSchDel",pMap);
 		return result;
 	}
@@ -261,5 +261,12 @@ public class WorkDao {
 		List<Map<String,Object>> rlist = null;
 		rlist = sqlSes.selectList("sel_empDispatch",pMap);
 		return rlist;
+	}
+	public List<Map<String, Object>> deptEmp(Map<String, Object> pMap) {
+		//파견사원 조회 버튼 insert here
+				logger.info("Dao : 부서 일정 부서 사원 이름 호출 성공");
+				List<Map<String,Object>> rlist = null;
+				rlist = sqlSes.selectList("proc_deptEmp",pMap);
+				return rlist;
 	}
 }

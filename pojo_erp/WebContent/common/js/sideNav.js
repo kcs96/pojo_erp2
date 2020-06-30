@@ -119,7 +119,7 @@ const sideNavMainTitleApi = [
         id: "department",
         title: "부서일정",
         className: "",
-        ref: "../work/deptSchedule.jsp",
+        ref: "../work/deptEmp.erp",
         onClick: "",
         collapsed: false,
       },

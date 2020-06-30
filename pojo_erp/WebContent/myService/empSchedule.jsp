@@ -28,7 +28,7 @@
         <nav class="sb-topnav navbar navbar-expand navbar-dark" style="background-color:#282828;">
             <a class="navbar-brand" href="javascript:history.back();" style="width:20%; padding-top:12px;" >
             <i class="fas fa-arrow-left" style="width:50px; height:50px; float:left;"></i></a>
-            <a class="navbar-brand" href="./deptSchedule.jsp" style=" width:60%; font-size:25px; padding-top:12px; text-align: center;" >Personal Schedules</a>
+            <a class="navbar-brand" href="./empSchedule.jsp" style=" width:60%; font-size:25px; padding-top:12px; text-align: center;" >Personal Schedules</a>
 		    <a class="navbar-brand" href="../home/main.jsp" style="width:20%; padding-top:12px;">
 		    <i class="fas fa-home" style="width:50px; height:50px; float:right;"></i></a>
 		    </nav>

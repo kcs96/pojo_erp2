@@ -24,10 +24,7 @@ audio, canvas, progress, video {
 	vertical-align: baseline
 }
 
-audio
-:not
- 
-(
+audio:not(
 [
 controls
 ]
@@ -40,11 +37,7 @@ none
 ;
 
 	
-height
-:
- 
-0
-}
+height:0}
 [hidden], template {
 	display: none
 }
@@ -103,9 +96,7 @@ img {
 }
 
 svg
-:not
- 
-(
+:not(
 :root
  
 ){
@@ -4061,30 +4052,16 @@ border-bottom-right-radius
 >
 .btn
 :last-child
-:not
- 
-(
+:not(
 :first-child
  
 ),
 .btn-group
 >
 .dropdown-toggle
-:not
-
-	
-(
-:first-child
- 
-){
-border-top-left-radius
-:
- 
-0;
-border-bottom-left-radius
-:
- 
-0
+:not(:first-child){
+border-top-left-radius:0;
+border-bottom-left-radius:0
 }
 .btn-group>.btn-group {
 	float: left
@@ -4097,7 +4074,7 @@ border-bottom-left-radius
 .btn-group>.btn-group:first-child:not (:last-child )>.btn:last-child,
 	.btn-group>.btn-group:first-child:not (:last-child )>.dropdown-toggle {
 	border-top-right-radius: 0;
-	border-bottom-right-radius: 0
+	border-bottom-right-radius : 0
 }
 
 .btn-group>.btn-group:last-child:not (:first-child )>.btn:first-child {

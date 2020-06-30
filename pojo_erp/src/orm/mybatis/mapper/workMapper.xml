@@ -235,12 +235,21 @@
 						     ,#{msg, mode=OUT,jdbcType=VARCHAR})}
 	</select>
 	
-	<!-- 개인 일정 삭제하기  -->
+	<!-- 부서 일정 삭제하기  -->
 	<delete id="work_deptSchDel" parameterType="map"> 
 		DELETE FROM dept_schedule
 		 WHERE emp_no = #{emp_no}
   		   AND ds_no = #{ds_no}
 	</delete>
+	
+	<!-- 부서 사원 이름 조회하기  -->
+	<select id="proc_deptEmp" parameterType="map" statementType="CALLABLE">
+		{call proc_deptEmp(#{emp_no},#{key, 
+		                     	    jdbcType=CURSOR, 
+		                     		mode=OUT, 
+		                     		javaType=java.sql.ResultSet, 
+		                     		resultMap=wmap})}
+	</select>
 	
 	<!-- ================================== 부서일정 리스트 끝=============================================== -->
 	

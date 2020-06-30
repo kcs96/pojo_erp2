@@ -104,7 +104,7 @@ var editEvent = function (event, element, view) {
 $('#deleteEvent').on('click', function () {
     
     $('#deleteEvent').unbind();
-    $("#calendar").fullCalendar('removeEvent', $(this).data('id'));
+    $("#calendar").fullCalendar('removeEvents', $(this).data('id'));
     eventModal.modal('hide');
 
     //삭제시

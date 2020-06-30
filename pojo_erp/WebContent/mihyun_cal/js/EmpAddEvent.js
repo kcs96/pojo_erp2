@@ -44,7 +44,7 @@ var newEvent = function (start, end, eventType) {
     $('#save-event').on('click', function () {
     	alert('start: '+editStart.val());
         alert('end: '+editEnd.val());
-        alert('bgColor: '+editColor.val())
+        alert('bgColor: '+editColor.val());
         var eventData = {
            // _id: eventId,
             title: editTitle.val(),

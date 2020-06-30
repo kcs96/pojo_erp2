@@ -165,18 +165,23 @@ var calendar = $('#calendar').fullCalendar({
    *  일정 받아옴 
    * ************** */
   events: function (start, end, timezone, callback) {
+		var today = new Date();
+		var yyyy = today.getFullYear().toString(); 
+		var month = (today.getMonth()+1).toString();
+		var date = today.getDate().toString();
+		var msg = yyyy+"-"+month+"-"+date;
     $.ajax({
       type: "get",
-      url: "./data.json",//일정을 가져옴 전체일정이 아닌 월 단위로 가져오기
-      data: {
-        // 실제 사용시, 날짜를 전달해 일정기간 데이터만 받아오기를 권장
-      },
+      url: "allRes.erp?cud=allRes&cfr_day="+msg,//일정을 가져옴 전체일정이 아닌 월 단위로 가져오기
+//      data: {
+//        // 실제 사용시, 날짜를 전달해 일정기간 데이터만 받아오기를 권장
+//      },
       success: function (response) {
         var fixedDate = response.map(function (array) {
-          if (array.allDay && array.start !== array.end) {
-            // 이틀 이상 AllDay 일정인 경우 달력에 표기시 하루를 더해야 정상출력
-            array.end = moment(array.end).add(1, 'days');
-          }
+//          if (array.allDay && array.start !== array.end) {
+//            // 이틀 이상 AllDay 일정인 경우 달력에 표기시 하루를 더해야 정상출력
+//            array.end = moment(array.end).add(1, 'days');
+//          }
           return array;
         })
         callback(fixedDate);
@@ -193,7 +198,11 @@ var calendar = $('#calendar').fullCalendar({
   //일정 리사이즈
   eventResize: function (event, delta, revertFunc, jsEvent, ui, view) {
     $('.popover.fade.top').remove();
-
+    var today = new Date();
+	var yyyy = today.getFullYear().toString(); 
+	var month = (today.getMonth()+1).toString();
+	var date = today.getDate().toString();
+	var msg = yyyy+"-"+month+"-"+date;
     /** 리사이즈시 수정된 날짜반영
      * 하루를 빼야 정상적으로 반영됨. */
     var newDates = calDateWhenResize(event);
@@ -201,7 +210,7 @@ var calendar = $('#calendar').fullCalendar({
     //리사이즈한 일정 업데이트
     $.ajax({
       type: "get",
-      url: "",
+      url: "allRes.erp?cud=allRes&cfr_day="+msg,
       data: {
         //id: event._id,
         //....
@@ -232,14 +241,18 @@ var calendar = $('#calendar').fullCalendar({
 
     // 드랍시 수정된 날짜반영
     var newDates = calDateWhenDragnDrop(event);
-
+    var today = new Date();
+	var yyyy = today.getFullYear().toString(); 
+	var month = (today.getMonth()+1).toString();
+	var date = today.getDate().toString();
+	var msg = yyyy+"-"+month+"-"+date;
     //드롭한 일정 업데이트
     $.ajax({
       type: "get",
-      url: "",
-      data: {
-        //...
-      },
+      url: "allRes.erp?cud=allRes&cfr_day="+msg,
+//      data: {
+//        //...
+//      },
       success: function (response) {
         alert('수정: ' + newDates.startDate + ' ~ ' + newDates.endDate);
       }

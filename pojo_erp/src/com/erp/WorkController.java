@@ -345,7 +345,20 @@ public class WorkController implements Controller {
 			else {path="redirect:errorPage.jsp";}
 			*/
 		}
-		
+		 else if("deptEmp".equals(requestName)) {
+			 //부서일정 insert here
+			 logger.info("Controller : 부서일정 사원 이름 조회 호출 성공");
+			 /////////////////////// 실제 코드    /////////////////////
+			 List<Map<String,Object>> rlist =  new ArrayList<>();
+			 pMap = new HashMap<>();
+			 //pMap.put("emp_no", session.getAttribute("emp_no"));
+			 pMap.put("emp_no", 10001);
+			 //pMap.put("dept_day",req.getParameter("dept_day"));
+			 rlist = workLogic.deptEmp(pMap);
+			 System.out.println("rlist => "+rlist.size());
+			 req.setAttribute("deptEmpList", rlist);
+			 path = "forward:deptSchedule.jsp";
+		 }
 		//////////////////////////////////////////////////////// forward 지역 /////////////////////////////////////////////////////////////////////
 		
 		else if(requestName.equals("workSelectPerson")) { //성공

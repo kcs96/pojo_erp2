@@ -107,11 +107,11 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <label class="col-xs-4" for="edit-color">색상</label>
-                                <select class="inputModal" name="color" id="edit-color" disabled>
-                                    <option id="#D25565" value="#D25565" style="color:#D25565;">빨간색</option>
-                                    <option id="#ffa94d" value="#ffa94d" style="color:#ffa94d;">주황색</option>
-                                    <option id="#a9e34b" value="#a9e34b" style="color:#a9e34b;">초록색</option>
-                                    <option id="#74c0fc" value="#74c0fc" style="color:#74c0fc;">파란색</option>
+                                <select class="inputModal" name="color" id="edit-color">
+                                    <option id="D25565" value="D25565" style="color:#D25565;">빨간색</option>
+                                    <option id="ffa94d" value="ffa94d" style="color:#ffa94d;">주황색</option>
+                                    <option id="a9e34b" value="a9e34b" style="color:#a9e34b;">초록색</option>
+                                    <option id="74c0fc" value="74c0fc" style="color:#74c0fc;">파란색</option>
                                 </select>
                             </div>
                         </div> 
@@ -155,22 +155,6 @@
                         </select>
                     </div>
                 </div>
-
-               <!--  <div class="col-lg-6">
-                    <label for="calendar_view">등록자별</label>
-                    <div class="input-group">
-                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="정연"
-                                checked>정연</label>
-                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="다현"
-                                checked>다현</label>
-                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="사나"
-                                checked>사나</label>
-                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="나연"
-                                checked>나연</label>
-                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="지효"
-                                checked>지효</label>
-                    </div>
-                </div> -->
 
             </div>
         </div>
