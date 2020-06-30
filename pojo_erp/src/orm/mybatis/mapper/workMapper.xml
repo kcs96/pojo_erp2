@@ -10,7 +10,7 @@
 		<result property="start" column="DS_SDATE" jdbcType="VARCHAR"/>
 		<result property="end" column="DS_EDATE" jdbcType="VARCHAR"/>
 		<result property="type" column="DS_TYPE" jdbcType="VARCHAR"/>
-	   <!-- <result property="username" column="EMP_NO" jdbcType="NUMERIC"/> -->
+	    <result property="username" column="EMP_NAME" jdbcType="VARCHAR"/> 
 		<result property="backgroundColor" column="DS_BGCOLOR" jdbcType="VARCHAR"/>
 		<result property="textColor" column="DS_TEXTCOLOR" jdbcType="VARCHAR"/>
 		<result property="allDay" column="DS_ALLDAY" jdbcType="VARCHAR"/>

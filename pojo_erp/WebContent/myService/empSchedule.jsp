@@ -79,12 +79,12 @@
                             </div>
                         </div>
 
-                         <div class="row">
+                       <%--   <div class="row">
                             <div class="col-xs-12">
                                 <label class="col-xs-4" for="edit-username">사원명</label>
                                 <input class="inputModal" type="text" name="edit-username" id="edit-username"  value="<%=emp_name %>" disabled/>
                             </div>
-                        </div> 
+                        </div>  --%>
                         <div class="row">
                             <div class="col-xs-12">
                                 <label class="col-xs-4" for="edit-start">시작</label>
@@ -112,15 +112,15 @@
                             <div class="col-xs-12">
                                 <label class="col-xs-4" for="edit-color">색상</label>
                                 <select class="inputModal" name="color" id="edit-color">
-                                    <option value="#D25565" style="color:#D25565;">빨간색</option>
-                                    <option value="#9775fa" style="color:#9775fa;">보라색</option>
-                                    <option value="#ffa94d" style="color:#ffa94d;">주황색</option>
-                                    <option value="#74c0fc" style="color:#74c0fc;">파란색</option>
-                                    <option value="#f06595" style="color:#f06595;">핑크색</option>
-                                    <option value="#63e6be" style="color:#63e6be;">연두색</option>
-                                    <option value="#a9e34b" style="color:#a9e34b;">초록색</option>
-                                    <option value="#4d638c" style="color:#4d638c;">남색</option>
-                                    <option value="#495057" style="color:#495057;">검정색</option>
+                                   <option value="D25565" style="color:#D25565;">빨간색</option>
+                                    <option value="9775fa" style="color:#9775fa;">보라색</option>
+                                    <option value="ffa94d" style="color:#ffa94d;">주황색</option>
+                                    <option value="74c0fc" style="color:#74c0fc;">파란색</option>
+                                    <option value="f06595" style="color:#f06595;">핑크색</option>
+                                    <option value="63e6be" style="color:#63e6be;">연두색</option>
+                                    <option value="a9e34b" style="color:#a9e34b;">초록색</option>
+                                    <option value="4d638c" style="color:#4d638c;">남색</option>
+                                    <option value="495057" style="color:#495057;">검정색</option>
                                 </select>
                             </div>
                         </div> 
@@ -157,10 +157,10 @@
                     <label for="calendar_view">카테고리</label>
                     <div class="input-group">
                         <select class="filter" id="type_filter" multiple="multiple">
-                            <option value="일정1">일정1</option>
-                            <option value="일정2">일정2</option>
-                            <option value="일정3">일정3</option>
-                            <option value="일정4">일정4</option>
+                            <option value="개인일정1">개인일정1</option>
+                            <option value="개인일정2">개인일정2</option>
+                            <option value="개인일정3">개인일정3</option>
+                            <option value="개인일정4">개인일정4</option>
                         </select>
                     </div>
                 </div>

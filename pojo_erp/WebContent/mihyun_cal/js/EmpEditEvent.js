@@ -30,7 +30,7 @@ var editEvent = function (event, element, view) {
     editStart.val(event.start.format('YYYY-MM-DD HH:mm'));
     editType.val(event.type);
     editDesc.val(event.description);
-    editColor.val(event.backgroundColor).css('color', event.backgroundColor);
+    editColor.val("#"+event.backgroundColor).css('color', "#"+event.backgroundColor);
 
     addBtnContainer.hide();
     modifyBtnContainer.show();
@@ -68,7 +68,6 @@ var editEvent = function (event, element, view) {
         }
 
         eventModal.modal('hide');
-
         event.allDay = statusAllDay;
         event.title = editTitle.val();
         event.username = editUserName.val();
@@ -83,15 +82,17 @@ var editEvent = function (event, element, view) {
         //일정 업데이트
         $.ajax({
             type: "get",
-            url: "myUpdSchedule.erp?my_title="+event.title+"&my_memo="+event.description+
+            url: "myUpdSchedule.erp?&my_no="+event._id+"&my_title="+event.title+"&my_memo="+event.description+
             "&my_sdate="+event.start+"&my_edate="+event.end+
             "&my_type="+event.type+"&my_allday="+event.allDay+
             "&my_bgcolor="+event.backgroundColor,
-            data: {
-                //...
-            },
+//            data: {
+//                //...
+//            },
             success: function (response) {
-                alert('수정되었습니다.')
+                alert('수정되었습니다.');
+                $('#calendar').fullCalendar('removeEvents');
+                $('#calendar').fullCalendar('refetchEvents');
             }
         });
 
@@ -102,7 +103,7 @@ var editEvent = function (event, element, view) {
 $('#deleteEvent').on('click', function () {
     
     $('#deleteEvent').unbind();
-    $("#calendar").fullCalendar('removeEvent', $(this).data('id'));
+    $("#calendar").fullCalendar('removeEvents', $(this).data('id'));
     eventModal.modal('hide');
 
     //삭제시
@@ -114,6 +115,8 @@ $('#deleteEvent').on('click', function () {
 //        },
         success: function (response) {
             alert('삭제되었습니다.');
+            $('#calendar').fullCalendar('removeEvents');
+            $('#calendar').fullCalendar('refetchEvents');
         }
     });
 

@@ -107,8 +107,8 @@ var calendar = $('#calendar').fullCalendar({
       }),
       content: $('<div />', {
           class: 'popoverInfoCalendar'
-        }).append('<p><strong>등록자:</strong> ' + event.username + '</p>')
-        .append('<p><strong>회의실:</strong> ' + event.type + '</p>')
+        })//.append('<p><strong>등록자:</strong> ' + event.username + '</p>')
+        .append('<p><strong>일정:</strong> ' + event.type + '</p>')
         .append('<p><strong>시간:</strong> ' + getDisplayEventDate(event) + '</p>')
         .append('<div class="popoverDescCalendar"><strong>설명:</strong> ' + event.description + '</div>'),
       delay: {
@@ -187,10 +187,10 @@ var calendar = $('#calendar').fullCalendar({
 //      },
       success: function (data) {
         var fixedDate = data.map(function (array) {
-          if (array.allDay&& array.start !== array.end) {
-            // 이틀 이상 AllDay 일정인 경우 달력에 표기시 하루를 더해야 정상출력
-            array.end = moment(array.end).add(1, 'days');
-          }
+//          if (array.allDay&& array.start != array.end) {
+//            // 이틀 이상 AllDay 일정인 경우 달력에 표기시 하루를 더해야 정상출력
+//            array.end = moment(array.end).add(1, 'days');
+//          }
           return array;
         })
         callback(fixedDate);
@@ -211,15 +211,19 @@ var calendar = $('#calendar').fullCalendar({
     /** 리사이즈시 수정된 날짜반영
      * 하루를 빼야 정상적으로 반영됨. */
     var newDates = calDateWhenResize(event);
-
+    var today = new Date();
+    var yyyy = today.getFullYear().toString(); 
+    var month = (today.getMonth()+1).toString();
+    var date = today.getDate().toString();
+    var msg = yyyy+"-"+month+"-"+date;
     //리사이즈한 일정 업데이트
     $.ajax({
       type: "get",
-      url: "",
-      data: {
-        //id: event._id,
-        //....
-      },
+      url: "mySchedule.erp?cud=mySchedule&my_day="+msg,
+//      data: {
+//        //id: event._id,
+//        //....
+//      },
       success: function (response) {
         alert('수정: ' + newDates.startDate + ' ~ ' + newDates.endDate);
       }
@@ -234,7 +238,12 @@ var calendar = $('#calendar').fullCalendar({
   //일정 드래그앤드롭
   eventDrop: function (event, delta, revertFunc, jsEvent, ui, view) {
     $('.popover.fade.top').remove();
-
+    var newDates = calDateWhenResize(event);
+    var today = new Date();
+    var yyyy = today.getFullYear().toString(); 
+    var month = (today.getMonth()+1).toString();
+    var date = today.getDate().toString();
+    var msg = yyyy+"-"+month+"-"+date;
     //주,일 view일때 종일 <-> 시간 변경불가
     if (view.type === 'agendaWeek' || view.type === 'agendaDay') {
       if (draggedEventIsAllDay !== event.allDay) {
@@ -250,10 +259,10 @@ var calendar = $('#calendar').fullCalendar({
     //드롭한 일정 업데이트
     $.ajax({
       type: "get",
-      url: "",
-      data: {
-        //...
-      },
+      url: "mySchedule.erp?cud=mySchedule&my_day="+msg,
+//      data: {
+//        //...
+//      },
       success: function (response) {
         alert('수정: ' + newDates.startDate + ' ~ ' + newDates.endDate);
       }

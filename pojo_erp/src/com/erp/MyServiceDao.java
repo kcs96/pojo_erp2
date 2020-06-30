@@ -133,6 +133,7 @@ public class MyServiceDao {
 		//일정삭제 버튼 이벤트
 		logger.info("MyServiceDao => 개인 일정 삭제 호출"); 
 		result=sqlSec.delete("my_sdDel",pMap);
+		sqlSec.commit();
 		return result;
 	}
 

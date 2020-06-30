@@ -139,17 +139,15 @@ public class MyServiceController implements Controller {
 			/////////////////////// 실제 코드    /////////////////////
 			pMap= HashMapBuilder.hashMapBuilder(req.getParameterMap());
 			pMap.put("emp_no", session.getAttribute("emp_no"));
+			for(int i=0; i<pMap.size(); i++) {
+				String key = (String)pMap.keySet().toArray()[i];
+				//logger.info(key);
+				logger.info(key+"="+pMap.get(key));
+			}
+			logger.info("pMap.size()===>"+pMap.size());
 			String result = myServiceLogic.myAddSchedule(pMap);
-			if(result.equals("1")) {
-				Calendar cal = Calendar.getInstance();
-				logger.info("MyService => 내 일정 추가 Cal:"+cal);
-				int year = cal.get(Calendar.YEAR);
-				int month = cal.get(Calendar.MONTH)+1;
-				int date = cal.get(Calendar.DATE);
-				String msg = year+"-"+month+"-"+date;
-				logger.info("MyService => 내 일정 추가 CalMsg:"+msg);
-				path="redirect:mySchedule.erp?cud=mySchedule+&my_day="+msg;
-			}else {path="redirect:errorPage.jsp";}
+			if(result.equals("1")) {path="redirect:empSchedule.jsp";}
+			else {path="redirect:errorPage.jsp";}
 			///////////////////////  테스트 코드   /////////////////////
 			/*
 			Map<String, Object> pMap = new HashMap<>();
@@ -177,17 +175,14 @@ public class MyServiceController implements Controller {
 			/////////////////////// 실제 코드    /////////////////////	
 			pMap= HashMapBuilder.hashMapBuilder(req.getParameterMap());
 			pMap.put("emp_no", session.getAttribute("emp_no"));
-			String result=myServiceLogic.myUpdSchedule(pMap);
-			if(result.equals("1")) {
-				Calendar cal = Calendar.getInstance();
-				logger.info("MyService => 내 일정 추가 Cal:"+cal);
-				int year = cal.get(Calendar.YEAR);
-				int month = cal.get(Calendar.MONTH)+1;
-				int date = cal.get(Calendar.DATE);
-				String msg = year+"-"+month+"-"+date;
-				logger.info("MyService => 내 일정 추가 CalMsg:"+msg);
-				path="redirect:mySchedule.erp?cud=mySchedule+&my_day="+msg;
+			for(int i=0; i<pMap.size(); i++) {
+				String key = (String)pMap.keySet().toArray()[i];
+				//logger.info(key);
+				logger.info(key+"="+pMap.get(key));
 			}
+			logger.info("pMap.size()===>"+pMap.size());
+			String result=myServiceLogic.myUpdSchedule(pMap);
+			if(result.equals("1")) {path="redirect:empSchedule.jsp";}
 			else {path="redirect:errorPage.jsp";}
 			
 			///////////////////////  테스트 코드   /////////////////////
@@ -220,16 +215,8 @@ public class MyServiceController implements Controller {
 			pMap.put("emp_no", session.getAttribute("emp_no"));
 			pMap.put("my_no", req.getParameter("my_no"));
 			int del_result = myServiceLogic.myDelSchedule(pMap);
-			if(del_result==1) {
-				Calendar cal = Calendar.getInstance();
-				logger.info("MyService => 내 일정 추가 Cal:"+cal);
-				int year = cal.get(Calendar.YEAR);
-				int month = cal.get(Calendar.MONTH)+1;
-				int date = cal.get(Calendar.DATE);
-				String msg = year+"-"+month+"-"+date;
-				logger.info("MyService => 내 일정 추가 CalMsg:"+msg);
-				path="redirect:mySchedule.erp?cud=mySchedule+&my_day="+msg;
-			}
+			
+			if(del_result==1) {path="redirect:empSchedule.jsp";}
 			else {path="redirect:errorPage.jsp";}
 			
 			///////////////////////  테스트 코드   /////////////////////

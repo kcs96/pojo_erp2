@@ -178,10 +178,10 @@ var calendar = $('#calendar').fullCalendar({
       },
       success: function (response) {
         var fixedDate = response.map(function (array) {
-          if (array.allDay && array.start !== array.end) {
-            // 이틀 이상 AllDay 일정인 경우 달력에 표기시 하루를 더해야 정상출력
-            array.end = moment(array.end).add(1, 'days');
-          }
+//          if (array.allDay && array.start !== array.end) {
+//            // 이틀 이상 AllDay 일정인 경우 달력에 표기시 하루를 더해야 정상출력
+//            array.end = moment(array.end).add(1, 'days');
+//          }
           return array;
         })
         callback(fixedDate);
@@ -198,7 +198,11 @@ var calendar = $('#calendar').fullCalendar({
   //일정 리사이즈
   eventResize: function (event, delta, revertFunc, jsEvent, ui, view) {
     $('.popover.fade.top').remove();
-
+    var today = new Date();
+	var yyyy = today.getFullYear().toString(); 
+	var month = (today.getMonth()+1).toString();
+	var date = today.getDate().toString();
+	var msg = yyyy+"-"+month+"-"+date;
     /** 리사이즈시 수정된 날짜반영
      * 하루를 빼야 정상적으로 반영됨. */
     var newDates = calDateWhenResize(event);
@@ -206,11 +210,11 @@ var calendar = $('#calendar').fullCalendar({
     //리사이즈한 일정 업데이트
     $.ajax({
       type: "get",
-      url: "",
-      data: {
-        //id: event._id,
-        //....
-      },
+      url: "deptSchedule.erp?cud=deptSchedule&dept_day="+msg,
+//      data: {
+//        //id: event._id,
+//        //....
+//      },
       success: function (response) {
         alert('수정: ' + newDates.startDate + ' ~ ' + newDates.endDate);
       }
@@ -237,14 +241,18 @@ var calendar = $('#calendar').fullCalendar({
 
     // 드랍시 수정된 날짜반영
     var newDates = calDateWhenDragnDrop(event);
-
+    var today = new Date();
+	var yyyy = today.getFullYear().toString(); 
+	var month = (today.getMonth()+1).toString();
+	var date = today.getDate().toString();
+	var msg = yyyy+"-"+month+"-"+date;
     //드롭한 일정 업데이트
     $.ajax({
       type: "get",
-      url: "",
-      data: {
-        //...
-      },
+      url: "deptSchedule.erp?cud=deptSchedule&dept_day="+msg,
+//      data: {
+//        //...
+//      },
       success: function (response) {
         alert('수정: ' + newDates.startDate + ' ~ ' + newDates.endDate);
       }
@@ -331,7 +339,7 @@ var calendar = $('#calendar').fullCalendar({
   },
   eventLimitClick: 'week', //popover
   navLinks: true,
-  defaultDate: moment('2020-06'), //실제 사용시 삭제
+//  defaultDate: moment('2020-06'), //실제 사용시 삭제
   timeFormat: 'HH:mm',
   defaultTimedEventDuration: '01:00:00',
   editable: true,

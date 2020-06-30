@@ -115,6 +115,7 @@ public class MyServiceLogic {
 		logger.info("MyServiceLogic => 개인 일정 삭제  호출");
 		int result = 0;
 		result = myServiceDao.myDelSchedule(pMap);
+		
 		return result;
 		
 	}
