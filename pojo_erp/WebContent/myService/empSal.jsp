@@ -100,21 +100,7 @@ pageEncoding="UTF-8"%>
   </table>
   </div>
 
- 		  	<div class="text-center">
- 			<div class="text-center" align="center">
-  		 	<ul class="pagination justify-content-center">
-   		 	 	<li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
- 		   	 	<li class="page-item"><a class="page-link" href="#">1</a></li>
-  				 <li class="page-item"><a class="page-link" href="#">2</a></li>
-  				 <li class="page-item"><a class="page-link" href="#">3</a></li>
-  				 <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-	 		 </ul>
-	 		</div>
-	 		<div style="float:right;">
-	 			<label>전체 영수증 다운로드</label>
-	 			
-	 		</div>
-   </div>
+
      	
      			<!-- 컨텐츠 들어갈내용 끝   -->
      			</div>

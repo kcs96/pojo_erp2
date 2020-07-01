@@ -17,7 +17,7 @@ const mainTitle = document.createElement("a"); //메인타이틀 a태그
 const mainTitleClass = "navbar-brand"; //메인타이틀 클래스
 const mainTitleStyle = "width:100%"; //메인타이틀 스타일
 const mainTitleText = "2RP PROGRAM"; //메인타이틀 텍스트
-const mainTitleRef = "http://localhost:5000/pojo_erp2/main/main.jsp"; //메인 타이틀 링크
+const mainTitleRef = "http://localhost:5000/main/main.jsp"; //메인 타이틀 링크
 
 //Top nav dom 생성
 function generateTopNav() {

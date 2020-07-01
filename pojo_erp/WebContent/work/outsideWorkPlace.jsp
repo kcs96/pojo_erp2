@@ -40,7 +40,7 @@ pageEncoding="UTF-8"%>
 							<div class="col-6">
 								<div class="text-center" style="float: left; padding: 5px">
 									<button class="btn btn-secondary" style="width: 150px"
-										onClick="location.href='outsideWorker.jsp'">파견사원관리</button>
+										onClick="location.href='outsideWorker.erp'">파견사원관리</button>
 								</div>
 							</div>
 						</div>
@@ -65,17 +65,7 @@ pageEncoding="UTF-8"%>
 				
 							</tbody>
 						</table>
-						<div class="text-center">
-							<div class="text-center" align="center">
-								<ul class="pagination justify-content-center">
-									<li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-									<li class="page-item"><a class="page-link" href="#">1</a></li>
-									<li class="page-item"><a class="page-link" href="#">2</a></li>
-									<li class="page-item"><a class="page-link" href="#">3</a></li>
-									<li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-								</ul>
-							</div>
-						</div>
+						
 
 
 						<!-- 컨텐츠 들어갈내용 끝   -->

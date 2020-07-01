@@ -152,6 +152,7 @@ public class WorkDao {
 	    	logger.info("Dao workSelEmp : " + rlist.size());
 		return rlist;
 	}
+	
 	public int workUpdEmp(Map<String, Object> pMap) {
 		int result = 0;
 		result = sqlSes.update("workUpdEmp",pMap);

@@ -37,7 +37,7 @@ pageEncoding="UTF-8"%>
 		var workername = $("#worker option:selected").val();
 		
 		$.ajax({
-			url : "http://localhost:5000/pojo_erp2/work/kimchiman.erp?cud=outsideSEL&emp_no="+workername
+			url : "http://localhost:5000/work/kimchiman.erp?cud=outsideSEL&emp_no="+workername
 		   ,method : "get"
 		   ,success : function(result){
 			   doc = JSON.stringify(result);
@@ -228,8 +228,8 @@ pageEncoding="UTF-8"%>
 							<div class="col-6">
 								<div class="row" style="padding: 5px; text-align: right;">
 									<div class="col-12">
-										<button class="btn btn-secondary" onclick="location.href='http://localhost:5000/pojo_erp2/work/outsideWorkPlaceEdit.jsp'">파견지 등록</button>
-										<button class="btn btn-secondary" onclick="location.href='http://localhost:5000/pojo_erp2/work/outsideWorkPlace.jsp'">파견지 조회</button>
+										<button class="btn btn-secondary" onclick="location.href='http://localhost:5000/work/outsideWorkPlaceEdit.jsp'">파견지 등록</button>
+										<button class="btn btn-secondary" onclick="location.href='http://localhost:5000/work/outsideWorkPlace.jsp'">파견지 조회</button>
 									</div>
 								</div>
 								<div class="col-md">

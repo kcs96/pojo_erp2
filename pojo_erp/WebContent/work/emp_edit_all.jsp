@@ -1,8 +1,17 @@
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
+<!--  개인 정보 수정 페이지 -->
+
+<%
+	List<Map<String,Object>> rList = (List<Map<String,Object>>)request.getAttribute("workEmpList");
+	Map<String,Object> rMap = rList.get(0);
+%>
+
 <!--정보수정에 필요한 코드 시작=================================================================================-->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -14,8 +23,7 @@ pageEncoding="UTF-8"%>
 <!--정보수정에 필요한 코드 끝   =================================================================================-->
 
 <!--관리자 로그에 필요한 코드 시작=================================================================================-->
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+<!-- <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" /> --> <!-- 얘 지워야지 모달 창 없어진다. -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
 <link href="../common/main.css" rel="stylesheet" />
 <link href="../common/css/custom.css" rel="stylesheet" />
@@ -33,14 +41,44 @@ pageEncoding="UTF-8"%>
 					// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
 					var roadAddr = data.roadAddress;
 					alert("roadAddr: " + roadAddr);
-					$("#i_postcode").val(data.zonecode);
-					$("#i_address").val(roadAddr);
+					$("#emp_zipcode").val(data.zonecode);
+					$("#emp_address").val(roadAddr);
 					//document.getElementbyId('institutuionPostcode').value = data.zonecode;
 					//document.getElementbyId('institutuionAddress').value = roadAddr;
 				},
 			}).open();
 		});
 	}
+	
+	/* 
+	function btn_checkpw(){
+		var old_pw = $("#old_pw").val();
+		var new_pw = $("#f_pw").val();
+		$.ajax({
+			url: "./workUpdPw.erp?U_IN_PW="+old_pw+"&U_IN_RPW="+new_pw
+		   ,method: "get"
+		   ,success: function(data){
+			   alert("비밀번호 수정 버튼 호출 성공");
+			   if(data == "1"){
+				   alert("비밀번호 변경이 완료 되었습니다.");
+					$("#intro").modal('hide');
+					$("#emp_pw").val(new_pw);
+			   }
+			   else{
+				   alert("비밀번호가 불일치 합니다.");
+			   }
+		   }
+		});
+	}
+	 */
+	
+	function save(){
+		alert("저장 버튼 호출 성공");	
+ 		$("#f_updInfo").attr("method","get");
+		$("#f_updInfo").attr("action","workUpdEmp.erp");
+		$("#f_updInfo").submit();
+	}
+	
 </script>
 </head>
 <body class="sb-nav-fixed">
@@ -56,81 +94,80 @@ pageEncoding="UTF-8"%>
 					<div id="page_contents" style="max-width: 1730px; margin: 10px 100px;">
 						<!-- 컨텐츠 들어갈내용 시작-->
 						
+						<form id="f_updInfo">
 						<div class="row">
 							<div class="col-sm-6">
 								<table class="table table-boardered">
 									<tr>
 										<th>사원번호</th>
-										<td><input id="emp_no" type="text" class="form-control" name="EMP_NO" placeholder="사원번호를 입력하세요." ></td>
+										<td><input id="emp_no" type="text" class="form-control" name="EMP_NO" value="<%= rMap.get("EMP_NO") %>" placeholder="사원번호를 입력하세요." ></td>
 									</tr>
 									<tr>
 										<th>사원명</th>
-										<td><input id="emp_name" type="text" class="form-control" name="EMP_NAME" ></td>
+										<td><input id="emp_name" type="text" class="form-control" name="EMP_NAME" value="<%= rMap.get("EMP_NAME") %>" ></td>
 									</tr>
 									<tr>
 										<th>패스워드</th>
-										<td><input id="emp_pw" type="password" class="form-control" name="EMP_PW" disabled></td>
+										<td><input id="emp_pw" type="password" class="form-control" name="EMP_PW" value="<%= rMap.get("EMP_PW") %>" ></td>
+										<!-- 
 										<td>
-											<button data-toggle="modal" class="btn btn-link" data-target="#intro">변경</button>
+											<a type="button" data-toggle="modal" class="btn btn-link" data-target="#intro" >변경</a>
 											<div id="intro" class="modal fade" role="dialog" aria-labelledby="introHeader" aria-hidden="true" tabindex="-1">
 												<div class="modal-dialog">
 													<div id="modal" class="modal-content" style="padding: 40px; margin: 40px;">
-														<!-- 
 														<div class="form-group">
 															<label for="exampleInputEmail1">이전 비밀번호</label> 
 															<input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="pwHelp" width="50px"> 
 															<small id="pwlHelp" class="form-text text-muted">비밀번호가 생각나지 않으면 인사부로 문의하세요...</small>
 														</div>
-														 -->
 														<div class="form-group">
 															<label for="exampleInputPassword1">새 비밀번호</label> 
-															<input type="password" class="form-control" id="exampleInputPassword1" width="100px">
+															<input type="password" class="form-control" id="old_pw" name="U_IN_PW" width="100px">
 														</div>
 														<div class="form-group">
 															<label for="exampleInputPassword2">비밀번호 확인</label> 
-															<input type="password" class="form-control" id="exampleInputPassword2" width="100px">
+															<input type="password" class="form-control" id="new_pw" name="U_IN_RPW" width="100px">
 														</div>
-														<div class="form-group form-check">
-															<input type="checkbox" class="form-check-input" id="exampleCheck1"> 
-															<label class="form-check-label" for="exampleCheck1">Check me out</label>
+														<div class="form-group">
+															<button type="submit" class="btn btn-primary" onclick="javascript:btn_checkpw()">저장</button>
+															<button type="reset" class="btn btn-default" data-dismiss="modal">닫기</button>
 														</div>
-														<button type="submit" class="btn btn-primary">저장</button>
-														<button type="reset" class="btn btn-default" data-dismiss="modal">닫기</button>
 													</div>
 												</div>
 											</div>
 										</td>
+										 -->
 									</tr>
 									<tr>
 										<th>주민번호</th>
-										<td><input id="emp_resnum" type="text" class="form-control" name="EMP_RESNUM" ></td>
+										<td><input id="emp_resnum" type="text" class="form-control" name="EMP_RESNUM" value="<%= rMap.get("EMP_RESNUM") %>" ></td>
 									</tr>
 									<tr>
 										<th>사진</th>
-										<td><input id="emp_photo" type="file" class="form-control" name="EMP_PHOTO"></td>
+										<td><input id="emp_photo" type="file" class="form-control" name="EMP_PHOTO" value="<%= rMap.get("EMP_PHOTO") %>" ></td>
 									</tr>
 									<tr>
 										<th>핸드폰</th>
-										<td><input id="emp_phone" type="tel" class="form-control" name="EMP_PHONE"></td>
+										<td><input id="emp_phone" type="tel" class="form-control" name="EMP_PHONE" value="<%= rMap.get("EMP_PHONE") %>" ></td>
 									</tr>
 									<tr>
 										<th>이메일</th>
-										<td><input id="emp_email" type="email" class="form-control" name="EMP_EMAIL"></td>
+										<td><input id="emp_email" type="email" class="form-control" name="EMP_EMAIL" value="<%= rMap.get("EMP_EMAIL") %>" ></td>
 									</tr>
 									<tr>
 										<th>부서명</th>
 										<td>
-											<select id="dept_name" name="DEPT_NAME" class="form-control" >
-												<option value="영업부">영업부</option>
-												<option value="개발부">개발부</option>
-												<option value="총무부">총무부</option>
+											<select id="dept_name" name="DEPT_NAME" value="<%= rMap.get("DEPT_NAME") %>" class="form-control" >
 												<option value="인사부">인사부</option>
+												<option value="개발부">개발부</option>
+												<option value="품질관리부">품질관리부</option>
+												<option value="관리자">관리자</option>
 											</select>
 										</td>
 									</tr>
 									<tr>
 										<th>부서번호</th>
-										<td><input id="dept_no" type="text" class="form-control" name="DEPT_NO" ></td>
+										<td><input id="dept_no" type="text" class="form-control" name="DEPT_NO" value="<%= rMap.get("DEPT_NO") %>" ></td>
 									</tr>
 								</table>
 							</div>
@@ -139,51 +176,52 @@ pageEncoding="UTF-8"%>
 								<table class="table table-boardered">
 									<tr>
 										<th>내선번호</th>
-										<td><input id="emp_extend" type="tel" class="form-control" name="EMP_EXTEND" ></td>
+										<td><input id="emp_extend" type="tel" class="form-control" name="EMP_EXTEND" value="<%= rMap.get("EMP_EXTEND") %>" ></td>
 									</tr>
 									<tr>
 										<th>직급</th>
-										<td><input id="emp_position" type="text" class="form-control" name="EMP_POSITION" ></td>
+										<td><input id="emp_position" type="text" class="form-control" name="EMP_POSITION" value="<%= rMap.get("EMP_POSITION") %>" ></td>
 									</tr>
 									<tr>
 										<th>연봉</th>
-										<td><input id="emp_salary" type="text" class="form-control" name="EMP_SALARY" ></td>
+										<td><input id="emp_salary" type="text" class="form-control" name="EMP_SALARY" value="<%= rMap.get("EMP_SALARY") %>" ></td>
 									</tr>
 									<tr>
 										<th>성별</th>
 										<td>
-											<select id="emp_gender" name="EMP_GENDER" class="form-control" >
-												<option value="남성">남성</option>
-												<option value="여성">여성</option>
+											<select id="emp_gender" name="EMP_GENDER" value="<%= rMap.get("EMP_GENDER") %>" class="form-control" >
+												<option value="남자">남자</option>
+												<option value="여자">여자</option>
 											</select>
 										</td>
 									</tr>
 									<tr>
 										<th>입사일자</th>
-										<td><input id="emp_hiredate" type="date" class="form-control" name="EMP_HIREDATE" ></td>
+										<td><input id="emp_hiredate" type="date" class="form-control" name="EMP_HIREDATE" value="<%= rMap.get("EMP_HIREDATE") %>" ></td>
 									</tr>
 									<tr>
 										<th>퇴사일자</th>
-										<td><input id="emp_retiredate" type="date" class="form-control" name="EMP_RETIREDATE" ></td>
+										<td><input id="emp_retiredate" type="date" class="form-control" name="EMP_RETIREDATE" value="<%= rMap.get("EMP_RETIREDATE") %>" ></td>
 									</tr>
 									<tr>
 										<th>근무상태</th>
 										<td>
-											<select id="emp_state" name="EMP_STATE" class="form-control" >
-												<option value="재직">재직</option>
-												<option value="파견">파견</option>
+											<select id="emp_state" name="EMP_STATE" value="<%= rMap.get("EMP_STATE") %>" class="form-control" >
+												<option value="정상">정상</option>
+												<option value="병가">병가</option>
+												<option value="휴가">휴가</option>
 												<option value="퇴사">퇴사</option>
 											</select>
 										</td>
 									</tr>
 									<tr>
 										<th>은행</th>
-										<td><input id="emp_bank" type="text" class="form-control" name="EMP_BANK" ></td>
+										<td><input id="emp_bank" type="text" class="form-control" name="EMP_BANK" value="<%= rMap.get("EMP_BANK") %>" ></td>
 									</tr>
 
 									<tr>
 										<th>계좌번호</th>
-										<td><input id="emp_account" type="text" class="form-control" name="EMP_ACCOUNT" ></td>
+										<td><input id="emp_account" type="text" class="form-control" name="EMP_ACCOUNT" value="<%= rMap.get("EMP_ACCOUNT") %>" ></td>
 									</tr>
 								</table>
 							</div>
@@ -193,22 +231,23 @@ pageEncoding="UTF-8"%>
 								<table class="table table-boardered">
 									<tr>
 										<th>우편번호</th>
-										<td><input id="emp_zipcode" type="text" class="form-control" name="EMP_ZIPCODE" align="left"></td>
+										<td><input id="emp_zipcode" type="text" class="form-control" name="EMP_ZIPCODE" value="<%= rMap.get("EMP_ZIPCODE") %>" align="left"></td>
 										<td><input type="button" class="btn btn-link" onclick="DaumPostcode()" value="주소검색" /></td>
 									</tr>
 									<tr>
 										<th>주소</th>
-										<td><input id="emp_address" type="text" class="form-control" name="EMP_ADDRESS"></td>
+										<td><input id="emp_address" type="text" class="form-control" name="EMP_ADDRESS" value="<%= rMap.get("EMP_ADDRESS") %>" ></td>
 									</tr>
 									<tr>
 										<th>상세주소</th>
-										<td><input id="emp_detailaddress" type="text" class="form-control" name="EMP_DETAILADDRESS" placeholder="상세 주소를 입력하세요..."></td>
+										<td><input id="emp_detailaddress" type="text" class="form-control" name="EMP_DETAILADDRESS" value="<%= rMap.get("EMP_DETAILADDRESS") %>" placeholder="상세 주소를 입력하세요..."></td>
 									</tr>
 								</table>
 							</div>
 							<!-- 주소 검색 부분 끝 =================================================================================== -->
 
 						</div>
+						</form>
 
 						<div class="container" align="right">
 							<tr>
@@ -232,8 +271,13 @@ pageEncoding="UTF-8"%>
 	<!-- 탑메뉴 사용 -->
 	<script src="../common/js/topNav.js"></script>
 	<!-- 사이드 메뉴 사용 -->
+<<<<<<< HEAD
 	<script src="../common//js/sideNav.js?ver=2"></script>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+=======
+	<script src="../common//js/sideNav.js"></script>
+<!-- 	<script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script> -->
+>>>>>>> branch 'master' of https://github.com/kcs96/pojo_erp2.git
 	<script src="../common/scripts.js"></script>
 	<!-- 버거 메뉴 활성화 -->
 
@@ -276,6 +320,7 @@ pageEncoding="UTF-8"%>
 	});
 </script> -->
 
+<!-- 
 <script>
   fetch("jsonEmpList.json") // 제이슨파일받아오기
     .then(async (res) => {
@@ -317,6 +362,7 @@ pageEncoding="UTF-8"%>
       console.log(e);
     });
 </script>
+ -->
 
 </body>
 </html>

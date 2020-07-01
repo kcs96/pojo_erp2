@@ -84,7 +84,8 @@
             <div class="subpage" id="content">
           
 
-
+<form id="forms_name">
+<input type="hidden" name="cud" value="workAddSendDoc">
 <table style="margin-left: auto; margin-right: auto;" border="1" width="650px;"cellspacing=0>
 <tr>
 <td colspan="6">
@@ -102,13 +103,13 @@
 			작성자
 		  </th>
 		  <td style="width:110px;">
-			<input class="wrap3"style="height:30px;"type="text">
+			<input class="wrap3" id="ap_reporter"name="ap_reporter"style="height:30px;"type="text">
 		  </td>
 		  <th style="width:200px; hieght:110px;">
 		        작성일자
 		  </th>
 		  <td style="width:120px;">
-			<input class="wrap3"style="height:30px;"type="text">
+			<input id="ap_appdate" name="ap_appdate" class="wrap3"style="height:30px;"type="text">
 		  </td>
 		 </tr>
 		</table>
@@ -128,25 +129,26 @@
 </tr>
 <tr>
 <th colspan="3" style="height:420px;"> 
-<textarea class="wrap2"style="resize:none;border:0;width:99%;height:100%;" cols="30" rows="5" ></textarea>
+<textarea class="wrap2" id="ap_content" name="ap_content" style="resize:none;border:0;width:99%;height:100%;" cols="30" rows="5" ></textarea>
 
 </th>
 <td colspan="1" style="height:350px;">
-<textarea class="wrap2"style="resize:none;border:0;width:99%;height:100%;" cols="10"  ></textarea>
+<textarea class="wrap2" name="ap_bego" id="ap_bego"style="resize:none;border:0;width:99%;height:100%;"cols="10"  ></textarea>
 
 </td>
 </tr>
 <tr>
-<th class="auto-style3"colspan="6">
+<th class="auto-style3" colspan="6">
 특이사항/ 건의 사항
 </th>
 </tr>
 <tr>
 <th colspan="6" "class="auto-style3" > 
-<textarea class="wrap2"style="height:300px;resize:none;border:0;width:98%;"></textarea>
+<textarea class="wrap2"  id="ap_instructions" name="ap_instructions" style="height:300px;resize:none;border:0;width:98%;">이건뭐지?</textarea>
 </th>
 </tr>
 </table>
+</form>
 </div>
 </div>
 </div>

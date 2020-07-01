@@ -1,9 +1,15 @@
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
-<%@ page trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
 <html>
 <head>
+<%
+	List<Map<String, Object>> rList = (List<Map<String, Object>>)request.getAttribute("myInfoList"); //DB에서 가져온 리스트를 사용 가능
+	Map<String, Object> rMap = rList.get(0);
+%>
+
 <!--정보수정에 필요한 코드 시작=================================================================================-->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -15,8 +21,7 @@ pageEncoding="UTF-8"%>
 <!--정보수정에 필요한 코드 끝   =================================================================================-->
 
 <!--관리자 로그에 필요한 코드 시작=================================================================================-->
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+<!-- <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" /> --> <!-- 얘 지워야지 모달 창 없어진다. -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
 <link href="../common/main.css" rel="stylesheet" />
 <link href="../common/css/custom.css" rel="stylesheet" />
@@ -25,12 +30,32 @@ pageEncoding="UTF-8"%>
 <title>2RP PROGRAM</title>
 
 <script type="text/javascript">
-	var photo = null;
-	var email = null;
-	var phone = null;
-	var post = null;
-	var addr = null;
-	var detailaddr = null;
+	
+ 	function save(){
+ 		//$("#f_all").submit();
+  		alert("저장 버튼 호출 성공");
+ 		$("#f_updInfo").attr("method","get");
+		$("#f_updInfo").attr("action","myUpdImformation.erp");
+		$("#f_updInfo").submit();
+ 	} 
+		
+			/*
+			$.ajax({
+			//url: "myUpdImformation.erp?emp_no="+no+"&emp_pw="+pw+"&emp_photo="+photo+"&emp_phone="+phone+"&emp_email="+email+"&emp_address="+address
+			url: "myUpdImformation.erp"
+			,type:"post"
+			//,data: datas
+			,success: function(data){
+				alert(data);
+				if(data == 0){
+					alert("정보수정을 실패하였습니다.");
+				} else if(data == 1) {
+					alert("정보수정에 성공하였습니다.")
+				}
+				//location.href = "../main/main.jsp";
+				}
+			});  
+			*/
 	
 	function DaumPostcode() {
 		daum.postcode.load(function () {
@@ -50,46 +75,28 @@ pageEncoding="UTF-8"%>
 		});
 	}
 	
-	function save(){
-		no = $("#emp_no").val();
-		photo = $("#emp_photo").val();
-		email = $("#emp_email").val();
-		photo = $("#emp_photo").val();
-		post = $("#emp_zipcode").val();
-		addr = $("#emp_address").val();
-		detailaddr = $("#emp_detailaddress").val();
+	
+	function btn_checkpw() {
 		
-		var datas = {
-				EMP_NO : no,
-				EMP_PHOTO : photo,
-				EMP_EMAIL : email,
-				EMP_PHOTO : photo,
-				EMP_POST : post,
-				EMP_ADDR : addr,
-				EMP_DETAILADDRESS : detailaddr
-				
-		}
-		//저장될것임
-		//data에 0이면 정보수정 실패, 1이면 정보수정 성공 -> alert
+		var old_pw = $("#old_pw").val();
+		var new_pw = $("#new_pw").val();
+		var new_repw = $("#new_repw").val();
 		$.ajax({
-			url: "XXX.erp"
-			,type:"post"
-			,data: datas
-			,success: function(data){
-				if(data == 0){
-					alert("정보수정을 실패하였습니다.");
-				} else if(data == 1) {
-					alert("정보수정에 성공하였습니다.")
+			url : "./newPassword.erp?old_pw=" + old_pw + "&new_pw=" + new_pw + "&new_repw=" + new_repw
+		   ,method : "get"
+		   ,success : function(result) {
+				if (result == "1") {
+					alert("비밀번호 변경 성공!!!!");
+					$("#intro").modal('hide');
+					$("#emp_pw").val(new_repw);
+					
 				}
-				location.href = "../main/main.jsp";
+				else {
+					alert("비밀번호 변경 실패!!!!");
+				}
 			}
 		});
 	}
-	
-	/* function close(){
-		alert("close함수 호출 성공");
-		location.href = "../main/main.jsp";
-	} */
 </script>
 </head>
 <body class="sb-nav-fixed">
@@ -104,133 +111,138 @@ pageEncoding="UTF-8"%>
 					</div>
 					<div id="page_contents" style="max-width: 1730px; border: 1px solid yellow; margin: 50px 50px;">
 						<!-- 컨텐츠 들어갈내용 시작-->
-						
+						<form id="f_updInfo">
 						<div class="row">
 							<div class="col-sm-6">
 								<table class="table table-boardered">
 									<tr>
 										<th>사원번호</th>
-										<td><input id="emp_no" type="text" class="form-control" name="EMP_NO" placeholder="사원번호를 입력하세요." disabled></td>
+										<td><input id="emp_no" type="text" class="form-control" name="EMP_NO" value="<%= rMap.get("EMP_NO") %>" placeholder="사원번호를 입력하세요." disabled></td>
 									</tr>
 									<tr>
 										<th>사원명</th>
-										<td><input id="emp_name" type="text" class="form-control" name="EMP_NAME" disabled></td>
+										<td><input id="emp_name" type="text" class="form-control" name="EMP_NAME" value="<%=rMap.get("EMP_NAME") %>" disabled></td>
 									</tr>
 									<tr>
 										<th>패스워드</th>
-										<td><input id="emp_pw" type="password" class="form-control" name="EMP_PW" disabled></td>
+										<td><input id="emp_pw" type="password" class="form-control" name="EMP_PW" value="<%=rMap.get("EMP_PW") %>" readonly></td>
 										<td>
-											<button data-toggle="modal" class="btn btn-link" data-target="#intro">변경</button>
+											<a type="button" data-toggle="modal" class="btn btn-link" data-target="#intro">변경</a>
+											<!-- <form id="f_pw"> -->
 											<div id="intro" class="modal fade" role="dialog" aria-labelledby="introHeader" aria-hidden="true" tabindex="-1">
-												<div class="modal-dialog">
+												<div id="modalMain" class="modal-dialog">
 													<div id="modal" class="modal-content" style="padding: 40px; margin: 40px;">
 														<div class="form-group">
 															<label for="exampleInputEmail1">이전 비밀번호</label> 
-															<input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="pwHelp" width="50px"> 
+															<input type="password" class="form-control" id="old_pw" name="old_pw"  aria-describedby="pwHelp" width="50px"> 
 															<small id="pwlHelp" class="form-text text-muted">비밀번호가 생각나지 않으면 인사부로 문의하세요...</small>
 														</div>
 														<div class="form-group">
 															<label for="exampleInputPassword1">새 비밀번호</label> 
-															<input type="password" class="form-control" id="exampleInputPassword1" width="100px">
+															<input type="password" class="form-control" id="new_pw" name="new_pw"  width="100px">
 														</div>
 														<div class="form-group">
 															<label for="exampleInputPassword2">비밀번호 확인</label> 
-															<input type="password" class="form-control" id="exampleInputPassword2" width="100px">
+															<input type="password" class="form-control" id="new_repw" width="100px">
 														</div>
-														<div class="form-group form-check">
-															<input type="checkbox" class="form-check-input" id="exampleCheck1"> 
-															<label class="form-check-label" for="exampleCheck1">Check me out</label>
+														<div class="form-group">
+															<button type="button" class="btn btn-primary" onclick="javascript:btn_checkpw()">저장</button>
+															<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 														</div>
-														<button type="submit" class="btn btn-primary">저장</button>
-														<button type="reset" class="btn btn-default" data-dismiss="modal">닫기</button>
 													</div>
 												</div>
 											</div>
+											<!-- </form> -->
+				
+											
+											
 										</td>
 									</tr>
 									<tr>
 										<th>주민번호</th>
-										<td><input id="emp_resnum" type="text" class="form-control" name="EMP_RESNUM" disabled></td>
+										<td><input id="emp_resnum" type="text" class="form-control" name="EMP_RESNUM" value="<%=rMap.get("EMP_RESNUM") %>" disabled></td>
 									</tr>
 									<tr>
 										<th>사진</th>
-										<td><input id="emp_photo" type="file" class="form-control" name="EMP_PHOTO"></td>
+										<td><input id="emp_photo" type="file" class="form-control" name="EMP_PHOTO" value="<%=rMap.get("EMP_PHOTO") %>"></td>
 									</tr>
 									<tr>
 										<th>핸드폰</th>
-										<td><input id="emp_phone" type="tel" class="form-control" name="EMP_PHONE"></td>
+										<td><input id="emp_phone" type="tel" class="form-control" name="EMP_PHONE" value="<%=rMap.get("EMP_PHONE") %>" ></td>
 									</tr>
 									<tr>
 										<th>이메일</th>
-										<td><input id="emp_email" type="email" class="form-control" name="EMP_EMAIL"></td>
+										<td><input id="emp_email" type="email" class="form-control" name="EMP_EMAIL" value="<%= rMap.get("EMP_EMAIL") %>" ></td>
 									</tr>
 									<tr>
 										<th>부서명</th>
 										<td>
-											<select id="dept_name" name="DEPT_NAME" class="form-control" disabled>
-												<option value="영업부">영업부</option>
-												<option value="개발부">개발부</option>
-												<option value="총무부">총무부</option>
+											<select id="dept_name" name="DEPT_NAME" value="<%= rMap.get("DEPT_NAME") %>" class="form-control" disabled>
 												<option value="인사부">인사부</option>
+												<option value="개발부">개발부</option>
+												<option value="품질관리부">품질관리부</option>
+												<option value="관리자">관리자</option>
 											</select>
 										</td>
 									</tr>
 									<tr>
 										<th>부서번호</th>
-										<td><input id="dept_no" type="text" class="form-control" name="DEPT_NO" disabled></td>
+										<td><input id="dept_no" type="text" class="form-control" name="DEPT_NO" value="<%= rMap.get("DEPT_NO") %>" disabled></td>
 									</tr>
 								</table>
+								
 							</div>
 
 							<div class="col-sm-6">
 								<table class="table table-boardered">
 									<tr>
 										<th>내선번호</th>
-										<td><input id="emp_extend" type="tel" class="form-control" name="EMP_EXTEND" disabled></td>
+										<td><input id="emp_extend" type="tel" class="form-control" name="EMP_EXTEND" value="<%= rMap.get("EMP_EXTEND") %>" disabled></td>
 									</tr>
 									<tr>
 										<th>직급</th>
-										<td><input id="emp_position" type="text" class="form-control" name="EMP_POSITION" disabled></td>
+										<td><input id="emp_position" type="text" class="form-control" name="EMP_POSITION" value="<%= rMap.get("EMP_POSITION") %>" disabled></td>
 									</tr>
 									<tr>
 										<th>연봉</th>
-										<td><input id="emp_salary" type="text" class="form-control" name="EMP_SALARY" disabled></td>
+										<td><input id="emp_salary" type="text" class="form-control" name="EMP_SALARY" value="<%= rMap.get("EMP_SALARY") %>" disabled></td>
 									</tr>
 									<tr>
 										<th>성별</th>
 										<td>
-											<select id="emp_gender" name="EMP_GENDER" class="form-control" disabled>
-												<option value="남성">남성</option>
-												<option value="여성">여성</option>
+											<select id="emp_gender" name="EMP_GENDER" class="form-control" value="<%= rMap.get("EMP_GENDER") %>" disabled>
+												<option value="남자">남자</option>
+												<option value="여자">여자</option>
 											</select>
 										</td>
 									</tr>
 									<tr>
 										<th>입사일자</th>
-										<td><input id="emp_hiredate" type="date" class="form-control" name="EMP_HIREDATE" disabled></td>
+										<td><input id="emp_hiredate" type="date" class="form-control" name="EMP_HIREDATE" value="<%= rMap.get("EMP_HIREDATE") %>" disabled></td>
 									</tr>
 									<tr>
 										<th>퇴사일자</th>
-										<td><input id="emp_retiredate" type="date" class="form-control" name="EMP_RETIREDATE" disabled></td>
+										<td><input id="emp_retiredate" type="date" class="form-control" name="EMP_RETIREDATE" value="<%=rMap.get("EMP_RETIREDATE") %>" disabled></td>
 									</tr>
 									<tr>
 										<th>근무상태</th>
 										<td>
-											<select id="emp_state" name="EMP_STATE" class="form-control" disabled>
-												<option value="재직">재직</option>
-												<option value="파견">파견</option>
+											<select id="emp_state" name="EMP_STATE" value="<%=rMap.get("EMP_STATE") %>" class="form-control" disabled>
+												<option value="정상">정상</option>
+												<option value="병가">병가</option>
+												<option value="휴가">휴가</option>
 												<option value="퇴사">퇴사</option>
 											</select>
 										</td>
 									</tr>
 									<tr>
 										<th>은행</th>
-										<td><input id="emp_bank" type="text" class="form-control" name="EMP_BANK" disabled></td>
+										<td><input id="emp_bank" type="text" class="form-control" name="EMP_BANK" value="<%= rMap.get("EMP_BANK") %>" disabled></td>
 									</tr>
 
 									<tr>
 										<th>계좌번호</th>
-										<td><input id="emp_account" type="text" class="form-control" name="EMP_ACCOUNT" disabled></td>
+										<td><input id="emp_account" type="text" class="form-control" name="EMP_ACCOUNT" value="<%= rMap.get("EMP_ACCOUNT") %>" disabled></td>
 									</tr>
 								</table>
 							</div>
@@ -240,28 +252,31 @@ pageEncoding="UTF-8"%>
 								<table class="table table-boardered">
 									<tr>
 										<th>우편번호</th>
-										<td><input id="emp_zipcode" type="text" class="form-control" name="EMP_ZIPCODE" align="left"></td>
+										<td><input id="emp_zipcode" type="text" class="form-control" name="EMP_ZIPCODE" value="<%= rMap.get("EMP_ZIPCODE") %>" align="left" readonly></td>
 										<td><input type="button" class="btn btn-link" onclick="DaumPostcode()" value="주소검색" /></td>
 									</tr>
 									<tr>
 										<th>주소</th>
-										<td><input id="emp_address" type="text" class="form-control" name="EMP_ADDRESS"></td>
+										<td><input id="emp_address" type="text" class="form-control" name="EMP_ADDRESS" value="<%= rMap.get("EMP_ADDRESS") %>" readonly></td>
 									</tr>
 									<tr>
 										<th>상세주소</th>
-										<td><input id="emp_detailaddress" type="text" class="form-control" name="EMP_DETAILADDRESS" placeholder="상세 주소를 입력하세요..."></td>
+										<td><input id="emp_detailaddress" type="text" class="form-control" name="EMP_DETAILADDRESS" value="<%= rMap.get("EMP_DETAILADDRESS") %>" placeholder="상세 주소를 입력하세요..."></td>
 									</tr>
 								</table>
+								
 							</div>
+							
 							<!-- 주소 검색 부분 끝 =================================================================================== -->
 
 						</div>
-
+						</form>
+						
 						<div class="container" align="right">
 							<tr>
 								<td colspan="2">
-									<button type="button" class="btn btn-info" style="border: 3px solid white; border-radius: 10px;" onclick="javascript:save()">저장</button>
-									<button type="button" class="btn btn-info" style="border: 3px solid white; border-radius: 10px;" onclick="location.href='javascript:history.back();'">닫기</button>
+									<button type="submit" class="btn btn-info" style="border: 3px solid white; border-radius: 10px;" onclick="save()">저장</button>
+									<button type="reset" class="btn btn-info" style="border: 3px solid white; border-radius: 10px;" onclick="location.href='javascript:history.back();'" >닫기</button>
 								<!--<input type="submit" class="btn btn-primary" value="저장" onclick="main()">  
 								    <input type="reset" class="btn btn-danger" value="닫기" onclick="main()"> -->
 								</td>
@@ -280,7 +295,7 @@ pageEncoding="UTF-8"%>
 	<script src="../common/js/topNav.js"></script>
 	<!-- 사이드 메뉴 사용 -->
 	<script src="../common//js/sideNav.js"></script>
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+	<!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script> -->
 	<script src="../common/scripts.js"></script>
 	<!-- 버거 메뉴 활성화 -->
 </body>

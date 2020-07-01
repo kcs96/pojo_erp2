@@ -32,6 +32,7 @@ public class ModelAndView {
 	//member/memberList.jsp.jsp
 	public void setViewName(String viewName) {
 		//this.viewName=viewName;
+
 		this.viewName = "/WEB-INF/view/"+viewName+".jsp";
 	}
 	public String getViewName() {

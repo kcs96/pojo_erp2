@@ -5,17 +5,17 @@ pageEncoding="UTF-8"%>
 							   class="table table-hover"
 							   data-search="true" 
 							   data-pagination="true"
-							   data-url="../minkyu/jsonEmpList.json">
+							   data-url="./emp_list_off.erp?cud=empRetire">
 							<thead class="thead-light">
 								<tr>
 									<th data-field="EMP_NO">사원번호</th>
 									<th data-field="EMP_NAME">사원이름</th>
-									<th data-field="EMP_RESNUM">부서</th>
+									<th data-field="DEPT_NAME">부서</th>
 									<th data-field="EMP_POSITION">직급</th>
 									<th data-field="EMP_PHONE">핸드폰</th>
-									<th data-field="EMP_EMAIL">근무일자</th>
-									<th data-field="EMP_STATE">퇴사일자</th>
-									<th data-field="EMP_SAL">퇴사사유</th>
+									<th data-field="EMP_HIREDATE">근무일자</th>
+									<th data-field="EMP_RETIREDATE">퇴사일자</th>
+									<th data-field="EMP_OUTREASON">퇴사사유</th>
 									<!-- <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents" width="300">정보수정</th> -->
 								</tr>
 							</thead>

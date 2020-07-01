@@ -24,7 +24,7 @@ const sideNavMainTitleApi = [
         id: "salary",
         title: "급여관리",
         className: "",
-        ref: "http://localhost:5000/pojo_erp2/myService/allPay.erp",
+        ref: "http://localhost:5000/myService/allPay.erp",
         onClick: "",
         collapsed: false,
       },
@@ -110,7 +110,7 @@ const sideNavMainTitleApi = [
             id: "dispatch",
             title: "파견사원",
             className: "",
-            ref: "http://localhost:5000/pojo_erp2/work/outsideWorker.erp",
+            ref: "http://localhost:5000/work/outsideWorker.erp",
             onClick: "http://localhost:5000/pojo_erp2/work/outsideWorker.erp",
           },
         ],
@@ -155,12 +155,13 @@ const avatarBoxButtonApi = [
     text: "정보수정",
     classname: "avatar_button btn btn-info",
     id: "avatarBoxButton_edit",
-    ref: "http://localhost:5000/erpProject_final/main/emp_edit.jsp",
+    ref: "../main/emp_edit.erp",
   },
   {
     text: "로그아웃",
     classname: "avatar_button btn btn-danger",
     id: "avatarBoxButton_logout",
+    ref: "../main/logout.jsp"
   },
 ];
 

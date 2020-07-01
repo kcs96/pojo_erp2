@@ -140,7 +140,7 @@ pageEncoding="UTF-8"%>
 		     	<button class="btn btn-primary" style="width:120px;" onclick="save()">저장</button>
 		     </div>                 
 		 	 <div class="col-6 text-left">
-		     	<button class="btn btn-danger" style="width:120px;" onclick="location.href='http://localhost:5000/pojo_erp2/work/outsideWorker.erp'">취소</button>
+		     	<button class="btn btn-danger" style="width:120px;" onclick="location.href='http://localhost:5000/work/outsideWorker.erp'">취소</button>
 		     </div>
 		    </div>
 		    <!-- 입력창 end -->	
