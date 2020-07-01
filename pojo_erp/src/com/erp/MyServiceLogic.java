@@ -51,7 +51,7 @@ public class MyServiceLogic {
 	public List<Map<String, Object>> myScheduleChart(Map<String, Object> pMap) {
 		//내 일정 관리 탭 이벤트
 		logger.info("MyServiceLogic => 개인 일정  호출");
-		List<Map<String, Object>> rList = null;
+		List<Map<String, Object>> rList = new ArrayList<Map<String,Object>>();
 		rList = myServiceDao.myScheduleChart(pMap);
 		return rList;
 	}

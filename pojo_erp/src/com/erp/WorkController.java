@@ -301,9 +301,15 @@ public class WorkController implements Controller {
 			/////////////////////// 실제 코드    /////////////////////	
 			pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
 			pMap.put("emp_no", session.getAttribute("emp_no"));
+			for(int i=0; i<pMap.size(); i++) {
+				String key = (String)pMap.keySet().toArray()[i];
+				//logger.info(key);
+				logger.info(key+"="+pMap.get(key));
+			}
 			String upd_result=workLogic.deptUpdSchedule(pMap);
+			System.out.println("일정등록 성공 여부=>"+upd_result);
 			if(upd_result.equals("1")) {path="redirect:deptSchedule.jsp";}
-			else {path="redirect:errorPage.jsp";}
+			else {path="redirect:deptScheduleUpderrorPage.jsp";}
 			
 			///////////////////////  테스트 코드   /////////////////////
 			/*
@@ -331,7 +337,7 @@ public class WorkController implements Controller {
 			pMap.put("ds_no", req.getParameter("ds_no"));
 			int del_result = workLogic.deptDelSchedule(pMap);
 			if(del_result==1) {path="redirect:deptSchedule.jsp";}
-			else {path="redirect:errorPage.jsp";}
+			else {path="redirect:deptScheduleDelerrorPage.jsp";}
 			
 			///////////////////////  테스트 코드   /////////////////////
 			/*
@@ -353,7 +359,6 @@ public class WorkController implements Controller {
 			 pMap = new HashMap<>();
 			 //pMap.put("emp_no", session.getAttribute("emp_no"));
 			 pMap.put("emp_no", 10001);
-			 //pMap.put("dept_day",req.getParameter("dept_day"));
 			 rlist = workLogic.deptEmp(pMap);
 			 System.out.println("rlist => "+rlist.size());
 			 req.setAttribute("deptEmpList", rlist);
@@ -519,7 +524,7 @@ public class WorkController implements Controller {
 				pMap = new HashMap<>();
 				pMap.put("emp_no", session.getAttribute("emp_no"));
 				//pMap.put("emp_no", 10001);
-				pMap.put("dept_day",req.getParameter("dept_day"));
+				//pMap.put("dept_day",req.getParameter("dept_day"));
 				rlist = workLogic.deptSchedule(pMap);
 				mav.addObject("deptScheduleList", rlist);
 				mav.setViewName("jsonDeptSchedule");

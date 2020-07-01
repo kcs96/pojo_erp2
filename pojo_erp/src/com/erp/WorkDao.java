@@ -231,7 +231,7 @@ public class WorkDao {
 		return result;
 	}
 	public String deptUpdSchedule(Map<String, Object> pMap) {
-		//부서일정추가 버튼 이벤트
+		//부서일정수정 버튼 이벤트
 		logger.info("workDao => 부서 일정 수정 호출"); 
 		String result ="";
 		sqlSes.selectOne("proc_deptSchUpd",pMap);
@@ -241,6 +241,7 @@ public class WorkDao {
 	public int deptDelSchedule(Map<String, Object> pMap) {
 		logger.info("workDao => 부서 일정 삭제 호출"); 
 		int result=sqlSes.delete("work_deptSchDel",pMap);
+		sqlSes.commit();
 		return result;
 	}
 	public int workAddDoc(Map<String, Object> pMap) {
@@ -265,8 +266,10 @@ public class WorkDao {
 	public List<Map<String, Object>> deptEmp(Map<String, Object> pMap) {
 		//파견사원 조회 버튼 insert here
 				logger.info("Dao : 부서 일정 부서 사원 이름 호출 성공");
-				List<Map<String,Object>> rlist = null;
-				rlist = sqlSes.selectList("proc_deptEmp",pMap);
+				List<Map<String,Object>> rlist = new ArrayList<Map<String,Object>>();
+				sqlSes.selectOne("proc_deptEmp",pMap);
+				rlist = (List<Map<String,Object>>)pMap.get("key");
+				logger.info("rslit.size() : " + rlist.size()); 
 				return rlist;
 	}
 }

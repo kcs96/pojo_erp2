@@ -26,11 +26,11 @@ var editEvent = function (event, element, view) {
 
     modalTitle.html('일정 수정');
     editTitle.val(event.title);
-    editUserName.val(event.username);
+    //editUserName.val(event.username);
     editStart.val(event.start.format('YYYY-MM-DD HH:mm'));
     editType.val(event.type);
     editDesc.val(event.description);
-    editColor.val(event.backgroundColor).css('color', event.backgroundColor);
+    editColor.val("#"+event.backgroundColor).css('color',"#"+event.backgroundColor);
 
     addBtnContainer.hide();
     modifyBtnContainer.show();
@@ -91,7 +91,11 @@ var editEvent = function (event, element, view) {
 //                //...
 //            },
             success: function (response) {
-                alert('수정되었습니다.')
+            	if(response == 0){
+            		alert('본인의 일정이 아닙니다.');
+            	}else{
+            		alert('수정되었습니다.');
+            	}
                 $('#calendar').fullCalendar('removeEvents');
                 $('#calendar').fullCalendar('refetchEvents');
             }
@@ -110,12 +114,16 @@ $('#deleteEvent').on('click', function () {
     //삭제시
     $.ajax({
         type: "get",
-        url: "conDelRoom?cfr_no="+$(this).data('id'),
-        data: {
-            //...
-        },
+        url: "conDelRoom.erp?cfr_no="+$(this).data('id'),
+//        data: {
+//            //...
+//        },
         success: function (response) {
-            alert('삭제되었습니다.');
+        	if(response == 0){
+        		alert('본인의 일정이 아닙니다.');
+        	}else{
+        		alert('삭제되었습니다.');
+        	}
             $('#calendar').fullCalendar('removeEvents');
             $('#calendar').fullCalendar('refetchEvents');
         }

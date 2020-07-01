@@ -34,10 +34,10 @@
         <div id="contextMenu" class="dropdown clearfix">
             <ul class="dropdown-menu dropNewEvent" role="menu" aria-labelledby="dropdownMenu"
                 style="display:block;position:static;margin-bottom:5px;">
-                <li><a tabindex="-1" href="#">회의실1</a></li>
-                <li><a tabindex="-1" href="#">회의실2</a></li>
-                <li><a tabindex="-1" href="#">회의실3</a></li>
-                <li><a tabindex="-1" href="#">회의실4</a></li>
+                <li><a tabindex="-1" href="#">제1회의실</a></li>
+                <li><a tabindex="-1" href="#">제2회의실</a></li>
+                <li><a tabindex="-1" href="#">제3회의실</a></li>
+                <li><a tabindex="-1" href="#">제4회의실</a></li>
                 <li class="divider"></li>
                 <li><a tabindex="-1" href="#" data-role="close">Close</a></li>
             </ul>
@@ -75,12 +75,12 @@
                             </div>
                         </div>
 
-                        <div class="row">
+<!--                         <div class="row">
                             <div class="col-xs-12">
                                 <label class="col-xs-4" for="edit-username">등록자</label>
                                 <input class="inputModal" type="text" name="edit-username" id="edit-username" required="required" />
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row">
                             <div class="col-xs-12">
                                 <label class="col-xs-4" for="edit-start">시작</label>
@@ -97,10 +97,10 @@
                             <div class="col-xs-12">
                                 <label class="col-xs-4" for="edit-type">회의실</label>
                                 <select class="inputModal" type="text" name="edit-type" id="edit-type" disabled>
-                                    <option value="회의실1">회의실1</option>
-                                    <option value="회의실2">회의실2</option>
-                                    <option value="회의실3">회의실3</option>
-                                    <option value="회의실4">회의실4</option>
+                                    <option value="제1회의실">제1회의실</option>
+                                    <option value="제2회의실">제2회의실</option>
+                                    <option value="제3회의실">제3회의실</option>
+                                    <option value="제4회의실">제4회의실</option>
                                 </select>
                             </div>
                         </div>
@@ -108,10 +108,10 @@
                             <div class="col-xs-12">
                                 <label class="col-xs-4" for="edit-color">색상</label>
                                 <select class="inputModal" name="color" id="edit-color">
-                                    <option id="D25565" value="D25565" style="color:#D25565;">빨간색</option>
-                                    <option id="ffa94d" value="ffa94d" style="color:#ffa94d;">주황색</option>
-                                    <option id="a9e34b" value="a9e34b" style="color:#a9e34b;">초록색</option>
-                                    <option id="74c0fc" value="74c0fc" style="color:#74c0fc;">파란색</option>
+                                    <option value="D25565" style="color:#D25565;">빨간색</option>
+                                    <option value="ffa94d" style="color:#ffa94d;">주황색</option>
+                                    <option value="a9e34b" style="color:#a9e34b;">초록색</option>
+                                    <option value="74c0fc" style="color:#74c0fc;">파란색</option>
                                 </select>
                             </div>
                         </div> 
@@ -148,10 +148,10 @@
                     <label for="calendar_view">회의실별</label>
                     <div class="input-group">
                         <select class="filter" id="type_filter" multiple="multiple">
-                            <option value="회의실1">회의실1</option>
-                            <option value="회의실2">회의실2</option>
-                            <option value="회의실3">회의실3</option>
-                            <option value="회의실4">회의실4</option>
+                            <option value="제1회의실">제1회의실</option>
+                            <option value="제2회의실">제2회의실</option>
+                            <option value="제3회의실">제3회의실</option>
+                            <option value="제4회의실">제4회의실</option>
                         </select>
                     </div>
                 </div>

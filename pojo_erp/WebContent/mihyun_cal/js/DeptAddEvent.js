@@ -42,8 +42,8 @@ var newEvent = function (start, end, eventType) {
     //새로운 일정 저장버튼 클릭
     $('#save-event').unbind();
     $('#save-event').on('click', function () {
-    	alert('start: '+editStart.val());
-        alert('end: '+editEnd.val());
+    	//alert('start: '+editStart.val());
+        //alert('end: '+editEnd.val());
         var eventData = {
             //_id: eventId,
             title: editTitle.val(),

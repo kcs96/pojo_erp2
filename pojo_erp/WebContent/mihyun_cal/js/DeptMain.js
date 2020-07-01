@@ -36,7 +36,7 @@ function filtering(event) {
   }
 
   return show_username && show_type;
-  //return show_type;
+//  //return show_type;
 }
 
 function calDateWhenResize(event) {
@@ -165,17 +165,13 @@ var calendar = $('#calendar').fullCalendar({
    *  일정 받아옴 
    * ************** */
   events: function (start, end, timezone, callback) {
-	var today = new Date();
-	var yyyy = today.getFullYear().toString(); 
-	var month = (today.getMonth()+1).toString();
-	var date = today.getDate().toString();
-	var msg = yyyy+"-"+month+"-"+date;
+
     $.ajax({
       type: "get",
-      url: "deptSchedule.erp?cud=deptSchedule&dept_day="+msg,//일정을 가져옴 전체일정이 아닌 월 단위로 가져오기
-      data: {
-        // 실제 사용시, 날짜를 전달해 일정기간 데이터만 받아오기를 권장
-      },
+      url: "deptSchedule.erp?cud=deptSchedule",//일정을 가져옴 전체일정이 아닌 월 단위로 가져오기
+//      data: {
+//        // 실제 사용시, 날짜를 전달해 일정기간 데이터만 받아오기를 권장
+//      },
       success: function (response) {
         var fixedDate = response.map(function (array) {
 //          if (array.allDay && array.start !== array.end) {
@@ -198,11 +194,7 @@ var calendar = $('#calendar').fullCalendar({
   //일정 리사이즈
   eventResize: function (event, delta, revertFunc, jsEvent, ui, view) {
     $('.popover.fade.top').remove();
-    var today = new Date();
-	var yyyy = today.getFullYear().toString(); 
-	var month = (today.getMonth()+1).toString();
-	var date = today.getDate().toString();
-	var msg = yyyy+"-"+month+"-"+date;
+
     /** 리사이즈시 수정된 날짜반영
      * 하루를 빼야 정상적으로 반영됨. */
     var newDates = calDateWhenResize(event);
@@ -210,7 +202,7 @@ var calendar = $('#calendar').fullCalendar({
     //리사이즈한 일정 업데이트
     $.ajax({
       type: "get",
-      url: "deptSchedule.erp?cud=deptSchedule&dept_day="+msg,
+      url: "deptSchedule.erp?cud=deptSchedule",
 //      data: {
 //        //id: event._id,
 //        //....
@@ -240,16 +232,11 @@ var calendar = $('#calendar').fullCalendar({
     }
 
     // 드랍시 수정된 날짜반영
-    var newDates = calDateWhenDragnDrop(event);
-    var today = new Date();
-	var yyyy = today.getFullYear().toString(); 
-	var month = (today.getMonth()+1).toString();
-	var date = today.getDate().toString();
-	var msg = yyyy+"-"+month+"-"+date;
+
     //드롭한 일정 업데이트
     $.ajax({
       type: "get",
-      url: "deptSchedule.erp?cud=deptSchedule&dept_day="+msg,
+      url: "deptSchedule.erp?cud=deptSchedule",
 //      data: {
 //        //...
 //      },

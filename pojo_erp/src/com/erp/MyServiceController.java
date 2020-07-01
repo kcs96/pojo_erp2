@@ -92,7 +92,7 @@ public class MyServiceController implements Controller {
 			pMap.put("btn_type","외출");
 			String result = myServiceLogic.myGoOut(pMap);
 			if(result.equals("1")) {path="redirect:empCommute.jsp";}
-			else {path="redirect:dfd.erp?cud=";}
+			else {path="redirect:error.jsp";}
 			
 			///////////////////////  테스트 코드   /////////////////////
 			/*
@@ -334,12 +334,19 @@ public class MyServiceController implements Controller {
 			mav.addObject("weekInOutList", weekInOutList);
 			mav.setViewName("jsonWeekChart");
 		}else if("myScheduleChart".equals(cud)) {
-			//개인일정 insert here
+			//개인일정차트 insert here
 			logger.info("MAV => 개인일정 실행");
 			pMap = new HashMap<>();
 			pMap.put("emp_no", session.getAttribute("emp_no")); 
-			List<Map<String,Object>> rList = myServiceLogic.mySchedule(pMap);
-			System.out.println("개인일정 리스트 => "+rList.size());
+			//pMap.put("emp_no", 10001); 
+			List<Map<String,Object>> rList = myServiceLogic.myScheduleChart(pMap);
+			for(int i=0; i<pMap.size(); i++) {
+				String key = (String)pMap.keySet().toArray()[i];
+				//logger.info(key);
+				logger.info(key+"="+pMap.get(key));
+			}
+			System.out.println("개인일정차트 리스트 => "+rList.size());
+			System.out.println(mav);
 			mav.addObject("myScheduleChart", rList);
 			mav.setViewName("jsonMyScheduleChart");
 		}
@@ -349,8 +356,6 @@ public class MyServiceController implements Controller {
 			logger.info("MAV => 개인일정달력 실행");
 			pMap = new HashMap<>();
 			pMap.put("emp_no", session.getAttribute("emp_no")); 
-			//pMap.put("my_day", "2020-06-01");//테스트
-			pMap.put("my_day", req.getParameter("my_day")); //실제
 			List<Map<String,Object>> rList = myServiceLogic.mySchedule(pMap);
 			System.out.println("개인일정 리스트 => "+rList.size());
 			mav.addObject("myScheduleList", rList);

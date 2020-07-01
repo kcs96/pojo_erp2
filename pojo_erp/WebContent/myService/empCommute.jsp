@@ -1,4 +1,5 @@
 <%@page import="java.util.HashMap"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -7,6 +8,9 @@ pageEncoding="UTF-8"%>
 	String emp_name = (String)session.getAttribute("emp_name");
 	String dept_name = (String)session.getAttribute("dept_name");
 	List<Map<String, Object>> rList = (List<Map<String, Object>>)request.getAttribute("todayInOutList");
+ 	if(rList == null){
+		rList = new ArrayList<>();
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -62,11 +66,7 @@ pageEncoding="UTF-8"%>
 				,pieSliceText: 'label'
 				,pieStartAngle: 180
 				,legend: 'none'
-				, slices: {0: {offset: 0.2}}/* jsonData.length  */
-				,tooltip: {
-			        trigger: 'selection'
-			    },
-	    		pieResidueSliceColor: "yellow"
+				//, slices: {0: {offset: 0.2}}/* jsonData.length  */
 		};
 		var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 			chart.draw(pieData, pieOptions);
@@ -266,9 +266,9 @@ pageEncoding="UTF-8"%>
 									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;" id="comeBack">-</td>
 									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;">-</td>
 									<%
-	}else if(rList.size() > 0){
-		Map<String, Object> rMap = rList.get(0);
-	
+								}
+								else if(rList.size() > 0){
+									Map<String, Object> rMap = rList.get(0);
 %>
 									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;" id="go"><%=rMap.get("CM_GOTOWORK") %></td>
 									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;" id="leave"><%=rMap.get("CM_GOTOHOME") %></td>
@@ -311,7 +311,7 @@ pageEncoding="UTF-8"%>
 <script src="../common/js/sideNav.js"></script>
 <!-- 버거 메뉴 활성화 -->
 
- <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+ <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script> 
 
 <script src="../common/scripts.js"></script>
 </body>

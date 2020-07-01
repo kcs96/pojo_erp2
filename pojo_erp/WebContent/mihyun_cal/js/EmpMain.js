@@ -165,14 +165,9 @@ var calendar = $('#calendar').fullCalendar({
    *  일정 받아옴 
    * ************** */
   events: function (start, end, timezone, callback) {
-	var today = new Date();
-	var yyyy = today.getFullYear().toString(); 
-	var month = (today.getMonth()+1).toString();
-	var date = today.getDate().toString();
-	var msg = yyyy+"-"+month+"-"+date;
     $.ajax({
       type: "get",
-      url: "mySchedule.erp?cud=mySchedule&my_day="+msg,//일정을 가져옴 전체일정이 아닌 월 단위로 가져오기
+      url: "mySchedule.erp?cud=mySchedule",//일정을 가져옴 전체일정이 아닌 월 단위로 가져오기
 //      data: {
 //        // 실제 사용시, 날짜를 전달해 일정기간 데이터만 받아오기를 권장
 //    	_id:MY_NO
@@ -210,16 +205,11 @@ var calendar = $('#calendar').fullCalendar({
 
     /** 리사이즈시 수정된 날짜반영
      * 하루를 빼야 정상적으로 반영됨. */
-    var newDates = calDateWhenResize(event);
-    var today = new Date();
-    var yyyy = today.getFullYear().toString(); 
-    var month = (today.getMonth()+1).toString();
-    var date = today.getDate().toString();
-    var msg = yyyy+"-"+month+"-"+date;
+
     //리사이즈한 일정 업데이트
     $.ajax({
       type: "get",
-      url: "mySchedule.erp?cud=mySchedule&my_day="+msg,
+      url: "mySchedule.erp?cud=mySchedule",
 //      data: {
 //        //id: event._id,
 //        //....
@@ -238,12 +228,7 @@ var calendar = $('#calendar').fullCalendar({
   //일정 드래그앤드롭
   eventDrop: function (event, delta, revertFunc, jsEvent, ui, view) {
     $('.popover.fade.top').remove();
-    var newDates = calDateWhenResize(event);
-    var today = new Date();
-    var yyyy = today.getFullYear().toString(); 
-    var month = (today.getMonth()+1).toString();
-    var date = today.getDate().toString();
-    var msg = yyyy+"-"+month+"-"+date;
+
     //주,일 view일때 종일 <-> 시간 변경불가
     if (view.type === 'agendaWeek' || view.type === 'agendaDay') {
       if (draggedEventIsAllDay !== event.allDay) {
@@ -259,7 +244,7 @@ var calendar = $('#calendar').fullCalendar({
     //드롭한 일정 업데이트
     $.ajax({
       type: "get",
-      url: "mySchedule.erp?cud=mySchedule&my_day="+msg,
+      url: "mySchedule.erp?cud=mySchedule",
 //      data: {
 //        //...
 //      },

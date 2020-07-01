@@ -291,6 +291,7 @@ pageEncoding="UTF-8"%>
 
 <script type="text/javascript">
 	$(document).ready(function() {
+		var flag = <%=flag %>
 		if(flag == true){
 	var timeGap =<%=timeGap%>;
 	/* 	var timeGap =500; */

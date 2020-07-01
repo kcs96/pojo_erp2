@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="orm.mybatis.mapper.workMapper">
 <resultMap id="wmap" type="java.util.Map">
-	<result property="_id" column="DS_NO" jdbcType="NUMERIC"/>
+		<result property="_id" column="DS_NO" jdbcType="NUMERIC"/>
 		<result property="title" column="DS_TITLE" jdbcType="VARCHAR"/>
 		<result property="description" column="DS_MEMO" jdbcType="VARCHAR"/>
 		<result property="start" column="DS_SDATE" jdbcType="VARCHAR"/>
@@ -214,7 +214,7 @@
 	<!-- ==================================== 부서일정  ================================================== -->
 	<!--부서 일정 리스트  -->
 	<select id="proc_deptSchList" parameterType="map" statementType="CALLABLE">
-		{call proc_deptSchList(#{emp_no},#{dept_day},#{key, 
+		{call proc_deptSchList(#{emp_no},#{key, 
 		                     	    jdbcType=CURSOR, 
 		                     		mode=OUT, 
 		                     		javaType=java.sql.ResultSet, 
@@ -222,19 +222,18 @@
 	</select>
 	
 	<!--부서 일정 추가  -->
-	<select id="proc_deptSchAdd" parameterType="map" statementType="CALLABLE" resultType="String">
+	<select id="proc_deptSchAdd" parameterType="map" statementType="CALLABLE" resultType="string">
 		{call proc_deptSchAdd(#{ds_title},#{ds_memo},#{ds_sdate},#{ds_edate}
 							 ,#{ds_allday},#{ds_type},#{ds_bgcolor},#{emp_no}
 						     ,#{msg, mode=OUT,jdbcType=VARCHAR})}
 	</select>
 	
 	<!--부서 일정 변경  -->
-	<select id="proc_deptSchUpd" parameterType="map" statementType="CALLABLE" resultType="String">
-		{call proc_deptSchUpd(#{ds_title},#{ds_memo},#{ds_sdate},#{ds_edate}
-							 ,#{ds_allday},#{ds_type},#{ds_bgcolor},#{ds_no},#{emp_no}
-						     ,#{msg, mode=OUT,jdbcType=VARCHAR})}
-	</select>
-	
+	<select id="proc_deptSchUpd" parameterType="map" statementType="CALLABLE" resultType="string">
+      {call proc_deptSchUpd(#{ds_title},#{ds_sdate},#{ds_edate},#{ds_type}
+                      ,#{ds_allday},#{ds_bgcolor},#{ds_no},#{ds_memo},#{emp_no}
+                       ,#{msg, mode=OUT,jdbcType=VARCHAR})}
+   </select>
 	<!-- 부서 일정 삭제하기  -->
 	<delete id="work_deptSchDel" parameterType="map"> 
 		DELETE FROM dept_schedule
