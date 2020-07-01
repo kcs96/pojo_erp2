@@ -39,6 +39,54 @@ pageEncoding="UTF-8"%>
  	String ap_appdate_2 = request.getParameter("ap_appdate_2"); //월
  	String ap_appdate_3 = request.getParameter("ap_appdate_3"); //일
  	String ap_no = request.getParameter("ap_no"); //문서 고유번호
+ 	
+ 	String null_check = "undefined"; //null체크
+ 	
+ 	if(ap_reporter.equals(null_check)){
+ 		ap_reporter = "";
+ 	}
+ 	if(no.equals(null_check)){
+ 		no = "";
+ 	}
+ 	if(fr_no.equals(null_check)){
+ 		fr_no = "";
+ 	}
+ 	if(ap_title.equals(null_check)){
+ 		ap_title = "";
+ 	}
+ 	if(ap_prosessingdate.equals(null_check)){
+ 		ap_prosessingdate = "";
+ 	}
+ 	if(ap_dname.equals(null_check)){
+ 		ap_dname = "";
+ 	}
+ 	if(ap_content.equals(null_check)){
+ 		ap_content = "";
+ 	}
+ 	if(ap_contact.equals(null_check)){
+ 		ap_contact = "";
+ 	}
+ 	if(ap_bego.equals(null_check)){
+ 		ap_bego = "";
+ 	}
+ 	if(ap_instructions.equals(null_check)){
+ 		ap_instructions = "";
+ 	}
+ 	if(ap_appdate.equals(null_check)){
+ 		ap_appdate = "";
+ 	}
+ 	if(ap_appdate_1.equals(null_check)){
+ 		ap_appdate_1 = "";
+ 	}
+ 	if(ap_appdate_2.equals(null_check)){
+ 		ap_appdate_2 = "";
+ 	}
+ 	if(ap_appdate_3.equals(null_check)){
+ 		ap_appdate_3 = "";
+ 	}
+ 	if(ap_no.equals(null_check)){
+ 		ap_no = "";
+ 	}
 %>
 <!-- 파라미터 받기 끝 -->
 

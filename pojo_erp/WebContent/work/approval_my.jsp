@@ -172,28 +172,39 @@ pageEncoding="UTF-8"%>
     		AP_TITLE = row.AP_TITLE.split("''");
     		alert("문자열 자름 : "+ AP_TITLE)
     		 */
-    		ap_reporter = row.AP_REPORTER.split(" ");	//이름 채번 
+    		 
+    		 
+    		ap_reporter = row.AP_REPORTER	//이름 채번 
     		//alert("문자열 자름 : "+ ap_reporter)
+    		
+    		
     		
     		no = row.NO		//번호 채번 
     		//alert("문자열 자름 : "+ no)
     		
+    		
     		fr_no = row.FR_NO	//양식번호 
     		//alert("문자열 자름 : "+ fr_no)
     		
-    		ap_title = row.AP_TITLE.split("''");	//제목 채번
+    		
+    		
+    		ap_title = row.AP_TITLE	//제목 채번
     		//alert("문자열 자름 : "+ ap_title)
     		
-    		ap_prosessingdate = row.AP_PROSESSINGDATE.split("''");	//기한  채번	
+    		
+    		ap_prosessingdate = row.AP_PROSESSINGDATE	//기한  채번	
     		//alert("문자열 자름 : "+ ap_prosessingdate)
+    	
     		
-    		ap_dname = row.AP_DNAME.split("''");	//부서  채번
+    		ap_dname = row.AP_DNAME	//부서  채번
     		//alert("문자열 자름 : "+ ap_dname)
-    		
-    		ap_content = row.AP_CONTENT.split("''");	//문서 내용
+    	
+    	
+    		ap_content = row.AP_CONTENT	//문서 내용
     		//alert("문자열 자름 : "+ ap_content)
-    		
-    		ap_contact = row.AP_CONTACT.split("''");	//사원 전화번호 
+    	
+    	
+    		ap_contact = row.AP_CONTACT	//사원 전화번호 
     		//alert("문자열 자름 : "+ ap_contact)
     		
     		//alert("문자열 자르기 전 : "+ row.AP_APPDATE)
@@ -203,13 +214,20 @@ pageEncoding="UTF-8"%>
     		ap_appdate_3 = ap_appdate[2];	//일
     		//alert("날짜 : "+ ap_appdate_1+"  "+ ap_appdate_2+"  "+ ap_appdate_3)
     		
-    		ap_bego = row.AP_BEGO.split("''");	//사원 전화번호 
+    		
+    		
+    		ap_bego = row.AP_BEGO	//사원 전화번호 
     		//alert("문자열 자름 : "+ ap_bego)
-    		ap_instructions = row.AP_INSTRUCTIONS.split("''");	//사원 전화번호 
+    		
+    		
+    		
+    		ap_instructions = row.AP_INSTRUCTIONS	//사원 전화번호 
     		//alert("문자열 자름 : "+ ap_contact)
     		
+    	
     		ap_no = row.AP_NO	//문서 고유번호 
-    		alert("문자열 자름 : "+ ap_no)
+    		//alert("문자열 자름 : "+ ap_no)
+    	
     		
     		location.href = './approval_get.jsp?ap_reporter='+ap_reporter
     				+'&no='+no+'&fr_no='+fr_no+'&ap_title='+ap_title
