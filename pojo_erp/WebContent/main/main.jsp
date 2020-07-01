@@ -361,7 +361,7 @@ pageEncoding="UTF-8"%>
 <!-- 탑메뉴 사용 -->
 <script src="../common/js/topNav.js?after"></script>
 <!-- 사이드 메뉴 사용 -->
-<script src="../common/js/sideNav.js"></script>
+<script src="../common/js/sideNav.js?ver=2"></script>
 
 <script src="../common/scripts.js"></script>
 <!-- 버거 메뉴 활성화 -->

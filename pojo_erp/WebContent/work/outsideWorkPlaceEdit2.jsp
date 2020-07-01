@@ -20,31 +20,6 @@ pageEncoding="UTF-8"%>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a9c4b678674e7c8512ebf2cadc156977&libraries=services"></script>
-<script type="text/javascript">
-	function save(){
-		var DL_NAME = $("#DL_NAME").val();
-		var DL_TEL = $("#DL_TEL").val();
-		var DL_LATITUDE = $("#DL_LATITUDE").val();
-		var DL_LONGITUDE = $("#DL_LONGITUDE").val();
-		var DL_ADDRESS = $("#DL_ADDRESS").val();
-		var DL_DETAILADDRESS = $("#DL_DETAILADDRESS").val();
-		var DL_NOTE = $("#DL_NOTE").val();
-		
-		$.ajax({
-			 url : "workAddBranch.erp?DL_NAME="+DL_NAME+"&DL_TEL="+DL_TEL+"&DL_LATITUDE="+DL_LATITUDE+"&DL_LONGITUDE="+DL_LONGITUDE+"&DL_ADDRESS="+DL_ADDRESS+"&DL_DETAILADDRESS="+DL_DETAILADDRESS+"&DL_NOTE="+DL_NOTE
-			,method : "GET"
-			,success : function(data){
-				if(data == "1"){
-					alert("입력이 완료 되었습니다.");
-					location.href = "./outsideWorker.erp"
-				}
-			}
-		});
-	}
-//
-
-</script>
-
 </head>
 <body class="sb-nav-fixed">
 	<nav id="topNav"></nav>
@@ -53,23 +28,22 @@ pageEncoding="UTF-8"%>
 		<div id="layoutSidenav_content">
 			<main id="input_div">
 				<div id="frame_div" style="border: 1px solid black;">
-					<div id="page_title" style="border-bottom: 2px solid gray; margin: 50px 30px;">
+					<div id="page_title" style="border: 1px solid red; margin: 10px 30px;">
 						<h2>지사등록</h2>
 					</div>
-					<div id="page_contents" style="max-width: 1730px; margin: 10px 100px;">
+					<div id="page_contents" style="max-width: 1730px; border: 1px solid yellow; margin: 50px 50px;">
 						<!-- 컨텐츠 들어갈내용 시작-->
 
 	 <div class="row">
-   		
+	   
 		   <div class="col-6">
-		   
 		   	<!-- 회사명 -->	
 		   	<div class="row " style="padding:5px;">
 		      <div class="col-2">
 		      	<label>회사명 :</label>
 		      </div>                 
 		 	  <div class="col-8">
-		    	  <input class="form-control mr-2" name="DL_NAME" type="" placeholder="회사명을 입력해주세요." id="DL_NAME">
+		    	  <input class="form-control mr-2" id="" type="" placeholder="회사명을 입력해주세요." >
 		      </div>
 		   	</div>
 		      
@@ -79,7 +53,7 @@ pageEncoding="UTF-8"%>
 		      	<label>전화번호 :</label>
 		      </div>                 
 		 	  <div class="col-8">
-		    	  <input class="form-control mr-2" name="DL_TEL" type="" placeholder="전화번호를 입력해주세요." id="DL_TEL">
+		    	  <input class="form-control mr-2" id="" type="" placeholder="전화번호를 입력해주세요." >
 		      </div>
 		   	</div>
 		   	<!-- 위도|경도 -->	
@@ -88,7 +62,7 @@ pageEncoding="UTF-8"%>
 		      	<label>위도 :</label>
 		      </div>                 
 		 	  <div class="col-2">
-		    	  <input readonly class="form-control mr-2" id="DL_LATITUDE" type="search" placeholder="위도" aria-label="Search" name="DL_LATITUDE">
+		    	  <input readonly class="form-control mr-2" id="searchLat" type="search" placeholder="위도" aria-label="Search">
 		      </div>
 		      
 		      <div class="col-2">
@@ -98,7 +72,7 @@ pageEncoding="UTF-8"%>
 		      	<label>경도 :</label>
 		      </div>                 
 		 	  <div class="col-2">
-		    	  <input readonly class="form-control mr-2" id="DL_LONGITUDE" type="search" placeholder="경도" aria-label="Search" name="DL_LONGITUDE">
+		    	  <input readonly class="form-control mr-2" id="searchLng" type="search" placeholder="경도" aria-label="Search">
 		      </div>
 		    </div>  
 		    <!-- 주소 -->
@@ -107,7 +81,7 @@ pageEncoding="UTF-8"%>
 		      	<label>위치검색 :</label>
 		      </div>                 
 		 	  <div class="col-6">
-		    	  <input readonly class="form-control mr-2" id="DL_ADDRESS" type="search" placeholder="주소찾기 버튼을 눌러주세요." aria-label="Search" name="DL_ADDRESS">
+		    	  <input readonly class="form-control mr-2" id="searchAddr" type="search" placeholder="주소찾기 버튼을 눌러주세요." aria-label="Search">
 		      </div>
 		      <div class="col-2"> 
 		      		<button class="btn btn-dark btn-block" type="submit" style="width:100px" onClick="addrSearch()">주소검색</button>
@@ -119,28 +93,34 @@ pageEncoding="UTF-8"%>
 		     	<label>상세주소 :</label>
 		     </div>                 
 		 	 <div class="col-8">
-		    	<input class="form-control mr-2" id="DL_DETAILADDRESS" type="" placeholder="상세주소를 입력해주세요." name="DL_DETAILADDRESS" >
+		    	<input class="form-control mr-2" id="" type="" placeholder="상세주소를 입력해주세요." >
 		     </div>
 		    </div>
 		    <!-- 지사 -->	
-		    
+		    <div class="row" style="padding:5px">
+		     <div class="col-2">
+		     	<label>지사 :</label>
+		     </div>                 
+		 	 <div class="col-8">
+		    	<input class="form-control mr-2" id="" type="" placeholder="지사를 입력해주세요." >
+		     </div>
+		    </div>
 		    <!-- 비고 -->	
 		    <div class="row" style="padding:5px">
 		     <div class="col-2">
 		     	<label>비고 :</label>
 		     </div>                 
 		 	 <div class="col-8">
-		    	<textarea class="form-control" rows="6" id="DL_NOTE" name="DL_NOTE"></textarea>
+		    	<textarea class="form-control" rows="6" id="comment"></textarea>
 		     </div>
 		    </div>
-		  
 		    <!-- 비고 -->	
 		    <div class="row" style="padding:5px; align-items: center;">
 		     <div class="col-6  text-right">
-		     	<button class="btn btn-primary" style="width:120px;" onclick="save()">저장</button>
+		     	<button class="btn btn-primary" style="width:120px;">저장</button>
 		     </div>                 
 		 	 <div class="col-6 text-left">
-		     	<button class="btn btn-danger" style="width:120px;" onclick="location.href='http://localhost:5000/pojo_erp2/work/outsideWorker.erp'">취소</button>
+		     	<button class="btn btn-danger" style="width:120px;" onclick="location.href='outsideWorkerPlace.jsp'">취소</button>
 		     </div>
 		    </div>
 		    <!-- 입력창 end -->	
@@ -183,7 +163,7 @@ pageEncoding="UTF-8"%>
 	                var addr1 = data.sido; // 최종 주소 변수
 	                var addr2 = data.bname; // 최종 주소 변수
 	                // 주소 정보를 해당 필드에 넣는다.
-	                document.getElementById("DL_ADDRESS").value = addr+" "+addr1+" "+addr2;
+	                document.getElementById("searchAddr").value = addr+" "+addr1+" "+addr2;
 	                // 주소로 상세 정보를 검색
 	                geocoder.addressSearch(data.address, function(results, status) {
 	                    // 정상적으로 검색이 완료됐으면
@@ -204,8 +184,8 @@ pageEncoding="UTF-8"%>
 	
 	                    }
 	                // 위도경도 정보를 해당 필드에 넣는다.
-	                document.getElementById("DL_LATITUDE").value = result.y;
-	                document.getElementById("DL_LONGITUDE").value = result.x;
+	                document.getElementById("searchLat").value = result.y;
+	                document.getElementById("searchLng").value = result.x;
 	                });
 	            }
 	        }).open();
@@ -235,7 +215,7 @@ pageEncoding="UTF-8"%>
 <!-- 탑메뉴 사용 -->
 <script src="../common/js/topNav.js"></script>
 <!-- 사이드 메뉴 사용 -->
-<script src="../common//js/sideNav.js?ver=2"></script>
+<script src="../common//js/sideNav.js"></script>
 
 <script src="../common/scripts.js"></script>
 <!-- 버거 메뉴 활성화 -->

@@ -72,7 +72,7 @@ public class WorkDao {
 	public List<Map<String, Object>> branchList(Map<String, Object> pMap) {
 		//지사 관리 이벤트 탭
 		logger.info("Dao : 지사관리 호출 성공");
-		List<Map<String,Object>> rlist = null;
+		List<Map<String,Object>> rlist = new ArrayList<Map<String,Object>>();
 		sqlSes.selectOne("PROC_BRANCHLIST",pMap);
 		rlist = (List<Map<String,Object>>)pMap.get("key");
 		logger.info("Dao branchList : " + rlist.size());
@@ -258,7 +258,7 @@ public class WorkDao {
 	public List<Map<String, Object>> outsideSEL(Map<String, Object> pMap) {
 		//파견사원 조회 버튼 insert here
 		logger.info("Dao : 파견사원 조회 버튼 호출 성공");
-		List<Map<String,Object>> rlist = null;
+		List<Map<String,Object>> rlist = new ArrayList<Map<String,Object>>();
 		rlist = sqlSes.selectList("sel_empDispatch",pMap);
 		return rlist;
 	}

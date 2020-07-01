@@ -57,14 +57,14 @@ public class WorkLogic {
 	public List<Map<String, Object>> branchList(Map<String, Object> pMap) {
 		//지사관리 이벤트 탭
 		logger.info("Logic : 지사관리 호출 성공");
-		List<Map<String,Object>> rlist = null;
+		List<Map<String,Object>> rlist = new ArrayList<Map<String,Object>>();
 		rlist = workDao.branchList(pMap);
 		return rlist;
 	}
 	public List<Map<String, Object>> deptSchedule(Map<String,Object> pMap) {
 		//부서일정 이벤트 탭
 		logger.info("Logic : 부서일정 호출 성공");
-		List<Map<String,Object>> rlist = null;
+		List<Map<String,Object>> rlist = new ArrayList<Map<String,Object>>();
 		rlist = workDao.deptSchedule(pMap);
 		return rlist;
 		
@@ -220,7 +220,7 @@ public class WorkLogic {
 	}
 	public List<Map<String, Object>> outsideSEL(Map<String, Object> pMap) {
 		logger.info("Logic : 파견사원 조회 버튼 호출 성공");
-		List<Map<String,Object>> rlist = null;
+		List<Map<String,Object>> rlist = new ArrayList<Map<String,Object>>();
 		rlist = workDao.outsideSEL(pMap);
 		return rlist;
 	}

@@ -248,8 +248,8 @@ public class WorkController implements Controller {
 			/////////////////////// 실제 코드    /////////////////////
 			pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
 			result = workLogic.workAddBranch(pMap);
-			if(result==1) {path="redirect:xxx.jsp";}
-			else {path="redirect:errorPage.jsp";}
+			if(result==1) {path="redirect:success.jsp";}
+			else {path="redirect:kimchizzige.jsp";}
 			
 			///////////////////////  테스트 코드   /////////////////////
 			/*
@@ -368,20 +368,10 @@ public class WorkController implements Controller {
 		else if(requestName.equals("outsideWorker")) {  ///성공
 			//파견사원 조회
 			logger.info("Controller : 파견사원 조회 탭 호출");
-			List<Map<String,Object>> rlist = null;
+			List<Map<String,Object>> rlist = new ArrayList<Map<String,Object>>();
 			rlist = workLogic.outsideWorker();
 			req.setAttribute("dispatchList", rlist);
-			path="forward:./outsideWorker.jsp"; 
-		}
-		else if(requestName.equals("outsideSEL")) {  ///성공
-			//파견사원버튼 조회
-			logger.info("Controller : 파견사원 조회 버튼 호출");
-			pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
-			//pMap.put("EMP_NAME", req.getParameter("EMP_NAME"));
-			//pMap.put("EMP_NAME", "안철수");
-			List<Map<String,Object>> rlist = workLogic.outsideSEL(pMap);
-			req.setAttribute("sList", rlist);
-			path="forward:./outsideWorker.jsp";
+			path="forward:outsideWorker.jsp"; 
 		}
 		else if("personManageMent".equals(requestName)) {    ////////화면 미정
 			//인사조직도  insert here
@@ -452,15 +442,6 @@ public class WorkController implements Controller {
 			req.setAttribute("empRetireList", rlist);
 			path = "forward:xxx.jsp";
 		}
-		else if("branchList".equals(requestName)) {  //완료
-			//지사관리 insert here
-			logger.info("Controller : 지사관리 호출 성공");
-			List<Map<String,Object>> rlist = null;
-			pMap = new HashMap<>();
-			rlist = workLogic.branchList(pMap);//파라미터 없음
-			req.setAttribute("branchList", rlist);
-			path = "forward:xxx.jsp";
-		}
 		else if("deptSchedule".equals(requestName)) {
 			//부서일정 insert here
 			logger.info("Controller : 부서일정 호출 성공");
@@ -491,6 +472,25 @@ public class WorkController implements Controller {
 	public ModelAndView process(String cud, HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 		ModelAndView mav = new ModelAndView(req,res);
+		 if(cud.equals("outsideSEL")) {  ///성공
+			//파견사원버튼 조회
+			logger.info("Controller : 파견사원 조회 버튼 호출");
+			Map<String,Object> pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
+			//pMap.put("EMP_NAME", req.getParameter("EMP_NAME"));
+			//pMap.put("EMP_NAME", "안철수");
+			List<Map<String,Object>> rlist = workLogic.outsideSEL(pMap);
+			mav.setViewName("outsideworker");
+			mav.addObject("outsideWorker", rlist);
+		}
+		 else if(cud.equals("branchList")) {  //완료
+			 //지사관리 insert here
+			 logger.info("Controller : 지사관리 호출 성공");
+			 List<Map<String,Object>> rlist = new ArrayList<Map<String,Object>>();
+			 Map<String,Object> pMap = new HashMap<>();
+			 rlist = workLogic.branchList(pMap);//파라미터 없음
+			 mav.setViewName("outsideWorkPlace");
+			 mav.addObject("outsideWorkPlace", rlist);
+		 }
 	
 		return mav;
 	}

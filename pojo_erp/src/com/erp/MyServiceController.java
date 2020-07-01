@@ -17,7 +17,8 @@ public class MyServiceController implements Controller {
 	Logger logger = Logger.getLogger(MyServiceController.class);
 	String requestName = null;
 	MyServiceLogic myServiceLogic = null;
-	
+	HttpSession session = null;
+	Map<String, Object> pMap = null;
 	public MyServiceController(String requestName) {
 		logger.info("MyServiceController 호출 성공");
 		this.requestName = requestName;
@@ -27,8 +28,7 @@ public class MyServiceController implements Controller {
 	@Override  
 	public String process(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		String path = null;
-		HttpSession session = req.getSession();
-		Map<String, Object> pMap = null;
+		session = req.getSession();
 		if(requestName.equals("myGoWork")) { //insert 출근테이블에 오늘 출근 row추가
 			//출근버튼 눌렀을때
 			logger.info("MyService => 출근버튼 실행");
@@ -246,26 +246,30 @@ public class MyServiceController implements Controller {
 			logger.info("MAV => 당월급여 실행");
 			pMap = new HashMap<>();
 			pMap.put("emp_no", session.getAttribute("emp_no")); 
-			pMap.put("btn_type", "당월");
-			pMap.put("sal_payday", "2020/06/14");//테스트
-			//pMap.put("sal_payday", req.getParameter("sal_payday")); //실제
+			//pMap.put("btn_type", "당월");
+			//pMap.put("sal_payday", "2020/06/14");//테스트
+			pMap.put("SAL_PAYDAY", req.getParameter("SAL_PAYDAY")); //실제
 			List<Map<String,Object>> monthPayList = myServiceLogic.monthPay(pMap);
 			System.out.println("당월급여 조회  => "+monthPayList.size());
 			req.setAttribute("monthPayList", monthPayList);
-			path="forward:xxx.jsp";
+			path="forward:empSalDetail.jsp";
 		}
-		else if("allPay".equals(requestName)) {
+		else if(requestName.equals("allPay")) {
 			//전체급여 insert here
-			logger.info("MAV => 전체급여 실행");
-			pMap = new HashMap<>();
+			logger.info("ALLPAY => 전체급여 실행");
+			pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
+			//pMap.put("emp_no", session.getAttribute("emp_no")); 
 			pMap.put("emp_no", session.getAttribute("emp_no")); 
+			/*
 			pMap.put("btn_type", "전체");
 			pMap.put("sal_payday", "2020/06/14");//테스트
-			//pMap.put("sal_payday", req.getParameter("sal_payday")); //실제
+			//pMap.put("sal_payday", req.getParameter("sal_payday"));
+			 */
+			//실제
 			List<Map<String,Object>> allPayList = myServiceLogic.allPay(pMap);
 			System.out.println("전체급여 조회  => "+allPayList.size());
-			req.setAttribute("allPayList", allPayList);
-			path="forward:xxx.jsp";
+			req.setAttribute("allPayList",allPayList );
+			path="forward:empSal.jsp";
 		}
 		else if("mySchedule".equals(requestName)) {
 			//개인일정 insert here
@@ -285,6 +289,7 @@ public class MyServiceController implements Controller {
 	@Override
 	public ModelAndView process(String cud, HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
+		session = req.getSession();
 		ModelAndView mav = new ModelAndView(req,res);
 		return mav;
 		

@@ -35,18 +35,17 @@ pageEncoding="UTF-8"%>
 					<button id="restore" class="btn btn-success">복구</button>
 				</div>
 				<!-- ========================= 휴지통 테이블 ========================== -->
-				<table id="table" data-toolbar=".toolbar" data-show-columns="true"
-					data-pagination="true" data-search="true"
+				<table id="table" data-toolbar=".toolbar"
+					
 					data-advanced-search="true"
 					data-select-item-name="selectItemName" data-url="../juno/member2.json">
 					<thead>
 						<tr>
 							<th data-field="state" data-checkbox="true"></th>
-							<th data-field="app_no" data-sortable="true"
-								data-align="center" data-width="100">번호</th>
-							<th data-field="app_name" data-sortable="true">양식</th>
-							<th data-field="app_write" data-sortable="true">이름</th>
-							<th data-field="app_print" data-sortable="true">상태</th>
+							<th data-field="app_no">번호</th>
+							<th data-field="app_name">양식</th>
+							<th data-field="app_write" >이름</th>
+							<th data-field="app_print"> 상태</th>
 							<th data-field="operate" data-formatter="operateFormatter"
 								data-events="operateEvents" data-width="100" data-align="center">확인</th>
 						</tr>
@@ -93,7 +92,7 @@ pageEncoding="UTF-8"%>
 <!-- 탑메뉴 사용 -->
 <script src="../common/js/topNav.js"></script>
 <!-- 사이드 메뉴 사용 -->
-<script src="../common//js/sideNav.js"></script>
+<script src="../common//js/sideNav.js?ver=2"></script>
 <!-- 버거 메뉴 활성화 -->
 <script src="../common/scripts.js"></script>
 </body>

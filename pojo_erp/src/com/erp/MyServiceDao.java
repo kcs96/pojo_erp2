@@ -44,7 +44,7 @@ public class MyServiceDao {
 		//당월급여 조회  이벤트
 		logger.info("MyServiceDao => 당월급여 호출"); 
 		List<Map<String, Object>> rList = new ArrayList<>();
-		sqlSec.selectOne("proc_sal",pMap);
+		sqlSec.selectOne("proc_sal2",pMap);
 		rList = (List<Map<String, Object>>)pMap.get("key");
 		return rList;
 	}

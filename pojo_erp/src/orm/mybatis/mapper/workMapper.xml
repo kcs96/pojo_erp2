@@ -164,8 +164,8 @@
 	<!-- ==================================  지사등록 ===================================================== -->
 	<insert id="addBranch" parameterType="map">
 		INSERT INTO DISPATCH_LOC(DL_NO,DL_LATITUDE,DL_LONGITUDE,DL_NAME,
-               DL_TEL,DL_ADDRESS)
-        VALUES(SEQ_DL_NO.NEXTVAL,#{DL_LATITUDE},#{DL_LONGITUDE},#{DL_NAME},#{DL_TEL},#{DL_ADDRESS})
+               DL_TEL,DL_ADDRESS,DL_DETAILADDRESS,DL_NOTE)
+        VALUES(SEQ_DL_NO.NEXTVAL,#{DL_LATITUDE},#{DL_LONGITUDE},#{DL_NAME},#{DL_TEL},#{DL_ADDRESS},#{DL_DETAILADDRESS},#{DL_NOTE})
 	</insert>	
 	<!-- ================================== 지사등록 끝 =================================================== -->
 	
@@ -190,8 +190,9 @@
      		  ,dl.dl_address as DL_ADDRESS,e.emp_name as EMP_NAME,e.emp_phone as EMP_PHONE
       		  ,dp.dp_sdate as DP_SDATE,dp.dp_edate as DP_EDATE,dl.dl_latitude as DL_LATITUDE,dl.dl_longitude as DL_LONGITUDE
 		 FROM emp e, dispatch dp, dispatch_loc dl
-		WHERE e.emp_name = #{EMP_NAME}
+		WHERE e.emp_no = #{emp_no}
  		  AND dl.dl_no = dp.dl_no
+ 		  and e.emp_no = dp.emp_no
   	      AND SYSDATE BETWEEN dp.dp_sdate AND dp.dp_edate
 	</select>
 	
