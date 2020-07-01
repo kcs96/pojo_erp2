@@ -14,8 +14,7 @@ pageEncoding="UTF-8"%>
 <!--정보수정에 필요한 코드 끝   =================================================================================-->
 
 <!--관리자 로그에 필요한 코드 시작=================================================================================-->
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+<!-- <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" /> --><!-- 모달 창 닫으려면 이거 없애야 한다. -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
 <link href="../common/main.css" rel="stylesheet" />
 <link href="../common/css/custom.css" rel="stylesheet" />
@@ -33,14 +32,44 @@ pageEncoding="UTF-8"%>
 					// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
 					var roadAddr = data.roadAddress;
 					alert("roadAddr: " + roadAddr);
-					$("#i_postcode").val(data.zonecode);
-					$("#i_address").val(roadAddr);
+					$("#emp_zipcode").val(data.zonecode);
+					$("#emp_address").val(roadAddr);
 					//document.getElementbyId('institutuionPostcode').value = data.zonecode;
 					//document.getElementbyId('institutuionAddress').value = roadAddr;
 				},
 			}).open();
 		});
 	}
+	
+	/*
+	function btn_checkpw(){
+		alert("비밀번호 변경 저장 버튼 호출 성공");
+		var new_pw = $("#new_pw").val();
+		var new_repw = $("#new_repw").val();
+		$.ajax({
+			url : "./                .erp?U_IN_PW="+new_pw+"&U_IN_RPW="+new_repw
+		   ,method : "get"
+		   ,success : function(data){
+			   if(data == 1){
+				   alert("비밀번호 변경 성공");
+				   $("#intro").modal('hide');
+				   $("#emp_pw").val(new_repw);
+			   }
+			   else{
+				   alert("변경하려는 비밀번호가 같지 않습니다.");
+			   }
+		   }
+		});
+	}
+	*/
+	
+	function save(){
+		alert("신규사원 등록 저장 버튼 호출 성공");
+		$("#f_updInfo").attr("method","get");
+		$("#f_updInfo").attr("action","workAddEmp.erp");
+		$("#f_updInfo").submit();
+	}
+	
 </script>
 </head>
 <body class="sb-nav-fixed">
@@ -56,134 +85,135 @@ pageEncoding="UTF-8"%>
 					<div id="page_contents" style="max-width: 1730px; margin: 10px 100px;">
 						<!-- 컨텐츠 들어갈내용 시작-->
 						
+						<form id="f_updInfo">
 						<div class="row">
 							<div class="col-sm-6">
 								<table class="table table-boardered">
 									<tr>
 										<th>사원번호</th>
-										<td><input id="emp_no" type="text" class="form-control" name="EMP_NO" placeholder="사원번호를 입력하세요." ></td>
+										<td><input id="emp_no" type="text" class="form-control" name="emp_no"  placeholder="사원번호를 입력하세요."></td>
 									</tr>
 									<tr>
 										<th>사원명</th>
-										<td><input id="emp_name" type="text" class="form-control" name="EMP_NAME" ></td>
+										<td><input id="emp_name" type="text" class="form-control" name="emp_name" ></td>
 									</tr>
 									<tr>
 										<th>패스워드</th>
-										<td><input id="emp_pw" type="password" class="form-control" name="EMP_PW" ></td>
+										<td><input id="emp_pw" type="password" class="form-control" name="emp_pw" ></td>
+										<!--  
 										<td>
-											<button data-toggle="modal" class="btn btn-link" data-target="#intro">등록</button>
+											<a type="button" data-toggle="modal" class="btn btn-link" data-target="#intro">변경</a>
 											<div id="intro" class="modal fade" role="dialog" aria-labelledby="introHeader" aria-hidden="true" tabindex="-1">
-												<div class="modal-dialog">
+												<div id="modalMain" class="modal-dialog">
 													<div id="modal" class="modal-content" style="padding: 40px; margin: 40px;">
-														<!-- 
 														<div class="form-group">
 															<label for="exampleInputEmail1">이전 비밀번호</label> 
-															<input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="pwHelp" width="50px"> 
+															<input type="password" class="form-control" id="old_pw" name="old_pw"  aria-describedby="pwHelp" width="50px"> 
 															<small id="pwlHelp" class="form-text text-muted">비밀번호가 생각나지 않으면 인사부로 문의하세요...</small>
 														</div>
-														 -->
 														<div class="form-group">
 															<label for="exampleInputPassword1">새 비밀번호</label> 
-															<input type="password" class="form-control" id="exampleInputPassword1" width="100px">
+															<input type="password" class="form-control" id="new_pw" name="U_IN_PW"  width="100px">
 														</div>
 														<div class="form-group">
 															<label for="exampleInputPassword2">비밀번호 확인</label> 
-															<input type="password" class="form-control" id="exampleInputPassword2" width="100px">
+															<input type="password" class="form-control" id="new_repw" name="U_IN_RPW" width="100px">
 														</div>
-														<div class="form-group form-check">
-															<input type="checkbox" class="form-check-input" id="exampleCheck1"> 
-															<label class="form-check-label" for="exampleCheck1">Check me out</label>
+														<div class="form-group">
+															<button type="button" class="btn btn-primary" onclick="javascript:btn_checkpw()">저장</button>
+															<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 														</div>
-														<button type="submit" class="btn btn-primary">저장</button>
-														<button type="reset" class="btn btn-default" data-dismiss="modal">닫기</button>
 													</div>
 												</div>
 											</div>
 										</td>
+										-->
 									</tr>
 									<tr>
 										<th>주민번호</th>
-										<td><input id="emp_resnum" type="text" class="form-control" name="EMP_RESNUM" ></td>
+										<td><input id="emp_resnum" type="text" class="form-control" name="emp_resnum" ></td>
 									</tr>
 									<tr>
 										<th>사진</th>
-										<td><input id="emp_photo" type="file" class="form-control" name="EMP_PHOTO"></td>
+										<td><input id="emp_photo" type="file" class="form-control" name="emp_photo" ></td>
 									</tr>
 									<tr>
 										<th>핸드폰</th>
-										<td><input id="emp_phone" type="tel" class="form-control" name="EMP_PHONE"></td>
+										<td><input id="emp_phone" type="tel" class="form-control" name="emp_phone"  ></td>
 									</tr>
 									<tr>
 										<th>이메일</th>
-										<td><input id="emp_email" type="email" class="form-control" name="EMP_EMAIL"></td>
+										<td><input id="emp_email" type="email" class="form-control" name="emp_email"  ></td>
 									</tr>
 									<tr>
 										<th>부서명</th>
 										<td>
-											<select id="dept_name" name="DEPT_NAME" class="form-control" >
-												<option value="영업부">영업부</option>
-												<option value="개발부">개발부</option>
-												<option value="총무부">총무부</option>
+											<select id="dept_name" name="dept_name" class="form-control" >
 												<option value="인사부">인사부</option>
+												<option value="개발부">개발부</option>
+												<option value="품질관리부">품질관리부</option>
+												<option value="관리자">관리자</option>
 											</select>
 										</td>
 									</tr>
 									<tr>
 										<th>부서번호</th>
-										<td><input id="dept_no" type="text" class="form-control" name="DEPT_NO" ></td>
+										<td><input id="dept_no" type="text" class="form-control" name="dept_no" ></td>
 									</tr>
 								</table>
+								
 							</div>
 
 							<div class="col-sm-6">
 								<table class="table table-boardered">
 									<tr>
 										<th>내선번호</th>
-										<td><input id="emp_extend" type="tel" class="form-control" name="EMP_EXTEND" ></td>
+										<td><input id="emp_extend" type="tel" class="form-control" name="emp_extend" ></td>
 									</tr>
 									<tr>
 										<th>직급</th>
-										<td><input id="emp_position" type="text" class="form-control" name="EMP_POSITION" ></td>
+										<td><input id="emp_position" type="text" class="form-control" name="emp_position" ></td>
 									</tr>
 									<tr>
 										<th>연봉</th>
-										<td><input id="emp_salary" type="text" class="form-control" name="EMP_SALARY" ></td>
+										<td><input id="emp_salary" type="text" class="form-control" name="emp_salary" ></td>
 									</tr>
 									<tr>
 										<th>성별</th>
 										<td>
-											<select id="emp_gender" name="EMP_GENDER" class="form-control" >
-												<option value="남성">남성</option>
-												<option value="여성">여성</option>
+											<select id="emp_gender" name="emp_gender" class="form-control" >
+												<option value="남자">남자</option>
+												<option value="여자">여자</option>
 											</select>
 										</td>
 									</tr>
 									<tr>
 										<th>입사일자</th>
-										<td><input id="emp_hiredate" type="date" class="form-control" name="EMP_HIREDATE" ></td>
+										<td><input id="emp_hiredate" type="date" class="form-control" name="emp_hiredate" ></td>
 									</tr>
 									<tr>
 										<th>퇴사일자</th>
-										<td><input id="emp_retiredate" type="date" class="form-control" name="EMP_RETIREDATE" ></td>
+										<td><input id="emp_retiredate" type="date" class="form-control" name="emp_retiredate" ></td>
 									</tr>
 									<tr>
 										<th>근무상태</th>
 										<td>
-											<select id="emp_state" name="EMP_STATE" class="form-control" >
-												<option value="재직">재직</option>
-												<option value="파견">파견</option>
+											<select id="emp_state" name="emp_state" class="form-control" >
+												<option value="정상">정상</option>
+												<option value="병가">병가</option>
+												<option value="휴가">휴가</option>
 												<option value="퇴사">퇴사</option>
 											</select>
 										</td>
 									</tr>
 									<tr>
 										<th>은행</th>
-										<td><input id="emp_bank" type="text" class="form-control" name="EMP_BANK" ></td>
+										<td><input id="emp_bank" type="text" class="form-control" name="emp_bank" ></td>
 									</tr>
 
 									<tr>
 										<th>계좌번호</th>
-										<td><input id="emp_account" type="text" class="form-control" name="EMP_ACCOUNT" ></td>
+										<td><input id="emp_account" type="text" class="form-control" name="emp_account" ></td>
 									</tr>
 								</table>
 							</div>
@@ -193,28 +223,31 @@ pageEncoding="UTF-8"%>
 								<table class="table table-boardered">
 									<tr>
 										<th>우편번호</th>
-										<td><input id="emp_zipcode" type="text" class="form-control" name="EMP_ZIPCODE" align="left"></td>
+										<td><input id="emp_zipcode" type="text" class="form-control" name="emp_zipcode" align="left" readonly></td>
 										<td><input type="button" class="btn btn-link" onclick="DaumPostcode()" value="주소검색" /></td>
 									</tr>
 									<tr>
 										<th>주소</th>
-										<td><input id="emp_address" type="text" class="form-control" name="EMP_ADDRESS"></td>
+										<td><input id="emp_address" type="text" class="form-control" name="emp_address" readonly></td>
 									</tr>
 									<tr>
 										<th>상세주소</th>
-										<td><input id="emp_detailaddress" type="text" class="form-control" name="EMP_DETAILADDRESS" placeholder="상세 주소를 입력하세요..."></td>
+										<td><input id="emp_detailaddress" type="text" class="form-control" name="emp_detailaddress" placeholder="상세 주소를 입력하세요..."></td>
 									</tr>
 								</table>
+								
 							</div>
+							
 							<!-- 주소 검색 부분 끝 =================================================================================== -->
 
 						</div>
-
+						</form>
+						
 						<div class="container" align="right">
 							<tr>
 								<td colspan="2">
-									<button type="button" class="btn btn-info" style="border: 3px solid white; border-radius: 10px;" onclick="javascript:save()">저장</button>
-									<button type="button" class="btn btn-info" style="border: 3px solid white; border-radius: 10px;" onclick="location.href='javascript:history.back();'">닫기</button>
+									<button type="submit" class="btn btn-info" style="border: 3px solid white; border-radius: 10px;" onclick="save()">저장</button>
+									<button type="reset" class="btn btn-info" style="border: 3px solid white; border-radius: 10px;" onclick="location.href='javascript:history.back();'" >닫기</button>
 								<!--<input type="submit" class="btn btn-primary" value="저장" onclick="main()">  
 								    <input type="reset" class="btn btn-danger" value="닫기" onclick="main()"> -->
 								</td>
@@ -233,7 +266,7 @@ pageEncoding="UTF-8"%>
 	<script src="../common/js/topNav.js"></script>
 	<!-- 사이드 메뉴 사용 -->
 	<script src="../common//js/sideNav.js"></script>
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+<!--<script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script> -->
 	<script src="../common/scripts.js"></script>
 	<!-- 버거 메뉴 활성화 -->
 </body>

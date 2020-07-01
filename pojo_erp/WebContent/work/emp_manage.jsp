@@ -29,7 +29,7 @@ pageEncoding="UTF-8"%>
 				$("#emp_list").html(data);
 			}
 		});
-	}	
+	}
 	function emp_list_off(){
 		$.ajax({
 			url : "./emp_list_off.jsp",
@@ -126,7 +126,7 @@ pageEncoding="UTF-8"%>
       }
       window.operateEvents = {
         "click .button": function (e, value, row, index) {
-          window.location.href = "xxx.erp?emp_no=" + row.EMP_NO;
+          window.location.href = "workSelectEmp.erp?emp_no=" + row.EMP_NO;
         },
       };
     </script>

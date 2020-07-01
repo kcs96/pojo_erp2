@@ -21,91 +21,7 @@ pageEncoding="UTF-8"%>
 <link href="../common/css/custom.css" rel="stylesheet" />
    
    <title>2RP PROGRAM</title>
-<!-- 파라미터 받기  -->
- <%
-	request.setCharacterEncoding("UTF-8");
- 	String ap_reporter = request.getParameter("ap_reporter"); //이름 채번
- 	String no  = request.getParameter("no"); //번호  채번
- 	String fr_no  = request.getParameter("fr_no"); //양식 채번
- 	String ap_title  = request.getParameter("ap_title"); //제목 채번
- 	String ap_prosessingdate  = request.getParameter("ap_prosessingdate"); //기한 채번
- 	String ap_dname  = request.getParameter("ap_dname"); //부서 채번
- 	String ap_content  = request.getParameter("ap_content"); //문서 내용 채번
- 	String ap_contact = request.getParameter("ap_contact"); //사원 번호 채번
- 	String ap_bego = request.getParameter("ap_bego"); //비고 
- 	String ap_instructions = request.getParameter("ap_instructions"); //특이사항
- 	String ap_appdate = request.getParameter("ap_appdate"); //작성일자
- 	String ap_appdate_1 = request.getParameter("ap_appdate_1"); //년
- 	String ap_appdate_2 = request.getParameter("ap_appdate_2"); //월
- 	String ap_appdate_3 = request.getParameter("ap_appdate_3"); //일
- 	String ap_no = request.getParameter("ap_no"); //문서 고유번호
- 	
- 	String null_check = "undefined"; //null체크
- 	
- 	if(ap_reporter.equals(null_check)){
- 		ap_reporter = "";
- 	}
- 	if(no.equals(null_check)){
- 		no = "";
- 	}
- 	if(fr_no.equals(null_check)){
- 		fr_no = "";
- 	}
- 	if(ap_title.equals(null_check)){
- 		ap_title = "";
- 	}
- 	if(ap_prosessingdate.equals(null_check)){
- 		ap_prosessingdate = "";
- 	}
- 	if(ap_dname.equals(null_check)){
- 		ap_dname = "";
- 	}
- 	if(ap_content.equals(null_check)){
- 		ap_content = "";
- 	}
- 	if(ap_contact.equals(null_check)){
- 		ap_contact = "";
- 	}
- 	if(ap_bego.equals(null_check)){
- 		ap_bego = "";
- 	}
- 	if(ap_instructions.equals(null_check)){
- 		ap_instructions = "";
- 	}
- 	if(ap_appdate.equals(null_check)){
- 		ap_appdate = "";
- 	}
- 	if(ap_appdate_1.equals(null_check)){
- 		ap_appdate_1 = "";
- 	}
- 	if(ap_appdate_2.equals(null_check)){
- 		ap_appdate_2 = "";
- 	}
- 	if(ap_appdate_3.equals(null_check)){
- 		ap_appdate_3 = "";
- 	}
- 	if(ap_no.equals(null_check)){
- 		ap_no = "";
- 	}
-%>
-<!-- 파라미터 받기 끝 -->
 
-<script type="text/javascript">
-	function approval(){
-		ap_no = <%=ap_no%>
-		location.href="http://localhost:5000/work/workAgree.erp?ap_no="+ ap_no
-	}
-
-	function dismissal(){
-		ap_no = <%=ap_no%>
-		alert("기각 버튼 호출 성공");
-		$("#f_gigag").attr("method","get");
-		$("#f_gigag").attr("action","workDeny.erp");
-		$("#f_gigag").submit();
-	}
-
-
-</script>
 </head>
 <body class="sb-nav-fixed">
    <nav id="topNav"></nav>
@@ -137,25 +53,25 @@ pageEncoding="UTF-8"%>
 			<table class="table">
 				 <tr>
 				   <td style="padding:5px;text-align:center;">보낸사람</td>
-				   <td><%= ap_reporter %></td>	<!-- 보낸사람 이름  -->
+				   <td>이상현</td>
 				   <td style="padding-right:5px;text-align:center;">기안부서</td>
-				   <td><%= ap_dname %></td> <!-- 부서 이름  -->
+				   <td>영업부</td>
 				 </tr>
 				 <tr>
 				   <td style="width:20%;text-align:center;">번호</td>
-				   <td><%= ap_contact %></td><!-- 사원 전화번호  -->
+				   <td>20112344</td>
 				   <td style="padding:5px;\text-align:center;"></td>
 				   <td></td>
 				 </tr>
 				 <tr>
 				   <td style="text-align:center;">제목</td>
-				   <td><%= ap_title %></td>	<!-- 제목  -->
+				   <td>퇴사합니다.</td>
 				   <td style="padding:5px;\text-align:center;"></td>
 				   <td></td>
 				 </tr>
 				 <tr>
 				   <td style="width:20%;text-align:center;">기한</td>
-				   <td><%= ap_prosessingdate %></td> <!-- 기한 -->
+				   <td>2020-06-20 ~ 2020-07-20</td>
 				   <td style="padding:5px;width:20%;text-align:center;"></td>
 				   <td></td>
 				 </tr>
@@ -176,92 +92,24 @@ pageEncoding="UTF-8"%>
 	<div class="col-1"></div> -->
 	</div>
 	</div>
-	  	<!--	페이지 나누기	  -->
 	  	 <script type="text/javascript">
-				page = <%=fr_no%>
-	  	 		if(page===1){	//사원 페이지
-	  	 			$(document).ready(function(){
-						$.ajax({
-							url:"../sanghyun2/huga.jsp"
-							,success:function(data){
-								$("#test").html(data);
-								$("#ap_reporter").val("<%=ap_reporter%>");
-								$("#ap_dname").val("<%=ap_dname%>");
-								$("#ap_prosessingdate").val("<%=ap_prosessingdate%>");
-								$("#ap_content").val("<%=ap_content%>");
-								$("#ap_contact").val("<%=ap_contact%>");
-								$("#ap_year").val("<%=ap_appdate_1%>");
-								$("#ap_month").val("<%=ap_appdate_2%>");
-								$("#ap_today").val("<%=ap_appdate_3%>");
-								$("#ap_namein").val("<%=ap_reporter%>"); 
-								
-							}
-						})
-					});	
-				}
-				else if(page===2){	//파견 페이지 
-	  	 			$(document).ready(function(){
+					$(document).ready(function(){
 						$.ajax({
 							url:"../sanghyun2/paguns.jsp"
 							,success:function(data){
 								$("#test").html(data);
-								$("#ap_reporter").val("<%=ap_reporter%>");
-								$("#ap_dname").val("<%=ap_dname%>");
-								$("#ap_prosessingdate").val("<%=ap_prosessingdate%>");
-								$("#ap_content").val("<%=ap_content%>");
-								$("#ap_contact").val("<%=ap_contact%>");
-								$("#ap_year").val("<%=ap_appdate_1%>");
-								$("#ap_month").val("<%=ap_appdate_2%>");
-								$("#ap_today").val("<%=ap_appdate_3%>");
-								$("#ap_namein").val("<%=ap_reporter%>"); 
 							}
 						})
-					});	
-				}
-				if(page===3){	//업무보고서 
-	  	 			$(document).ready(function(){
-						$.ajax({
-							url:"../sanghyun2/upmo.jsp"
-							,success:function(data){
-								$("#test").html(data);
-								$("#ap_reporter").val("<%=ap_reporter%>");
-								$("#ap_appdate").val("<%=ap_appdate%>");
-								$("#ap_content").val("<%=ap_content%>");
-								$("#ap_bego").val("<%=ap_bego%>");
-								$("#ap_instructions").val("<%=ap_instructions%>");
-							}
-						})
-					});	
-				}
-				if(page===4){	//사직서 
-	  	 			$(document).ready(function(){
-						$.ajax({
-							url:"../sanghyun2/sagi.jsp"
-							,success:function(data){
-								$("#test").html(data);
-								$("#ap_reporter").val("<%=ap_reporter%>");
-								$("#ap_dname").val("<%=ap_dname%>");
-								$("#ap_prosessingdate").val("<%=ap_prosessingdate%>");
-								$("#ap_content").val("<%=ap_content%>");
-								$("#ap_contact").val("<%=ap_contact%>");
-								$("#ap_year").val("<%=ap_appdate_1%>");
-								$("#ap_month").val("<%=ap_appdate_2%>");
-								$("#ap_today").val("<%=ap_appdate_3%>");
-								$("#ap_namein").val("<%=ap_reporter%>"); 
-							}
-						})
-					});	
-				}
+					});
 			</script> 
-			<!--	페이지 나누기 끝	  -->
-		
+		<!--기각모달  -->
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header ">
-     		 받은 결재
-          <button type="button"  class="close" data-dismiss="modal">&times;</button>	
+        받은 결재
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
 	        <br>
@@ -270,13 +118,13 @@ pageEncoding="UTF-8"%>
 	        <br>
         </div>
         <div class="modal-footer">
-          <button type="button" name = "workAgree" onclick="approval()" class="btn btn-info" data-dismiss="modal">승인</button> <!--  승인 버튼  -->
+          <button type="button" class="btn btn-info" data-dismiss="modal">승인</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
         </div>
       </div>
     </div>
 </div>  
-  <!-- 기각 모달 -->
+  <!--승인모달  -->
   <div class="modal fade" id="myModal1" role="dialog">
     <div class="modal-dialog">
       <!-- Modal content-->
@@ -287,19 +135,15 @@ pageEncoding="UTF-8"%>
         </div>
         <div class="modal-body">
 		<h6>기각사유</h6>
-		<form id="f_gigag">
 		<div class="row">
 		<div class="col-12" style="margin-top:12px;">
-		 <textarea id="text_gigag" name="ap_reason" class="form-control" style="width:100%;"id="exampleFormControlTextarea1" rows="10"></textarea>
+		 <textarea class="form-control" style="width:100%;"id="exampleFormControlTextarea1" rows="10"></textarea>
 		 <br>
 		 <br>
 		</div>
         </div>
-        <input name="ap_no" type="hidden" value=<%=ap_no%> />
-        </form>
         <div class="modal-footer">
-          <!--  기각 버튼  -->
-          <button type="button" onclick="dismissal()" class="btn btn-info " data-dismiss="modal">기각</button>	 
+          <button type="button" class="btn btn-info " data-dismiss="modal">기각</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
         </div>
       </div>

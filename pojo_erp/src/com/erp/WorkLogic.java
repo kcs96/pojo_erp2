@@ -95,7 +95,6 @@ public class WorkLogic {
 		//결재 승인 이벤트 insert here
 		logger.info("Logic : 결재 승인 호출 성공");
 		String result = workDao.workAgree(pMap);
-		logger.info("Logic result : "+ result);
 		return result;
 	}
 	public String workDeny(Map<String, Object> pMap) {
@@ -224,22 +223,6 @@ public class WorkLogic {
 		List<Map<String,Object>> rlist = null;
 		rlist = workDao.outsideSEL(pMap);
 		return rlist;
-	}
-	
-	
-	//	ModelAndView 영역
-	public List<Map<String, Object>> app_get(Map<String, Object> pMap) {
-		logger.info("Logic :app_get 호출 성공");
-		List<Map<String,Object>> applist = new ArrayList<>();
-		applist = workDao.app_get(pMap);
-		return applist;
-	}
-	
-	public List<Map<String, Object>> app_set(Map<String, Object> pMap) {
-		logger.info("Logic :app_set 호출 성공");
-		List<Map<String,Object>> applist = null;
-		applist = workDao.app_set(pMap);
-		return applist;
 	}
 	
 

@@ -152,6 +152,7 @@ public class WorkDao {
 	    	logger.info("Dao workSelEmp : " + rlist.size());
 		return rlist;
 	}
+	
 	public int workUpdEmp(Map<String, Object> pMap) {
 		int result = 0;
 		result = sqlSes.update("workUpdEmp",pMap);
@@ -262,22 +263,4 @@ public class WorkDao {
 		rlist = sqlSes.selectList("sel_empDispatch",pMap);
 		return rlist;
 	}
-	
-	
-	//ModelAndView 영역 
-	public List<Map<String, Object>> app_get(Map<String, Object> pMap) {
-		// TODO Auto-generated method stub
-		logger.info("DAO : appGet호출");
-		List<Map<String,Object>> applist = new ArrayList<>();
-		applist = sqlSes.selectList("app_getList",pMap);
-		logger.info("applist : "+ applist);
-		return applist;
-	}
-	public List<Map<String, Object>> app_set(Map<String, Object> pMap) {
-		logger.info("DAO : appSet호출");
-		List<Map<String,Object>> applist = null;
-		applist = sqlSes.selectList("app_setList",pMap);
-		return applist;
-	}
-	
 }

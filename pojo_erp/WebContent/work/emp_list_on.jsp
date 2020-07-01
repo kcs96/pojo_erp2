@@ -6,17 +6,17 @@
 	   class="table table-hover"
 	   data-search="true" 
 	   data-pagination="true"
-	   data-url="../minkyu/jsonEmpList.json">
+	   data-url="./emp_list_on.erp?cud=empList">
 	<thead class="thead-light">
 		<tr>
 			<th data-field="EMP_NO">사원번호</th>
 			<th data-field="EMP_NAME">사원이름</th>
-			<th data-field="EMP_RESNUM">부서</th>
+			<th data-field="DEPT_NAME">부서</th>
 			<th data-field="EMP_POSITION">직급</th>
 			<th data-field="EMP_EMAIL">이메일</th>
 			<th data-field="EMP_PHONE">핸드폰</th>
 			<th data-field="EMP_STATE">근무상태</th>
-			<th data-field="OPERATE" data-formatter="operateFormatter" data-events="operateEvents" width="300">정보수정</th>
+			<th data-field="OPERATE" data-formatter="operateFormatter" data-events="operateEvents" width="300" >정보수정</th>
 		</tr>
 	</thead>
 </table>
@@ -35,27 +35,34 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
 
+
+
+
+
+
+
 	<!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script> -->
 
 	<!-- 수정버튼 클릭햇을때 테이블 정보불러오기 -->
-<!-- 	<script>
+ 	<!-- 
+ 	<script>
  	var $table = $("#table");
 
 		function operateFormatter(value, row) {
 			return [
 			  '<a class="button" href="javascript:void(0)" title="button">',
-			  '<button type="button" class="btn btn-info" style="border: 1px solid white; border-radius: 10px; font-size:12px" align="center" >수정</button>',
+			  '<button type="button" class="btn btn-info" style="border: 1px solid white; border-radius: 10px; font-size:12px" align="center" onclick="workSelectEmp()" >수정</button>',
 			  "</a>  ",
 			].join("");
 		}
-
-	/* window.operateEvents = {
+	window.operateEvents = {
 		"click .button": function (e, value, row, index) {
 			//alert("You click like action, row: " + JSON.stringify(row));
 			location.href = "./emp_edit_all.jsp?id=" + row.emp_no;  //파라미터로 user id 넘겨주는것
 		}, 
-	};*/
-    </script>  -->
+	};
+    </script>
+	 -->
 
 	<!-- 탑메뉴 사용 -->
 	<!-- <script src="../common/js/topNav.js"></script> -->
@@ -64,4 +71,5 @@
 
 	<script src="../common/scripts.js"></script>
 	<!-- 버거 메뉴 활성화 -->
+
 	

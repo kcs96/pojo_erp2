@@ -59,7 +59,7 @@ public class EmpLogic {
 	}
 
 	public int myUpdImformation(Map<String, Object> pMap) {
-		//내 정보 수정
+		//내 정보 수정     저장 버튼
 		logger.info("EmpLogic => 내정보 수정");
 		result = empDao.myUpdImformation(pMap);
 		return result;
@@ -68,7 +68,7 @@ public class EmpLogic {
 	public List<Map<String, Object>> myInfoMap(Map<String, Object> pMap) {
 		//내 정보 리스트
 		logger.info("EmpLogic => 내 정보 리스트");
-		List<Map<String, Object>> rList= new ArrayList<Map<String,Object>>();
+		List<Map<String, Object>> rList= new ArrayList<>();
 		rList = empDao.myInfoMap(pMap);
 		return rList;
 	}

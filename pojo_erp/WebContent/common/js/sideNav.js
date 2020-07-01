@@ -155,12 +155,13 @@ const avatarBoxButtonApi = [
     text: "정보수정",
     classname: "avatar_button btn btn-info",
     id: "avatarBoxButton_edit",
-    ref: "http://localhost:5000/erpProject_final/main/emp_edit.jsp",
+    ref: "./emp_edit.erp",
   },
   {
     text: "로그아웃",
     classname: "avatar_button btn btn-danger",
     id: "avatarBoxButton_logout",
+    ref: "../main/logout.jsp"
   },
 ];
 
