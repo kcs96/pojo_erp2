@@ -45,18 +45,19 @@ public class EmpDao {
 		return inoutList;
 	}
 
-	public List<Map<String, Object>> todayList(Map<String, Object> pMap) {
-		//오늘 일정 얻어오기
-		logger.info("EmpDao() => 메인페이지 오늘 일정 정보 담기"); 
-		List<Map<String, Object>> todayList = new ArrayList<>();
-		sqlSec.selectList("proc_myschedule",pMap);
-		todayList=(List<Map<String,Object>>)pMap.get("key");
-		return todayList;
-	}
+	
+//	  public List<Map<String, Object>> todayList(Map<String, Object> pMap) {
+//		  //오늘일정 얻어오기 
+//	 logger.info("EmpDao() => 메인페이지 일정 정보"); 
+//	 List<Map<String,Object>> todayList = new ArrayList<>();
+//	  sqlSec.selectList("proc_taskTime",pMap);
+//	  todayList=(List<Map<String,Object>>)pMap.get("key"); 
+//	  return todayList; }
+	 
 	
 	public List<Map<String, Object>> commuteList(Map<String, Object> pMap) {
 		//오늘 일정 얻어오기
-		logger.info("EmpDao() => 메인페이지 오늘 일정 정보 담기"); 
+		logger.info("EmpDao() => 오늘 업무시간 리스트"); 
 		List<Map<String, Object>> todayTaskList = new ArrayList<>();
 		sqlSec.selectList("proc_taskTime",pMap);
 		todayTaskList=(List<Map<String,Object>>)pMap.get("key");
@@ -68,8 +69,7 @@ public class EmpDao {
 		logger.info("EmpDao() => 메인페이지 회의실 예약 정보 담기"); 
 		List<Map<String, Object>> roomList = new ArrayList<>();
 		sqlSec.selectList("proc_todaycfr",pMap);
-		roomList=(List<Map<String,Object>>)pMap.get("key");
-
+		roomList = (List<Map<String,Object>>) pMap.get("key");
 		return roomList;
 	}
 

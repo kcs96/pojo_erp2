@@ -104,7 +104,7 @@ pageEncoding="UTF-8"%>
 									</tr>
 									<tr>
 										<th>사원명</th>
-										<td><input id="emp_name" type="text" class="form-control" name="EMP_NAME" value="<%= rMap.get("EMP_NAME") %>" ></td>
+										<td><input id="emp_name" type="text" class="form-control" name="EMP_NAME" value="<%= rMap.get("username") %>" ></td>
 									</tr>
 									<tr>
 										<th>패스워드</th>

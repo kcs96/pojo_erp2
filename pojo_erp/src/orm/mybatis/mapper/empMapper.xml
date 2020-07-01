@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="orm.mybatis.mapper.empMapper">
 	<resultMap id="bbmap" type="java.util.Map"/>
+	 
+	<resultMap id="testMap" type="map">
+		<result property="filedata" column="FILEDATA" jdbcType="BLOB"/>
+	</resultMap>
 	
 <!--=====================================로그인 화면 ======================================-->
 	<!-- 로그인 프로시저  -->
-	<select id="proc_empLogin" parameterType="map" statementType="CALLABLE">
+	<select id="proc_empLogin" parameterType="map" statementType="CALLABLE" resultMap="testMap">
 		{call proc_empLogin(#{emp_no},#{emp_pw}
 										   ,#{key,jdbcType=CURSOR
 		                                   , mode=OUT

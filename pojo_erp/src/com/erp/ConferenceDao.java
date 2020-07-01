@@ -29,7 +29,7 @@ public class ConferenceDao {
 
 	public String conUpdRoom(Map<String, Object> pMap) {
 		//회의실 예약 수정 버튼 클릭
-		logger.info("ConferenceDao() => 회의실 예약"); 
+		logger.info("ConferenceDao() => 회의실 수정"); 
 		sqlSec.selectOne("proc_conResUpd",pMap);
 		String result=pMap.get("msg").toString();
 		return result;
@@ -39,6 +39,7 @@ public class ConferenceDao {
 		//회의실 삭제 이벤트
 		logger.info("ConferenceDao() => 회의실 삭제"); 
 		int result = sqlSec.delete("conResDel",pMap);
+		sqlSec.commit();
 		return result;
 	}
 

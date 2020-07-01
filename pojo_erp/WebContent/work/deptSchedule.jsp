@@ -1,5 +1,16 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%
+    	String emp_name = (String)session.getAttribute("emp_name");
+     	List<Map<String,Object>> deptEmpList = (List<Map<String,Object>>) request.getAttribute("deptEmpList");
+     	if(deptEmpList == null){
+     		deptEmpList = new ArrayList<>();
+     	}
+    %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -8,10 +19,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Dept Schedules</title>
     <%@include file ="../common/fontAwesomeUI.jsp" %>
-    <link rel=" shortcut icon" href="../mihyun_cal/image/favicon.ico">
+    <!-- <link rel=" shortcut icon" href="../mihyun_cal/image/favicon.ico"> -->
 
     <link rel="stylesheet" href="../mihyun_cal/vendor/css/fullcalendar.min2.css" />
-    <link rel="stylesheet" href="../mihyun_cal/vendor/css/bootstrap.min2.css">
+    <link rel="stylesheet" href="../mihyun_cal/vendor/css/bootstrap.min2.css?after">
     <link rel="stylesheet" href='../mihyun_cal/vendor/css/select2.min.css' />
     <link rel="stylesheet" href='../mihyun_cal/vendor/css/bootstrap-datetimepicker.min.css' />
 
@@ -36,10 +47,10 @@
         <div id="contextMenu" class="dropdown clearfix">
             <ul class="dropdown-menu dropNewEvent" role="menu" aria-labelledby="dropdownMenu"
                 style="display:block;position:static;margin-bottom:5px;">
-                <li><a tabindex="-1" href="#">일정1</a></li>
-                <li><a tabindex="-1" href="#">일정2</a></li>
-                <li><a tabindex="-1" href="#">일정3</a></li>
-                <li><a tabindex="-1" href="#">일정4</a></li>
+                <li><a tabindex="-1" href="#">부서일정1</a></li>
+                <li><a tabindex="-1" href="#">부서일정2</a></li>
+                <li><a tabindex="-1" href="#">부서일정3</a></li>
+                <li><a tabindex="-1" href="#">부서일정4</a></li>
                 <li class="divider"></li>
                 <li><a tabindex="-1" href="#" data-role="close">Close</a></li>
             </ul>
@@ -77,12 +88,12 @@
                             </div>
                         </div>
 
-                        <div class="row">
+<%--                         <div class="row">
                             <div class="col-xs-12">
                                 <label class="col-xs-4" for="edit-username">등록자</label>
-                                <input class="inputModal" type="text" name="edit-username" id="edit-username" required="required" />
-                            </div>
-                        </div>
+                                <input class="inputModal" type="text" name="edit-username" id="edit-username" value="<%=emp_name %>" disabled />
+                            </div> 
+                        </div>--%>
                         <div class="row">
                             <div class="col-xs-12">
                                 <label class="col-xs-4" for="edit-start">시작</label>
@@ -99,10 +110,10 @@
                             <div class="col-xs-12">
                                 <label class="col-xs-4" for="edit-type">일정</label>
                                 <select class="inputModal" type="text" name="edit-type" id="edit-type">
-                                    <option value="일정1">일정1</option>
-                                    <option value="일정2">일정2</option>
-                                    <option value="일정3">일정3</option>
-                                    <option value="일정4">일정4</option>
+                                    <option value="부서일정1">부서일정1</option>
+                                    <option value="부서일정2">부서일정2</option>
+                                    <option value="부서일정3">부서일정3</option>
+                                    <option value="부서일정4">부서일정4</option>
                                 </select>
                             </div>
                         </div>
@@ -110,15 +121,15 @@
                             <div class="col-xs-12">
                                 <label class="col-xs-4" for="edit-color">색상</label>
                                 <select class="inputModal" name="color" id="edit-color">
-                                    <option value="#D25565" style="color:#D25565;">빨간색</option>
-                                    <option value="#9775fa" style="color:#9775fa;">보라색</option>
-                                    <option value="#ffa94d" style="color:#ffa94d;">주황색</option>
-                                    <option value="#74c0fc" style="color:#74c0fc;">파란색</option>
-                                    <option value="#f06595" style="color:#f06595;">핑크색</option>
-                                    <option value="#63e6be" style="color:#63e6be;">연두색</option>
-                                    <option value="#a9e34b" style="color:#a9e34b;">초록색</option>
-                                    <option value="#4d638c" style="color:#4d638c;">남색</option>
-                                    <option value="#495057" style="color:#495057;">검정색</option>
+                                    <option value="D25565" style="color:#D25565;">빨간색</option>
+                                    <option value="9775fa" style="color:#9775fa;">보라색</option>
+                                    <option value="ffa94d" style="color:#ffa94d;">주황색</option>
+                                    <option value="74c0fc" style="color:#74c0fc;">파란색</option>
+                                    <option value="f06595" style="color:#f06595;">핑크색</option>
+                                    <option value="63e6be" style="color:#63e6be;">연두색</option>
+                                    <option value="a9e34b" style="color:#a9e34b;">초록색</option>
+                                    <option value="4d638c" style="color:#4d638c;">남색</option>
+                                    <option value="495057" style="color:#495057;">검정색</option>
                                 </select>
                             </div>
                         </div> 
@@ -155,18 +166,30 @@
                     <label for="calendar_view">카테고리</label>
                     <div class="input-group">
                         <select class="filter" id="type_filter" multiple="multiple">
-                            <option value="일정1">일정1</option>
-                            <option value="일정2">일정2</option>
-                            <option value="일정3">일정3</option>
-                            <option value="일정4">일정4</option>
+                            <option value="부서일정1">부서일정1</option>
+                            <option value="부서일정2">부서일정2</option>
+                            <option value="부서일정3">부서일정3</option>
+                            <option value="부서일정4">부서일정4</option>
                         </select>
                     </div>
                 </div>
 
-                <div class="col-lg-6">
+                 <div class="col-lg-6">
                     <label for="calendar_view">등록자별</label>
                     <div class="input-group">
-                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="정연"
+                    <%
+                 	if(deptEmpList.size()>0){
+                 		Map<String,Object> rmap = null;
+                 		for(int i = 0; i < deptEmpList.size(); i++){
+            				rmap = deptEmpList.get(i);
+                    %>
+                    <label class="checkbox-inline"><input class='filter' type="checkbox" value="<%=rmap.get("DEPT_EMP") %>"
+                    checked><%=rmap.get("DEPT_EMP") %></label>
+                    <%
+                 		}
+                 	}
+                    %> 
+                      <!--   <label class="checkbox-inline"><input class='filter' type="checkbox" value="정연"
                                 checked>정연</label>
                         <label class="checkbox-inline"><input class='filter' type="checkbox" value="다현"
                                 checked>다현</label>
@@ -175,9 +198,9 @@
                         <label class="checkbox-inline"><input class='filter' type="checkbox" value="나연"
                                 checked>나연</label>
                         <label class="checkbox-inline"><input class='filter' type="checkbox" value="지효"
-                                checked>지효</label>
-                    </div>
-                </div> 
+                                checked>지효</label> -->
+                  <!--   </div> -->
+                <!-- </div>  -->
 
             </div>
         </div>

@@ -9,7 +9,7 @@ pageEncoding="UTF-8"%>
 							<thead class="thead-light">
 								<tr>
 									<th data-field="EMP_NO">사원번호</th>
-									<th data-field="EMP_NAME">사원이름</th>
+									<th data-field="username">사원이름</th>
 									<th data-field="DEPT_NAME">부서</th>
 									<th data-field="EMP_POSITION">직급</th>
 									<th data-field="EMP_PHONE">핸드폰</th>

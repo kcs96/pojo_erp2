@@ -224,6 +224,12 @@ public class WorkLogic {
 		rlist = workDao.outsideSEL(pMap);
 		return rlist;
 	}
+	public List<Map<String, Object>> deptEmp(Map<String, Object> pMap) {
+		logger.info("Logic : 부서 일정 부서사원이름 호출 성공");
+		List<Map<String,Object>> rlist = new ArrayList<Map<String,Object>>();
+		rlist = workDao.deptEmp(pMap);
+		return rlist;
+	}
 	
 
 

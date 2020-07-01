@@ -1,5 +1,17 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+<%
+	String emp_name = (String)session.getAttribute("emp_name");
+	String dept_name = (String)session.getAttribute("dept_name");
+	List<Map<String, Object>> rList = (List<Map<String, Object>>)request.getAttribute("todayInOutList");
+ 	if(rList == null){
+		rList = new ArrayList<>();
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +22,7 @@ pageEncoding="UTF-8"%>
 <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->  
 <!--관리자 로그에 필요한 코드 시작=================================================================================-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css" />
 <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"rel="stylesheet" crossorigin="anonymous" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous" ></script>
 <link href="../common/main.css" rel="stylesheet" />
@@ -26,8 +39,14 @@ pageEncoding="UTF-8"%>
 	google.charts.setOnLoadCallback(pieDrawChart);
 		 
 	function pieDrawChart() {
+		/* 개인일정 받아오는 프로시저가 뭐지.. 분단위로 주는 프로시저가 안보인다...  */
+		var today = new Date();
+		var yyyy = today.getFullYear().toString(); 
+		var month = (today.getMonth()+1).toString();  
+		var date = today.getDate().toString(); 
+		var msg = yyyy+"-"+month+"-"+date;
 		var jsonData = $.ajax({
-			url: "../mihyun_commute/chartjson.jsp"
+			url: "myScheduleChart.erp?cud=myScheduleChart"
 			,dataType: "json"
 			,async: false
 		}).responseText;
@@ -47,7 +66,7 @@ pageEncoding="UTF-8"%>
 				,pieSliceText: 'label'
 				,pieStartAngle: 180
 				,legend: 'none'
-				, slices: {0: {offset: 0.2}}/* jsonData.length  */
+				//, slices: {0: {offset: 0.2}}/* jsonData.length  */
 		};
 		var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 			chart.draw(pieData, pieOptions);
@@ -60,7 +79,7 @@ pageEncoding="UTF-8"%>
 
     function curvDrawChart() {
 	var jsonData1 = $.ajax({
-				url: "../mihyun_commute/curvchartdata.jsp"
+				url: "weekChart.erp?cud=weekChart"
 				,dataType: "json"
 				,async: false
 	}).responseText;
@@ -91,18 +110,19 @@ pageEncoding="UTF-8"%>
 		var today = new Date();   
 		var  hours = today.getHours(); // 시
 		var minutes = today.getMinutes();  // 분
-		var second  = today.getSeconds();
+		//var second  = today.getSeconds();
 		hours = hours < 10 ? '0'+hours : hours;
 		minutes = minutes < 10 ? '0'+minutes : minutes;
-		second = second < 10 ? '0'+second : second;
-		alert(hours+ ':' + minutes + ':' +second);
-		var msg = hours+ ':' + minutes + ':' +second;
+		//second = second < 10 ? '0'+second : second;
+		alert(hours+ ':' + minutes);
+		var msg = hours+ ':' + minutes;
 		if(goText == "-"){
 			$("#go").text(msg);
 			$.ajax({
-				url:"?xxx="+msg,
+				url:"myGoWork.erp",
 				success:function(data){
-				alert("업데이트 성공"+data);
+					alert("업데이트 결과"+data);
+					alert("출 근 성 공");
 				}
 			});
      	}else{
@@ -116,18 +136,21 @@ pageEncoding="UTF-8"%>
 		var today = new Date();
 		var hours = today.getHours(); // 시
 		var minutes = today.getMinutes(); // 분
-		var second = today.getSeconds();
-		hours = hours < 10 ? '0' + hours : hours;
-		minutes = minutes < 10 ? '0' + minutes : minutes;
-		second = second < 10 ? '0' + second : second;
-		alert(hours + ':' + minutes + ':' + second);
-		var msg = hours + ':' + minutes + ':' + second;
+		//var second = today.getSeconds();
+		hours = hours < 10 ? '0'+hours : hours;
+		minutes = minutes < 10 ? '0'+minutes : minutes;
+		//second = second < 10 ? '0'+second : second;
+		alert(hours+ ':' + minutes);
+		var msg = hours+ ':' + minutes;
 		if (outText == "-") {
 			$("#out").text(msg);
 			$.ajax({
-				url : "?xxx=" + msg,
+				url : "myGoOut.erp",
 				success : function(data) {
 					alert("업데이트 성공" + data);
+					if(data != null){
+						alert("출근 성공")
+					}
 				}
 			});
 		} else {
@@ -141,18 +164,18 @@ pageEncoding="UTF-8"%>
 		var today = new Date();
 		var hours = today.getHours(); // 시
 		var minutes = today.getMinutes(); // 분
-		var second = today.getSeconds();
-		hours = hours < 10 ? '0' + hours : hours;
-		minutes = minutes < 10 ? '0' + minutes : minutes;
-		second = second < 10 ? '0' + second : second;
-		alert(hours + ':' + minutes + ':' + second);
-		var msg = hours + ':' + minutes + ':' + second;
+		//var second = today.getSeconds();
+		hours = hours < 10 ? '0'+hours : hours;
+		minutes = minutes < 10 ? '0'+minutes : minutes;
+		//second = second < 10 ? '0'+second : second;
+		alert(hours+ ':' + minutes);
+		var msg = hours+ ':' + minutes;
 		var outText = $("#out").text();
 		alert(outText + " outText");
 		if (outText != "-") {
 			$("#comeBack").text(msg);
 			$.ajax({
-				url : "?xxx=" + msg,
+				url : "myComBack.erp",
 				success : function(data) {
 					alert("업데이트 성공" + data);
 				}
@@ -168,17 +191,17 @@ pageEncoding="UTF-8"%>
 		var today = new Date();
 		var hours = today.getHours(); // 시
 		var minutes = today.getMinutes(); // 분
-		var second = today.getSeconds();
-		hours = hours < 10 ? '0' + hours : hours;
-		minutes = minutes < 10 ? '0' + minutes : minutes;
-		second = second < 10 ? '0' + second : second;
-		alert(hours + ':' + minutes + ':' + second);
-		var msg = hours + ':' + minutes + ':' + second;
+		//var second = today.getSeconds();
+		hours = hours < 10 ? '0'+hours : hours;
+		minutes = minutes < 10 ? '0'+minutes : minutes;
+		//second = second < 10 ? '0'+second : second;
+		alert(hours+ ':' + minutes);
+		var msg = hours+ ':' + minutes;
 
 		if (leaveText == "-") {
 			$("#leave").text(msg);
 			$.ajax({
-				url : "?xxx=" + msg,
+				url : "myGoHome.erp",
 				success : function(data) {
 					alert("업데이트 성공" + data);
 				}
@@ -227,20 +250,34 @@ pageEncoding="UTF-8"%>
 									<th scope="col" style="text-align: center;">퇴근</th>
 									<th scope="col" style="text-align: center;">외출</th>
 									<th scope="col" style="text-align: center;">복귀</th>
-									<th scope="col" style="text-align: center;">병가</th>
 									<th scope="col" style="text-align: center;">휴가</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr >
-									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;">-</td>
-									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;">-</td>
+									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;"><%=dept_name %></td>
+									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;"><%=emp_name %></td>
+								<%
+								if(rList.size() == 0){
+								%>
 									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;" id="go">-</td>
 									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;" id="leave">-</td>
 									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;" id="out">-</td>
 									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;" id="comeBack">-</td>
 									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;">-</td>
+									<%
+								}
+								else if(rList.size() > 0){
+									Map<String, Object> rMap = rList.get(0);
+%>
+									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;" id="go"><%=rMap.get("CM_GOTOWORK") %></td>
+									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;" id="leave"><%=rMap.get("CM_GOTOHOME") %></td>
+									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;" id="out"><%=rMap.get("CM_OUTTIME")%></td>
+									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;" id="comeBack"><%=rMap.get("CM_COMEBACK")%></td>
 									<td scope="col" style="text-align: center; font-weight:bold; font-size: 20px; padding-top: 20px;">-</td>
+								<%
+	}
+								%>
 								</tr>
 							</tbody>
 						</table>
@@ -274,7 +311,7 @@ pageEncoding="UTF-8"%>
 <script src="../common/js/sideNav.js"></script>
 <!-- 버거 메뉴 활성화 -->
 
- <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+ <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script> 
 
 <script src="../common/scripts.js"></script>
 </body>

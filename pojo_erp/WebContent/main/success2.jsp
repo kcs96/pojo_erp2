@@ -9,7 +9,7 @@
 <body>
 <script>
 	alert("저장되었습니다.");
-	location.href="./main.jsp";
+	location.href="./login.jsp";
 </script>
 </body>
 </html>

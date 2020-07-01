@@ -58,13 +58,22 @@ public class MyServiceDao {
 		return rList;
 	}
 
-	public List<Map<String, Object>> mySchedule(Map<String, Object> pMap) {
+	public List<Map<String, Object>> myScheduleChart(Map<String, Object> pMap) {
 		//내 일정 관리  이벤트
 		logger.info("MyServiceDao => 내 일정 관리 호출"); 
 		List<Map<String, Object>> rList = new ArrayList<>();
-		sqlSec.selectOne("proc_mySdList",pMap);
+		sqlSec.selectOne("proc_myschedulechart",pMap);
 		rList= (List<Map<String, Object>>)pMap.get("key");
 		return rList;
+	}
+	
+	public List<Map<String, Object>> mySchedule(Map<String, Object> pMap) {
+			//내 일정 관리  이벤트
+			logger.info("MyServiceDao => 내 일정 관리 호출"); 
+			List<Map<String, Object>> rList = new ArrayList<>();
+			sqlSec.selectOne("proc_mySdList",pMap);
+			rList= (List<Map<String, Object>>)pMap.get("key");
+			return rList;
 	}
 	public String myGoWork(Map<String, Object> pMap) {
 		//출근 버튼 이벤트
@@ -124,6 +133,7 @@ public class MyServiceDao {
 		//일정삭제 버튼 이벤트
 		logger.info("MyServiceDao => 개인 일정 삭제 호출"); 
 		result=sqlSec.delete("my_sdDel",pMap);
+		sqlSec.commit();
 		return result;
 	}
 

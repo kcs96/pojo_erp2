@@ -24,10 +24,7 @@ audio, canvas, progress, video {
 	vertical-align: baseline
 }
 
-audio
-:not
- 
-(
+audio:not(
 [
 controls
 ]
@@ -40,11 +37,7 @@ none
 ;
 
 	
-height
-:
- 
-0
-}
+height:0}
 [hidden], template {
 	display: none
 }
@@ -103,9 +96,7 @@ img {
 }
 
 svg
-:not
- 
-(
+:not(
 :root
  
 ){
@@ -1371,7 +1362,7 @@ html {
 
 body {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 14px;
+	font-size: 15px;
 	line-height: 1.42857143;
 	color: #333;
 	background-color: #fff
@@ -3549,7 +3540,7 @@ a.btn.disabled, fieldset[disabled] a.btn {
 
 .btn-info {
 	color: #fff;
-	background-color: #5bc0de;
+	background-color: #17a2b8;
 	border-color: #46b8da
 }
 
@@ -3652,7 +3643,7 @@ a.btn.disabled, fieldset[disabled] a.btn {
 
 .btn-danger {
 	color: #fff;
-	background-color: #d9534f;
+	background-color: #dc3545;
 	border-color: #d43f3a
 }
 
@@ -4061,30 +4052,16 @@ border-bottom-right-radius
 >
 .btn
 :last-child
-:not
- 
-(
+:not(
 :first-child
  
 ),
 .btn-group
 >
 .dropdown-toggle
-:not
-
-	
-(
-:first-child
- 
-){
-border-top-left-radius
-:
- 
-0;
-border-bottom-left-radius
-:
- 
-0
+:not(:first-child){
+border-top-left-radius:0;
+border-bottom-left-radius:0
 }
 .btn-group>.btn-group {
 	float: left
@@ -4097,7 +4074,7 @@ border-bottom-left-radius
 .btn-group>.btn-group:first-child:not (:last-child )>.btn:last-child,
 	.btn-group>.btn-group:first-child:not (:last-child )>.dropdown-toggle {
 	border-top-right-radius: 0;
-	border-bottom-right-radius: 0
+	border-bottom-right-radius : 0
 }
 
 .btn-group>.btn-group:last-child:not (:first-child )>.btn:first-child {
@@ -4786,13 +4763,13 @@ border-bottom-right-radius
 .navbar {
 	position: relative;
 	min-height: 50px;
-	margin-bottom: 20px;
-	border: 1px solid transparent
+	/* margin-bottom: 20px; */
+	/* border: 1px solid transparent */
 }
 
 @media ( min-width :768px) {
 	.navbar {
-		border-radius: 4px
+		/* border-radius: 4px */
 	}
 }
 
