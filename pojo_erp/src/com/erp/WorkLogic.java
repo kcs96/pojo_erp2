@@ -244,6 +244,12 @@ public class WorkLogic {
 		applist = workDao.app_set(pMap);
 		return applist;
 	}
+	//결재자 순서대로 +1 
+	public int getSeqAr() {
+		int seq_ar = 0;
+		seq_ar = workDao.getSeqAr();
+		return seq_ar;
+	}
 	
 
 

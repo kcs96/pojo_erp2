@@ -302,7 +302,7 @@ public class MyServiceController implements Controller {
 			List<Map<String,Object>> allPayList = myServiceLogic.allPay(pMap);
 			System.out.println("전체급여 조회  => "+allPayList.size());
 			req.setAttribute("allPayList",allPayList );
-			path="forward:empSal.jsp";
+			path="forward:../myService/empSal.jsp";
 		}
 //		else if("mySchedule".equals(requestName)) {
 //			//개인일정 insert here

@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%
+		String s_empno = "";
+		String s_ename = "";
+		if(session.getAttribute("emp_no")!=null){
+			s_ename = session.getAttribute("emp_name").toString();
+			s_empno = session.getAttribute("emp_no").toString();
+			
+		}
+		//out.print(s_empno);
+	%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,8 +34,72 @@
 
 <title>2RP PROGRAM</title>
 <script type="text/javascript">
+		var to = new Date(); 
+		var year = to.getFullYear().toString(); // 년도
+		var month = (to.getMonth() + 1).toString();  // 월
+		var date = to.getDate().toString();  // 날짜
+		if(month.length==1){//길이 11이면 2개  
+			month = "0"+month;
+		}
+		if(date.length==1){
+			date = "0"+date;
+		}///
+		var dates3 = year+'-'+month+'-'+date;
+		var imsi;
+		var g_names=[];//배열 변수
+		var g_position =[];//배열 변수
+		var g_no = [];
+		function appov(){ //모달에 있는 확인 버튼을 눌렀을대 onclick이벤트
+		var num = $('input:checkbox[name="selectItemName"]:checked').length;//체크된 아이들 갯수 ex)2개 선택했으면 2가뜸
+		//alert("num:" +num);
+		$("#approvalName").html("");//span 태그에 있는 값 지우기 //하는이유 다시 결재창 버튼을 눌렀을때 span태그에있는 값을 초기화
+		if(num>0){//span 태그에 선택한 값 넣어주기 num- 2개 선택하면 0보다 2가 더크면 for문을돌려라  i가 0부터시작인까 0,1로올라간다.
+			for(var i=0;i<g_names.length;i++) {//for문을 돌리면 var 0,1 g_names길이는 3이뜰꺼임 
+				if(i==(g_names.length-1)){//i가 2니까 g_names가 3이면 -1을해주면 2==2가 된다 , 를 없애주기 위해서 쓴다.(길이)중요 
+					$("#approvalName").append("<a href='#' onClick='del(this)'>"+g_position[i]+"</a>");
+				//$("#approvalName").append("<a href='#' onClick='del(this)'>"+g_names[i]+"("+g_position[i]+")"+"<input type='text'>"+g_no[i]+"</input>"+"</a>");
+				//append()먼저 a href='#'-는 아무것도 안주기위해서 #해주고 클릭버튼을눌렀을때 del(this)파라미터를 넘겨준다 넘겨주면 this는 이름이랑 직급이뜬다.
+				//g_names[i]는 이름이 뜨고 +(직급)이뜨고 +</a>감싸줘야지 한사람당씩 누를수있게 보여진다. 
+				//만약 3-1이면 approval
+				/* <input type='hidden' value='1'></input>
+					"<input type='hidden' value="+"'"+g_no[i]+"'"+"></input>" */
+				}else{
+					$("#approvalName").append("<a href='#' onClick='del(this)'>"+g_position[i]+"</a>"+",");
+				//$("#approvalName").append("<a href='#' onClick='del(this)'>"+g_names[i]+"("+g_position[i]+")"+"<input type='text'>"+g_no[i]+"</input>"+"</a>"+",");
+				}
+			}
+		}
+	}
+		//del(el)파라미터 써주고 
+	function del(el){
+		alert("클릭");//
+		var imsi = $(el).text();//var imsi로 만들어줘서 $(el).text파라미터값만 받아올때 쓰는건가봄
+		alert(imsi+"삭제");
+		$("#approvalName").html("");//클릭을하면 초기화
+		for(var i=0;i<g_position.length;i++) {
+			var val = g_position[i];
+			//alert("val"+val);
+			if(imsi!=val){
+				if(i==(g_names.length-1)){
+					$("#approvalName").append("<a href='#' onClick='del(this)'>"+g_position[i]+"</a>");
+				}else{
+					$("#approvalName").append("<a href='#' onClick='del(this)'>"+g_position[i]+"</a>"+",");
+				}
+			}else{
+				g_position.splice(i, 1)
+				//alert(i+"삭제");
+				i--;//배열에서 하나 요소를 삭제 했으므로 인덱스 값이 하나씩 줄어든다! 따라서 i를 하나 빼준다!
+			}
+		}
+	}
+	function test_modal(){
+		alert("결재하기?");
+		g_names=[];//배열에 저장된 값들 초기화하기
+		g_position =[];
+		$("input[type=checkbox]").prop("checked", false);
+	}
 	function test(res) {
-		var imsi = res;
+		 imsi = res;
 		var url;
 		alert("res:" + imsi);
 		if (res == "휴가양식") {
@@ -35,7 +109,7 @@
 		} else if (res == "파견양식") {
 			url = "../sanghyun2/paguns.jsp"
 		} else if (res == "사직양식") {
-			url = "sagi.jsp"
+			url = "../sanghyun2/sagi.jsp"
 		}
 		$.ajax({
 			url : url,
@@ -44,6 +118,91 @@
 			}
 		});
 
+	}
+ 	function send() {
+		alert("보냄");
+		$("#approveModal").modal({
+			show:false
+		}); 
+		//부서이름
+			var ap_dname= $("#ap_dname").val();
+		if(ap_dname == null)ap_dname = '';
+			alert("ap_dname2ss:" + ap_dname);
+		//연락처
+ 		var ap_contact = $("#ap_contact").val();
+		if(ap_contact ==null)ap_contact='';
+		var ap_sign = $("#emp_name").text();
+		var fr_no = $("#i_ap_instructions").val();
+ 		var ap_reporter = $("#ap_reporter").val();
+ 		//파견일자,휴가일자,
+		var ap_prosessingdate =$("#ap_prosessingdate").val();
+		if(ap_prosessingdate == null) ap_prosessingdate ='2018-05-03';
+		var ap_content =$("#ap_content").val();
+ 		var ap_appdate =$("#sdate").text();
+ 		//비고
+		var ap_bego = $("#ap_bego").val();
+		if(ap_bego ==null) ap_bego='';
+		var ap_instructions = $("#ap_instructions").val();
+		if(ap_instructions==null) ap_instructions = '';
+		var closedate = $("#ap_closedate").val();
+		var ap_retiredate = $("#ap_retiredate").val();
+		if(ap_retiredate == null) ap_retiredate = '';
+		//일짜른거 
+	      var jbSplit =  closedate.split('일');
+		var num = Number(jbSplit[0]);//0배열을 Number타입으로 바꿈
+		//오늘날짜 @@@@@@@@@@@@@@@@@@@@@
+		var dates1 = year+'-'+month+'-'+date;
+		//오늘날짜 끝@@@@@@@@@@@@@@@@@@@@@
+		//기한날짜@@@@@@@@@@@@@@@@@@
+		to.setDate(to.getDate() +num);
+		year = to.getFullYear().toString(); // 년도
+		month = (to.getMonth() + 1).toString();  // 월
+		date = to.getDate().toString();  // 날짜
+		if(month.length==1){
+			month = "0"+month;
+		}
+		if(date.length==1){
+			date = "0"+date;
+		}
+//alert("222");
+		var ap_closedate = year+'-'+month+'-'+date;
+		var rev_empNo = $("#approvalName").text();//결재자이름
+		alert('rev_empNo' + rev_empNo);
+		//alert("rev_empNo:"+rev_empNo);
+		var arrs = rev_empNo.split(',');
+		//alert("arrs:"+arrs);
+		var app_num = arrs.length;
+		//alert("app_num:"+app_num);
+		var ap_count = 1
+		var ap_title = $("#ap_titles").val();//제목 
+		alert("ap_ti")
+		var ap_empno = $("#emp_no").val();
+
+		
+	location.href="./workAddSendDoc.erp?ap_instructions="
+										+"&fr_no=" + fr_no
+										+"&ap_title="+ap_title
+										+"&ap_reporter="+ap_reporter
+								  		+"&ap_appdate="+ap_appdate
+										+"&ap_closedate="+ap_closedate
+								  		+"&ap_content="+ap_content
+										+"&ap_dname="+ap_dname
+								  		+"&ap_retiredate="+ap_retiredate
+										+"&ap_contact="+ap_contact
+										+"&ap_prosessingdate="+ap_prosessingdate
+								  		+"&ap_bego="+ap_bego
+										+"&ap_sign="+ap_sign
+										+"&rev_empNo="+rev_empNo
+										+"&emp_no=<%= s_empno%>"
+										+"&ap_count="+app_num
+										;
+	}	
+ 	
+	function approval(){
+		alert("승인");
+		$("#approveModal").modal({
+			show:true
+		});
 	}
 </script>
 </head>
@@ -54,71 +213,54 @@
 		<div id="layoutSidenav_content">
 			<main id="input_div">
 				<div id="frame_div" style="border: 1px solid black;">
-					<div id="page_title" style="border-bottom: 2px solid gray; margin: 50px 30px;">
-						<h2>결재신청</h2>
-					</div>
-					<div id="page_contents" style="border: 1px solid black; max-width: 1730px; margin: 10px 100px;">
+					<div id="page_title" style="border-bottom: 2px solid gray; margin: 50px 30px;"><h2>결재 신청</h2></div>
+				<div id="page_contents" style="max-width: 1730px; margin: 10px 100px;">
 						<!-- 컨텐츠 들어갈내용 시작-->
-
 						<div class="row">
-							<div class="col-1"></div>
-							<div class="col-10">
+							<div class="col-12">
+						
 								<table class="table table-bordered">
 									<tbody>
 										<tr>
-											<th scope="row"
-												style="background: #EAEAEA; text-align: center;">문서번호</th>
-											<td>20112344</td>
+											<th scope="row" 
+												style="background: #EAEAEA; width:17%; text-align: center;">문서번호</th>
+											<td style="width:17%;"><span>20112344</span></td>
 											<th style="background: #EAEAEA; text-align: center;">직위
+											</th>
 
 
 											
-											</td>
-											<td>사원</td>
-											<th style="background: #EAEAEA; text-align: center;">보안
-
-
-											
-											</td>
-											<td>일반</td>
+											<td><span>사원</span></td>
+											<th style="background:  #EAEAEA; width:17%; text-align: center;">보안</th>
+											<td style="width:17%;">일반</td>
 										</tr>
 										<tr>
 											<th scope="row"
-												style="background: #EAEAEA; text-align: center;">작성자</th>
-											<td>이상현</td>
-											<th style="background: #EAEAEA; text-align: center;">작성일자
-
-
-											
+												style="background: #EAEAEA; width:17%; text-align: center;">작성자</th>
+											<td style="width:17%;"><span id="emp_name" name="emp_name"><%= s_ename %></span></td>
+											<th style="background: #EAEAEA; text-align: center;">작성일자</th>
+											<td>
+											<span id="sdate" name="sdate"></span>
 											</td>
-											<td>2020-06-21</td>
-											<th style="background: #EAEAEA; text-align: center;">보존기간
-
-
-											
-											</td>
+											<th style="background: #EAEAEA; text-align: center;">보존기간</th>
 											<td>1년</td>
 										</tr>
-										<!-- <tr>
-		      <th scope="row">3</th>
-		      <td >Larry the Bird</td>
-		      <td>@twitter</td>
-		    </tr> -->
 									</tbody>
 								</table>
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-1"></div>
-							<div class="col-10">
+							<div class="col-12">
 								<table class="table table-bordered">
 									<tbody>
+									<tr>
 										<th scope="row"
-											style="width: 200px; padding: 1px; padding-top: 14px; background: #EAEAEA; text-align: center;">제목</th>
+											style=" width:17%; padding: 1px; padding-top: 14px; background: #EAEAEA; text-align: center;">제목</th>
 										<td colspan="6">
-										<input
-											style="width: 100%; height: 100%; border: 0px;" type="text"
-											class="form-control" id="exampleInputEmail1"
+										
+										<input 
+											style="width: 100%;  height: 100%; border: 0px;" type="text"
+											class="ap_instructions-control" name="ap_titles" id="ap_titles"
 											placeholder="제목을 입력하세요."></td>
 										</tr>
 										<!-- 결재자 -->
@@ -126,45 +268,27 @@
 											<th scope="row"
 												style="padding-right: 10px; padding-top: 14px; background: #EAEAEA; text-align: center;">
 												결재자</th>
-											<th style="width: 100px;">
-												<button style="margin-left: 40px;" class="btn btn-info "
-													data-toggle="modal" data-target="#apporve">결재자</button>
+											<th style="width: 17%;">
+												 <button style="margin-left: 40px;" class="btn btn-info "
+													data-toggle="modal" data-target="#apporve" onClick="test_modal()">결재자</button>
 											</th>
-											<td style="width: 250px;" id="rank1">[회사]이길동 사장</td>
-											<td style="width: 250px;" id="rank2">[인사부]홍길동 팀장</td>
-											<td style="width: 250px;" id="rank3">[영업부]올챙이 부장</td>
-											<td style="width: 250px;" id="rank4">[인사부]두꺼비 부장</td>
+											<td colspan="4"style="width:;" id="rank1">
+											<span name="approvalName" id="approvalName"></span>
+											</td>
 										</tr>
 										<tr>
 											<th scope="row"
 												style="background: #EAEAEA; text-align: center;">결재양식</th>
-											<td><select id="i_form" style="margin-left: 25px;">
-													<option value="업무보고서">업무보고서</option>
-													<option value="휴가양식">휴가양식</option>
-													<option value="사직양식">사직양식</option>
-													<option value="파견양식">파견양식</option>
-											</select> <script type="text/javascript">
-												//카테고리가 변할때마다 선택된 값을 test함수에 파라미터로 넘긴다.
-												$("#i_form")
-														.change(
-																function() {
-																	//each문은 for문과 비슷하게 생각하면 된다.
-																	//선택된 텍스트 값을 p_zdo에 저장해 보자.
-																	$(
-																			"#i_form option:selected")
-																			.each(
-																					function() {
-																						var res = $(
-																								this)
-																								.text();//var값을 집어넣으려면 val에다가 넣어야한다. 
-																						//alert("res:" +res);
-																						test(res);// ajax
-
-																					});
-																});
-											</script></td>
-											<th style="background: #EAEAEA; text-align: center;">기한</th>
-											<td colspan="3"><select>
+											<td><select id="i_ap_instructions" name="ap_no" style="margin-left: 25px;">
+													<option value="3">업무보고서</option>
+													<option value="1">휴가양식</option>
+													<option value="2">파견양식</option>
+													<option value="5">사직양식</option>
+											</select>
+											</td>
+											<th style="background: #EAEAEA; width: 17%;text-align: center;">기한</th>
+											<td colspan="3 ">
+											<select id="ap_closedate" name="ap_closedate">
 													<option selected>1일</option>
 													<option>3일</option>
 													<option>5일</option>
@@ -176,65 +300,62 @@
 										</tr>
 									</tbody>
 								</table>
+										
 							</div>
 						</div>
 						<hr style="border: solid 1px black;">
 						<!--***************************양식 뿌려주기  ******************************-->
 						<div class="row">
-							<div class="col-1"></div>
-							<div style="border: 2px solid black; padding-top: 10px;" class="col-9">
-								<button style="float: right;"
-									type="button" class="btn btn-info">인쇄</button>
+							<div style="overflow-x:scroll ; padding-top: 10px;" class="col-12">
+							 <div  style=" border: 2px solid #d2d2d2; ">
+								<!-- <button style="float: right;"
+									type="button" class="btn btn-info" onclick="window.print();">인쇄</button> -->
 								<!-- *****밑에 승인취소버튼 -->
-								<div id="test"></div>
-								<div class="row">
-									<div class="col-5"></div>
-									<div class="col-5" style="align-content: center;">
+								<div id="test">
+								</div>
+								<div class="row" style="text-align: center;">
+									
+									<div class="col" style="text-align: center;">
 										<button
 											type="button" class="btn btn-info btn-lg"
 											data-toggle="modal" data-target="#approveModal">승인</button>
-
 										<button type="button" class="btn btn-info btn-lg"
 											data-toggle="modal"  data-target="#cancle">취소</button>
 										<br> <br>
 									</div>
 								</div>
-
+							 </div>
 							</div>
 						</div>
 					</div>
-
 					<!--****************************신청 취소**************************************  -->
 					<div class="col-1"></div>
-					<!-- 	<!-- 이전꺼 보여주는 거 
-	<div class="row">
-	<div class="col-1"></div>
-	<div class="col-10"></div>
-	</div>
-	<div class="col-1"></div> -->
 				</div>
+		</main>
 		</div>
-		<!-- **********************승인 취소 모달 ********************************** -->
-		<!-- ***************************승인 모달********************************* -->
+		
+	
+<!--*****************************************모달  ****************************************************-->
+<!-- ***************************결재자 모달********************************* -->
 		<div class="modal fade" id="approveModal" role="dialog">
 			<div class="modal-dialog">
-				<!-- Modal content-->
+				Modal content
 				<div class="modal-content">
 					<div class="modal-header">
-						받은 결재
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						받은 결재 
+						<button type="button"data-dismiss="modal">&times;</button>
 					</div>
 					<div class="modal-body">
 						<br> 승인요청 하시겠습니까? <br> <br>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-info"
-							data-dismiss="modal">확인</button>
+							onClick="send()" >확인</button>
 						<button type="button" class="btn btn-secondary " data-dismiss="modal">닫기</button>
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> 
 		<!-- ***************************승인 모달 끝********************************* -->
 		<!-- ***********************************취소모달***************** ******************-->
 		<div class="modal fade" id="cancle" role="dialog">
@@ -258,18 +379,7 @@
 		</div>
 		<!-- ***********************************취소모달 끝***************** ******************-->
 		<!-- **********************승인 취소 모달 끝 ********************************** -->
-
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$.ajax({
-					url : "../sanghyun2/upmo.jsp",
-					success : function(data) {
-						$("#test").html(data);
-					}
-				});
-			});
-		</script>
-		<!--결재자모달  -->
+			<!--결재자모달  -->
 		<div class="modal fade" id="apporve" role="dialog">
 			<div class="modal-dialog modal-lg" style="height: 400px;">
 				<!-- Modal content-->
@@ -288,44 +398,73 @@
 								style="border: 1px solid yellow; margin: 10px 10px;">
 								<div class="toolbar">
 									<button id="addrev" class="btn btn-success"
-										data-dismiss="modal">확인</button>
+										data-dismiss="modal" onclick="appov()">확인</button>
 									<button id="canclerev" class="btn btn-danger" data-dismiss="modal">취소</button>
 								</div>
-								<!-- ========================= 휴지통 테이블 ========================== -->
-								<table id="table" data-toolbar=".toolbar"
+								<!-- ========================= 결재자 테이블 ========================== -->
+								<table id="tb_approval" data-toolbar=".toolbar" data-toggle="table"
 									data-show-columns="true" data-pagination="true"
 									data-search="true" data-advanced-search="true"
 									data-select-item-name="selectItemName"
-									data-url="../sanghyun/member2.json">
+									data-url="approval_send.erp?cud=approval_send">
 									<thead>
 										<tr>	
 											<th data-field="state" data-checkbox="true"></th>
-											<th data-field="app_no" data-sortable="true"
+											<th data-field="EMP_NO" data-sortable="true"
 												data-align="center" data-width="10">사 원 번 호</th>
-											<th data-field="app_name" data-sortable="true">사 원 이 름</th>
-											<th data-field="app_write" data-sortable="true">사 원 부 서</th>
-											<th data-field="app_print" data-align="center"
+											<th data-field="username" data-sortable="true">사 원 이 름</th>
+											<th data-field="DEPT_NAME" data-sortable="true">사 원 부 서</th>
+											<th data-field="EMP_POSITION" data-align="center"
 												data-sortable="true">직 급</th>
 										</tr>
 									</thead>
 								</table>
-								<!-- ======================== 휴지통 테이블 끝 ====================== -->
+								<!-- ======================== 결재자 테이블 끝 ====================== -->
 							</div>
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
-
-
-
 		<!-- 컨텐츠 들어갈내용 끝   -->
 	</div>
-	</div>
-	</main>
-	</div>
-	</div>
+	<!--********************************************  양식****************************************ajax-->
+	 <script type="text/javascript">
+												//카테고리가 변할때마다 선택된 값을 test함수에 파라미터로 넘긴다.
+			$("#i_ap_instructions").change(function() {
+				//each문은 for문과 비슷하게 생각하면 된다.
+				//선택된 텍스트 값을 p_zdo에 저장해 보자.
+				$("#i_ap_instructions option:selected").each(function() {
+					var res = $(this).text();//var값을 집어넣으려면 val에다가 넣어야한다. 
+					//alert("res:" +res);
+					test(res);// ajax
+
+				});
+			});
+		</script>
+	<script type="text/javascript">
+		var temp='';
+		
+			$(document).ready(function() {
+				$.ajax({
+					url : "../sanghyun2/upmo.jsp",
+					success : function(data) {
+						$("#test").html(data);
+						$('#sdate').append(dates3);
+					}
+				});
+			    $('#tb_approval').on('check.bs.table', function (row, element) {
+			    	g_names.push(element.EMP_NAME);
+			    	g_position.push(element.EMP_POSITION);
+			    	g_no.push(element.EMP_NO);
+			        });
+			      
+			      $('#tb_approval').on('uncheck.bs.table', function (row, element) {
+			    	  $("#state").val("");
+			        });				
+			});
+		</script>
+		
 	<!-- 슬라이드바 사용할때 필요 -->
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
 		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -340,63 +479,10 @@
 		crossorigin="anonymous"></script>
 	<script
 		src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
-
-
-	<script>
-		$(function() {
-			$('#table').bootstrapTable()
-		})
-
-		/* ========================= 테이블 버튼 영역 =========================== */
-		/* 테이블 버튼 생성  */
-		function operateFormatter(value, row) {
-			return [
-					'<a class="button" href="javascript:void(0)" title="button">',
-					'<button style="font-size:15px">확인</button>', '</a>  ', ]
-					.join('')
-		}
-		/* 테이블버튼 생성  끝*/
-
-		/* 테이블버튼 이벤트 생성 */
-		window.operateEvents = {
-			'click .button' : function(e, value, row, index) {
-				alert('You click like action, row: ' + JSON.stringify(row))
-				alert('You click like action, row: ' + JSON.stringify(index))
-			}
-		}
-		/* 테이블버튼 이벤트 끝 */
-		/* ======================= 테이블 버튼 영역 끝 ===================== */
-
-		/* ======================== 취소 버튼 영역 ============================ */
-		$(function() {
-			$('#canclerev').click(function() {
-				var index = []
-				$('input[name="selectItemName"]:checked').each(function() {
-					index.push($(this).data('index'))
-				})
-				alert('취소버튼 row index: ' + index.join(', '))
-			})
-		})
-		/* ====================== 삭제 버튼 영역 끝 ============================ */
-
-		/* ======================== 복구버튼 영역 =============================== */
-		$(function() {
-			$('#addrev').click(function() {
-				var index = []
-				$('input[name="selectItemName"]:checked').each(function() {
-					index.push($(this).data('index'))
-				})
-				alert('확인버튼  row index: ' + index.join(', '))
-			})
-		})
-		/* ======================= 복구 영역 =================================== */
-	</script>
-
-
 	<!-- 탑메뉴 사용 -->
 	<script src="../common/js/topNav.js"></script>
 	<!-- 사이드 메뉴 사용 -->
-	<script src="../common//js/sideNav.js?ver=2"></script>
+	<script src="../common//js/sideNav.js"></script>
 
 	<script src="../common/scripts.js"></script>
 	<!-- 버거 메뉴 활성화 -->

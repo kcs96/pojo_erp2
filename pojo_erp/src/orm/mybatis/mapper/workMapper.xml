@@ -107,22 +107,35 @@
 
 	<!--결제신청 버튼 눌렀을때 -->
 	<insert id="workAddDoc" parameterType="map">
-		INSERT INTO
-		APPROVE(ap_no,fr_no,ap_title,ap_state,ap_reporter,ap_appdate
-		,ap_closedate,ap_content,ap_dname,ap_retiredate
-		,ap_contact,ap_prosessingdate,ap_instructions,ap_bego,ap_sign)
-		VALUES(seq_ar.nextval,#{fr_no},#{ap_title},#{ap_state}
-		,#{ap_reporter},to_date(#{ap_appdate},'yyyy-mm-dd'),to_date(#{ap_closedate},'yyyy-mm-dd')
-		,#{ap_content},#{ap_dname},to_date(#{ap_retiredate},'yyyy-mm-dd')
-		,#{ap_contact},#{ap_prosessingdate},#{ap_instructions},#{ap_bego},#{ap_sign})
+		INSERT INTO APPROVE(ap_no
+		                   ,fr_no
+		                   ,ap_title
+		                   ,ap_state
+		                   ,ap_reporter
+		                   ,ap_appdate
+                           ,ap_closedate
+                           ,ap_content
+                           ,ap_dname
+                           ,ap_retiredate
+                   		   ,ap_contact
+                   		   ,ap_prosessingdate
+                   		   ,ap_instructions
+                   		   ,ap_bego
+                   		   ,ap_sign)
+        VALUES(#{ap_no},#{fr_no},#{ap_title},'결재대기'
+              ,#{ap_reporter},to_date(#{ap_appdate},'yyyy-mm-dd'),to_date(#{ap_closedate},'yyyy-mm-dd')
+                  ,#{ap_content},#{ap_dname},to_date(#{ap_retiredate},'yyyy-mm-dd')
+                  ,#{ap_contact},#{ap_prosessingdate},#{ap_instructions},#{ap_bego},#{ap_sign})
 	</insert>
-
-	<!-- 결제신청시 수신자테이블에 insert -->
-	<select id="proc_addRev" parameterType="map"
-		statementType="CALLABLE" resultType="String">
-		{call
-		proc_addRev(#{emp_no},#{ap_no},#{count},#{msg,jdbcType=VARCHAR,mode=OUT})}
+	<!-- 결제 신청시 수신자 테이블에 insert할때  필요한 seq_ar채번하기 -->
+	<select id="getSeqAr" parameterType="int" resultType="int">
+		select seq_ar.nextval as seq_ar from dual
 	</select>
+	<!-- 결제신청시 수신자테이블에 insert -->
+	<select id="proc_addRev" parameterType="map" statementType="CALLABLE" resultType="String">
+		{call proc_addRev(#{emp_no},#{ap_no},#{ap_count,jdbcType=INTEGER, mode=IN},#{msg,jdbcType=VARCHAR,mode=OUT})}
+	   </select>
+	<!--  결제신청시 수신자테이블 끝 INSERt-->
 
 
 	<!-- ================================== 전자결재 항목 끝 ============================================ -->

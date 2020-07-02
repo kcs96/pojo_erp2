@@ -180,7 +180,6 @@ pageEncoding="UTF-8"%>
 				   <td></td>
 				 </tr>
 				 <tr>
-				   <td style="width:20%;text-align:center;">기한</td>
 				   <td><%= ap_prosessingdate %></td> <!-- 기한 -->
 				   <td style="padding:5px;width:20%;text-align:center;"></td>
 				   <td></td>

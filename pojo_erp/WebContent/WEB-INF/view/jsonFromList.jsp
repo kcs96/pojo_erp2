@@ -5,7 +5,7 @@
     pageEncoding="UTF-8"%>
 <%
 	List<Map<String,Object>> rList =
-	(List<Map<String,Object>>)request.getAttribute("prList");
+	(List<Map<String,Object>>)request.getAttribute("formList");
 	Gson gson = new Gson();
 	String imsi = null;
 	imsi = gson.toJson(rList);

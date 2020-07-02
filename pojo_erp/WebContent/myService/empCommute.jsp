@@ -308,7 +308,7 @@ pageEncoding="UTF-8"%>
 <!-- 탑메뉴 사용 -->
 <script src="../common/js/topNav.js"></script>
 <!-- 사이드 메뉴 사용 -->
-<script src="../common/js/sideNav.js"></script>
+<script src="../common/js/sideNav.js?ver=1213412"></script><!-- * 페이지 갱신 처리 *  -->
 <!-- 버거 메뉴 활성화 -->
 
  <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script> 
