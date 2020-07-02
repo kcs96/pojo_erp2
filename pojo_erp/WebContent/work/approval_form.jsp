@@ -15,9 +15,7 @@ pageEncoding="UTF-8"%>
 <link href="../common/main.css" rel="stylesheet" />
 <link href="../common/css/custom.css" rel="stylesheet" />
 <!--관리자 로그에 필요한 코드 끝   =================================================================================-->
-	
 	<title>2RP PROGRAM</title>
-
 </head>
 <body class="sb-nav-fixed">
 <nav id="topNav"></nav>
@@ -34,22 +32,18 @@ pageEncoding="UTF-8"%>
 					<div class="table-responsive">
 						<table id="table" data-show-columns="true" data-pagination="true"
 							data-search="true" data-advanced-search="true"
-							data-id-table="advancedTable" data-url="../juno/member.json">
+							data-id-table="advancedTable" data-url="./approval_form.erp?cud=approval_form">
 							<thead class="thead-light">
 								<tr>
-									<th data-field="app_no" data-align="center"
+									<th data-field="FR_NO" data-align="center"
 										data-sortable="true" data-width="100">번호</th>
-									<th data-field="app_name" data-align="center">제목</th>
+									<th data-field="FR_NAME" data-align="center">제목</th>
 									<th data-field="operate" data-formatter="operateFormatter"
 										data-events="operateEvents" data-width="100px" data-align="center" >작성</th>
 								</tr>
 							</thead>
 						</table>
 					</div>
-					<!-- 결재양식 테이블 끝 -->
-
-
-					<!-- 컨텐츠 들어갈내용 끝   -->
      			</div>
 			</div>
 		</main>
@@ -73,8 +67,6 @@ pageEncoding="UTF-8"%>
 	          "</a>  ", ]
 				.join('')
 	}
-	/* 테이블 버튼 구현 부분  끝*/
-
 	/* 테이블 버튼 이벤트 처리 부분  */
 	window.operateEvents = {
 		'click .button' : function(e, value, row, index) {
@@ -88,7 +80,7 @@ pageEncoding="UTF-8"%>
 <!-- 탑메뉴 사용 -->
 <script src="../common/js/topNav.js"></script>
 <!-- 사이드 메뉴 사용 -->
-<script src="../common/js/sideNav.js?ver=2"></script>
+<script src="../common/js/sideNav.js"></script>
 <!-- 버거 메뉴 활성화 -->
 <script src="../common/scripts.js"></script>
 </body>

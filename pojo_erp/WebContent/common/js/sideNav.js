@@ -2,7 +2,8 @@
 // collapsed = 트리메뉴 사용여부
 // collapseData = 첫번째 트리메뉴 정보
 // subData = 두번째 트리메뉴 정보
-
+console.log( sessionStorage.getItem("emp_name"));
+console.log( sessionStorage.getItem("dept_name"));
 const sideNavMainTitleApi = [
   {
     id: "myservice",
@@ -180,6 +181,15 @@ const avatarBoxImageSrc = "../common/img/woman.png"; //네비게이션 아바타
 const avatarBoxImageAlt = "Avatar"; //네비게이션 아바타 img alt
 const avatarBoxImageClassname = "avatar"; //네비게이션 아바타 img class
 
+const avatarInfoBoxCreate = document.createElement("div"); //사원 정보
+const avatarInfoBoxClassname = "avatar_Info_box";
+
+const avatarInfoDept = document.createElement("label"); //
+const avatarInfoDeptClassname = "avatar_Info_Dept"; // 부서
+
+const avatarInfoName = document.createElement("label"); //
+const avatarInfoNameClassname = "avatar_Info_Name"; // 이름
+
 const avatarButtonBoxCreate = document.createElement("div"); //네비게이션 아바타 button
 const avatarButtonBoxClassname = "avatar_button_box"; //네비게이션 아바타 button class
 
@@ -200,6 +210,14 @@ function generateSideNav() {
   nav.style = navStyle;
   nav.appendChild(avatarBoxCreate);
 
+  avatarInfoBoxCreate.classList = avatarInfoBoxClassname;
+  avatarInfoBoxCreate.appendChild(avatarInfoDept);
+  avatarInfoDept.value = sessionStorage.getItem("dept_name");
+  
+  avatarInfoBoxCreate.appendChild(avatarInfoName);
+  avatarInfoName.value = sessionStorage.getItem("emp_name");
+  
+  
   avatarBoxCreate.classList = avatarBoxClassname;
   avatarBoxCreate.appendChild(avatarBoxImage);
   avatarBoxImage.src = avatarBoxImageSrc;

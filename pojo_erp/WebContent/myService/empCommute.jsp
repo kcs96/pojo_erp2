@@ -66,6 +66,7 @@ pageEncoding="UTF-8"%>
 				,pieSliceText: 'label'
 				,pieStartAngle: 180
 				,legend: 'none'
+				,tooltip:{textStyle : {fontSize:12}, showColorCode : true},
 				//, slices: {0: {offset: 0.2}}/* jsonData.length  */
 		};
 		var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -110,12 +111,12 @@ pageEncoding="UTF-8"%>
 		var today = new Date();   
 		var  hours = today.getHours(); // 시
 		var minutes = today.getMinutes();  // 분
-		//var second  = today.getSeconds();
+		var second  = today.getSeconds();
 		hours = hours < 10 ? '0'+hours : hours;
 		minutes = minutes < 10 ? '0'+minutes : minutes;
-		//second = second < 10 ? '0'+second : second;
+		second = second < 10 ? '0'+second : second;
 		alert(hours+ ':' + minutes);
-		var msg = hours+ ':' + minutes;
+		var msg = hours+ ':' + minutes+':'+second;
 		if(goText == "-"){
 			$("#go").text(msg);
 			$.ajax({
@@ -136,12 +137,12 @@ pageEncoding="UTF-8"%>
 		var today = new Date();
 		var hours = today.getHours(); // 시
 		var minutes = today.getMinutes(); // 분
-		//var second = today.getSeconds();
+		var second = today.getSeconds();
 		hours = hours < 10 ? '0'+hours : hours;
 		minutes = minutes < 10 ? '0'+minutes : minutes;
-		//second = second < 10 ? '0'+second : second;
-		alert(hours+ ':' + minutes);
-		var msg = hours+ ':' + minutes;
+		second = second < 10 ? '0'+second : second;
+		alert(hours+ ':' + minutes +':'+second);
+		var msg = hours+ ':' + minutes+':'+second;
 		if (outText == "-") {
 			$("#out").text(msg);
 			$.ajax({
@@ -164,12 +165,12 @@ pageEncoding="UTF-8"%>
 		var today = new Date();
 		var hours = today.getHours(); // 시
 		var minutes = today.getMinutes(); // 분
-		//var second = today.getSeconds();
+		var second = today.getSeconds();
 		hours = hours < 10 ? '0'+hours : hours;
 		minutes = minutes < 10 ? '0'+minutes : minutes;
-		//second = second < 10 ? '0'+second : second;
-		alert(hours+ ':' + minutes);
-		var msg = hours+ ':' + minutes;
+		second = second < 10 ? '0'+second : second;
+		alert(hours+ ':' + minutes+':'+second);
+		var msg = hours+ ':' + minutes+':'+second;
 		var outText = $("#out").text();
 		alert(outText + " outText");
 		if (outText != "-") {
@@ -191,12 +192,12 @@ pageEncoding="UTF-8"%>
 		var today = new Date();
 		var hours = today.getHours(); // 시
 		var minutes = today.getMinutes(); // 분
-		//var second = today.getSeconds();
+		var second = today.getSeconds();
 		hours = hours < 10 ? '0'+hours : hours;
 		minutes = minutes < 10 ? '0'+minutes : minutes;
-		//second = second < 10 ? '0'+second : second;
-		alert(hours+ ':' + minutes);
-		var msg = hours+ ':' + minutes;
+		second = second < 10 ? '0'+second : second;
+		alert(hours+ ':' + minutes+':'+second);
+		var msg = hours+ ':' + minutes+':'+second;
 
 		if (leaveText == "-") {
 			$("#leave").text(msg);
@@ -308,7 +309,7 @@ pageEncoding="UTF-8"%>
 <!-- 탑메뉴 사용 -->
 <script src="../common/js/topNav.js"></script>
 <!-- 사이드 메뉴 사용 -->
-<script src="../common/js/sideNav.js"></script>
+<script src="../common/js/sideNav.js?ver=1213412"></script><!-- * 페이지 갱신 처리 *  -->
 <!-- 버거 메뉴 활성화 -->
 
  <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script> 

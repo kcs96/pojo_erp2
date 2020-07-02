@@ -7,9 +7,13 @@
 <html lang="ko">
 
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!--     <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Personal Schedules</title>
+    <link href="../common/main.css?ver=2" rel="stylesheet" />
+    <link href="../common/css/custom.css" rel="stylesheet" />
     <%@include file ="../common/fontAwesomeUI.jsp" %>
     <!-- <link rel=" shortcut icon" href="../mihyun_cal/image/favicon.ico"> -->
 
@@ -25,14 +29,22 @@
 
 </head>
 <body>
-        <nav class="sb-topnav navbar navbar-expand navbar-dark" style="background-color:#282828;">
+<!--         <nav class="sb-topnav navbar navbar-expand navbar-dark" style="background-color:#282828;">
             <a class="navbar-brand" href="javascript:history.back();" style="width:20%; padding-top:12px;" >
             <i class="fas fa-arrow-left" style="width:50px; height:50px; float:left;"></i></a>
             <a class="navbar-brand" href="./empSchedule.jsp" style=" width:60%; font-size:25px; padding-top:12px; text-align: center;" >Personal Schedules</a>
 		    <a class="navbar-brand" href="../home/main.jsp" style="width:20%; padding-top:12px;">
 		    <i class="fas fa-home" style="width:50px; height:50px; float:right;"></i></a>
-		    </nav>
-      <div class="container"> 
+		    </nav> -->
+			<nav id="topNav"></nav>
+			<div id="layoutSidenav">
+				<div id="layoutSidenav_nav"></div>
+				<div id="layoutSidenav_content">
+			<main id="input_div">
+			<div id="frame_div" style="border: 1px solid black;">
+			<div id="page_title" style="border-bottom: 2px solid gray; margin: 50px 30px;"><h2>개 인 일 정</h2></div>
+			<div id="page_contents" style="max-width: 1730px; margin: 50px 50px;">
+<!--        <div class="container">  --> 
 <!-- 일정추가전 생기는 카탈로그 창 -->
         <!-- 일자 클릭시 메뉴오픈 -->
          <div id="contextMenu" class="dropdown clearfix">
@@ -167,8 +179,24 @@
             </div>
         </div>
         <!-- /.filter panel -->
-    </div>
+ <!--     </div>  -->
     <!-- /.container -->
+
+
+			</div>
+		</main>
+	</div>
+</div>
+<!-- 슬라이드바 사용할때 필요 -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
+<script src="../common/js/topNav.js"></script>
+<!-- 사이드 메뉴 사용 -->
+<script src="../common/js/sideNav.js"></script>
+
+<script src="../common/scripts.js"></script>
 
     <script src="../mihyun_cal/vendor/js/jquery.min.js"></script>
     <script src="../mihyun_cal/vendor/js/bootstrap.min.js"></script>

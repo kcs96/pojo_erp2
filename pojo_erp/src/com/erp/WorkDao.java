@@ -122,9 +122,20 @@ public class WorkDao {
 		String result = pMap.get("msg").toString();
 		return result;
 	}
+	/*********************************************************************
+	 * ap_no를 채번하는 메소드 구현 
+	 * @param pMap - 해당사항 없음
+	 * @return 새로 채번한 숫자 select seq_ar.nextval from dual
+	 * @author 이상현 2020-07-01
+	 ********************************************************************/
+	public int getSeqAr() {
+		int seq_ar = 0;
+		seq_ar = Integer.parseInt(sqlSes.selectOne("getSeqAr").toString());
+		return seq_ar;
+	}
 	public String workAddSendDoc(Map<String, Object> pMap) {
 		//결재 신청 이벤트 탭 insert here
-		logger.info("Dao : 결재 신청 호출 성공");
+		logger.info("Dao : 결재 신청 호출 성공" + pMap.get("emp_no")+","+pMap.get("ap_count"));
 		sqlSes.selectOne("proc_addRev",pMap);
 		String result = pMap.get("msg").toString();
 		return result;

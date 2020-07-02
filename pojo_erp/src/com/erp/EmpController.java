@@ -65,6 +65,32 @@ public class EmpController implements Controller {
 			}
 		}
 
+//		else if("roomList".equals(requestName)) {
+//			pMap = new HashMap<>();
+//			List<Map<String,Object>> roomList = empLogic.roomList(pMap);
+//			System.out.println("오늘 회의실 예약 리스트 => "+roomList.size());
+//			req.setAttribute("roomList", roomList);
+//			path="forward:jsonRoomList.jsp";
+//		}
+//		else if("inoutList".equals(requestName)) {
+//			String emp_no = session.getAttribute("emp_no").toString();
+//			pMap = new HashMap<>();
+//			pMap.put("emp_no", emp_no);
+//			List<Map<String,Object>> inoutList = empLogic.inoutList(pMap);
+//			System.out.println("오늘 출근 리스트 사이즈 => "+inoutList.size());
+//			req.setAttribute("inOutList", inoutList);
+//			path="forward:./jsonInOutList.jsp";
+//		}
+		else if("reMain".equals(requestName)) {
+			logger.info("EmpController =>  remain 호출");
+			pMap= HashMapBuilder.hashMapBuilder(req.getParameterMap());
+			pMap.put("emp_no", session.getAttribute("emp_no"));
+			List<Map<String,Object>> taskTimeList = empLogic.reMain(pMap);
+			System.out.println("오늘 업무시간 리스트 => "+taskTimeList.size());
+			req.setAttribute("taskTimeList", taskTimeList);
+			path="forward:../main/main.jsp";
+		}
+
 		else if("myUpdImformation".equals(requestName)) {
 			logger.info("EmpController => 내정보 수정 저장 버튼 호출"); ////////////////저장 버튼 눌렀을 때
 			/////////////////////// 실제 코드    /////////////////////
