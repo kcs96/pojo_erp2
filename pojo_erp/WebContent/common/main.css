@@ -3891,7 +3891,7 @@ input[type=button].btn-block {
 
 .nav-link {
   display: block;
-  padding: 0.5rem 1rem;
+  padding: 1rem 1.5rem;
 }
 .nav-link:hover, .nav-link:focus {
   text-decoration: none;
@@ -10142,8 +10142,8 @@ body {
 .sb-sidenav .sb-sidenav-menu .nav .nav-link {
   display: flex;
   align-items: center;
-  padding-top: 1.2rem;
-  padding-bottom: 1.2rem;
+  padding-top: 2.5rem;
+  padding-bottom: 1.5rem;
   position: relative;
 }
 .sb-sidenav .sb-sidenav-menu .nav .nav-link .sb-nav-link-icon {

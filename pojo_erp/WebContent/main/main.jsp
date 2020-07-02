@@ -3,6 +3,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <%
+	String emp_name = (String)session.getAttribute("emp_name");
+	String dept_name = (String)session.getAttribute("dept_name");
+
 	int timeGap = 0;
 	boolean flag = false;
 	List<Map<String ,Object>> inOutList =(List<Map<String,Object>>) request.getAttribute("taskTimeList");
@@ -34,7 +37,11 @@ pageEncoding="UTF-8"%>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 
 	<title>2RP PROGRAM</title>
+<script type="text/javascript">
+sessionStorage.setItem("emp_name", "<%=emp_name %>");
+sessionStorage.setItem("dept_name", "<%=dept_name %>");
 
+</script>
 <script type="text/javascript">
 		var interver = null;
 		//var x = 10;
@@ -155,10 +162,8 @@ pageEncoding="UTF-8"%>
 					data-url="inoutList.erp?cud=inoutList">
 					<thead class="thead-light">
 						<tr>
-							<th data-field="CM_GOTOWORK">출근</th>
-							<th data-field="CM_GOTOHOME">퇴근</th>
-							<th data-field="CM_OUTTIME">외출</th>
-							<th data-field="CM_COMEBACK">복귀</th>
+							<th data-field="STATE">상태</th>
+							<th data-field="TIME">시간</th>
 						</tr>
 					</thead>
 				</table>
@@ -291,6 +296,8 @@ pageEncoding="UTF-8"%>
 
 <script type="text/javascript">
 	$(document).ready(function() {
+		
+		
 		var flag = <%=flag %>
 		if(flag == true){
 	var timeGap =<%=timeGap%>;
