@@ -96,5 +96,13 @@ public class EmpDao {
 		return result;
 	}
 
+	public List<Map<String, Object>> reMain(Map<String, Object> pMap) {
+		logger.info("EmpDao() => reMain 가져오기"); 
+		List<Map<String, Object>> reMainList = new ArrayList<Map<String,Object>>();
+		sqlSec.selectOne("proc_taskTime",pMap);
+		reMainList=(List<Map<String, Object>>)pMap.get("key");
+		return reMainList;
+	}
+
 	
 }

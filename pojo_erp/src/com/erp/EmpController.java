@@ -87,6 +87,15 @@ public class EmpController implements Controller {
 //			req.setAttribute("inOutList", inoutList);
 //			path="forward:./jsonInOutList.jsp";
 //		}
+		else if("reMain".equals(requestName)) {
+			logger.info("EmpController =>  remain 호출");
+			pMap= HashMapBuilder.hashMapBuilder(req.getParameterMap());
+			pMap.put("emp_no", session.getAttribute("emp_no"));
+			List<Map<String,Object>> taskTimeList = empLogic.reMain(pMap);
+			System.out.println("오늘 업무시간 리스트 => "+taskTimeList.size());
+			req.setAttribute("taskTimeList", taskTimeList);
+			path="forward:../main/main.jsp";
+		}
 		else if("myUpdImformation".equals(requestName)) {
 			logger.info("EmpController => 내정보 수정 버튼 호출");
 			/////////////////////// 실제 코드    /////////////////////

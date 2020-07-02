@@ -79,4 +79,11 @@ public class EmpLogic {
 		return result;
 	}
 
+	public List<Map<String, Object>> reMain(Map<String, Object> pMap) {
+		logger.info("EmpLogic => reMain 리스트");
+		List<Map<String, Object>> rList= new ArrayList<Map<String,Object>>();
+		rList = empDao.reMain(pMap);
+		return rList;
+	}
+
 }
