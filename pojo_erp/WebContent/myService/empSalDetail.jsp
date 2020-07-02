@@ -1,5 +1,11 @@
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+
+<%
+	List<Map<String,Object>> rlist = (List<Map<String,Object>>)request.getAttribute("monthPayList");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,8 +21,8 @@ pageEncoding="UTF-8"%>
 <link href="../common/css/custom.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
 <!--관리자 로그에 필요한 코드 끝   =================================================================================-->
-	
-	<title>2RP PROGRAM</title>
+
+<title>2RP PROGRAM</title>
 
 </head>
 <body class="sb-nav-fixed">
@@ -36,34 +42,38 @@ pageEncoding="UTF-8"%>
    <div class="container">
 	<div class="col" >
 		<div style="text-align: right; padding: 5px;">
-			<button class="btn btn-danger">인쇄</button>
+			<button class="btn btn-danger" onClick="window.print()">인쇄</button>
 		
 		</div>
 	</div>
    <div class="col" style="padding: 10px; background-color:; border: 1px solid black; ">
-   
-  <h2>2020년 06월 20일 급여</h2>
+  
+  <% 
+  try{
+  Map<String,Object> rMap = rlist.get(0);
+  %>
+  <h2><%=rMap.get("SAL_PAYDAY") %> 급여</h2>
 
   <table class="table">
     <tbody>
       <tr style="font-size: small;">
         <td style="width:12.5%">성명 : </td>
-        <td style="width:12.5%">개구리</td>
+        <td style="width:12.5%"><%=rMap.get("EMP_NAME") %></td>
         <td style="width:12.5%">부서 : </td>
-        <td style="width:12.5%">인사과</td>
+        <td style="width:12.5%"><%=rMap.get("DEPT_NAME") %></td>
         <td style="width:12.5%">직책 : </td>
-        <td style="width:12.5%">사원</td>
+        <td style="width:12.5%"><%=rMap.get("EMP_POSITION") %></td>
         <td style="width:12.5%">지급일 : </td>
-        <td style="width:12.5%">2020-06-07</td>
+        <td style="width:12.5%"><%=rMap.get("SAL_PAYDAY") %></td>
       </tr>
       <tr style="font-size: small;">
         <td >은행 : </td>
         <td ></td>
-        <td >국민</td>
+        <td><%=rMap.get("EMP_BANK") %></td>
         <td ></td>
         <td >계좌번호 : </td>
         <td ></td>
-        <td >964016-0454787</td>
+        <td><%=rMap.get("EMP_ACCOUNT") %></td>
         <td ></td>
         
       </tr>
@@ -92,40 +102,40 @@ pageEncoding="UTF-8"%>
     <tbody>
       <tr>
         <td>기본급여</td>
-        <td>2,080,000</td>
+        <td><%=rMap.get("BASE_PAY") %></td>
         <td>소득세</td>
-        <td>8,000</td>
+        <td><%=rMap.get("EI_PAY") %></td>
       
       </tr>
       <tr>
-		<td>인센티브</td>
+		<td></td>
         <td></td>
         <td>주민세</td>
-        <td></td>
+        <td><%=rMap.get("HI_PAY") %></td>
       </tr>
       <tr>
 		<td></td>
         <td></td>
         <td>고용보험</td>
-        <td></td>
+        <td><%=rMap.get("NP_PAY") %></td>
       </tr>
       <tr>
 		<td></td>
         <td></td>
         <td>국민연금</td>
-        <td></td>
+        <td><%=rMap.get("IT_PAY") %></td>
       </tr>
       <tr>
 		<td></td>
         <td></td>
         <td>건강보험</td>
-        <td></td>
+        <td><%=rMap.get("RD_PAY") %></td>
       </tr>
       <tr>
 		<td>급여합계</td>
-        <td></td>
+        <td><%=rMap.get("BASE_PAY") %></td>
         <td>공제합계</td>
-        <td></td>
+        <td><%=rMap.get("TAX_SUM") %></td>
       </tr>
     </tbody>
   </table>
@@ -134,10 +144,14 @@ pageEncoding="UTF-8"%>
     <thead>
       <tr>
         <th style="width:50%">실수령액</th>
-        <th style="width:50%">1,920,000</th>
+        <th style="width:50%"><%=rMap.get("RECEIPT") %></th>
       </tr>
    </thead>
    </table>
+  <%}catch(Exception e){
+  	e.printStackTrace();
+  }
+  %>
    </div>
    </div>
 
@@ -159,7 +173,7 @@ pageEncoding="UTF-8"%>
 <!-- 탑메뉴 사용 -->
 <script src="../common/js/topNav.js"></script>
 <!-- 사이드 메뉴 사용 -->
-<script src="../common//js/sideNav.js"></script>
+<script src="../common//js/sideNav.js?ver=2"></script>
 
 <script src="../common/scripts.js"></script>
 <!-- 버거 메뉴 활성화 -->

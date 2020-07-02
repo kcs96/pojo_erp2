@@ -104,7 +104,7 @@ pageEncoding="UTF-8"%>
 									</tr>
 									<tr>
 										<th>사원명</th>
-										<td><input id="emp_name" type="text" class="form-control" name="EMP_NAME" value="<%= rMap.get("EMP_NAME") %>" ></td>
+										<td><input id="emp_name" type="text" class="form-control" name="EMP_NAME" value="<%= rMap.get("username") %>" ></td>
 									</tr>
 									<tr>
 										<th>패스워드</th>
@@ -271,8 +271,13 @@ pageEncoding="UTF-8"%>
 	<!-- 탑메뉴 사용 -->
 	<script src="../common/js/topNav.js"></script>
 	<!-- 사이드 메뉴 사용 -->
+<<<<<<< HEAD
+	<script src="../common//js/sideNav.js?ver=2"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+=======
 	<script src="../common//js/sideNav.js"></script>
 <!-- 	<script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script> -->
+>>>>>>> branch 'master' of https://github.com/kcs96/pojo_erp2.git
 	<script src="../common/scripts.js"></script>
 	<!-- 버거 메뉴 활성화 -->
 

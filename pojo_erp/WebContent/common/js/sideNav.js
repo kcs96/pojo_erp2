@@ -2,7 +2,8 @@
 // collapsed = 트리메뉴 사용여부
 // collapseData = 첫번째 트리메뉴 정보
 // subData = 두번째 트리메뉴 정보
-
+console.log( sessionStorage.getItem("emp_name"));
+console.log( sessionStorage.getItem("dept_name"));
 const sideNavMainTitleApi = [
   {
     id: "myservice",
@@ -16,7 +17,7 @@ const sideNavMainTitleApi = [
         id: "goto",
         title: "출|퇴관리",
         className: "",
-        ref: "../myService/empCommute.jsp",
+        ref: "../myService/inOutManager.erp",
         onClick: "",
         collapsed: false,
       },
@@ -24,7 +25,7 @@ const sideNavMainTitleApi = [
         id: "salary",
         title: "급여관리",
         className: "",
-        ref: "../myService/empSal.jsp",
+        ref: "http://localhost:5000/myService/allPay.erp",
         onClick: "",
         collapsed: false,
       },
@@ -110,8 +111,8 @@ const sideNavMainTitleApi = [
             id: "dispatch",
             title: "파견사원",
             className: "",
-            ref: "../work/outsideWorker.jsp",
-            onClick: "",
+            ref: "http://localhost:5000/work/outsideWorker.erp",
+            onClick: "http://localhost:5000/pojo_erp2/work/outsideWorker.erp",
           },
         ],
       },
@@ -119,7 +120,7 @@ const sideNavMainTitleApi = [
         id: "department",
         title: "부서일정",
         className: "",
-        ref: "../work/deptSchedule.jsp",
+        ref: "../work/deptEmp.erp",
         onClick: "",
         collapsed: false,
       },
@@ -155,7 +156,7 @@ const avatarBoxButtonApi = [
     text: "정보수정",
     classname: "avatar_button btn btn-info",
     id: "avatarBoxButton_edit",
-    ref: "./emp_edit.erp",
+    ref: "../main/emp_edit.erp",
   },
   {
     text: "로그아웃",
@@ -180,6 +181,15 @@ const avatarBoxImageSrc = "../common/img/woman.png"; //네비게이션 아바타
 const avatarBoxImageAlt = "Avatar"; //네비게이션 아바타 img alt
 const avatarBoxImageClassname = "avatar"; //네비게이션 아바타 img class
 
+const avatarInfoBoxCreate = document.createElement("div"); //사원 정보
+const avatarInfoBoxClassname = "avatar_Info_box";
+
+const avatarInfoDept = document.createElement("label"); //
+const avatarInfoDeptClassname = "avatar_Info_Dept"; // 부서
+
+const avatarInfoName = document.createElement("label"); //
+const avatarInfoNameClassname = "avatar_Info_Name"; // 이름
+
 const avatarButtonBoxCreate = document.createElement("div"); //네비게이션 아바타 button
 const avatarButtonBoxClassname = "avatar_button_box"; //네비게이션 아바타 button class
 
@@ -200,6 +210,14 @@ function generateSideNav() {
   nav.style = navStyle;
   nav.appendChild(avatarBoxCreate);
 
+  avatarInfoBoxCreate.classList = avatarInfoBoxClassname;
+  avatarInfoBoxCreate.appendChild(avatarInfoDept);
+  avatarInfoDept.value = sessionStorage.getItem("dept_name");
+  
+  avatarInfoBoxCreate.appendChild(avatarInfoName);
+  avatarInfoName.value = sessionStorage.getItem("emp_name");
+  
+  
   avatarBoxCreate.classList = avatarBoxClassname;
   avatarBoxCreate.appendChild(avatarBoxImage);
   avatarBoxImage.src = avatarBoxImageSrc;

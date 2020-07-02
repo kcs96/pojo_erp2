@@ -58,33 +58,51 @@ public class EmpController implements Controller {
 				logger.info("메인페이지 호출");
 				pMap = new HashMap<>();
 				pMap.put("emp_no", emp_no);
-				//pMap.put("emp_no", session.getAttribute("emp_no"));
-				List<Map<String,Object>> inoutList = empLogic.inoutList(pMap);
-				System.out.println("오늘 출근 리스트 사이즈 => "+inoutList.size());
-				req.setAttribute("inOutList", inoutList);
-				List<Map<String,Object>> todayList = empLogic.todayList(pMap);
-				System.out.println("오늘일정 리스트 사이즈 => "+todayList.size());
-				req.setAttribute("todayList", todayList);
-				List<Map<String,Object>> roomList = empLogic.roomList(pMap);
-				System.out.println("오늘 회의실 예약 리스트 => "+roomList.size());
-				req.setAttribute("roomList", roomList);
 				List<Map<String,Object>> taskTimeList = empLogic.commuteList(pMap);
 				System.out.println("오늘 업무시간 리스트 => "+taskTimeList.size());
 				req.setAttribute("taskTimeList", taskTimeList);
 				path="forward:main.jsp";
 			}
 		}
+
+//		else if("roomList".equals(requestName)) {
+//			pMap = new HashMap<>();
+//			List<Map<String,Object>> roomList = empLogic.roomList(pMap);
+//			System.out.println("오늘 회의실 예약 리스트 => "+roomList.size());
+//			req.setAttribute("roomList", roomList);
+//			path="forward:jsonRoomList.jsp";
+//		}
+//		else if("inoutList".equals(requestName)) {
+//			String emp_no = session.getAttribute("emp_no").toString();
+//			pMap = new HashMap<>();
+//			pMap.put("emp_no", emp_no);
+//			List<Map<String,Object>> inoutList = empLogic.inoutList(pMap);
+//			System.out.println("오늘 출근 리스트 사이즈 => "+inoutList.size());
+//			req.setAttribute("inOutList", inoutList);
+//			path="forward:./jsonInOutList.jsp";
+//		}
+		else if("reMain".equals(requestName)) {
+			logger.info("EmpController =>  remain 호출");
+			pMap= HashMapBuilder.hashMapBuilder(req.getParameterMap());
+			pMap.put("emp_no", session.getAttribute("emp_no"));
+			List<Map<String,Object>> taskTimeList = empLogic.reMain(pMap);
+			System.out.println("오늘 업무시간 리스트 => "+taskTimeList.size());
+			req.setAttribute("taskTimeList", taskTimeList);
+			path="forward:../main/main.jsp";
+		}
+
 		else if("myUpdImformation".equals(requestName)) {
 			logger.info("EmpController => 내정보 수정 저장 버튼 호출"); ////////////////저장 버튼 눌렀을 때
 			/////////////////////// 실제 코드    /////////////////////
 			pMap= HashMapBuilder.hashMapBuilder(req.getParameterMap());
 			
-			for(int i=0; i<pMap.size();i++) {
-				System.out.println(pMap.keySet().toArray()[i]);
-			}
 			
 			pMap.put("emp_no", session.getAttribute("emp_no"));
-			//pMap.put("emp_no", req.getParameter("emp_no"));
+			for(int i=0; i<pMap.size(); i++) {
+				String key = (String)pMap.keySet().toArray()[i];
+				//logger.info(key);
+				logger.info(key+"="+pMap.get(key));
+			}			//pMap.put("emp_no", req.getParameter("emp_no"));
 			result =empLogic.myUpdImformation(pMap);
 			System.out.println("회원정보 등록 성공 여부- result: "+result);
 			if(result == 1) path="redirect:success2.jsp"; 
@@ -135,6 +153,11 @@ public class EmpController implements Controller {
 			pMap.put("emp_no", session.getAttribute("emp_no"));
 			//pMap.put("emp_no", 10001);
 			List<Map<String,Object>> myInfoList = empLogic.myInfoMap(pMap);
+			for(int i=0; i<pMap.size(); i++) {
+				String key = (String)pMap.keySet().toArray()[i];
+				//logger.info(key);
+				logger.info(key+"="+pMap.get(key));
+			}
 			System.out.println("내정보 리스트 사이즈 =>"+myInfoList.size());
 			System.out.println("myInfoList: "+myInfoList);
 			req.setAttribute("myInfoList", myInfoList);
@@ -149,9 +172,43 @@ public class EmpController implements Controller {
 			throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		Map<String,Object> rMap = new HashMap<>();
-		
+
+		Map<String,Object> pMap = new HashMap<>();
+		//pMap.put("emp_no", session.getAttribute("emp_no"));
+		//pMap.put("emp_no", 10001);
+
 		ModelAndView mav = new ModelAndView(req,res);
 		
+
+//		if("empEdit".equals(cud)) {
+//			logger.info("내정보 수정 호출");
+//			List<Map<String,Object>> myInfoList = empLogic.myInfoMap(pMap);
+//			System.out.println("내정보 리스트 사이즈 =>"+myInfoList.size());
+//			Gson g = new Gson();
+//			String imsi = g.toJson(myInfoList);
+//			System.out.println(imsi);
+//			mav.addObject("myInfoList", myInfoList);
+//			mav.setViewName("");
+//		}
+		
+		///메인 페이지 json
+		 if("roomList".equals(cud)) {
+			pMap = new HashMap<>();
+			List<Map<String,Object>> roomList = empLogic.roomList(pMap);
+			System.out.println("오늘 회의실 예약 리스트 => "+roomList.size());
+			mav.addObject("roomList", roomList);
+			mav.setViewName("jsonRoomList");
+		}
+		else if("inoutList".equals(cud)) {
+			String emp_no = session.getAttribute("emp_no").toString();
+			pMap = new HashMap<>();
+			pMap.put("emp_no", emp_no);
+			List<Map<String,Object>> inoutList = empLogic.inoutList(pMap);
+			System.out.println("오늘 출근 리스트 사이즈 => "+inoutList.size());
+			mav.addObject("inOutList", inoutList);
+			mav.setViewName("jsonInOutList");
+		}
+
 		return mav;
 	}
 

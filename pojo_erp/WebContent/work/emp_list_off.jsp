@@ -9,7 +9,7 @@ pageEncoding="UTF-8"%>
 							<thead class="thead-light">
 								<tr>
 									<th data-field="EMP_NO">사원번호</th>
-									<th data-field="EMP_NAME">사원이름</th>
+									<th data-field="username">사원이름</th>
 									<th data-field="DEPT_NAME">부서</th>
 									<th data-field="EMP_POSITION">직급</th>
 									<th data-field="EMP_PHONE">핸드폰</th>
@@ -53,7 +53,7 @@ pageEncoding="UTF-8"%>
 	<!-- 탑메뉴 사용 -->
 <!-- 	<script src="../common/js/topNav.js"></script>
 	사이드 메뉴 사용
-	<script src="../common//js/sideNav.js"></script> -->
+	<script src="../common//js/sideNav.js?ver=2"></script> -->
 
 	<script src="../common/scripts.js"></script>
 	<!-- 버거 메뉴 활성화 -->

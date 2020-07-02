@@ -116,10 +116,10 @@
     </tr>
   	<tr>
     <th width="123" class="auto-style3">
-   		 입 사 일 자
+   		 퇴 직 일 자
    	 </th>
     <td colspan="3" height="100px;">
-    	<input class="wrap2" type="text" id="ap_prosessingdate" name="ap_prosessingdate"style=" height:100%;line-height: 75px; width:99%; border: 0;">
+    	<input class="wrap2" type="text" id="ap_retiredate" name="ap_retiredate" style=" height:100%;line-height: 75px; width:99%; border: 0;">
     </td>
   	</tr>
   	<tr>

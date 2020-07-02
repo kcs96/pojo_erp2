@@ -21,9 +21,9 @@ public class EmpLogic {
 	public List<Map<String, Object>> login(Map<String, Object> loginMap) {
 		//로그인 이벤트 시작
 		logger.info("EmpLogic => 로그인 버튼");
-		List<Map<String, Object>> rMap = new ArrayList<>();
-		rMap = empDao.login(loginMap);
-		return  rMap;
+		List<Map<String, Object>> rList = new ArrayList<>();
+		rList = empDao.login(loginMap);
+		return  rList;
 	}
 
 	public List<Map<String, Object>> inoutList(Map<String, Object> pMap) {
@@ -34,13 +34,13 @@ public class EmpLogic {
 		return rList;
 	}
 
-	public List<Map<String, Object>> todayList(Map<String, Object> pMap) {
-		//메인페이지 오늘 나의 일정 정보
-		logger.info("EmpLogic => 메인페이지 일정 정보");
-		List<Map<String, Object>> rList = new ArrayList<>();
-		rList = empDao.todayList(pMap);
-		return rList;
-	}
+//	public List<Map<String, Object>> todayList(Map<String, Object> pMap) {
+//		//메인페이지 오늘 나의 일정 정보
+//		logger.info("EmpLogic => 메인페이지 일정 정보");
+//		List<Map<String, Object>> rList = new ArrayList<>();
+//		rList = empDao.todayList(pMap);
+//		return rList;
+//	}
 
 	public List<Map<String, Object>> roomList(Map<String, Object> pMap) {
 		//메인페이지 오늘 회의실예약 정보
@@ -51,8 +51,8 @@ public class EmpLogic {
 	}
 	
 	public List<Map<String, Object>> commuteList(Map<String, Object> pMap) {
-		//메인페이지 오늘 출퇴시간 정보
-		logger.info("EmpLogic => 메인페이지 출퇴시간 정보");
+		//메인페이지 오늘 업무시간 리스트
+		logger.info("EmpLogic => 오늘 업무시간 리스트");
 		List<Map<String, Object>> rList = new ArrayList<>();
 		rList = empDao.commuteList(pMap);
 		return rList;
@@ -77,6 +77,13 @@ public class EmpLogic {
 		logger.info("EmpLogic => 내 정보 리스트 => password 설정");
 		String result = empDao.newPassword(pMap);
 		return result;
+	}
+
+	public List<Map<String, Object>> reMain(Map<String, Object> pMap) {
+		logger.info("EmpLogic => reMain 리스트");
+		List<Map<String, Object>> rList= new ArrayList<Map<String,Object>>();
+		rList = empDao.reMain(pMap);
+		return rList;
 	}
 
 }

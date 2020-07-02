@@ -1,5 +1,11 @@
+<%@page import="org.apache.ibatis.javassist.bytecode.stackmap.BasicBlock.Catch"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+<%
+	List<Map<String,Object>> rlist = (List<Map<String,Object>>)request.getAttribute("dispatchList");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,6 +26,61 @@ pageEncoding="UTF-8"%>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=39e05403ed4b21e961251256b8fff8ed&libraries=services"></script>
+
+<script type="text/javascript">
+	
+	function outsideWorker(){
+		var lat = "";
+		var lng = "";
+		var doc = "";
+		var doc2 = "";
+		var workername = $("#worker option:selected").val();
+		
+		$.ajax({
+			url : "http://localhost:5000/work/kimchiman.erp?cud=outsideSEL&emp_no="+workername
+		   ,method : "get"
+		   ,success : function(result){
+			   doc = JSON.stringify(result);
+			   doc2 = JSON.parse(doc);
+			  lat = doc2[0].DL_LATITUDE ;
+			  lng = doc2[0].DL_LONGITUDE;
+				    $("#work_name").val(doc2[0].DL_NAME);
+				    $("#work_num").val(doc2[0].DL_TEL);
+				    $("#work_addr").val(doc2[0].DL_ADDRESS);
+				    $("#emp_no").val(doc2[0].EMP_NAME);
+				    $("#emp_phone").val(doc2[0].EMP_PHONE);
+				    $("#start").val(doc2[0].DP_SDATE);
+				   	$("#end").val(doc2[0].DP_EDATE);
+			        $("#lat").val(doc2[0].DL_LATITUDE);
+			        $("#lng").val(doc2[0].DL_LONGITUDE);
+	
+			    //지도를 미리 생성
+			    var map = new daum.maps.Map(mapContainer, mapOption);
+
+			    var marker = new daum.maps.Marker({
+			        position: new daum.maps.LatLng(50.537187, 127.005476),
+			        map: map
+			    	});
+			    var infoWindow;
+			   
+			      var coords = new daum.maps.LatLng(lat, lng);
+			                       
+			                        map.setCenter(coords);
+			                        // 마커를 결과값으로 받은 위치로 옮긴다.
+			                        marker.setPosition(coords)
+			                        daum.maps.event.addListener(marker,'click',function(){
+			                           infoWindow.open(map,marker);
+			                        
+			                        });
+			    
+			    mapContainer.style.display = "block";
+			    map.relayout();	
+			    
+		}
+	});
+	}
+		
+</script>
 
 </head>
 <body class="sb-nav-fixed">
@@ -49,17 +110,24 @@ pageEncoding="UTF-8"%>
 									</div>
 									<!-- 콤보박스 -->
 									<div class="col-8">
-										<select class="form-control">
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-											<option>5</option>
+										<select class="form-control" id="worker">
+										<% 
+										try{
+										for(int i=0; i<rlist.size();i++){
+										Map<String,Object> rMap = rlist.get(i);
+										%>
+											<option value="<%=rMap.get("EMP_NO")%>"><%=rMap.get("EMP_NAME")%></option>
+										<%
+										}
+										}catch(Exception e){
+											e.printStackTrace();
+										}
+										%>
 										</select>
 									</div>
 									<!-- 버튼 -->
 									<div class="col-2">
-										<button class="btn btn-secondary">조회</button>
+										<button class="btn btn-secondary" onclick="outsideWorker()">조회</button>
 									</div>
 								</div>
 								<!-- 회사정보 -->
@@ -74,7 +142,7 @@ pageEncoding="UTF-8"%>
 									</div>
 
 									<div class="col-8">
-										<input readonly class="form-control mr-2" id="searchLat"
+										<input readonly class="form-control mr-2" id="work_name"
 											type="search" placeholder="회사명" aria-label="Search">
 									</div>
 								</div>
@@ -85,7 +153,7 @@ pageEncoding="UTF-8"%>
 									</div>
 
 									<div class="col-8">
-										<input readonly class="form-control mr-2" id="searchLat"
+										<input readonly class="form-control mr-2" id="work_num"
 											type="search" placeholder="회사명" aria-label="Search">
 									</div>
 								</div>
@@ -96,7 +164,7 @@ pageEncoding="UTF-8"%>
 									</div>
 
 									<div class="col-8">
-										<input readonly class="form-control mr-2" id="searchLat"
+										<input readonly class="form-control mr-2" id="work_addr"
 											type="search" placeholder="회사명" aria-label="Search">
 									</div>
 								</div>
@@ -112,7 +180,7 @@ pageEncoding="UTF-8"%>
 									</div>
 
 									<div class="col-8">
-										<input readonly class="form-control mr-2" id="searchLat"
+										<input readonly class="form-control mr-2" id="emp_no"
 											type="search" placeholder="회사명" aria-label="Search">
 									</div>
 								</div>
@@ -123,7 +191,7 @@ pageEncoding="UTF-8"%>
 									</div>
 
 									<div class="col-8">
-										<input readonly class="form-control mr-2" id="searchLat"
+										<input readonly class="form-control mr-2" id="emp_phone"
 											type="search" placeholder="회사명" aria-label="Search">
 									</div>
 								</div>
@@ -134,7 +202,7 @@ pageEncoding="UTF-8"%>
 									</div>
 
 									<div class="col-8">
-										<input readonly class="form-control mr-2" id="searchLat"
+										<input readonly class="form-control mr-2" id="start"
 											type="search" placeholder="회사명" aria-label="Search">
 									</div>
 								</div>
@@ -145,7 +213,7 @@ pageEncoding="UTF-8"%>
 									</div>
 
 									<div class="col-8">
-										<input readonly class="form-control mr-2" id="searchLat"
+										<input readonly class="form-control mr-2" id="end"
 											type="search" placeholder="회사명" aria-label="Search">
 									</div>
 								</div>
@@ -160,8 +228,8 @@ pageEncoding="UTF-8"%>
 							<div class="col-6">
 								<div class="row" style="padding: 5px; text-align: right;">
 									<div class="col-12">
-										<button class="btn btn-secondary">파견지 등록</button>
-										<button class="btn btn-secondary">파견지 조회</button>
+										<button class="btn btn-secondary" onclick="location.href='http://localhost:5000/work/outsideWorkPlaceEdit.jsp'">파견지 등록</button>
+										<button class="btn btn-secondary" onclick="location.href='http://localhost:5000/work/outsideWorkPlace.jsp'">파견지 조회</button>
 									</div>
 								</div>
 								<div class="col-md">
@@ -183,12 +251,13 @@ pageEncoding="UTF-8"%>
 <!-- 탑메뉴 사용 -->
 <script src="../common/js/topNav.js"></script>
 <!-- 사이드 메뉴 사용 -->
-<script src="../common//js/sideNav.js"></script>
+<script src="../common//js/sideNav.js?ver=2?"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous" ></script>
 <script src="../common/scripts.js"></script>
 <!-- 버거 메뉴 활성화 -->
 
 		<script type="text/javascript">
+		
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 				    mapOption = {
 			         center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
@@ -201,7 +270,7 @@ pageEncoding="UTF-8"%>
 			 var geocoder = new daum.maps.services.Geocoder();
 			 //마커를 미리 생성
 			 var marker = new daum.maps.Marker({
-			     position: new daum.maps.LatLng(37.537187, 127.005476),
+			     position: new daum.maps.LatLng(lat, lng),
 			     map: map
 			 	});
 			
@@ -233,12 +302,13 @@ pageEncoding="UTF-8"%>
 				$("#mb").style.height = screen.height+ 'px'; */
 			
 				// 이동할 위도 경도 위치를 생성합니다 
-				var moveLatLon = new kakao.maps.LatLng(37.537187, 127.005476);
+				var moveLatLon = new kakao.maps.LatLng(lat, lng );
 				// 지도 레벨 설정( 1~14 낮을 수록 확대)
 				 // 현재 맵 보다 확대해서 표시	
 				map.relayout();  // 지도의 레이 아웃을 재 정렬합니다.
 				map.setCenter(moveLatLon); // 지도 중심을 이동 시킵니다
 			});
+			
 			</script>
 </body>
 </html>

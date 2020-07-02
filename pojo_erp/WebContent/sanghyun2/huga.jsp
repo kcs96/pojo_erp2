@@ -87,8 +87,6 @@
 <body>  
         <div class="page"  >
             <div class="subpage" id="content">
-<form id="forms_name">
-<input type="hidden" name="cud" value="workAddSendDoc">
 <table style="margin-left: auto; margin-right: auto;" border="2" width="650" 
 		 cellspacing=0>
 	<tr id="tableTr">
@@ -110,7 +108,7 @@
 	<tr>
     <th width="123"  class="auto-style3">성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명 </th>
     <td width="201">
-    <input type="text"  id="ap_reporter" name="ap_reporter"class="wrap2"style=" height:50px;line-height: 45px; width:98%; border: 0;">
+    <input type="text"  id="ap_reporter"name="ap_reporter"class="wrap2"style=" height:50px;line-height: 45px; width:98%; border: 0;">
     </td>
     <th width="111" class="auto-style3">부 서 명</th>
     <td width="209">
@@ -176,7 +174,6 @@
 </td>
 </tr>
 </table>
-            </form>
 </div>
 </div>
 </div>

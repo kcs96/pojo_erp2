@@ -74,19 +74,26 @@
 }
 .sb-sidenav .sb-sidenav-menu .nav .sb-sidenav-menu-heading {
   padding: 1.75rem 1rem 0.75rem;
-  font-size: 0.75rem;
+  font-size: 3rem;
   font-weight: bold;
   text-transform: uppercase;
 }
+
+.nav-link {
+    display: block;
+    padding: 1rem 1.5rem;
+}
+
+
 .sb-sidenav .sb-sidenav-menu .nav .nav-link {
-  display: flex;
-  align-items: center;
-  padding-top: 1.2rem;
-  padding-bottom: 1.2rem;
-  position: relative;
+    display: flex;
+    align-items: center;
+    padding-top: 2.5rem;
+    padding-bottom: 1.5rem;
+    position: relative;
 }
 .sb-sidenav .sb-sidenav-menu .nav .nav-link .sb-nav-link-icon {
-  font-size: 0.9rem;
+  font-size: 1.6rem;
 }
 .sb-sidenav .sb-sidenav-menu .nav .nav-link .sb-sidenav-collapse-arrow {
   display: inline-block;
@@ -170,10 +177,10 @@
 
 .navbar-brand {
   display: inline-block;
-  padding-top: 0.3125rem;
+  padding-top: 0.3180rem;
   padding-bottom: 0.3125rem;
-  margin-right: 1rem;
-  font-size: 1.7rem;
+  margin-right: 2rem;
+  font-size: 2.6rem;
   line-height: inherit;
   white-space: nowrap;
 }
@@ -219,8 +226,8 @@
 }
 .sb-topnav .navbar-brand {
   width: 225px;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 2.5rem;
+  padding-right: 1.2rem;
   margin: 0;
 }
 .sb-topnav.navbar-dark #sidebarToggle {
@@ -231,7 +238,7 @@
 
 body {
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-  padding: 30px;
+  /* padding: 30px; */
 }
 
 .dropNewEvent {
