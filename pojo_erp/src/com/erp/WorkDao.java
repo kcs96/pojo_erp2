@@ -72,7 +72,7 @@ public class WorkDao {
 	public List<Map<String, Object>> branchList(Map<String, Object> pMap) {
 		//지사 관리 이벤트 탭
 		logger.info("Dao : 지사관리 호출 성공");
-		List<Map<String,Object>> rlist = null;
+		List<Map<String,Object>> rlist = new ArrayList<Map<String,Object>>();
 		sqlSes.selectOne("PROC_BRANCHLIST",pMap);
 		rlist = (List<Map<String,Object>>)pMap.get("key");
 		logger.info("Dao branchList : " + rlist.size());
@@ -152,6 +152,7 @@ public class WorkDao {
 	    	logger.info("Dao workSelEmp : " + rlist.size());
 		return rlist;
 	}
+	
 	public int workUpdEmp(Map<String, Object> pMap) {
 		int result = 0;
 		result = sqlSes.update("workUpdEmp",pMap);
@@ -231,7 +232,7 @@ public class WorkDao {
 		return result;
 	}
 	public String deptUpdSchedule(Map<String, Object> pMap) {
-		//부서일정추가 버튼 이벤트
+		//부서일정수정 버튼 이벤트
 		logger.info("workDao => 부서 일정 수정 호출"); 
 		String result ="";
 		sqlSes.selectOne("proc_deptSchUpd",pMap);
@@ -239,8 +240,9 @@ public class WorkDao {
 		return result;
 	}
 	public int deptDelSchedule(Map<String, Object> pMap) {
-		logger.info("workDao => 개인 일정 삭제 호출"); 
+		logger.info("workDao => 부서 일정 삭제 호출"); 
 		int result=sqlSes.delete("work_deptSchDel",pMap);
+		sqlSes.commit();
 		return result;
 	}
 	public int workAddDoc(Map<String, Object> pMap) {
@@ -258,13 +260,20 @@ public class WorkDao {
 	public List<Map<String, Object>> outsideSEL(Map<String, Object> pMap) {
 		//파견사원 조회 버튼 insert here
 		logger.info("Dao : 파견사원 조회 버튼 호출 성공");
-		List<Map<String,Object>> rlist = null;
+		List<Map<String,Object>> rlist = new ArrayList<Map<String,Object>>();
 		rlist = sqlSes.selectList("sel_empDispatch",pMap);
 		return rlist;
 	}
-	
-	
-	//ModelAndView 영역 
+	public List<Map<String, Object>> deptEmp(Map<String, Object> pMap) {
+		//파견사원 조회 버튼 insert here
+				logger.info("Dao : 부서 일정 부서 사원 이름 호출 성공");
+				List<Map<String,Object>> rlist = new ArrayList<Map<String,Object>>();
+				sqlSes.selectOne("proc_deptEmp",pMap);
+				rlist = (List<Map<String,Object>>)pMap.get("key");
+				logger.info("rslit.size() : " + rlist.size()); 
+				return rlist;
+	}
+	//받은 결재함 
 	public List<Map<String, Object>> app_get(Map<String, Object> pMap) {
 		// TODO Auto-generated method stub
 		logger.info("DAO : appGet호출");
@@ -273,11 +282,13 @@ public class WorkDao {
 		logger.info("applist : "+ applist);
 		return applist;
 	}
+	//보낸결재함
 	public List<Map<String, Object>> app_set(Map<String, Object> pMap) {
 		logger.info("DAO : appSet호출");
 		List<Map<String,Object>> applist = null;
 		applist = sqlSes.selectList("app_setList",pMap);
 		return applist;
 	}
+	
 	
 }

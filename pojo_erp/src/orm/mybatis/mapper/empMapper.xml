@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="orm.mybatis.mapper.empMapper">
 	<resultMap id="bbmap" type="java.util.Map"/>
+	 
+	<resultMap id="testMap" type="map">
+		<result property="filedata" column="FILEDATA" jdbcType="BLOB"/>
+	</resultMap>
 	
 <!--=====================================로그인 화면 ======================================-->
 	<!-- 로그인 프로시저  -->
-	<select id="proc_empLogin" parameterType="map" statementType="CALLABLE">
+	<select id="proc_empLogin" parameterType="map" statementType="CALLABLE" resultMap="testMap">
 		{call proc_empLogin(#{emp_no},#{emp_pw}
 										   ,#{key,jdbcType=CURSOR
 		                                   , mode=OUT
@@ -16,17 +20,34 @@
 
 <!--=====================================메인 화면 탭 ======================================-->
 	<!-- 내정보 수정클릭시 내 리스트 -->
-  	<select id="PROC_NEMPLIST" parameterType="map" statementType="CALLABLE">
+<!--   	<select id="PROC_NEMPLIST" parameterType="map" statementType="CALLABLE">
 		{ call PROC_NEMPLIST(#{emp_no}
+										   ,#{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=bbmap})}
+	</select> -->
+	
+	
+	
+	<!-- 내정보 수정클릭시 내 리스트 -->
+  	<select id="PROC_EMPTEST" parameterType="map" statementType="CALLABLE">
+		{ call PROC_EMPTEST(#{emp_no}
 										   ,#{key,jdbcType=CURSOR
 		                                   , mode=OUT
 		                                   , javaType=java.sql.ResultSet
 		                                   , resultMap=bbmap})}
 	</select>
 	
+	
+	
+	
+	
+	
+	
 	<!-- 패스워드 변경 검증 -->
   	<select id="proc_newPassword" parameterType="map" statementType="CALLABLE" resultType="String">
-		{ call proc_newPassword(#{emp_no},#{emp_pw},#{new_pw},#{new_repw}
+		{ call proc_newPassword(#{emp_no},#{old_pw},#{new_pw},#{new_repw}
 										   , #{msg,mode=OUT,jdbcType=VARCHAR})}
 	</select>
 	
@@ -62,14 +83,16 @@
 		                                   , resultMap=bbmap})}
 	</select>
 	
-	<!-- 회원 수정 버튼 클릭 이벤트 -->
+	<!-- 회원 수정 저장 버튼 클릭 이벤트 -->
 	<insert id="myUpdImformation" parameterType="map">
 		UPDATE emp SET    
-	        emp_photo = #{emp_photo}
-	        ,emp_pw  = #{emp_pw}
-	        ,emp_phone  = #{emp_phone}
-	        ,emp_email = #{emp_email}
-	      ,emp_address = #{emp_address}
+	        emp_photo = #{EMP_PHOTO}
+	        ,emp_pw  = #{EMP_PW}
+	        ,emp_phone  = #{EMP_PHONE}
+	        ,emp_email = #{EMP_EMAIL}
+	      ,emp_zipcode = #{EMP_ZIPCODE}
+	      ,emp_address = #{EMP_ADDRESS}
+	      ,emp_detailaddress = #{EMP_DETAILADDRESS}
 	WHERE emp_no = #{emp_no}
 	</insert>
 	

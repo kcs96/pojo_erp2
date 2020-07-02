@@ -4534,7 +4534,7 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 
 @media ( min-width :768px) {
 	.navbar {
-		border-radius: 4px
+		/* border-radius: 4px */
 	}
 }
 
@@ -7400,4 +7400,4 @@ button.close {
 		display: none !important
 	}
 }
-/*# sourceMappingURL=bootstrap.min.css.map */
+/* # sourceMappingURL=bootstrap.min.css.map */

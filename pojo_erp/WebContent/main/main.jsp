@@ -1,7 +1,19 @@
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <%
-	int timeGap = 200;
+	int timeGap = 0;
+	boolean flag = false;
+	List<Map<String ,Object>> inOutList =(List<Map<String,Object>>) request.getAttribute("taskTimeList");
+	 if(inOutList.size() != 0){
+		Map<String, Object> rmap = inOutList.get(0);
+		timeGap = Integer.parseInt(rmap.get("WORK_MINUTE").toString());
+		flag = true;
+	} else {
+		//timeGap = 0;
+		flag = false;
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -140,11 +152,13 @@ pageEncoding="UTF-8"%>
 		<div id="emp_table" style="width: 100%; height: 300px;">
 			<div class="table-responsive">
 				<table id="testTable" class="table table-hover" data-toggle="table"
-					data-url="../mihyun_main/SearchJson.json">
+					data-url="inoutList.erp?cud=inoutList">
 					<thead class="thead-light">
 						<tr>
-							<th data-field="CF_NAME">상태</th>
-							<th data-field="DEPT_NAME">시간</th>
+							<th data-field="CM_GOTOWORK">출근</th>
+							<th data-field="CM_GOTOHOME">퇴근</th>
+							<th data-field="CM_OUTTIME">외출</th>
+							<th data-field="CM_COMEBACK">복귀</th>
 						</tr>
 					</thead>
 				</table>
@@ -157,6 +171,7 @@ pageEncoding="UTF-8"%>
 
 		<h2 style="text-align: center;">회의실</h2>
 		<div id="cf_table" style="width: 100%;; height: 300px;"></div>
+		<!-- <script src="../mihyun_main/js/react/cfTableContainer.bundle.js"></script> -->
 		<script src="../mihyun_main/js/react/cfTableContainer.bundle.js"></script>
 		<hr>
 	</div>
@@ -175,18 +190,6 @@ pageEncoding="UTF-8"%>
 		<div id="text"></div>
 		<br>
 		<div class="container">
-			<!-- <div class="row">
-		      		<div class="col-lg-12" style="height:100px;">
-						<img id="mar" src="../img/mar.png" style="width: 100px; left: 0px; bottom: 30px; position: absolute;">
-						<div id="clock" style="left: 20px; width: 100px; bottom: 60px; font-size: 1em; font-weight: bold; position: absolute;">현재시간</div>
-					</div>
-		      	</div>
-			      <div class="row">
-				      <div class="col-lg-12">
-				      <img id="men" alt="달리는 사람" src="../img/run2.gif" style="width:80px; height:100px; left: 0px; position: absolute;"/>float:left;
-				      <i class="fas fa-home" style="width:100px; height:100px; float:right;"></i>
-				      </div>
-			      </div> -->
 			<div class="row">
 				<div class="col-lg-12">
 					<table style="width: 100%; height: 100%;">
@@ -288,9 +291,10 @@ pageEncoding="UTF-8"%>
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		var timeGap =
-<%=timeGap%>
-	;
+		var flag = <%=flag %>
+		if(flag == true){
+	var timeGap =<%=timeGap%>;
+	/* 	var timeGap =500; */
 
 		if (timeGap < 60) {//출발 0시간
 			function start1() {
@@ -332,12 +336,13 @@ pageEncoding="UTF-8"%>
 				intervel = setInterval(clockAutoLoad8, 1000);
 			}
 			start8();
-		} else if (timeGap > 500 && timeGap <= 560) {
+		} else if (timeGap > 500 ) {
 			function start9() { //퇴근 8시간
 				intervel = setInterval(clockAutoLoad9, 1000);
 			}
 			start9();
 		}
+	}
 	});
 </script>
 
@@ -361,7 +366,7 @@ pageEncoding="UTF-8"%>
 <!-- 탑메뉴 사용 -->
 <script src="../common/js/topNav.js?after"></script>
 <!-- 사이드 메뉴 사용 -->
-<script src="../common/js/sideNav.js"></script>
+<script src="../common/js/sideNav.js?ver=2"></script>
 
 <script src="../common/scripts.js"></script>
 <!-- 버거 메뉴 활성화 -->

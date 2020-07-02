@@ -56,7 +56,7 @@ pageEncoding="UTF-8"%>
 		             <div class="card-header">
 		                <i class="fas fa-table mr-1"></i>
 		                <button type="button" class="btn btn-info float-" id="b" value="로그 조회" onClick="manager_log_content()" style="border: 3px solid white; border-radius: 10px;">로그조회</button>
-		                <button type="button" class="btn btn-info float-right" style="border: 3px solid white; border-radius: 10px; padding-bottom: 5px; margin-bottom: 15px;"onClick="window.print()">출력</button>
+		                <button type="button" class="btn btn-info float-right" style="border: 3px solid white; border-radius: 10px; padding-bottom: 5px; margin-bottom: 15px;" onClick="window.print()">출력</button>
 		              </div>
 		              
 					<div id="log_content">
@@ -90,7 +90,7 @@ pageEncoding="UTF-8"%>
     <!-- 탑메뉴 사용 -->
     <script src="../common/js/topNav.js"></script>
     <!-- 사이드 메뉴 사용 -->
-    <script src="../common/js/sideNav.js"></script>
+    <script src="../common/js/sideNav.js?ver=2"></script>
     
     <script src="../common/scripts.js"></script>
     

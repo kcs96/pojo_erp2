@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="orm.mybatis.mapper.myServiceMapper">
-	<resultMap id="smap" type="map"/>
+	<resultMap id="smap" type="map">
+		<result property="_id" column="MY_NO" jdbcType="NUMERIC"/>
+		<result property="title" column="MY_TITLE" jdbcType="VARCHAR"/>
+		<result property="description" column="MY_MEMO" jdbcType="VARCHAR"/>
+		<result property="start" column="MY_SDATE" jdbcType="VARCHAR"/>
+		<result property="end" column="MY_EDATE" jdbcType="VARCHAR"/>
+		<result property="type" column="MY_TYPE" jdbcType="VARCHAR"/>
+	   <!-- <result property="username" column="EMP_NO" jdbcType="NUMERIC"/> -->
+		<result property="allDay" column="MY_ALLDAY" jdbcType="VARCHAR"/>
+		<result property="backgroundColor" column="MY_BGCOLOR" jdbcType="VARCHAR"/>
+		<result property="textColor" column="MY_TEXTCOLOR" jdbcType="VARCHAR"/>
+	</resultMap>
 	
 <!--=====================================출퇴 관리 탭======================================-->	
 	<!-- 출퇴관리 테이블(당일만) 프로시저 -->
@@ -24,6 +35,15 @@
 		                                   , javaType=java.sql.ResultSet
 		                                   , resultMap=smap})}
 	</select>
+	
+		<!-- 오늘 일정 리스트 chart 가져오기 -->
+	<select id="proc_myschedulechart" parameterType="map" statementType="CALLABLE">
+		{ call proc_myschedulechart(#{emp_no},  #{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=smap})}
+	</select>
+
 <!--=====================================출퇴 관리 탭 끝======================================-->	
 
 
@@ -32,7 +52,18 @@
 
 	<!--- 당월,전체 급여액 리스트 프로시저  -->
 	<select id="proc_sal" parameterType="map" statementType="CALLABLE">
-		{ call proc_sal(#{btn_type},#{emp_no},#{sal_payday}, #{key,jdbcType=CURSOR
+		{ call proc_sal(#{emp_no}, #{key,jdbcType=CURSOR
+		                                   , mode=OUT
+		                                   , javaType=java.sql.ResultSet
+		                                   , resultMap=smap})}                    
+	</select>
+<!--=====================================급여관리 탭 끝======================================-->	
+
+<!--=====================================상세급여 조회======================================-->	
+
+	<!--- 당월,전체 급여액 리스트 프로시저  -->
+	<select id="proc_sal2" parameterType="map" statementType="CALLABLE">
+		{ call proc_sal2(#{emp_no},#{SAL_PAYDAY},#{key,jdbcType=CURSOR
 		                                   , mode=OUT
 		                                   , javaType=java.sql.ResultSet
 		                                   , resultMap=smap})}                    
@@ -42,11 +73,12 @@
 
 
 
+
 <!--=====================================개인일정 관리 탭======================================-->
 
 	<!-- 달의 일정 전체 리스트 가져오기 -->
 	<select id="proc_mySdList" parameterType="map" statementType="CALLABLE">
-		{ call proc_mySdList(#{emp_no}, #{my_day}, #{key,jdbcType=CURSOR
+		{ call proc_mySdList(#{emp_no}, #{key,jdbcType=CURSOR
 		                                   , mode=OUT
 		                                   , javaType=java.sql.ResultSet
 		                                   , resultMap=smap})}

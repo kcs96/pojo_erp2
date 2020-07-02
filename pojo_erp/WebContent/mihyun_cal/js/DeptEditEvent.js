@@ -26,11 +26,11 @@ var editEvent = function (event, element, view) {
 
     modalTitle.html('일정 수정');
     editTitle.val(event.title);
-    editUserName.val(event.username);
+    //editUserName.val(event.username);
     editStart.val(event.start.format('YYYY-MM-DD HH:mm'));
     editType.val(event.type);
     editDesc.val(event.description);
-    editColor.val(event.backgroundColor).css('color', event.backgroundColor);
+    editColor.val("#"+event.backgroundColor).css('color', "#"+event.backgroundColor);
 
     addBtnContainer.hide();
     modifyBtnContainer.show();
@@ -83,12 +83,21 @@ var editEvent = function (event, element, view) {
         //일정 업데이트
         $.ajax({
             type: "get",
-            url: "",
-            data: {
-                //...
-            },
+            url: "updDeptSch.erp?&ds_no="+event._id+"&ds_title="+event.title+"&ds_memo="+event.description+
+            "&ds_sdate="+event.start+"&ds_edate="+event.end+
+            "&ds_type="+event.type+"&ds_allday="+event.allDay+
+            "&ds_bgcolor="+event.backgroundColor,
+//            data: {
+//                //...
+//            },
             success: function (response) {
-                alert('수정되었습니다.')
+            	if(response == 0){
+            		alert('본인의 일정이 아닙니다.');
+            	}else{
+            		alert('수정되었습니다.');
+            	}
+                $('#calendar').fullCalendar('removeEvents');
+                $('#calendar').fullCalendar('refetchEvents');
             }
         });
 
@@ -99,18 +108,24 @@ var editEvent = function (event, element, view) {
 $('#deleteEvent').on('click', function () {
     
     $('#deleteEvent').unbind();
-    $("#calendar").fullCalendar('removeEvent', $(this).data('id'));
+    $("#calendar").fullCalendar('removeEvents', $(this).data('id'));
     eventModal.modal('hide');
 
     //삭제시
     $.ajax({
         type: "get",
-        url: "",
-        data: {
-            //...
-        },
+        url: "delDeptSch.erp?ds_no="+$(this).data('id'),
+//        data: {
+//            //...
+//        },
         success: function (response) {
-            alert('삭제되었습니다.');
+        	if(response == 0){
+        		alert('본인의 일정이 아닙니다.');
+        	}else{
+        		alert('삭제되었습니다.');
+        	}
+            $('#calendar').fullCalendar('removeEvents');
+            $('#calendar').fullCalendar('refetchEvents');
         }
     });
 

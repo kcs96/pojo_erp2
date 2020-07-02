@@ -40,7 +40,6 @@ public class WorkController implements Controller {
 			pMap.put("emp_no","10001");
 			pMap.put("ap_no",req.getParameter("ap_no"));
 			String result_accept = workLogic.workAgree(pMap);
-			
 			if(result_accept.equals("1")) {path="redirect:approval_my.jsp";}
 			else {path="redirect:errorPage.jsp";}
 			
@@ -62,11 +61,9 @@ public class WorkController implements Controller {
 		    //pMap.put("emp_no", session.getAttribute("emp_no"));
 		    pMap.put("emp_no","10001");
 		    String result_deny = workLogic.workDeny(pMap);
-		    logger.info("result_deny : "+ result_deny);
-			if(result_deny.equals("1")) {path="redirect:approval_my.jsp";}
-			//{path="redirect:xxx.jsp?result=결재성공";}
+			if(result_deny.equals("1")) {path="redirect:approval_my.jsp?result=결재성공";}
 			else if(result_deny.equals("결재가 마감된 문서입니다.")) {
-				{path="redirect:xxx.jsp?result=결재가 마감된 문서입니다.";}
+				{path="redirect:approval_my.jsp?result=결재가 마감된 문서입니다.";}
 			}
 			else {path="redirect:errorPage.jsp";}
 			
@@ -153,8 +150,9 @@ public class WorkController implements Controller {
 			result = 0;
 			/////////////////////// 실제 코드    /////////////////////
 			pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
+			//pMap.put("emp_no", session.getAttribute("emp_no"));
 			result = workLogic.workUpdEmp(pMap); 
-			if(result==1) {path="redirect:xxx.jsp";}
+			if(result==1) {path="redirect:../main/main.jsp";}
 			else {path="redirect:errorPage.jsp";}
 			///////////////////////  테스트 코드   /////////////////////
 			/*
@@ -188,9 +186,9 @@ public class WorkController implements Controller {
 			logger.info("Controller : 신규사원 등록 호출 성공");
 			/////////////////////// 실제 코드    /////////////////////
 			 pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
-			 pMap.put("emp_no", session.getAttribute("emp_no"));
+			 //pMap.put("emp_no", session.getAttribute("emp_no"));
 			 result =workLogic.workAddEmp(pMap);
-			 if(result==1) {path="redirect:xxx.jsp";} 
+			 if(result==1) {path="redirect:../main/main.jsp";} 
 			 else{path="redirect:errorPage.jsp";}
 			///////////////////////  테스트 코드   /////////////////////
 			/*
@@ -225,7 +223,8 @@ public class WorkController implements Controller {
 			/////////////////////// 실제 코드    /////////////////////
 			pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
 			String results = workLogic.workUpdPw(pMap);
-			if(result==1) {path="redirect:xxx.jsp";}
+			System.out.println("result: "+result);
+			if(result==1) {path="redirect:./saveSuccess.jsp";}
 			else {path="redirect:errorPage.jsp";}
 			///////////////////////  테스트 코드   /////////////////////
 			/*
@@ -253,8 +252,8 @@ public class WorkController implements Controller {
 			/////////////////////// 실제 코드    /////////////////////
 			pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
 			result = workLogic.workAddBranch(pMap);
-			if(result==1) {path="redirect:xxx.jsp";}
-			else {path="redirect:errorPage.jsp";}
+			if(result==1) {path="redirect:success.jsp";}
+			else {path="redirect:kimchizzige.jsp";}
 			
 			///////////////////////  테스트 코드   /////////////////////
 			/*
@@ -274,9 +273,14 @@ public class WorkController implements Controller {
 			/////////////////////// 실제 코드    /////////////////////	
 			pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
 			pMap.put("emp_no", session.getAttribute("emp_no"));
+			for(int i=0; i<pMap.size(); i++) {
+				String key = (String)pMap.keySet().toArray()[i];
+				//logger.info(key);
+				logger.info(key+"="+pMap.get(key));
+			}
 			String add_result = workLogic.deptAddSchedule(pMap);
 			System.out.println("일정등록 성공 여부=>"+add_result);
-			if(add_result.equals("1")) {path="redirect:xxx.jsp";}
+			if(add_result.equals("1")) {path="redirect:deptSchedule.jsp";}
 			else {path="redirect:errorPage.jsp";}
 			
 			///////////////////////  테스트 코드   /////////////////////
@@ -301,9 +305,15 @@ public class WorkController implements Controller {
 			/////////////////////// 실제 코드    /////////////////////	
 			pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
 			pMap.put("emp_no", session.getAttribute("emp_no"));
+			for(int i=0; i<pMap.size(); i++) {
+				String key = (String)pMap.keySet().toArray()[i];
+				//logger.info(key);
+				logger.info(key+"="+pMap.get(key));
+			}
 			String upd_result=workLogic.deptUpdSchedule(pMap);
-			if(upd_result.equals("1")) {path="redirect:xxx.jsp";}
-			else {path="redirect:errorPage.jsp";}
+			System.out.println("일정등록 성공 여부=>"+upd_result);
+			if(upd_result.equals("1")) {path="redirect:deptSchedule.jsp";}
+			else {path="redirect:deptScheduleUpderrorPage.jsp";}
 			
 			///////////////////////  테스트 코드   /////////////////////
 			/*
@@ -330,8 +340,8 @@ public class WorkController implements Controller {
 			pMap.put("emp_no", session.getAttribute("emp_no"));
 			pMap.put("ds_no", req.getParameter("ds_no"));
 			int del_result = workLogic.deptDelSchedule(pMap);
-			if(del_result==1) {path="redirect:xxx.jsp";}
-			else {path="redirect:errorPage.jsp";}
+			if(del_result==1) {path="redirect:deptSchedule.jsp";}
+			else {path="redirect:deptScheduleDelerrorPage.jsp";}
 			
 			///////////////////////  테스트 코드   /////////////////////
 			/*
@@ -345,7 +355,19 @@ public class WorkController implements Controller {
 			else {path="redirect:errorPage.jsp";}
 			*/
 		}
-		
+		 else if("deptEmp".equals(requestName)) {
+			 //부서일정 insert here
+			 logger.info("Controller : 부서일정 사원 이름 조회 호출 성공");
+			 /////////////////////// 실제 코드    /////////////////////
+			 List<Map<String,Object>> rlist =  new ArrayList<>();
+			 pMap = new HashMap<>();
+			 //pMap.put("emp_no", session.getAttribute("emp_no"));
+			 pMap.put("emp_no", 10001);
+			 rlist = workLogic.deptEmp(pMap);
+			 System.out.println("rlist => "+rlist.size());
+			 req.setAttribute("deptEmpList", rlist);
+			 path = "forward:deptSchedule.jsp";
+		 }
 		//////////////////////////////////////////////////////// forward 지역 /////////////////////////////////////////////////////////////////////
 		
 		else if(requestName.equals("workSelectPerson")) { //성공
@@ -358,35 +380,26 @@ public class WorkController implements Controller {
 			req.setAttribute("empList", rlist);
 			path = "forward:xxx.jsp";
 		}
-		else if(requestName.equals("workSelectEmp")) { ////성공
+		else if(requestName.equals("workSelectEmp")) { ////성공   //인사탭->재직사원조회->정보수정 버튼 
 			//정보수정 이벤트 탭 insert here
 			logger.info("Controller : 인사 정보수정 이벤트 호출 성공");
 			List<Map<String,Object>> rList = null;
 			pMap = new HashMap<>(); 
 			//pMap.put("emp_no", 10001); //테스트코드
-			pMap.put("emp_no",session.getAttribute("emp_no")); //실제코드
+			pMap.put("emp_no",req.getParameter("emp_no"));       // session.getAttribute("emp_no")); //실제코드
 			rList = workLogic.workSelectEmp(pMap);
 			System.out.println("사원에 대한 정보 => "+rList.size());
 			req.setAttribute("workEmpList", rList);
-			path = "forward:xxx.jsp";
+			logger.info("rList: "+rList);
+			path = "forward:emp_edit_all.jsp";
 		}
 		else if(requestName.equals("outsideWorker")) {  ///성공
 			//파견사원 조회
 			logger.info("Controller : 파견사원 조회 탭 호출");
-			List<Map<String,Object>> rlist = null;
+			List<Map<String,Object>> rlist = new ArrayList<Map<String,Object>>();
 			rlist = workLogic.outsideWorker();
 			req.setAttribute("dispatchList", rlist);
-			path="forward:./outsideWorker.jsp"; 
-		}
-		else if(requestName.equals("outsideSEL")) {  ///성공
-			//파견사원버튼 조회
-			logger.info("Controller : 파견사원 조회 버튼 호출");
-			pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
-			//pMap.put("EMP_NAME", req.getParameter("EMP_NAME"));
-			//pMap.put("EMP_NAME", "안철수");
-			List<Map<String,Object>> rlist = workLogic.outsideSEL(pMap);
-			req.setAttribute("sList", rlist);
-			path="forward:./outsideWorker.jsp";
+			path="forward:outsideWorker.jsp"; 
 		}
 		else if("personManageMent".equals(requestName)) {    ////////화면 미정
 			//인사조직도  insert here
@@ -455,7 +468,7 @@ public class WorkController implements Controller {
 			pMap = new HashMap<>();
 			rlist = workLogic.empRetire(pMap);//파라미터 없음
 			req.setAttribute("empRetireList", rlist);
-			path = "forward:xxx.jsp";
+
 		}
 		else if("branchList".equals(requestName)) {  //완료
 			//지사관리 insert here
@@ -464,19 +477,20 @@ public class WorkController implements Controller {
 			pMap = new HashMap<>();
 			rlist = workLogic.branchList(pMap);//파라미터 없음
 			req.setAttribute("branchList", rlist);
+
 			path = "forward:xxx.jsp";
 		}
-		else if("deptSchedule".equals(requestName)) {
-			//부서일정 insert here
-			logger.info("Controller : 부서일정 호출 성공");
-			/////////////////////// 실제 코드    /////////////////////
-			List<Map<String,Object>> rlist =  new ArrayList<>();
-			pMap = new HashMap<>();
-			pMap.put("emp_no", session.getAttribute("emp_no"));
-			pMap.put("dept_day",req.getParameter("dept_day"));
-			rlist = workLogic.deptSchedule(pMap);
-			req.setAttribute("deptScheduleList", rlist);
-			path = "forward:xxx.jsp";
+//		else if("deptSchedule".equals(requestName)) {
+//			//부서일정 insert here
+//			logger.info("Controller : 부서일정 호출 성공");
+//			/////////////////////// 실제 코드    /////////////////////
+//			List<Map<String,Object>> rlist =  new ArrayList<>();
+//			pMap = new HashMap<>();
+//			pMap.put("emp_no", session.getAttribute("emp_no"));
+//			pMap.put("dept_day",req.getParameter("dept_day"));
+//			rlist = workLogic.deptSchedule(pMap);
+//			req.setAttribute("deptScheduleList", rlist);
+//			path = "forward:xxx.jsp";
 			///////////////////////  테스트 코드   /////////////////////
 			/*
 			List<Map<String,Object>> rlist = new ArrayList<>();
@@ -487,18 +501,75 @@ public class WorkController implements Controller {
 			System.out.println("부서일정 리스트 =>"+rlist.size());
 			req.setAttribute("deptScheduleList", rlist);
 			path = "forward:xxx.jsp";
-			*/
-		}
+			
+		}*/
 		return path;
 	}
 
+	
+//---------------------------ModelAndView--------------------------------------------------
+	
 	@Override
-	public ModelAndView process(String cud, HttpServletRequest req, HttpServletResponse res)
+	public ModelAndView process(String cud, HttpServletRequest req, HttpServletResponse res) 
 			throws ServletException, IOException {
-		HttpSession session = req.getSession();
 		ModelAndView mav = new ModelAndView(req,res);
-		Map<String,Object> pMap = null;
-		if("app_get".equals(cud)) {   //완료
+		HttpSession session = req.getSession();
+		Map<String, Object> pMap = null;
+		
+		 if(cud.equals("outsideSEL")) {  ///성공
+			//파견사원버튼 조회
+			logger.info("Controller : 파견사원 조회 버튼 호출");
+			pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
+			//pMap.put("EMP_NAME", req.getParameter("EMP_NAME"));
+			//pMap.put("EMP_NAME", "안철수");
+			List<Map<String,Object>> rlist = workLogic.outsideSEL(pMap);
+			mav.setViewName("outsideworker");
+			mav.addObject("outsideWorker", rlist);
+		}
+		 else if(cud.equals("branchList")) {  //완료
+			 //지사관리 insert here
+			 logger.info("Controller : 지사관리 호출 성공");
+			 List<Map<String,Object>> rlist = new ArrayList<Map<String,Object>>();
+			 pMap = new HashMap<>();
+			 rlist = workLogic.branchList(pMap);//파라미터 없음
+			 mav.setViewName("outsideWorkPlace");
+			 mav.addObject("outsideWorkPlace", rlist);
+		 }
+	
+		if("empList".equals(cud)) {   //완료
+			//사원조회 insert here
+			logger.info("Controller : 사원관리 호출 성공");
+			List<Map<String,Object>> rlist =  new ArrayList<>();
+			pMap = new HashMap<>();
+			rlist = workLogic.empList(pMap); //파라미터 없음
+			mav.addObject("empList", rlist); //mav.addObject 이게 req.setAttribute와 같다  //empList 가 포워드를 타고 같이 넘어간다.
+			mav.setViewName("jsonEmpList");
+		}
+		else if("empRetire".equals(cud)) {   //완료
+			//퇴직사원조회 insert here
+			logger.info("Controller : 퇴직사원관리 호출 성공");
+			List<Map<String,Object>> rlist =  new ArrayList<>();
+			 pMap = new HashMap<>();
+			rlist = workLogic.empRetire(pMap);//파라미터 없음
+			mav.addObject("empRetireList", rlist);
+			mav.setViewName("jsonEmpListOff"); //페이지 이름만 넣어야 한다. 앞뒤 경로는 다 붙을 예정
+		}
+		////////////////////////부서 일정 시작///////////////////////////////
+		else 	if("deptSchedule".equals(cud)) {
+			//부서일정 insert here
+			logger.info("Controller : 부서일정 호출 성공");
+			/////////////////////// 실제 코드    /////////////////////
+			List<Map<String,Object>> rlist =  new ArrayList<>();
+			pMap = new HashMap<>();
+			pMap.put("emp_no", session.getAttribute("emp_no"));
+			//pMap.put("emp_no", 10001);
+			//pMap.put("dept_day",req.getParameter("dept_day"));
+			rlist = workLogic.deptSchedule(pMap);
+			mav.addObject("deptScheduleList", rlist);
+			mav.setViewName("jsonDeptSchedule");
+	 }
+		///////////////////// 결재함 //////////////////////////////
+		else if("app_get".equals(cud)) {   //받은 문서함
 	         //사원조회 insert here
 	         logger.info("Controller : 받은결재함 호출 성공");
 	         List<Map<String,Object>> applist =  new ArrayList<>();
@@ -523,6 +594,6 @@ public class WorkController implements Controller {
 		}
 		
 		return mav;
-	}
 
+	}
 }

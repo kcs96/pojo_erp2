@@ -57,14 +57,14 @@ public class WorkLogic {
 	public List<Map<String, Object>> branchList(Map<String, Object> pMap) {
 		//지사관리 이벤트 탭
 		logger.info("Logic : 지사관리 호출 성공");
-		List<Map<String,Object>> rlist = null;
+		List<Map<String,Object>> rlist = new ArrayList<Map<String,Object>>();
 		rlist = workDao.branchList(pMap);
 		return rlist;
 	}
 	public List<Map<String, Object>> deptSchedule(Map<String,Object> pMap) {
 		//부서일정 이벤트 탭
 		logger.info("Logic : 부서일정 호출 성공");
-		List<Map<String,Object>> rlist = null;
+		List<Map<String,Object>> rlist = new ArrayList<Map<String,Object>>();
 		rlist = workDao.deptSchedule(pMap);
 		return rlist;
 		
@@ -95,7 +95,6 @@ public class WorkLogic {
 		//결재 승인 이벤트 insert here
 		logger.info("Logic : 결재 승인 호출 성공");
 		String result = workDao.workAgree(pMap);
-		logger.info("Logic result : "+ result);
 		return result;
 	}
 	public String workDeny(Map<String, Object> pMap) {
@@ -221,20 +220,24 @@ public class WorkLogic {
 	}
 	public List<Map<String, Object>> outsideSEL(Map<String, Object> pMap) {
 		logger.info("Logic : 파견사원 조회 버튼 호출 성공");
-		List<Map<String,Object>> rlist = null;
+		List<Map<String,Object>> rlist = new ArrayList<Map<String,Object>>();
 		rlist = workDao.outsideSEL(pMap);
 		return rlist;
 	}
-	
-	
-	//	ModelAndView 영역
+	public List<Map<String, Object>> deptEmp(Map<String, Object> pMap) {
+		logger.info("Logic : 부서 일정 부서사원이름 호출 성공");
+		List<Map<String,Object>> rlist = new ArrayList<Map<String,Object>>();
+		rlist = workDao.deptEmp(pMap);
+		return rlist;
+	}
+	//받은 결재함 
 	public List<Map<String, Object>> app_get(Map<String, Object> pMap) {
 		logger.info("Logic :app_get 호출 성공");
 		List<Map<String,Object>> applist = new ArrayList<>();
 		applist = workDao.app_get(pMap);
 		return applist;
 	}
-	
+	//보낸 결재함
 	public List<Map<String, Object>> app_set(Map<String, Object> pMap) {
 		logger.info("Logic :app_set 호출 성공");
 		List<Map<String,Object>> applist = null;

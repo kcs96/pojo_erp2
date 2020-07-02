@@ -8,6 +8,9 @@ public class ControllerMapper {
 		Logger logger = Logger.getLogger(ControllerMapper.class);
 		Controller controller = null;
 		String commands[] = command.split("/"); 
+			for(int i=0; i<commands.length; i++) {
+				System.out.println("commands[i]: "+commands[i]);
+			}
 			
 			if(commands.length==2) { 
 				String work = commands[0];
@@ -15,6 +18,7 @@ public class ControllerMapper {
 				logger.info("work ==>"+work   );
 				logger.info("requestName ==>"+requestName);
 				if("main".equals(work)) {
+					logger.info("work가 main인 경우 => EmpController로 requestName을 파라미터로 가지고 간다.");
 					//로그인 컨트롤러
 					controller = new EmpController(requestName);
 				}else if("myService".equals(work)) {

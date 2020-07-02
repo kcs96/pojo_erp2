@@ -29,7 +29,7 @@ pageEncoding="UTF-8"%>
 				$("#emp_list").html(data);
 			}
 		});
-	}	
+	}
 	function emp_list_off(){
 		$.ajax({
 			url : "./emp_list_off.jsp",
@@ -126,7 +126,7 @@ pageEncoding="UTF-8"%>
       }
       window.operateEvents = {
         "click .button": function (e, value, row, index) {
-          window.location.href = "xxx.erp?emp_no=" + row.EMP_NO;
+          window.location.href = "workSelectEmp.erp?emp_no=" + row.EMP_NO;
         },
       };
     </script>
@@ -135,7 +135,7 @@ pageEncoding="UTF-8"%>
 	<!-- 탑메뉴 사용 -->
 	<script src="../common/js/topNav.js"></script>
 	<!-- 사이드 메뉴 사용 -->
-	<script src="../common//js/sideNav.js"></script>
+	<script src="../common//js/sideNav.js?ver=2"></script>
 
 	<script src="../common/scripts.js"></script>
 	<!-- 버거 메뉴 활성화 -->

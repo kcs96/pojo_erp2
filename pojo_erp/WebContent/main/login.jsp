@@ -19,6 +19,7 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
 <!--===============================================================================================-->
+
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css?a">
 <!--===============================================================================================-->
@@ -28,11 +29,9 @@
 		$("#loginForm").attr('action','login.erp');
 		$("#loginForm").submit();
 	}
-//
 </script>
 </head>
 <body>
-	
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100" style="background-color: #282828;">
@@ -86,7 +85,7 @@
 			</div>
 		</div>
 	</div>
-	
+	 
 	
 
 	

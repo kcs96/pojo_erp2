@@ -10,16 +10,17 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.log4j.Logger;
 
 public class EmpDao {
-	
 	Logger logger = Logger.getLogger(EmpDao.class);
+	
 	public SqlSessionFactory sqlMapper = null;
 	public SqlSession sqlSec = null;
 	private int result = 0;
 	public EmpDao() {
 		logger.info("EmpDao() 호출 성공"); 
 		sqlMapper= MyBatisCommonFactory.getSqlSessionFactory();
-		System.out.println(sqlMapper);
-		sqlSec = sqlMapper.openSession();
+		System.out.println("sqlMapper: "+sqlMapper);
+		sqlSec = sqlMapper.openSession(true);
+		System.out.println("sqlSec: "+sqlSec);
 	}
 	
 	public List<Map<String, Object>> login(Map<String, Object> loginMap) {
@@ -44,18 +45,19 @@ public class EmpDao {
 		return inoutList;
 	}
 
-	public List<Map<String, Object>> todayList(Map<String, Object> pMap) {
-		//오늘 일정 얻어오기
-		logger.info("EmpDao() => 메인페이지 오늘 일정 정보 담기"); 
-		List<Map<String, Object>> todayList = new ArrayList<>();
-		sqlSec.selectList("proc_myschedule",pMap);
-		todayList=(List<Map<String,Object>>)pMap.get("key");
-		return todayList;
-	}
+	
+//	  public List<Map<String, Object>> todayList(Map<String, Object> pMap) {
+//		  //오늘일정 얻어오기 
+//	 logger.info("EmpDao() => 메인페이지 일정 정보"); 
+//	 List<Map<String,Object>> todayList = new ArrayList<>();
+//	  sqlSec.selectList("proc_taskTime",pMap);
+//	  todayList=(List<Map<String,Object>>)pMap.get("key"); 
+//	  return todayList; }
+	 
 	
 	public List<Map<String, Object>> commuteList(Map<String, Object> pMap) {
 		//오늘 일정 얻어오기
-		logger.info("EmpDao() => 메인페이지 오늘 일정 정보 담기"); 
+		logger.info("EmpDao() => 오늘 업무시간 리스트"); 
 		List<Map<String, Object>> todayTaskList = new ArrayList<>();
 		sqlSec.selectList("proc_taskTime",pMap);
 		todayTaskList=(List<Map<String,Object>>)pMap.get("key");
@@ -67,15 +69,15 @@ public class EmpDao {
 		logger.info("EmpDao() => 메인페이지 회의실 예약 정보 담기"); 
 		List<Map<String, Object>> roomList = new ArrayList<>();
 		sqlSec.selectList("proc_todaycfr",pMap);
-		roomList=(List<Map<String,Object>>)pMap.get("key");
-
+		roomList = (List<Map<String,Object>>) pMap.get("key");
 		return roomList;
 	}
 
 	public int myUpdImformation(Map<String, Object> pMap) {
-		//내 정보 수정 저장
+		//내 정보 수정     저장 버튼
 		logger.info("EmpDao() => 내 정보 수정 저장버튼"); 
 		result=sqlSec.update("myUpdImformation",pMap);
+		logger.info("result: "+result);
 		return result;
 	}
 
@@ -83,7 +85,7 @@ public class EmpDao {
 		//내 정보 리스트 가져오기
 		logger.info("EmpDao() => 내 정보 설정 리스트 가져오기"); 
 		List<Map<String, Object>> myInfoList = new ArrayList<Map<String,Object>>();
-		sqlSec.selectOne("PROC_NEMPLIST",pMap);
+		sqlSec.selectOne("PROC_EMPTEST",pMap);//pMap = 10001
 		myInfoList=(List<Map<String, Object>>)pMap.get("key");
 		return myInfoList;
 	}
