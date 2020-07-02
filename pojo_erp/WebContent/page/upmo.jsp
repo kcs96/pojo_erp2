@@ -81,7 +81,7 @@
 <body>
 <div class="book">
         <div class="page">
-            <div class="subpage" id="content">
+            <div id="content">
           
 
 <form id="forms_name">

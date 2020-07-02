@@ -77,13 +77,11 @@
     }
 }
    </style> 
-   <script type="text/javascript">
    
-   </script>
-   </head> 
-<body>  
-        <div class="page">
-            <div class="subpage" id="content">
+   </head> 	
+<body>
+	<div class="page">
+            <div id="content">
 <form id="forms_name">
 <input type="hidden" name="cud" value="workAddSendDoc">
 <table style="margin-left: auto; margin-right: auto;" border="2" width="650" 

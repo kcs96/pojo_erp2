@@ -39,7 +39,7 @@ pageEncoding="UTF-8"%>
 					data-advanced-search="true"
 					data-select-item-name="selectItemName"
 					data-toolbar="#del"
-					data-url="http://localhost:5000/work/emp.erp?cud=app_get">
+					data-url="./emp.erp?cud=app_get">
 					<thead>
 						<tr>
 						<center>  		
@@ -48,9 +48,9 @@ pageEncoding="UTF-8"%>
 							<th data-field="state" data-checkbox="true" data-align="center" data-width="30%;"></th>
 							<th data-field="NO"  data-align="center" data-width="50%;" data-sortable="true">순번</th>
 							<th data-field="AP_TITLE" data-align="center" data-width="150%%;">제목</th>
-							<th data-field="AP_REPORTER" data-align="center" data-width="150%;">작성자</th>
+							<th data-field="AP_REPORTER" data-align="center" data-width="150%;" data-sortable="true">작성자</th>
 							<th data-field="AP_PROSESSINGDATE"  data-align="center" data-width="200%;" data-sortable="true">결재 기한</th>
-							<th data-field="AP_STATE" data-align="center" data-width="100%%;">결재 상태</th>
+							<th data-field="AP_STATE" data-align="center" data-width="100%%;"  data-sortable="true">결재 상태</th>
 							<th data-field="operate" data-formatter="operateFormatter" data-width="30%;" data-events="operateEvents" data-align="center">보기</th>
 						</tr>
 					</thead>
@@ -69,7 +69,7 @@ pageEncoding="UTF-8"%>
 					data-advanced-search="true"
 					data-select-item-name="selectItemName"
 					data-toolbar="#del2"
-					data-url="http://localhost:5000/work/emp.erp?cud=app_set">
+					data-url="./emp.erp?cud=app_set">
 					<thead>
 						<tr>
 						<center>  		
@@ -78,9 +78,9 @@ pageEncoding="UTF-8"%>
 		  					<th data-field="state" data-checkbox="true" data-width="30%;"></th>
 							<th data-field="NO"  data-align="center" data-width="80%;" data-sortable="true">순번</th>
 							<th data-field="AP_TITLE" data-align="center" data-width="300%%;">제목</th>
-							<th data-field="AP_REPORTER" data-align="center" data-width="150%;">작성자</th>
-							<th data-field="AP_CLOSEDATE"data-align="center" data-width="200%;">결재 마감</th>
-							<th data-field="AP_STATE"data-align="center" data-width="150%;">결재 상태</th>
+							<th data-field="AP_REPORTER" data-align="center" data-width="150%;" data-sortable="true">작성자</th>
+							<th data-field="AP_CLOSEDATE"data-align="center" data-width="200%;" data-sortable="true">결재 마감</th>
+							<th data-field="AP_STATE"data-align="center" data-width="150%;" data-sortable="true">결재 상태</th>
 							<th data-field="operate" data-formatter="operateFormatter" data-width="100px" data-events="operateEvents" data-align="center" data-width="150%;">확인</th>
 						</tr>
 					</thead>
@@ -160,7 +160,8 @@ pageEncoding="UTF-8"%>
 		 /* 테이블 버튼 이벤트 처리 부분  */
 	window.operateEvents = {
    	'click .button': function (e, value, row, index) {
-    		/*alert('버튼 클릭 row값 : ' + JSON.stringify(row.AP_REPORTER)) //이름 채번
+   			/*alert('버튼 클릭 row값 : ' + JSON.stringify(row))//버튼 로우 확인 
+   			alert('버튼 클릭 row값 : ' + JSON.stringify(row.AP_REPORTER)) //이름 채번
     		alert('버튼 클릭 row값 : ' + JSON.stringify(row.NO))//번호 채번 ""X
     		alert('버튼 클릭 row값 : ' + JSON.stringify(row.AP_TITLE))//번호 채번
     		alert('버튼 클릭 row값 : ' + JSON.stringify(row.AP_PROSESSINGDATE))//번호 채번
@@ -172,37 +173,27 @@ pageEncoding="UTF-8"%>
     		AP_TITLE = row.AP_TITLE.split("''");
     		alert("문자열 자름 : "+ AP_TITLE)
     		 */
-    		 
-    		 
+    		
     		ap_reporter = row.AP_REPORTER	//이름 채번 
     		//alert("문자열 자름 : "+ ap_reporter)
-    		
-    		
     		
     		no = row.NO		//번호 채번 
     		//alert("문자열 자름 : "+ no)
     		
-    		
     		fr_no = row.FR_NO	//양식번호 
     		//alert("문자열 자름 : "+ fr_no)
-    		
-    		
     		
     		ap_title = row.AP_TITLE	//제목 채번
     		//alert("문자열 자름 : "+ ap_title)
     		
-    		
     		ap_prosessingdate = row.AP_PROSESSINGDATE	//기한  채번	
     		//alert("문자열 자름 : "+ ap_prosessingdate)
-    	
     		
     		ap_dname = row.AP_DNAME	//부서  채번
     		//alert("문자열 자름 : "+ ap_dname)
     	
-    	
     		ap_content = row.AP_CONTENT	//문서 내용
     		//alert("문자열 자름 : "+ ap_content)
-    	
     	
     		ap_contact = row.AP_CONTACT	//사원 전화번호 
     		//alert("문자열 자름 : "+ ap_contact)
@@ -214,33 +205,32 @@ pageEncoding="UTF-8"%>
     		ap_appdate_3 = ap_appdate[2];	//일
     		//alert("날짜 : "+ ap_appdate_1+"  "+ ap_appdate_2+"  "+ ap_appdate_3)
     		
-    		
-    		
     		ap_bego = row.AP_BEGO	//사원 전화번호 
     		//alert("문자열 자름 : "+ ap_bego)
     		
-    		
-    		
     		ap_instructions = row.AP_INSTRUCTIONS	//사원 전화번호 
     		//alert("문자열 자름 : "+ ap_contact)
-    		
     	
     		ap_no = row.AP_NO	//문서 고유번호 
     		//alert("문자열 자름 : "+ ap_no)
-    	
+    		
+    		page_no = row.KEY
+    		//alert("page_no : " + page_no)
     		
     		location.href = './approval_get.jsp?ap_reporter='+ap_reporter
-    				+'&no='+no+'&fr_no='+fr_no+'&ap_title='+ap_title
+    				+'&no='+no +'&fr_no='+fr_no+'&ap_title='+ap_title
     					+'&ap_prosessingdate='+ap_prosessingdate+'&ap_dname='
     						+ap_dname+'&ap_content='+ap_content+'&ap_contact='+ap_contact
     						+'&ap_appdate='+ap_appdate+'&ap_appdate_1='+ap_appdate_1+'&ap_appdate_2='+ap_appdate_2+'&ap_appdate_3='+ap_appdate_3
-    						+'&ap_bego='+ap_bego+'&ap_instructions='+ap_instructions+'&ap_no='+ap_no
+    						+'&ap_bego='+ap_bego+'&ap_instructions='+ap_instructions+'&ap_no='+ap_no+'&key='+page_no
    
     }
  }
  /* 테이블 버튼 이벤트  처리 끝 */
 
 </script>
+
+
 
 
 <!-- 탑메뉴 사용 -->

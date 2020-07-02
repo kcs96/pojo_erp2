@@ -39,6 +39,7 @@ pageEncoding="UTF-8"%>
  	String ap_appdate_2 = request.getParameter("ap_appdate_2"); //월
  	String ap_appdate_3 = request.getParameter("ap_appdate_3"); //일
  	String ap_no = request.getParameter("ap_no"); //문서 고유번호
+ 	String page_no = request.getParameter("key"); //페이지 번호
  	
  	String null_check = "undefined"; //null체크
  	
@@ -91,19 +92,46 @@ pageEncoding="UTF-8"%>
 <!-- 파라미터 받기 끝 -->
 
 <script type="text/javascript">
-	function approval(){
+	
+
+	function approval(){//승인 모달에 승인 페이지 
 		ap_no = <%=ap_no%>
-		location.href="http://localhost:5000/work/workAgree.erp?ap_no="+ ap_no
+		location.href="./workAgree.erp?ap_no="+ ap_no
 	}
 
-	function dismissal(){
-		ap_no = <%=ap_no%>
-		alert("기각 버튼 호출 성공");
+	function dismissal(){ //기각 모달에 기각 페이지 
+		//alert("기각 버튼 호출 성공");
 		$("#f_gigag").attr("method","get");
 		$("#f_gigag").attr("action","workDeny.erp");
 		$("#f_gigag").submit();
 	}
-
+	
+	function page_print(){ //인쇄버튼 반응
+	//파라미터 값 추가 
+		ap_reporter = "<%=ap_reporter%>"
+		no = "<%=no%>"
+		fr_no= "<%=fr_no%>"
+		ap_title= "<%=ap_title%>"
+		ap_prosessingdate = "<%=ap_prosessingdate%>"
+		ap_dname = "<%=ap_dname%>"
+		ap_content = "<%=ap_content%>"
+		ap_contact = "<%=ap_contact%>"
+		ap_bego = "<%=ap_bego%>"
+		ap_instructions = "<%=ap_instructions%>"
+		ap_appdate = "<%=ap_appdate%>"
+		ap_appdate_1 = "<%=ap_appdate_1%>"
+		ap_appdate_2 = "<%=ap_appdate_2%>"
+		ap_appdate_3 = "<%=ap_appdate_3%>"
+		ap_no = "<%=ap_no%>"
+		
+	 		location.href = '../page/approval_print.jsp?ap_reporter='+ap_reporter
+				+'&no='+no+'&fr_no='+fr_no+'&ap_title='+ap_title
+				+'&ap_prosessingdate='+ap_prosessingdate+'&ap_dname='
+				+ap_dname+'&ap_content='+ap_content+'&ap_contact='+ap_contact
+				+'&ap_appdate='+ap_appdate+'&ap_appdate_1='+ap_appdate_1
+				+'&ap_appdate_2='+ap_appdate_2+'&ap_appdate_3='+ap_appdate_3+'&ap_bego='+ap_bego
+				+'&ap_instructions='+ap_instructions+'&ap_no='+ap_no
+	}
 
 </script>
 </head>
@@ -112,20 +140,18 @@ pageEncoding="UTF-8"%>
    <div id="layoutSidenav">
       <div id="layoutSidenav_nav"></div>
       <div id="layoutSidenav_content">
-         <main id="input_div">
            
-<div id="frame_div" style="border: 1px solid black;">
-  <div id="page_title" style="border-bottom: 2px solid gray; margin: 50px 30px;"><h2>받은 결재</h2></div>
-  	 <div id="page_contents" style="border: 1px solid black; max-width: 1730px; margin: 10px 100px;">
+
+	 <h2><div id="page_title" style="border-bottom: 2px solid gray; margin: 50px 30px;"/></h2>
+  	 <div id="page_contents" style="border: 1px solid black; max-width: 1530px; margin: 0px 50px;">
   	 
   	 
   	 <div class="row"><!--승인 기각버튼  -->
   	 <div  class="col-1"></div>
-	    <div style="margin-top:15px;"class="col-5">
-	    	<button   style="margin-right:5px;"class="btn btn-info" data-toggle="modal" data-target="#myModal">승인</button>
-	        <button   style="margin-right:5px;"class="btn btn-info" data-toggle="modal" data-target="#myModal1">기각</button>
-	 
-	       <!-- 드랍다운 -->
+	    <div style="margin-top:15px;" id= "btns" class="col-5">
+	        <button id= "btn_print" onclick="page_print()"  style="margin-right:5px;"class="btn btn-info" data-toggle="modal" >인쇄</button>
+	    	<button id= "btn_approval"  style="margin-right:5px;"class="btn btn-info" data-toggle="modal" data-target="#myModal">승인</button>
+	        <button id= "btn_dismissal"  style="margin-right:5px;"class="btn btn-info" data-toggle="modal" data-target="#myModal1">기각</button>
 
 			</div> <!--드랍다운 끝  -->
 			</div>
@@ -165,96 +191,108 @@ pageEncoding="UTF-8"%>
 		<hr style="border: solid 1px black;">
 	<div class="row">
 		<div class="col-1"></div>
-			<div style=" border:2px solid black;"class="col-10"id="test"></div>
-	</div>
-		<div class="col-1"></div>
-<!-- 	<!-- 이전꺼 보여주는 거 -->\
+			<div style=" border:2px solid black;"class="col-10"id="page"></div>
+	</div>		<div class="col-1"></div>
+
+<!-- 	<!-- 이전꺼 보여주는 거 -->
 	  <div class="row">
 		<div class="col-1"></div>
 		<div class="col-10"></div>
 	  </div>
-	<div class="col-1"></div> -->
+	<div class="col-1"></div>
 	</div>
 	</div>
 	  	<!--	페이지 나누기	  -->
 	  	 <script type="text/javascript">
 				page = <%=fr_no%>
-	  	 		if(page===1){	//사원 페이지
-	  	 			$(document).ready(function(){
-						$.ajax({
-							url:"../sanghyun2/huga.jsp"
-							,success:function(data){
-								$("#test").html(data);
-								$("#ap_reporter").val("<%=ap_reporter%>");
-								$("#ap_dname").val("<%=ap_dname%>");
-								$("#ap_prosessingdate").val("<%=ap_prosessingdate%>");
-								$("#ap_content").val("<%=ap_content%>");
-								$("#ap_contact").val("<%=ap_contact%>");
-								$("#ap_year").val("<%=ap_appdate_1%>");
-								$("#ap_month").val("<%=ap_appdate_2%>");
-								$("#ap_today").val("<%=ap_appdate_3%>");
-								$("#ap_namein").val("<%=ap_reporter%>"); 
-								
-							}
-						})
-					});	
-				}
-				else if(page===2){	//파견 페이지 
-	  	 			$(document).ready(function(){
-						$.ajax({
-							url:"../sanghyun2/paguns.jsp"
-							,success:function(data){
-								$("#test").html(data);
-								$("#ap_reporter").val("<%=ap_reporter%>");
-								$("#ap_dname").val("<%=ap_dname%>");
-								$("#ap_prosessingdate").val("<%=ap_prosessingdate%>");
-								$("#ap_content").val("<%=ap_content%>");
-								$("#ap_contact").val("<%=ap_contact%>");
-								$("#ap_year").val("<%=ap_appdate_1%>");
-								$("#ap_month").val("<%=ap_appdate_2%>");
-								$("#ap_today").val("<%=ap_appdate_3%>");
-								$("#ap_namein").val("<%=ap_reporter%>"); 
-							}
-						})
-					});	
-				}
-				if(page===3){	//업무보고서 
-	  	 			$(document).ready(function(){
-						$.ajax({
-							url:"../sanghyun2/upmo.jsp"
-							,success:function(data){
-								$("#test").html(data);
-								$("#ap_reporter").val("<%=ap_reporter%>");
-								$("#ap_appdate").val("<%=ap_appdate%>");
-								$("#ap_content").val("<%=ap_content%>");
-								$("#ap_bego").val("<%=ap_bego%>");
-								$("#ap_instructions").val("<%=ap_instructions%>");
-							}
-						})
-					});	
-				}
-				if(page===4){	//사직서 
-	  	 			$(document).ready(function(){
-						$.ajax({
-							url:"../sanghyun2/sagi.jsp"
-							,success:function(data){
-								$("#test").html(data);
-								$("#ap_reporter").val("<%=ap_reporter%>");
-								$("#ap_dname").val("<%=ap_dname%>");
-								$("#ap_prosessingdate").val("<%=ap_prosessingdate%>");
-								$("#ap_content").val("<%=ap_content%>");
-								$("#ap_contact").val("<%=ap_contact%>");
-								$("#ap_year").val("<%=ap_appdate_1%>");
-								$("#ap_month").val("<%=ap_appdate_2%>");
-								$("#ap_today").val("<%=ap_appdate_3%>");
-								$("#ap_namein").val("<%=ap_reporter%>"); 
-							}
-						})
-					});	
-				}
+				
+				$(document).ready(function(){
+		  	 			if(page===1){	//휴가 페이지
+		  	 			$.ajax({
+		  	 				url:"../page/huga.jsp"
+								,success:function(data){
+									$("#page").html(data);
+									$("#ap_reporter").val("<%=ap_reporter%>");
+									$("#ap_dname").val("<%=ap_dname%>");
+									$("#ap_prosessingdate").val("<%=ap_prosessingdate%>");
+									$("#ap_content").val("<%=ap_content%>");
+									$("#ap_contact").val("<%=ap_contact%>");
+									$("#ap_year").val("<%=ap_appdate_1%>");
+									$("#ap_month").val("<%=ap_appdate_2%>");
+									$("#ap_today").val("<%=ap_appdate_3%>");
+									$("#ap_namein").val("<%=ap_reporter%>"); 
+									
+								} //성공 했을 때
+		  	 			
+							}) //아작스 종료 
+						} //휴가 끝 
+		  	 			else if(page===2){	//파견 페이지 
+							$.ajax({
+									url:"../page/paguns.jsp"
+									,success:function(data){
+										$("#page").html(data);
+										$("#ap_reporter").val("<%=ap_reporter%>");
+										$("#ap_dname").val("<%=ap_dname%>");
+										$("#ap_prosessingdate").val("<%=ap_prosessingdate%>");
+										$("#ap_content").val("<%=ap_content%>");
+										$("#ap_contact").val("<%=ap_contact%>");
+										$("#ap_year").val("<%=ap_appdate_1%>");
+										$("#ap_month").val("<%=ap_appdate_2%>");
+										$("#ap_today").val("<%=ap_appdate_3%>");
+										$("#ap_namein").val("<%=ap_reporter%>"); 
+								}
+							})
+						
+					}else if(page===3){	//업무보고서 
+							$.ajax({
+									url:"../page/upmo.jsp"
+									,success:function(data){
+										$("#page").html(data);
+										$("#ap_reporter").val("<%=ap_reporter%>");
+										$("#ap_appdate").val("<%=ap_appdate%>");
+										$("#ap_content").val("<%=ap_content%>");
+										$("#ap_bego").val("<%=ap_bego%>");
+										$("#ap_instructions").val("<%=ap_instructions%>");
+								}
+							})	
+					}else if(page===4){	//사직서 
+							$.ajax({
+								url:"../page/sagic.jsp"
+								,success:function(data){
+									$("#page").html(data);
+									$("#ap_reporter").val("<%=ap_reporter%>");
+									$("#ap_dname").val("<%=ap_dname%>");
+									$("#ap_prosessingdate").val("<%=ap_prosessingdate%>");
+									$("#ap_content").val("<%=ap_content%>");
+									$("#ap_contact").val("<%=ap_contact%>");
+									$("#ap_year").val("<%=ap_appdate_1%>");
+									$("#ap_month").val("<%=ap_appdate_2%>");
+									$("#ap_today").val("<%=ap_appdate_3%>");
+									$("#ap_namein").val("<%=ap_reporter%>"); 
+								}
+							})
+					} 			
+		  	}) // $(document).ready처리 끝
+
+				
 			</script> 
 			<!--	페이지 나누기 끝	  -->
-		
+		<script>
+		$(document).ready(function(){
+			page_no = <%=page_no%>
+		if(page_no == "0"){
+			$('#btn_print').show();
+			$('#btn_approval').show();
+			$('#btn_dismissal').show();
+			$("#page_title").text("받은 결재함");
+		}else if(page_no == "1"){
+			$('#btn_print').show();
+			$('#btn_approval').hide();
+			$('#btn_dismissal').hide();
+			$("#page_title").text("보낸 결재함");
+		}
+		});
+		</script>
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
       <!-- Modal content-->
