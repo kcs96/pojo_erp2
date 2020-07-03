@@ -24,8 +24,28 @@ pageEncoding="UTF-8"%>
 
 <title>2RP PROGRAM</title>
 
+<script type="text/javascript">
+//<![CDATA[
+function printPage(){
+ var initBody;
+ window.onbeforeprint = function(){
+  initBody = document.body.innerHTML;
+  document.body.innerHTML =  document.getElementById('print').innerHTML;
+ };
+ window.onafterprint = function(){
+  document.body.innerHTML = initBody;
+ };
+ window.print();
+ return false;
+}
+//]]>
+</script>
 </head>
 <body class="sb-nav-fixed">
+<% 
+  try{
+  Map<String,Object> rMap = rlist.get(0);
+ %>
 	<nav id="topNav"></nav>
 	<div id="layoutSidenav">
 		<div id="layoutSidenav_nav"></div>
@@ -37,125 +57,161 @@ pageEncoding="UTF-8"%>
 					</div>
 					<div id="page_contents" style="max-width: 1730px; margin: 10px 100px;">
 						<!-- 컨텐츠 들어갈내용 시작-->
-
-				
-   <div class="container">
-	<div class="col" >
-		<div style="text-align: right; padding: 5px;">
-			<button class="btn btn-danger" onClick="window.print()">인쇄</button>
-		
-		</div>
-	</div>
-   <div class="col" style="padding: 10px; background-color:; border: 1px solid black; ">
-  
-  <% 
-  try{
-  Map<String,Object> rMap = rlist.get(0);
-  %>
-  <h2><%=rMap.get("SAL_PAYDAY") %> 급여</h2>
-
-  <table class="table">
-    <tbody>
-      <tr style="font-size: small;">
-        <td style="width:12.5%">성명 : </td>
-        <td style="width:12.5%"><%=rMap.get("EMP_NAME") %></td>
-        <td style="width:12.5%">부서 : </td>
-        <td style="width:12.5%"><%=rMap.get("DEPT_NAME") %></td>
-        <td style="width:12.5%">직책 : </td>
-        <td style="width:12.5%"><%=rMap.get("EMP_POSITION") %></td>
-        <td style="width:12.5%">지급일 : </td>
-        <td style="width:12.5%"><%=rMap.get("SAL_PAYDAY") %></td>
-      </tr>
-      <tr style="font-size: small;">
-        <td >은행 : </td>
-        <td ></td>
-        <td><%=rMap.get("EMP_BANK") %></td>
-        <td ></td>
-        <td >계좌번호 : </td>
-        <td ></td>
-        <td><%=rMap.get("EMP_ACCOUNT") %></td>
-        <td ></td>
-        
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-       
-      </tr>
-    </tbody>
-  </table>
-    <table class="table table-bordered table-sm">
-    <thead>
-      <tr >
-        <th style="width:25%">지급항목</th>
-        <th style="width:25%">지급액</th>
-        <th style="width:25%">공제항목</th>
-        <th style="width:25%">공제액</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>기본급여</td>
-        <td><%=rMap.get("BASE_PAY") %></td>
-        <td>소득세</td>
-        <td><%=rMap.get("EI_PAY") %></td>
-      
-      </tr>
-      <tr>
-		<td></td>
-        <td></td>
-        <td>주민세</td>
-        <td><%=rMap.get("HI_PAY") %></td>
-      </tr>
-      <tr>
-		<td></td>
-        <td></td>
-        <td>고용보험</td>
-        <td><%=rMap.get("NP_PAY") %></td>
-      </tr>
-      <tr>
-		<td></td>
-        <td></td>
-        <td>국민연금</td>
-        <td><%=rMap.get("IT_PAY") %></td>
-      </tr>
-      <tr>
-		<td></td>
-        <td></td>
-        <td>건강보험</td>
-        <td><%=rMap.get("RD_PAY") %></td>
-      </tr>
-      <tr>
-		<td>급여합계</td>
-        <td><%=rMap.get("BASE_PAY") %></td>
-        <td>공제합계</td>
-        <td><%=rMap.get("TAX_SUM") %></td>
-      </tr>
-    </tbody>
-  </table>
-  
-   <table class="table table-bordered table-sm">
-    <thead>
-      <tr>
-        <th style="width:50%">실수령액</th>
-        <th style="width:50%"><%=rMap.get("RECEIPT") %></th>
-      </tr>
-   </thead>
-   </table>
-  <%}catch(Exception e){
-  	e.printStackTrace();
-  }
-  %>
-   </div>
-   </div>
-
-						
+						<div style="text-align: right; margin-bottom: 20px">
+							<button class="btn btn-secondary" onclick="printPage()">인쇄</button>
+							<button class="btn btn-secondary" onclick="location.href='http://localhost:5000/myService/allPay.erp'">돌아가기</button>
+						</div>
+						<div class="container"style="  overflow: scroll;" id="print">
+<table class="table table-bordered table-sm thead-light"style="border: solid 1px; width: 950px; height: 100%; text-align: center;">
+	<thead>
+		<tr>
+			<th style="padding-top: 60px; font-size: 45px;">우리를 JAVA 급여 명세서</th>
+		</tr>
+		<tr>
+			<td style="text-align: -webkit-center; padding-top: 35px;">
+				<table style="border-collapse: collapse; width: 900px; text-align: center;">
+					<thead>
+					<!-- =============================================================================================================== -->
+						<tr>
+							<td colspan="4" style="text-align: right; padding-right: 20px;padding-bottom: 5px;"> 지급일자 :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=rMap.get("SAL_PAYDAY") %></td>
+						</tr>
+						<tr>
+							<td style="height:30px;">사번</td>
+							<td style="">A1234</td>
+							<td style="">성명</td>
+							<td style=""><%=rMap.get("EMP_NAME") %></td>
+						</tr>
+						<tr>
+							<td style="height:30px;">부서</td>
+							<td style=""><%=rMap.get("DEPT_NAME") %></td>
+							<td style="">직책/직급</td>
+							<td style=""><%=rMap.get("EMP_POSITION") %></td>
+						</tr>
+					<!-- =============================================================================================================== -->
+						<tr>
+							<td colspan="4" style="text-align: left; padding-left: 20px; padding-top:25px;padding-bottom: 5px;"> 급여계좌</td>
+						</tr>
+						<tr>
+							<td style="height:30px;">은행</td>
+							<td style=""><%=rMap.get("EMP_BANK") %></td>
+							<td style="">계좌번호</td>
+							<td style=""><%=rMap.get("EMP_ACCOUNT") %></td>
+						</tr>
+					<!-- =============================================================================================================== -->
+						<tr>
+							<td colspan="4" style="text-align: left; padding-left: 20px; padding-top:25px;padding-bottom: 5px;"> 급여 내역</td>
+						</tr>
+						<tr>
+							<td style="" colspan="2">급여내역</td>
+							<td style="" colspan="2">공제내역</td>
+						</tr>
+						<tr>
+							<td style="height:30px;">기본급</td>
+							<td style=""><%=rMap.get("BASE_PAY") %></td>
+							<td style="">소득세</td>
+							<td style=";"><%=rMap.get("EI_PAY") %></td>
+						</tr>
+						<tr>
+							<td style="height:30px;">성과급</td>
+							<td style=""></td>
+							<td style="">주민세</td>
+							<td style=""><%=rMap.get("HI_PAY") %></td>
+						</tr>
+						<tr>
+							<td style="height:30px;"></td>
+							<td style=""></td>
+							<td style="">고용보험</td>
+							<td style=""><%=rMap.get("NP_PAY") %></td>
+						</tr>
+						<tr>
+							<td style="height:30px;"></td>
+							<td style=""></td>
+							<td style="">국민연금</td>
+							<td style=""><%=rMap.get("IT_PAY") %></td>
+						</tr>
+						<tr>
+							<td style="height:30px;"></td>
+							<td style=""></td>
+							<td style="">건강보험</td>
+							<td style=""><%=rMap.get("RD_PAY") %></td>
+						</tr>
+						<tr>
+							<td style="height:30px;"></td>
+							<td style=""></td>
+							<td style="">공제합계</td>
+							<td style=""><%=rMap.get("TAX_SUM") %></td>
+						</tr>
+						<tr>
+							<td style="height:30px;"></td>
+							<td style=""></td>
+							<td style=""></td>
+							<td style=""></td>
+						</tr>
+						<tr>
+							<td style="height:30px;"></td>
+							<td style=""></td>
+							<td style=""></td>
+							<td style=""></td>
+						</tr>
+						<tr>
+							<td style="height:30px;"></td>
+							<td style=""></td>
+							<td style=""></td>
+							<td style=""></td>
+						</tr>
+						<tr>
+							<td style="height:30px;"></td>
+							<td style=""></td>
+							<td style=""></td>
+							<td style=""></td>
+						</tr>
+						<tr>
+							<td style="height:30px;"></td>
+							<td style=""></td>
+							<td style=""></td>
+							<td style=""></td>
+						</tr>
+				<!-- =============================================================================================================== -->
+						<tr>
+							<td colspan="4" style="text-align: left; padding-left: 20px; padding-top:20px;"></td>
+						</tr>
+						<tr>
+							<td style="height:20px;">급여합계</td>
+							<td style=""><%=rMap.get("BASE_PAY") %></td>
+							<td style="">공제합계</td>
+							<td style=""><%=rMap.get("TAX_SUM") %></td>
+						</tr>
+						<tr>
+							<td colspan="4" style="text-align: left; padding-left: 20px; padding-top:5px;"></td>
+						</tr>
+						<tr>
+							<td style="height:20px; border-top: none; border-left: none;border-bottom: none;border-right: none;"></td>
+							<td style=""></td>
+							<td style="">실수령액</td>
+							<td style=""><%=rMap.get("RECEIPT") %></td>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			  <%}catch(Exception e){
+			  	e.printStackTrace();
+			  }
+			  %>
+			</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="padding-top:33px; text-align: center;">귀하의 노고에 감사드립니다.</td>
+		</tr>
+		<tr>
+			<td style="text-align: right; padding-right: 50px;">우리를 JAVA</td>
+		</tr>
+	</tbody>
+</table>
+			</div>	
+   
 						<!-- 컨텐츠 들어갈내용 끝   -->
 					</div>
 				</div>
