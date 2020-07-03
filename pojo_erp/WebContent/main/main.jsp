@@ -10,7 +10,6 @@ pageEncoding="UTF-8"%>
 	int timeGap = 0;
 	boolean flag = false;
 	List<Map<String ,Object>> inOutList =(List<Map<String,Object>>) request.getAttribute("taskTimeList");
-	List<Map<String, Object>> outList = (List<Map<String,Object>>) request.getAttribute("inoutList");
 
 	 if(inOutList.size() != 0){
 		Map<String, Object> rmap = inOutList.get(0);
@@ -20,13 +19,7 @@ pageEncoding="UTF-8"%>
 		//timeGap = 0;
 		flag = false;
 	}
-	
-	 if(outList.size() > 0){
-		 if(outList.get(0).get("TIME") != "-"){
-			 //out.print(outList.get(0).get("TIME"));
-			 timeGap = 600;
-		 }
-	 }
+
 %>
 <!DOCTYPE html>
 <html>

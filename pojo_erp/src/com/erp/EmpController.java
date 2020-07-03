@@ -66,11 +66,6 @@ public class EmpController implements Controller {
 //				req.setAttribute("roomList", roomList);
 				List<Map<String,Object>> taskTimeList = empLogic.commuteList(pMap);
 				System.out.println("오늘 업무시간 리스트 => "+taskTimeList.size());
-				req.setAttribute("taskTimeList", taskTimeList);
-				List<Map<String,Object>> inoutList = new ArrayList<>();
-				inoutList = empLogic.inoutList(pMap);
-				System.out.println("오늘 출퇴관리탭 리스트"+inoutList.size());
-				req.setAttribute("inoutList", inoutList);
 				path="forward:main.jsp";
 			}
 		}
@@ -96,11 +91,6 @@ public class EmpController implements Controller {
 			pMap.put("emp_no", session.getAttribute("emp_no"));
 			List<Map<String,Object>> taskTimeList = empLogic.reMain(pMap);
 			System.out.println("오늘 업무시간 리스트 => "+taskTimeList.size());
-			req.setAttribute("taskTimeList", taskTimeList);
-			List<Map<String,Object>> inoutList = new ArrayList<>();
-			inoutList = empLogic.inoutList(pMap);
-			System.out.println("오늘 출퇴관리탭 리스트"+inoutList.size());
-			req.setAttribute("inoutList", inoutList);
 			path="forward:../main/main.jsp";
 		}
 		else if("myUpdImformation".equals(requestName)) {
