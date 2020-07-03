@@ -123,7 +123,7 @@
                    		   ,ap_bego
                    		   ,ap_sign)
         VALUES(#{ap_no},#{fr_no},#{ap_title},'결재대기'
-              ,#{ap_reporter},to_date(#{ap_appdate},'yyyy-mm-dd'),to_date(#{ap_closedate},'yyyy-mm-dd')
+              ,#{emp_no},to_date(#{ap_appdate},'yyyy-mm-dd'),to_date(#{ap_closedate},'yyyy-mm-dd')
                   ,#{ap_content},#{ap_dname},to_date(#{ap_retiredate},'yyyy-mm-dd')
                   ,#{ap_contact},#{ap_prosessingdate},#{ap_instructions},#{ap_bego},#{ap_sign})
 	</insert>

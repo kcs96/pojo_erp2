@@ -15,7 +15,7 @@ pageEncoding="UTF-8"%>
 									<th data-field="EMP_PHONE">핸드폰</th>
 									<th data-field="EMP_HIREDATE">근무일자</th>
 									<th data-field="EMP_RETIREDATE">퇴사일자</th>
-									<th data-field="EMP_OUTREASON">퇴사사유</th>
+									<th data-field="EMP_OUTREASON" data-size="20%" >퇴사사유</th>
 									<!-- <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents" width="300">정보수정</th> -->
 								</tr>
 							</thead>

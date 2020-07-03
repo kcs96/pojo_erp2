@@ -67,20 +67,42 @@ pageEncoding="UTF-8"%>
 								onclick="emp_insert_new()">신규 사원등록</button>
 						
 						<div id="emp_list">
-							<table class="table">
-								<thead class="thead-light">
-									<tr>
-										<th>사원번호</th>
-										<th>사원이름</th>
-										<th>부서</th>
-										<th>직급</th>
-										<th>이메일</th>
-										<th>핸드폰</th>
-										<th>근무상태</th>
-										<th>정보수정</th>
-									</tr>
-								</thead>
-							</table> 
+						<table id="table" 
+							   data-toggle="table" 
+							   class="table table-hover"
+							   data-search="true" 
+							   data-pagination="true"
+							   data-url="./emp_list_on.erp?cud=empList">
+							<thead class="thead-light">
+								<tr>
+									<th data-field="EMP_NO">사원번호</th>
+									<th data-field="username">사원이름</th>
+									<th data-field="DEPT_NAME">부서</th>
+									<th data-field="EMP_POSITION">직급</th>
+									<th data-field="EMP_EMAIL">이메일</th>
+									<th data-field="EMP_PHONE">핸드폰</th>
+									<th data-field="EMP_STATE">근무상태</th>
+									<th data-field="OPERATE" data-formatter="operateFormatter" data-events="operateEvents" width="300" >정보수정</th>
+								</tr>
+							</thead>
+						</table>
+						
+						<!-- 							
+						<table class="table">
+							<thead class="thead-light">
+								<tr>
+									<th>사원번호</th>
+									<th>사원이름</th>
+									<th>부서</th>
+									<th>직급</th>
+									<th>이메일</th>
+									<th>핸드폰</th>
+									<th>근무상태</th>
+									<th>정보수정</th>
+								</tr>
+							</thead>
+						</table>  
+						-->
 						</div>
 						
 						<!-- 컨텐츠 들어갈내용 끝   -->

@@ -225,7 +225,7 @@
 			<main id="input_div">
 				<div id="frame_div" style="border: 1px solid black;">
 					<div id="page_title" style="border-bottom: 2px solid gray; margin: 50px 30px;"><h2>결재 신청</h2></div>
-				<div id="page_contents" style="max-width: 1730px; margin: 10px 100px;">
+				<div id="page_contents" style="max-width: 1730px; margin: 10px 100px;" >
 						<!-- 컨텐츠 들어갈내용 시작-->
 						<div class="row">
 							<div class="col-12">
@@ -316,14 +316,13 @@
 						</div>
 						<hr style="border: solid 1px black;">
 						<!--***************************양식 뿌려주기  ******************************-->
-						<div class="row">
-							<div style="overflow-x:scroll ; padding-top: 10px;" class="col-12">
+						<div class="row" >
+							<div style="padding-top: 10px;" class="col-12">
 							 <div  style=" border: 2px solid #d2d2d2; ">
 								<!-- <button style="float: right;"
 									type="button" class="btn btn-info" onclick="window.print();">인쇄</button> -->
 								<!-- *****밑에 승인취소버튼 -->
-								<div id="test">
-								</div>
+								<div id="test"  style="overflow-x:scroll;"></div>
 								<div class="row" style="text-align: center;">
 									
 									<div class="col" style="text-align: center;">

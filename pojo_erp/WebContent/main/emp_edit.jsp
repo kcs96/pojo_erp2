@@ -62,7 +62,7 @@ pageEncoding="UTF-8"%>
 			//load함수를 이용하여 core스크립트의 로딩이 완료된 후, 우편번호 서비스를 실행합니다.
 			new daum.Postcode({
 				oncomplete: function (data) {
-					alert(data);
+					//alert(data);
 					// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
 					var roadAddr = data.roadAddress;
 					alert("roadAddr: " + roadAddr);
@@ -107,10 +107,11 @@ pageEncoding="UTF-8"%>
 			<main id="input_div">
 				<div id="frame_div" style="border: 1px solid black;">
 					<div id="page_title" style="border-bottom: 2px solid gray; margin: 50px 30px;">
-						<h2>정보수정</h2>
+						<h2>정보 수정</h2>
 					</div>
 					<div id="page_contents" style="max-width: 1730px; margin: 50px 50px;">
 						<!-- 컨텐츠 들어갈내용 시작-->
+						
 						<form id="f_updInfo">
 						<div class="row">
 							<div class="col-sm-6">

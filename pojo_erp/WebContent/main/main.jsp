@@ -1,22 +1,24 @@
+<%@page import="java.io.Console"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <%
-	String emp_name = (String)session.getAttribute("emp_name");
-	String dept_name = (String)session.getAttribute("dept_name");
-
-	int timeGap = 0;
-	boolean flag = false;
-	List<Map<String ,Object>> inOutList =(List<Map<String,Object>>) request.getAttribute("taskTimeList");
-	 if(inOutList.size() != 0){
-		Map<String, Object> rmap = inOutList.get(0);
-		timeGap = Integer.parseInt(rmap.get("WORK_MINUTE").toString());
-		flag = true;
-	} else {
-		//timeGap = 0;
-		flag = false;
-	}
+	if(session.getAttribute("emp_no")!= null){
+	 	String emp_name = (String)session.getAttribute("emp_name");
+		String dept_name = (String)session.getAttribute("dept_name");	
+		
+		int timeGap = 0;
+		boolean flag = false;
+		List<Map<String ,Object>> inOutList =(List<Map<String,Object>>) request.getAttribute("taskTimeList");
+		 if(inOutList.size() != 0){
+			Map<String, Object> rmap = inOutList.get(0);
+			timeGap = Integer.parseInt(rmap.get("WORK_MINUTE").toString());
+			flag = true;
+		} else {
+			//timeGap = 0;
+			flag = false;
+		} 
 %>
 <!DOCTYPE html>
 <html>
@@ -38,9 +40,8 @@ pageEncoding="UTF-8"%>
 
 	<title>2RP PROGRAM</title>
 <script type="text/javascript">
-sessionStorage.setItem("emp_name", "<%=emp_name %>");
-sessionStorage.setItem("dept_name", "<%=dept_name %>");
-
+	sessionStorage.setItem("emp_name", "<%=emp_name %>");
+	sessionStorage.setItem("dept_name", "<%=dept_name %>");
 </script>
 <script type="text/javascript">
 		var interver = null;
@@ -142,19 +143,19 @@ sessionStorage.setItem("dept_name", "<%=dept_name %>");
 
 </head>
 <body class="sb-nav-fixed">
+
 <nav id="topNav"></nav>
 <div id="layoutSidenav">
    <div id="layoutSidenav_nav"></div>
    <div id="layoutSidenav_content">
 		<main id="input_div">
 			<div id="frame_div" style="border: 1px solid black;">
-				<div id="page_title" style="border-bottom: 2px solid gray; margin: 50px 30px;"><h2>main page</h2></div>
+				<div id="page_title" style="border-bottom: 2px solid gray; margin: 50px 30px;"><h2>메인</h2></div>
 				<div id="page_contents" style="max-width: 1730px; margin: 10px 100px;">
      			<!-- 컨텐츠 들어갈내용 시작-->
 
 <div class="row">
 	<div class="col-lg-6">
-
 		<h2 style="text-align: center;">출근|퇴근|외출 상황</h2>
 		<div id="emp_table" style="width: 100%; height: 300px;">
 			<div class="table-responsive">
@@ -298,10 +299,10 @@ sessionStorage.setItem("dept_name", "<%=dept_name %>");
 	$(document).ready(function() {
 		
 		
-		var flag = <%=flag %>
+	 	var flag = <%=flag %>
 		if(flag == true){
 	var timeGap =<%=timeGap%>;
-	/* 	var timeGap =500; */
+	 	var timeGap =500; 
 
 		if (timeGap < 60) {//출발 0시간
 			function start1() {
@@ -350,7 +351,7 @@ sessionStorage.setItem("dept_name", "<%=dept_name %>");
 			start9();
 		}
 	}
-	});
+	}); 
 </script>
 
 
@@ -369,7 +370,6 @@ sessionStorage.setItem("dept_name", "<%=dept_name %>");
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
 
-
 <!-- 탑메뉴 사용 -->
 <script src="../common/js/topNav.js?after"></script>
 <!-- 사이드 메뉴 사용 -->
@@ -379,3 +379,14 @@ sessionStorage.setItem("dept_name", "<%=dept_name %>");
 <!-- 버거 메뉴 활성화 -->
 </body>
 </html>
+
+<%
+	} else {
+%>
+	<script type="text/javascript">
+		location.href="http://localhost:5000/main/login.jsp";
+	</script>
+<%	}
+
+%>
+
