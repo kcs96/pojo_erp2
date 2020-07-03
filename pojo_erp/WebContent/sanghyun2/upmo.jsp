@@ -97,17 +97,17 @@
 	 	
 		<table border="1" cellspacing=0>
 		 <tr>
-		  <th style=" text-align:center;width:210px; hieght:110px;">
+		  <th style="width:200px; hieght:110px;">
 			작성자
 		  </th>
-		  <td style="text-align:center;width:110px;">
-			<textarea class="wrap3" id="ap_reporter"name="ap_reporter"style="border:0;height:100%;"cols="20" rows="2"></textarea>
+		  <td style="width:110px;">
+			<input class="wrap3" id="ap_reporter"name="ap_reporter"style="height:30px;"type="text">
 		  </td>
-		  <th style="width:210px; hieght:110px;">
+		  <th style="width:200px; hieght:110px;">
 		        작성일자
 		  </th>
 		  <td style="width:120px;">
-			<textarea id="ap_appdate" name="ap_appdate" class="wrap3"style="border:0;height:100%;"cols="20" rows="2"></textarea>
+			<input id="ap_appdate" name="ap_appdate" class="wrap3"style="height:30px;" type="date">
 		  </td>
 		 </tr>
 		</table>

@@ -70,8 +70,9 @@ pageEncoding="UTF-8"%>
 	/* 테이블 버튼 이벤트 처리 부분  */
 	window.operateEvents = {
 		'click .button' : function(e, value, row, index) {
-			alert('You click like action, row: ' + JSON.stringify(row))
-			alert('You click like action, row: ' + JSON.stringify(index))
+			fr_no = row.FR_NO   //양식번호 
+	          //alert("문자열 자름 : "+ fr_no)
+	         location.href = "./approval_send_form.jsp?fr_no="+fr_no
 		}
 	}
 	/* 테이블 버튼 이벤트  처리 끝 */

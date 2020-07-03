@@ -33,6 +33,10 @@
     	text-align:center;
     	font-size:20px; 
     }
+            .wrap4{
+    	font-size:20px;
+    	text-align:center;
+    }
       .wrap1{
     	text-align:right;
     	font-size:20px; 
@@ -107,11 +111,11 @@
 	<tr>
     <th width="123"  class="auto-style3">성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명 </th>
     <td width="201">
-    <input type="text" name="ap_reporter" id="ap_reporter" class="wrap2"style=" height:50px;line-height: 45px; width:98%; border: 0;">
+    <input type="text" name="ap_reporter" id="ap_reporter" class="wrap4"style=" height:50px;line-height: 45px; width:98%; border: 0;">
     </td>
     <th width="111" class="auto-style3">부 서 명</th>
     <td width="209">
-    	<input class="wrap2" type="text" name="ap_dname" id="ap_dname"  style=" height:50px;line-height: 75px; width:98%; border: 0;">
+    	<input class="wrap4" type="text" name="ap_dname" id="ap_dname"  style=" height:50px;line-height: 75px; width:98%; border: 0;">
     </td>
     </tr>
   	<tr>
@@ -119,7 +123,7 @@
    		 퇴 직 일 자
    	 </th>
     <td colspan="3" height="100px;">
-    	<input class="wrap2" type="text" id="ap_retiredate" name="ap_retiredate" style=" height:100%;line-height: 75px; width:99%; border: 0;">
+    	<input class="wrap2" type="date" id="ap_retiredate" name="ap_retiredate">
     </td>
   	</tr>
   	<tr>

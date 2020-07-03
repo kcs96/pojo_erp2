@@ -27,7 +27,12 @@
     	font-size:13px; 
     }
     .wrap2{
-    	font-size:20px; 
+    	font-size:20px;
+    	
+    }
+        .wrap4{
+    	font-size:20px;
+    	text-align:center;
     }
     .wrap3{
     	text-align:center;
@@ -104,11 +109,11 @@
 	<tr>
     <th width="123"  class="auto-style3">성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명 </th>
     <td width="201">
-    <input type="text" name="ap_reporter" id="ap_reporter"class="wrap2"style=" height:50px;line-height: 45px; width:98%; border: 0;">
+    <input type="text" name="ap_reporter" id="ap_reporter"class="wrap4"style=" height:50px;line-height: 45px; width:98%; border: 0;">
     </td>
     <th width="111" class="auto-style3">부 서 명</th>
     <td width="209">
-    	<input class="wrap2" type="text" id="ap_dname" name="ap_dname" style=" height:50px;line-height: 75px; width:98%; border: 0;">
+    	<input class="wrap4" type="text" id="ap_dname" name="ap_dname" style=" height:50px;line-height: 75px; width:98%; border: 0;">
     </td>
     </tr>
   	<tr>
@@ -116,7 +121,7 @@
    		 파 견 기 간
    	 </th>
     <td colspan="3" height="100px;">
-    	<input class="wrap2" type="text" id="ap_prosessingdate" name="ap_prosessingdate"  style=" height:100%;line-height: 75px; width:99%; border: 0;">
+    	<div align="center"><input class="wrap2" type="date" id="ap_prosessingdate" name="ap_prosessingdate"> ~ <input class="wrap2" type="date" id="ap_eprosessingdate" name="ap_eprosessingdate"></div>
     </td>
   	</tr>
   	<tr>

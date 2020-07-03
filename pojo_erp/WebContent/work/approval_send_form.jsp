@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%
+		String fr_no  = request.getParameter("fr_no"); //양식 채번
 		String s_empno = "";
 		String s_ename = "";
-		String dept_name ="";
+		String dept_name = "";
 		if(session.getAttribute("emp_no")!=null){
 			s_ename = session.getAttribute("emp_name").toString();
 			s_empno = session.getAttribute("emp_no").toString();
@@ -101,8 +102,9 @@
 		$("input[type=checkbox]").prop("checked", false);
 	}
 	function test(res) {
-		 imsi = res;
 		var url;
+		
+		 imsi = res;
 		alert("res:" + imsi);
 		if (res == "휴가양식") {
 			url = "../sanghyun2/huga.jsp"
@@ -117,10 +119,6 @@
 			url : url,
 			success : function(data) {
 				$("#test").html(data);
-				$("#ap_reporter").val("<%=s_ename%>");
-                $("#ap_dname").val("<%=dept_name%>");
-                $('#ap_reporter').attr('disabled', 'disabled');
-                $('#ap_dname').attr('disabled', 'disabled');
 			}
 		});
 	}
@@ -142,10 +140,9 @@
  		//파견일자,휴가일자,
 		var ap_prosessingdate =$("#ap_prosessingdate").val();
 		if(ap_prosessingdate == null) ap_prosessingdate ='2018-05-03';
-		var ap_eprosessingdate =$("#ap_eprosessingdate").val();
-		alert("ap_eprosessingdate" + ap_eprosessingdate);
+		var ap_prosessingdate =$("#ap_eprosessingdate").val();
+		alert("ap_prosessingdate" + ap_prosessingdate);
 		if(ap_eprosessingdate == null) ap_eprosessingdate ='2018-05-04';
-		///끝
 		var ap_content =$("#ap_content").val();
  		var ap_appdate =$("#sdate").text();
  		//비고
@@ -184,30 +181,26 @@
 		//alert("app_num:"+app_num);
 		var ap_count = 1
 		var ap_title = $("#ap_titles").val();//제목 
-		alert("테스트"+ap_prosessingdate+ap_eprosessingdate);
+		alert("ap_ti")
 		var ap_empno = $("#emp_no").val();
 		
-	alert("ap_eprosessingdate" + ap_eprosessingdate);
-	alert("ap_appdate" + ap_appdate);
-			location.href="./workAddSendDoc.erp?ap_instructions="
-												+"&fr_no=" + fr_no
-												+"&ap_title="+ap_title
-												+"&ap_reporter="+ap_reporter
-										  		+"&ap_appdate="+ap_appdate
-												+"&ap_closedate="+ap_closedate
-										  		+"&ap_content="+ap_content
-												+"&ap_dname="+ap_dname
-										  		+"&ap_retiredate="+ap_retiredate
-												+"&ap_contact="+ap_contact
-												+"&ap_prosessingdate="+ap_prosessingdate+ap_eprosessingdate
-										  		+"&ap_bego="+ap_bego
-												+"&ap_sign="+ap_sign
-												+"&rev_empNo="+rev_empNo
-												+"&emp_no=<%= s_empno%>"
-												+"&ap_count="+app_num
-												;
-
-	}	
+	location.href="./workAddSendDoc.erp?ap_instructions="
+										+"&fr_no=" + fr_no
+										+"&ap_title="+ap_title
+										+"&ap_reporter="+ap_reporter
+								  		+"&ap_appdate="+ap_appdate
+										+"&ap_closedate="+ap_closedate
+								  		+"&ap_content="+ap_content
+										+"&ap_dname="+ap_dname
+								  		+"&ap_retiredate="+ap_retiredate
+										+"&ap_contact="+ap_contact
+										+"&ap_prosessingdate="+ap_prosessingdate+ap_eprosessingdate
+								  		+"&ap_bego="+ap_bego
+										+"&ap_sign="+ap_sign
+										+"&rev_empNo="+rev_empNo
+										+"&emp_no=<%= s_empno%>"
+										+"&ap_count="+app_num;
+ 	}
  	
 	function approval(){
 		alert("승인");
@@ -444,7 +437,7 @@
 			$("#i_ap_instructions").change(function() {
 				//each문은 for문과 비슷하게 생각하면 된다.
 				//선택된 텍스트 값을 p_zdo에 저장해 보자.
-				$("#i_ap_instructions option:selected").each(function() {
+				 $("#i_ap_instructions option:selected").each(function() {
 					var res = $(this).text();//var값을 집어넣으려면 val에다가 넣어야한다. 
 					//alert("res:" +res);
 					test(res);// ajax
@@ -453,8 +446,42 @@
 		</script>
 	<script type="text/javascript">
 		var temp='';
-		
+		var fr_no = <%= fr_no %>
 			$(document).ready(function() {
+			if(fr_no=="1"){
+				
+				$.ajax({
+					url : "../sanghyun2/huga.jsp",
+					success : function(data) {
+						$("#test").html(data);
+						$('#sdate').append(dates3);
+						
+						$("#ap_reporter").val("<%=s_ename%>");
+                        $("#ap_dname").val("<%=dept_name%>");
+                        $('#ap_reporter').attr('disabled', 'disabled');
+                        $('#ap_dname').attr('disabled', 'disabled');
+					}
+				});
+				
+			}	
+			if(fr_no=="2"){
+				
+				$.ajax({
+					url : "../sanghyun2/paguns.jsp",
+					success : function(data) {
+						$("#test").html(data);
+						$('#sdate').append(dates3);
+						
+						$("#ap_reporter").val("<%=s_ename%>");
+                        $("#ap_dname").val("<%=dept_name%>");
+                        $('#ap_reporter').attr('disabled', 'disabled');
+                        $('#ap_dname').attr('disabled', 'disabled');
+					}
+				});
+				
+			}	
+			if(fr_no=="3"){
+				
 				$.ajax({
 					url : "../sanghyun2/upmo.jsp",
 					success : function(data) {
@@ -465,9 +492,27 @@
                         $("#ap_dname").val("<%=dept_name%>");
                         $('#ap_reporter').attr('disabled', 'disabled');
                         $('#ap_dname').attr('disabled', 'disabled');
-						
 					}
 				});
+				
+			}	
+			if(fr_no=="5"){
+				
+				$.ajax({
+					url : "../sanghyun2/sagi.jsp",
+					success : function(data) {
+						$("#test").html(data);
+						$('#sdate').append(dates3);
+						
+						$("#ap_reporter").val("<%=s_ename%>");
+                        $("#ap_dname").val("<%=dept_name%>");
+                        $('#ap_reporter').attr('disabled', 'disabled');
+                        $('#ap_dname').attr('disabled', 'disabled');
+					}
+				});
+				
+			}	
+				
 			    $('#tb_approval').on('check.bs.table', function (row, element) {
 			    	g_names.push(element.EMP_NAME);
 			    	g_position.push(element.EMP_POSITION);
