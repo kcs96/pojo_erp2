@@ -40,6 +40,7 @@ pageEncoding="UTF-8"%>
  	String ap_appdate_3 = request.getParameter("ap_appdate_3"); //일
  	String ap_no = request.getParameter("ap_no"); //문서 고유번호
  	String page_no = request.getParameter("key"); //페이지 번호
+ 	String ap_state = request.getParameter("ap_state"); //결재 상태 
  	
  	String null_check = "undefined"; //null체크
  	
@@ -88,6 +89,9 @@ pageEncoding="UTF-8"%>
  	if(ap_no.equals(null_check)){
  		ap_no = "";
  	}
+ 	if(ap_state.equals(null_check)){
+ 		ap_state = "";
+ 	}
 %>
 <!-- 파라미터 받기 끝 -->
 
@@ -123,8 +127,8 @@ pageEncoding="UTF-8"%>
 		ap_appdate_2 = "<%=ap_appdate_2%>"
 		ap_appdate_3 = "<%=ap_appdate_3%>"
 		ap_no = "<%=ap_no%>"
-		
-	 		location.href = '../page/approval_print.jsp?ap_reporter='+ap_reporter
+	
+	location.href = '../page/approval_print.jsp?ap_reporter='+ap_reporter
 				+'&no='+no+'&fr_no='+fr_no+'&ap_title='+ap_title
 				+'&ap_prosessingdate='+ap_prosessingdate+'&ap_dname='
 				+ap_dname+'&ap_content='+ap_content+'&ap_contact='+ap_contact
@@ -132,7 +136,7 @@ pageEncoding="UTF-8"%>
 				+'&ap_appdate_2='+ap_appdate_2+'&ap_appdate_3='+ap_appdate_3+'&ap_bego='+ap_bego
 				+'&ap_instructions='+ap_instructions+'&ap_no='+ap_no
 	}
-
+	
 </script>
 </head>
 <body class="sb-nav-fixed">
@@ -143,16 +147,15 @@ pageEncoding="UTF-8"%>
            
 
 	 <h2><div id="page_title" style="border-bottom: 2px solid gray; margin: 50px 30px;"/></h2>
-  	 <div id="page_contents" style="border: 1px solid black; max-width: 1530px; margin: 0px 50px;">
+  	 <div id="page_contents" style="max-width: 1730px; margin: 10px 100px;">
   	 
   	 
   	 <div class="row"><!--승인 기각버튼  -->
   	 <div  class="col-1"></div>
-	    <div style="margin-top:15px;" id= "btns" class="col-5">
+	    <div style="margin-top:0px;" id= "btns" class="col-5">
 	        <button id= "btn_print" onclick="page_print()"  style="margin-right:5px;"class="btn btn-info" data-toggle="modal" >인쇄</button>
 	    	<button id= "btn_approval"  style="margin-right:5px;"class="btn btn-info" data-toggle="modal" data-target="#myModal">승인</button>
 	        <button id= "btn_dismissal"  style="margin-right:5px;"class="btn btn-info" data-toggle="modal" data-target="#myModal1">기각</button>
-
 			</div> <!--드랍다운 끝  -->
 			</div>
         <hr style="border: solid 1px black;">
@@ -160,37 +163,30 @@ pageEncoding="UTF-8"%>
   	  <div class="col-1"></div>
   	 	<div class="col-10">
   	 	<br>
-			<table class="table">
-				 <tr>
-				   <td style="padding:5px;text-align:center;">보낸사람</td>
-				   <td><%= ap_reporter %></td>	<!-- 보낸사람 이름  -->
-				   <td style="padding-right:5px;text-align:center;">기안부서</td>
-				   <td><%= ap_dname %></td> <!-- 부서 이름  -->
-				 </tr>
-				 <tr>
-				   <td style="width:20%;text-align:center;">번호</td>
-				   <td><%= ap_contact %></td><!-- 사원 전화번호  -->
-				   <td style="padding:5px;\text-align:center;"></td>
-				   <td></td>
-				 </tr>
-				 <tr>
-				   <td style="text-align:center;">제목</td>
-				   <td><%= ap_title %></td>	<!-- 제목  -->
-				   <td style="padding:5px;\text-align:center;"></td>
-				   <td></td>
-				 </tr>
-				 <tr>
-				   <td><%= ap_prosessingdate %></td> <!-- 기한 -->
-				   <td style="padding:5px;width:20%;text-align:center;"></td>
-				   <td></td>
-				 </tr>
+			<table class="table table-bordered">
+				<tbody>
+					<tr>
+						<th scope="row" style="background: #EAEAEA; width:17%; text-align: center;">문서 번호</th>
+						<td style="width:17%;"><span><%= no  %></span></td>
+						<th style="background: #EAEAEA; text-align: center;">제목</th> <td><span><%= ap_title %></span></td>
+							<th style="background:  #EAEAEA; width:17%; text-align: center;">부서</th>
+							<td style="width:17%;"><span><%=ap_dname%></span></td>
+					</tr>
+					<tr>
+						<th scope="row" style="background: #EAEAEA; width:17%; text-align: center;">작성자</th>
+						<td style="width:17%;"><span><%=ap_reporter%></span></td>
+						<th style="background: #EAEAEA; text-align: center;">작성 일자</th>
+						<td><span><%= ap_appdate%></span></td>
+						<th style="background: #EAEAEA; text-align: center;">결재 상태</th><td><span><%=ap_state %></span></td>
+						</tr>
+				</tbody>
 			</table>
   	 	</div>
   	 </div>
 		<hr style="border: solid 1px black;">
 	<div class="row">
-		<div class="col-1"></div>
-			<div style=" border:2px solid black;"class="col-10"id="page"></div>
+		<div class="col-1"style="overflow-x:scroll;"></div>
+			<div style="overflow-x:scroll; border:2px solid black;"class="col-10"id="page"></div>
 	</div>		<div class="col-1"></div>
 
 <!-- 	<!-- 이전꺼 보여주는 거 -->

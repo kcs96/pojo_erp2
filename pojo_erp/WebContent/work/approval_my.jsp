@@ -20,6 +20,7 @@ pageEncoding="UTF-8"%>
 
 </head>
 <body class="sb-nav-fixed">
+
 <nav id="topNav"></nav>
 <div id="layoutSidenav">
    <div id="layoutSidenav_nav"></div>
@@ -217,12 +218,14 @@ pageEncoding="UTF-8"%>
     		page_no = row.KEY
     		//alert("page_no : " + page_no)
     		
+    		ap_state = row.AP_STATE
+    		
     		location.href = './approval_get.jsp?ap_reporter='+ap_reporter
     				+'&no='+no +'&fr_no='+fr_no+'&ap_title='+ap_title
     					+'&ap_prosessingdate='+ap_prosessingdate+'&ap_dname='
     						+ap_dname+'&ap_content='+ap_content+'&ap_contact='+ap_contact
     						+'&ap_appdate='+ap_appdate+'&ap_appdate_1='+ap_appdate_1+'&ap_appdate_2='+ap_appdate_2+'&ap_appdate_3='+ap_appdate_3
-    						+'&ap_bego='+ap_bego+'&ap_instructions='+ap_instructions+'&ap_no='+ap_no+'&key='+page_no
+    						+'&ap_bego='+ap_bego+'&ap_instructions='+ap_instructions+'&ap_no='+ap_no+'&key='+page_no +'&ap_state='+ap_state
    
     }
  }

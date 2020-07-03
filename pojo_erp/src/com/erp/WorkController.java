@@ -36,8 +36,7 @@ public class WorkController implements Controller {
 			logger.info("Controller : 결재 승인 호출 성공");
 			/////////////////////// 실제 코드    /////////////////////
 			pMap = new HashMap<>();
-			//pMap.put("emp_no",session.getAttribute("emp_no"));
-			pMap.put("emp_no","10001");
+			pMap.put("emp_no",session.getAttribute("emp_no"));
 			pMap.put("ap_no",req.getParameter("ap_no"));
 			String result_accept = workLogic.workAgree(pMap);
 			if(result_accept.equals("1")) {path="redirect:approval_my.jsp";}
@@ -58,8 +57,7 @@ public class WorkController implements Controller {
 			logger.info("Controller : 결재 기각 호출 성공");
 			/////////////////////// 실제 코드    /////////////////////
 		    pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
-		    //pMap.put("emp_no", session.getAttribute("emp_no"));
-		    pMap.put("emp_no","10001");
+		    pMap.put("emp_no", session.getAttribute("emp_no"));
 		    String result_deny = workLogic.workDeny(pMap);
 			if(result_deny.equals("1")) {path="redirect:approval_my.jsp?result=결재성공";}
 			else if(result_deny.equals("결재가 마감된 문서입니다.")) {
