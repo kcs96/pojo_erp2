@@ -27,6 +27,13 @@ pageEncoding="UTF-8"%>
 <title>2RP PROGRAM</title>
 </head>
 <body class="sb-nav-fixed">
+<script type="text/javascript">
+	$(document).ready(function rowAdd(){
+		var trCnt = $('#table tr').length;
+
+		alert(trCnt);
+	});
+</script>
 <nav id="topNav"></nav>
 <div id="layoutSidenav">
    <div id="layoutSidenav_nav"></div>
@@ -67,7 +74,7 @@ pageEncoding="UTF-8"%>
        
       </tr>
     </thead>
-    <tbody>
+    <tbody id="t_body">
     		
     		<% 
     		try{
@@ -89,8 +96,29 @@ pageEncoding="UTF-8"%>
     		<td><%= rMap.get("TAX_SUM") %></td>
     		<td><%= rMap.get("RECEIPT") %></td> 	
     	</tr>
+
     		<%
     			}
+    		for(int l=0; l<10-rlist.size(); l++){%>
+    		
+    		<tr>
+    		
+    		<td>-</td>
+    		<td>-</td>
+    		<td>-</td>
+    		<td>-</td>
+    		<td>-</td>
+    		<td>-</td>
+    		<td>-</td>
+    		<td>-</td>
+    		<td>-</td>
+    		<td>-</td>
+    		<td>-</td>
+    		<td>-</td> 	
+    	</tr>
+    		<% 
+    			
+    		}
     		}catch(Exception e){
     			e.printStackTrace();
     		}
@@ -120,5 +148,7 @@ pageEncoding="UTF-8"%>
 
 	<script src="../common/scripts.js"></script>
 	<!-- 버거 메뉴 활성화 -->
+	
+	<!-- 테이블 디폴트 10개 -->
 </body>
 </html>
