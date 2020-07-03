@@ -3,11 +3,9 @@
 	<%
 		String s_empno = "";
 		String s_ename = "";
-		String dept_name ="";
 		if(session.getAttribute("emp_no")!=null){
 			s_ename = session.getAttribute("emp_name").toString();
 			s_empno = session.getAttribute("emp_no").toString();
-			dept_name= session.getAttribute("dept_name").toString();
 			
 		}
 		//out.print(s_empno);
@@ -117,10 +115,6 @@
 			url : url,
 			success : function(data) {
 				$("#test").html(data);
-				$("#ap_reporter").val("<%=s_ename%>");
-                $("#ap_dname").val("<%=dept_name%>");
-                $('#ap_reporter').attr('disabled', 'disabled');
-                $('#ap_dname').attr('disabled', 'disabled');
 			}
 		});
 	}
@@ -142,10 +136,6 @@
  		//파견일자,휴가일자,
 		var ap_prosessingdate =$("#ap_prosessingdate").val();
 		if(ap_prosessingdate == null) ap_prosessingdate ='2018-05-03';
-		var ap_eprosessingdate =$("#ap_eprosessingdate").val();
-		alert("ap_eprosessingdate" + ap_eprosessingdate);
-		if(ap_eprosessingdate == null) ap_eprosessingdate ='2018-05-04';
-		///끝
 		var ap_content =$("#ap_content").val();
  		var ap_appdate =$("#sdate").text();
  		//비고
@@ -184,29 +174,26 @@
 		//alert("app_num:"+app_num);
 		var ap_count = 1
 		var ap_title = $("#ap_titles").val();//제목 
-		alert("테스트"+ap_prosessingdate+ap_eprosessingdate);
+		alert("ap_ti")
 		var ap_empno = $("#emp_no").val();
 		
-	alert("ap_eprosessingdate" + ap_eprosessingdate);
-	alert("ap_appdate" + ap_appdate);
-			location.href="./workAddSendDoc.erp?ap_instructions="
-												+"&fr_no=" + fr_no
-												+"&ap_title="+ap_title
-												+"&ap_reporter="+ap_reporter
-										  		+"&ap_appdate="+ap_appdate
-												+"&ap_closedate="+ap_closedate
-										  		+"&ap_content="+ap_content
-												+"&ap_dname="+ap_dname
-										  		+"&ap_retiredate="+ap_retiredate
-												+"&ap_contact="+ap_contact
-												+"&ap_prosessingdate="+ap_prosessingdate+ap_eprosessingdate
-										  		+"&ap_bego="+ap_bego
-												+"&ap_sign="+ap_sign
-												+"&rev_empNo="+rev_empNo
-												+"&emp_no=<%= s_empno%>"
-												+"&ap_count="+app_num
-												;
-
+	location.href="./workAddSendDoc.erp?ap_instructions="
+										+"&fr_no=" + fr_no
+										+"&ap_title="+ap_title
+										+"&ap_reporter="+ap_reporter
+								  		+"&ap_appdate="+ap_appdate
+										+"&ap_closedate="+ap_closedate
+								  		+"&ap_content="+ap_content
+										+"&ap_dname="+ap_dname
+								  		+"&ap_retiredate="+ap_retiredate
+										+"&ap_contact="+ap_contact
+										+"&ap_prosessingdate="+ap_prosessingdate
+								  		+"&ap_bego="+ap_bego
+										+"&ap_sign="+ap_sign
+										+"&rev_empNo="+rev_empNo
+										+"&emp_no=<%= s_empno%>"
+										+"&ap_count="+app_num
+										;
 	}	
  	
 	function approval(){
@@ -460,12 +447,6 @@
 					success : function(data) {
 						$("#test").html(data);
 						$('#sdate').append(dates3);
-						
-						$("#ap_reporter").val("<%=s_ename%>");
-                        $("#ap_dname").val("<%=dept_name%>");
-                        $('#ap_reporter').attr('disabled', 'disabled');
-                        $('#ap_dname').attr('disabled', 'disabled');
-						
 					}
 				});
 			    $('#tb_approval').on('check.bs.table', function (row, element) {
