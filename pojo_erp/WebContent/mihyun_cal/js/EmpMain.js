@@ -332,6 +332,7 @@ var calendar = $('#calendar').fullCalendar({
       eventLimit: 12
     }
   },
+  defaultView: 'agendaWeek',
   eventLimitClick: 'week', //popover
   navLinks: true,
   //defaultDate: moment('2020-06'), //실제 사용시 삭제
