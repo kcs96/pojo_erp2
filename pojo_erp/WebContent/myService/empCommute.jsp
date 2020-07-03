@@ -245,13 +245,13 @@ pageEncoding="UTF-8"%>
 						<table class="table table-bordered" style="width: 100%; height:80%; ">
 							<thead class="thead-dark">
 								<tr>
-									<th scope="col" style="text-align: center;">부서명</th>
-									<th scope="col" style="text-align: center;">사원명</th>
-									<th scope="col" style="text-align: center;">출근</th>
-									<th scope="col" style="text-align: center;">퇴근</th>
-									<th scope="col" style="text-align: center;">외출</th>
-									<th scope="col" style="text-align: center;">복귀</th>
-									<th scope="col" style="text-align: center;">휴가</th>
+									<th scope="col" style="text-align: center; width:13% ;">부서명</th>
+									<th scope="col" style="text-align: center; width:13% ;">사원명</th>
+									<th scope="col" style="text-align: center; width:13% ;">출근</th>
+									<th scope="col" style="text-align: center; width:13% ;">퇴근</th>
+									<th scope="col" style="text-align: center; width:13% ;">외출</th>
+									<th scope="col" style="text-align: center; width:13% ;">복귀</th>
+									<th scope="col" style="text-align: center; width:13% ;">휴가</th>
 								</tr>
 							</thead>
 							<tbody>
