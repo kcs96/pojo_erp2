@@ -70,15 +70,9 @@
 												style="background: #EAEAEA; text-align: center;">문서번호</th>
 											<td>20112344</td>
 											<th style="background: #EAEAEA; text-align: center;">직위
-
-
-											
 											</td>
 											<td>사원</td>
 											<th style="background: #EAEAEA; text-align: center;">보안
-
-
-											
 											</td>
 											<td>일반</td>
 										</tr>
@@ -87,15 +81,9 @@
 												style="background: #EAEAEA; text-align: center;">작성자</th>
 											<td>이상현</td>
 											<th style="background: #EAEAEA; text-align: center;">작성일자
-
-
-											
 											</td>
 											<td>2020-06-21</td>
 											<th style="background: #EAEAEA; text-align: center;">보존기간
-
-
-											
 											</td>
 											<td>1년</td>
 										</tr>

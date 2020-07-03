@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -9,6 +10,8 @@ pageEncoding="UTF-8"%>
 	int timeGap = 0;
 	boolean flag = false;
 	List<Map<String ,Object>> inOutList =(List<Map<String,Object>>) request.getAttribute("taskTimeList");
+	List<Map<String, Object>> outList = (List<Map<String,Object>>) request.getAttribute("inoutList");
+
 	 if(inOutList.size() != 0){
 		Map<String, Object> rmap = inOutList.get(0);
 		timeGap = Integer.parseInt(rmap.get("WORK_MINUTE").toString());
@@ -17,6 +20,13 @@ pageEncoding="UTF-8"%>
 		//timeGap = 0;
 		flag = false;
 	}
+	
+	 if(outList.size() > 0){
+		 if(outList.get(0).get("TIME") != "-"){
+			 //out.print(outList.get(0).get("TIME"));
+			 timeGap = 600;
+		 }
+	 }
 %>
 <!DOCTYPE html>
 <html>
@@ -161,9 +171,9 @@ sessionStorage.setItem("dept_name", "<%=dept_name %>");
 				<table id="testTable" class="table table-hover" data-toggle="table"
 					data-url="inoutList.erp?cud=inoutList">
 					<thead class="thead-light">
-						<tr>
-							<th data-field="STATE">상태</th>
-							<th data-field="TIME">시간</th>
+						<tr style="font-size: medium;">
+							<th  style="width: 20%" data-field="STATE">상태</th>
+							<th style="width: 80%"  data-field="TIME" >시간</th>
 						</tr>
 					</thead>
 				</table>
@@ -298,65 +308,60 @@ sessionStorage.setItem("dept_name", "<%=dept_name %>");
 	$(document).ready(function() {
 		
 		
-		var flag = <%=flag %>
-		if(flag == true){
-	var timeGap =<%=timeGap%>;
-	/* 	var timeGap =500; */
+			var flag = <%=flag %>
+			if(flag == true){
+			var timeGap =<%=timeGap%>;
+			/* 	var timeGap =500; */
 
-		if (timeGap < 60) {//출발 0시간
-			function start1() {
-				intervel = setInterval(clockAutoLoad1, 1000);
+			if (timeGap < 60) {//출발 0시간
+				function start1() {
+					intervel = setInterval(clockAutoLoad1, 1000);
+				}
+				start1();
+			} else if (timeGap > 60 && timeGap <= 120) { //1시간
+				function start2() {
+					intervel = setInterval(clockAutoLoad2, 1000);
+				}
+				start2();
+			} else if (timeGap > 120 && timeGap <= 180) { //2시간
+				function start3() {
+					intervel = setInterval(clockAutoLoad3, 1000);
+				}
+				start3();
+			} else if (timeGap > 180 && timeGap <= 240) { //3시간
+				function start4() {
+					intervel = setInterval(clockAutoLoad4, 1000);
+				}
+				start4();
+			} else if (timeGap > 240 && timeGap <= 300) { //4시간
+				function start5() {
+					intervel = setInterval(clockAutoLoad5, 1000);
+				}
+				start5();
+			} else if (timeGap > 300 && timeGap <= 360) { //5시간
+				function start6() {
+					intervel = setInterval(clockAutoLoad6, 1000);
+				}
+				start6();
+			} else if (timeGap > 360 && timeGap <= 440) { //6시간 
+				function start7() {
+					intervel = setInterval(clockAutoLoad7, 1000);
+				}
+				start7();
+			} else if (timeGap > 440 && timeGap <= 500) { //7시간
+				function start8() {
+					intervel = setInterval(clockAutoLoad8, 1000);
+				}
+				start8();
+			} else if (timeGap > 500 ) {
+				function start9() { //퇴근 8시간
+					intervel = setInterval(clockAutoLoad9, 1000);
+				}
+				start9();
 			}
-			start1();
-		} else if (timeGap > 60 && timeGap <= 120) { //1시간
-			function start2() {
-				intervel = setInterval(clockAutoLoad2, 1000);
-			}
-			start2();
-		} else if (timeGap > 120 && timeGap <= 180) { //2시간
-			function start3() {
-				intervel = setInterval(clockAutoLoad3, 1000);
-			}
-			start3();
-		} else if (timeGap > 180 && timeGap <= 240) { //3시간
-			function start4() {
-				intervel = setInterval(clockAutoLoad4, 1000);
-			}
-			start4();
-		} else if (timeGap > 240 && timeGap <= 300) { //4시간
-			function start5() {
-				intervel = setInterval(clockAutoLoad5, 1000);
-			}
-			start5();
-		} else if (timeGap > 300 && timeGap <= 360) { //5시간
-			function start6() {
-				intervel = setInterval(clockAutoLoad6, 1000);
-			}
-			start6();
-		} else if (timeGap > 360 && timeGap <= 440) { //6시간 
-			function start7() {
-				intervel = setInterval(clockAutoLoad7, 1000);
-			}
-			start7();
-		} else if (timeGap > 440 && timeGap <= 500) { //7시간
-			function start8() {
-				intervel = setInterval(clockAutoLoad8, 1000);
-			}
-			start8();
-		} else if (timeGap > 500 ) {
-			function start9() { //퇴근 8시간
-				intervel = setInterval(clockAutoLoad9, 1000);
-			}
-			start9();
 		}
-	}
 	});
 </script>
-
-
-
-
-     	
      			<!-- 컨텐츠 들어갈내용 끝   -->
      			</div>
 			</div>
@@ -373,7 +378,7 @@ sessionStorage.setItem("dept_name", "<%=dept_name %>");
 <!-- 탑메뉴 사용 -->
 <script src="../common/js/topNav.js?after"></script>
 <!-- 사이드 메뉴 사용 -->
-<script src="../common/js/sideNav.js"></script>
+<script src="../common/js/sideNav.js?ver=2"></script>
 
 <script src="../common/scripts.js"></script>
 <!-- 버거 메뉴 활성화 -->

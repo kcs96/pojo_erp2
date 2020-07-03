@@ -180,14 +180,7 @@ const avatarBoxImageSrc = "../common/img/woman.png"; //네비게이션 아바타
 const avatarBoxImageAlt = "Avatar"; //네비게이션 아바타 img alt
 const avatarBoxImageClassname = "avatar"; //네비게이션 아바타 img class
 
-const avatarInfoBoxCreate = document.createElement("div"); //사원 정보
-const avatarInfoBoxClassname = "avatar_Info_box";
 
-const avatarInfoDept = document.createElement("label"); //
-const avatarInfoDeptClassname = "avatar_Info_Dept"; // 부서
-
-const avatarInfoName = document.createElement("label"); //
-const avatarInfoNameClassname = "avatar_Info_Name"; // 이름
 
 const avatarButtonBoxCreate = document.createElement("div"); //네비게이션 아바타 button
 const avatarButtonBoxClassname = "avatar_button_box"; //네비게이션 아바타 button class
@@ -208,13 +201,6 @@ function generateSideNav() {
   nav.id = navId;
   nav.style = navStyle;
   nav.appendChild(avatarBoxCreate);
-
-  avatarInfoBoxCreate.classList = avatarInfoBoxClassname;
-  avatarInfoBoxCreate.appendChild(avatarInfoDept);
-  avatarInfoDept.value = sessionStorage.getItem("dept_name");
-  
-  avatarInfoBoxCreate.appendChild(avatarInfoName);
-  avatarInfoName.value = sessionStorage.getItem("emp_name");
   
   
   avatarBoxCreate.classList = avatarBoxClassname;
