@@ -27,13 +27,6 @@ pageEncoding="UTF-8"%>
 <title>2RP PROGRAM</title>
 </head>
 <body class="sb-nav-fixed">
-<script type="text/javascript">
-	$(document).ready(function rowAdd(){
-		var trCnt = $('#table tr').length;
-
-		alert(trCnt);
-	});
-</script>
 <nav id="topNav"></nav>
 <div id="layoutSidenav">
    <div id="layoutSidenav_nav"></div>

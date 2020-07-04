@@ -110,34 +110,22 @@ pageEncoding="UTF-8"%>
 		$("#f_gigag").submit();
 	}
 	
-	function page_print(){ //인쇄버튼 반응
-	//파라미터 값 추가 
-		ap_reporter = "<%=ap_reporter%>"
-		no = "<%=no%>"
-		fr_no= "<%=fr_no%>"
-		ap_title= "<%=ap_title%>"
-		ap_prosessingdate = "<%=ap_prosessingdate%>"
-		ap_dname = "<%=ap_dname%>"
-		ap_content = "<%=ap_content%>"
-		ap_contact = "<%=ap_contact%>"
-		ap_bego = "<%=ap_bego%>"
-		ap_instructions = "<%=ap_instructions%>"
-		ap_appdate = "<%=ap_appdate%>"
-		ap_appdate_1 = "<%=ap_appdate_1%>"
-		ap_appdate_2 = "<%=ap_appdate_2%>"
-		ap_appdate_3 = "<%=ap_appdate_3%>"
-		ap_no = "<%=ap_no%>"
 	
-	location.href = '../page/approval_print.jsp?ap_reporter='+ap_reporter
-				+'&no='+no+'&fr_no='+fr_no+'&ap_title='+ap_title
-				+'&ap_prosessingdate='+ap_prosessingdate+'&ap_dname='
-				+ap_dname+'&ap_content='+ap_content+'&ap_contact='+ap_contact
-				+'&ap_appdate='+ap_appdate+'&ap_appdate_1='+ap_appdate_1
-				+'&ap_appdate_2='+ap_appdate_2+'&ap_appdate_3='+ap_appdate_3+'&ap_bego='+ap_bego
-				+'&ap_instructions='+ap_instructions+'&ap_no='+ap_no
+	//<![CDATA[
+	function printPage(){
+	 var initBody;
+	 window.onbeforeprint = function(){
+	  initBody = document.body.innerHTML;
+	  document.body.innerHTML =  document.getElementById('page').innerHTML;
+	 };
+	 window.onafterprint = function(){
+	  document.body.innerHTML = initBody;
+	 };
+	 window.print();
+	 return false;
 	}
-	
-</script>
+	//]]>
+	</script>
 </head>
 <body class="sb-nav-fixed">
    <nav id="topNav"></nav>
@@ -153,7 +141,7 @@ pageEncoding="UTF-8"%>
   	 <div class="row"><!--승인 기각버튼  -->
   	 <div  class="col-1"></div>
 	    <div style="margin-top:0px;" id= "btns" class="col-5">
-	        <button id= "btn_print" onclick="page_print()"  style="margin-right:5px;"class="btn btn-info" data-toggle="modal" >인쇄</button>
+	        <button id= "btn_print" onclick="printPage()"  style="margin-right:5px;"class="btn btn-info" >인쇄</button>
 	    	<button id= "btn_approval"  style="margin-right:5px;"class="btn btn-info" data-toggle="modal" data-target="#myModal">승인</button>
 	        <button id= "btn_dismissal"  style="margin-right:5px;"class="btn btn-info" data-toggle="modal" data-target="#myModal1">기각</button>
 			</div> <!--드랍다운 끝  -->
@@ -185,7 +173,7 @@ pageEncoding="UTF-8"%>
   	 </div>
 		<hr style="border: solid 1px black;">
 	<div class="row">
-		<div class="col-1"style="overflow-x:scroll;"></div>
+		<div class="col-1"></div>
 			<div style="overflow-x:scroll; border:2px solid black;"class="col-10"id="page"></div>
 	</div>		<div class="col-1"></div>
 
