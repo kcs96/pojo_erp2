@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
     
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Conference Schedule</title>
+    <title>회의실</title>
 	<link href="../common/main.css?ver4" rel="stylesheet" />
     <link href="../common/css/custom.css" rel="stylesheet" />
    <%@include file ="../common/fontAwesomeUI.jsp" %>

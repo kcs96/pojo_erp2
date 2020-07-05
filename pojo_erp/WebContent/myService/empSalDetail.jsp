@@ -53,7 +53,7 @@ function printPage(){
 			<main id="input_div">
 				<div id="frame_div" style="border: 1px solid black;">
 					<div id="page_title" style="border-bottom: 2px solid gray; margin: 50px 30px;">
-						<h2>상세급여</h2>
+						<h2>상세 급여</h2>
 					</div>
 					<div id="page_contents" style="max-width: 1730px; margin: 10px 100px;">
 						<!-- 컨텐츠 들어갈내용 시작-->
