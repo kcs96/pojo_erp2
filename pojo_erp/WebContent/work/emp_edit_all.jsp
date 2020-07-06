@@ -91,7 +91,7 @@ pageEncoding="UTF-8"%>
 					<div id="page_title" style="border-bottom: 2px solid gray; margin: 50px 30px;">
 						<h2>정보수정</h2>
 					</div>
-					<div id="page_contents" style="max-width: 1730px; margin: 10px 100px;">
+					<div id="page_contents" style="max-width: 1200px; margin: 50px 150px;">
 						<!-- 컨텐츠 들어갈내용 시작-->
 						
 						<form id="f_updInfo">
@@ -228,21 +228,25 @@ pageEncoding="UTF-8"%>
 
 							<!-- 주소 검색 부분 시작 ================================================================================== -->
 							<div id="postSearch" class="col-sm-12" align="left">
-								<table class="table table-boardered">
-									<tr>
-										<th>우편번호</th>
-										<td><input id="emp_zipcode" type="text" class="form-control" name="EMP_ZIPCODE" value="<%= rMap.get("EMP_ZIPCODE") %>" align="left"></td>
-										<td><input type="button" class="btn btn-link" onclick="DaumPostcode()" value="주소검색" /></td>
-									</tr>
-									<tr>
-										<th>주소</th>
-										<td><input id="emp_address" type="text" class="form-control" name="EMP_ADDRESS" value="<%= rMap.get("EMP_ADDRESS") %>" ></td>
-									</tr>
-									<tr>
-										<th>상세주소</th>
-										<td><input id="emp_detailaddress" type="text" class="form-control" name="EMP_DETAILADDRESS" value="<%= rMap.get("EMP_DETAILADDRESS") %>" placeholder="상세 주소를 입력하세요..."></td>
-									</tr>
-								</table>
+								<div class="row">
+									<div class="col-sm-8">
+										<table class="table table-boardered">
+											<tr>
+												<th>우편번호</th>
+												<td><input id="emp_zipcode" type="text" class="form-control" name="emp_zipcode" align="left" placeholder="우편번호" readonly></td>
+												<td><input type="button" class="btn btn-link" onclick="DaumPostcode()" value="주소검색" /></td>
+											</tr>
+											<tr>
+												<th>주소</th>
+												<td><input id="emp_address" type="text" class="form-control" name="emp_address" placeholder="주소" readonly></td>
+											</tr>
+											<tr>
+												<th>상세주소</th>
+												<td><input id="emp_detailaddress" type="text" class="form-control" name="emp_detailaddress" placeholder="상세 주소를 입력하세요..."></td>
+											</tr>
+										</table>
+									</div>
+								</div>
 							</div>
 							<!-- 주소 검색 부분 끝 =================================================================================== -->
 

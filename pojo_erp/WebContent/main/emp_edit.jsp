@@ -109,7 +109,7 @@ pageEncoding="UTF-8"%>
 					<div id="page_title" style="border-bottom: 2px solid gray; margin: 50px 30px;">
 						<h2>정보 수정</h2>
 					</div>
-					<div id="page_contents" style="max-width: 1730px; margin: 50px 50px;">
+					<div id="page_contents" style="max-width: 1200px; margin: 50px 150px;">
 						<!-- 컨텐츠 들어갈내용 시작-->
 						
 						<form id="f_updInfo">
@@ -125,10 +125,10 @@ pageEncoding="UTF-8"%>
 										<td><input id="emp_name" type="text" class="form-control" name="EMP_NAME" value="<%=rMap.get("EMP_NAME") %>" disabled></td>
 									</tr>
 									<tr>
-										<th>패스워드</th>
-										<td><input id="emp_pw" type="password" class="form-control" name="EMP_PW" value="<%=rMap.get("EMP_PW") %>" readonly></td>
+										<th>패스워드<span style="float:right"><button type="button" data-toggle="modal" class="btn btn-link" data-target="#intro" >변경</button></span></th>
+										<td><input id="emp_pw" type="password" class="form-control" name="EMP_PW" value="<%=rMap.get("EMP_PW") %>" readonly ></td>
 										<td>
-											<a type="button" data-toggle="modal" class="btn btn-link" data-target="#intro">변경</a>
+											
 											<!-- <form id="f_pw"> -->
 											<div id="intro" class="modal fade" role="dialog" aria-labelledby="introHeader" aria-hidden="true" tabindex="-1">
 												<div id="modalMain" class="modal-dialog">
@@ -250,24 +250,26 @@ pageEncoding="UTF-8"%>
 
 							<!-- 주소 검색 부분 시작 ================================================================================== -->
 							<div id="postSearch" class="col-sm-12" align="left">
-								<table class="table table-boardered">
-									<tr>
-										<th>우편번호</th>
-										<td><input id="emp_zipcode" type="text" class="form-control" name="EMP_ZIPCODE" value="<%= rMap.get("EMP_ZIPCODE") %>" align="left" readonly></td>
-										<td><input type="button" class="btn btn-link" onclick="DaumPostcode()" value="주소검색" /></td>
-									</tr>
-									<tr>
-										<th>주소</th>
-										<td><input id="emp_address" type="text" class="form-control" name="EMP_ADDRESS" value="<%= rMap.get("EMP_ADDRESS") %>" readonly></td>
-									</tr>
-									<tr>
-										<th>상세주소</th>
-										<td><input id="emp_detailaddress" type="text" class="form-control" name="EMP_DETAILADDRESS" value="<%= rMap.get("EMP_DETAILADDRESS") %>" placeholder="상세 주소를 입력하세요..."></td>
-									</tr>
-								</table>
-								
+								<div class="row">
+									<div class="col-sm-8">
+										<table class="table table-boardered">
+											<tr>
+												<th>우편번호</th>
+												<td><input id="emp_zipcode" type="text" class="form-control" name="emp_zipcode" align="left" placeholder="우편번호" readonly></td>
+												<td><input type="button" class="btn btn-link" onclick="DaumPostcode()" value="주소검색" /></td>
+											</tr>
+											<tr>
+												<th>주소</th>
+												<td><input id="emp_address" type="text" class="form-control" name="emp_address" placeholder="주소" readonly></td>
+											</tr>
+											<tr>
+												<th>상세주소</th>
+												<td><input id="emp_detailaddress" type="text" class="form-control" name="emp_detailaddress" placeholder="상세 주소를 입력하세요..."></td>
+											</tr>
+										</table>
+									</div>
+								</div>
 							</div>
-							
 							<!-- 주소 검색 부분 끝 =================================================================================== -->
 
 						</div>

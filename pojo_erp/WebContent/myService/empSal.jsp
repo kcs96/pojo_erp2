@@ -27,20 +27,13 @@ pageEncoding="UTF-8"%>
 <title>2RP PROGRAM</title>
 </head>
 <body class="sb-nav-fixed">
-<script type="text/javascript">
-	$(document).ready(function rowAdd(){
-		var trCnt = $('#table tr').length;
-
-		alert(trCnt);
-	});
-</script>
 <nav id="topNav"></nav>
 <div id="layoutSidenav">
    <div id="layoutSidenav_nav"></div>
    <div id="layoutSidenav_content">
 		<main id="input_div">
 			<div id="frame_div" style="border: 1px solid black;">
-				<div id="page_title" style="border-bottom: 2px solid gray; margin: 50px 30px;"><h2>급여관리</h2></div>
+				<div id="page_title" style="border-bottom: 2px solid gray; margin: 50px 30px;"><h2>급여 관리</h2></div>
 				<div id="page_contents" style="max-width: 1730px; margin: 10px 100px;">
      			<!-- 컨텐츠 들어갈내용 시작-->
 	

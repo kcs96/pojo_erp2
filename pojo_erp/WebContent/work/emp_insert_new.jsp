@@ -82,7 +82,7 @@ pageEncoding="UTF-8"%>
 					<div id="page_title" style="border-bottom: 2px solid gray; margin: 50px 30px;">
 						<h2>신규사원 등록</h2>
 					</div>
-					<div id="page_contents" style="max-width: 1730px; margin: 10px 100px;">
+					<div id="page_contents" style="max-width: 1200px; margin: 50px 150px;">
 						<!-- 컨텐츠 들어갈내용 시작-->
 						
 						<form id="f_updInfo">
@@ -95,11 +95,11 @@ pageEncoding="UTF-8"%>
 									</tr>
 									<tr>
 										<th>사원명</th>
-										<td><input id="emp_name" type="text" class="form-control" name="emp_name" ></td>
+										<td><input id="emp_name" type="text" class="form-control" name="emp_name" placeholder="사원명을 입력하세요."></td>
 									</tr>
 									<tr>
 										<th>패스워드</th>
-										<td><input id="emp_pw" type="password" class="form-control" name="emp_pw" ></td>
+										<td><input id="emp_pw" type="password" class="form-control" name="emp_pw" placeholder="비밀번호를 입력하세요."></td>
 										<!--  
 										<td>
 											<a type="button" data-toggle="modal" class="btn btn-link" data-target="#intro">변경</a>
@@ -131,19 +131,19 @@ pageEncoding="UTF-8"%>
 									</tr>
 									<tr>
 										<th>주민번호</th>
-										<td><input id="emp_resnum" type="text" class="form-control" name="emp_resnum" ></td>
+										<td><input id="emp_resnum" type="text" class="form-control" name="emp_resnum" placeholder="주민번호를 입력하세요."></td>
 									</tr>
 									<tr>
 										<th>사진</th>
-										<td><input id="emp_photo" type="file" class="form-control" name="emp_photo" ></td>
+										<td><input id="emp_photo" type="file" class="form-control" name="emp_photo" placeholder="사진을 등록하세요."></td>
 									</tr>
 									<tr>
 										<th>핸드폰</th>
-										<td><input id="emp_phone" type="tel" class="form-control" name="emp_phone"  ></td>
+										<td><input id="emp_phone" type="tel" class="form-control" name="emp_phone" placeholder="핸드폰 번호를 입력하세요."></td>
 									</tr>
 									<tr>
 										<th>이메일</th>
-										<td><input id="emp_email" type="email" class="form-control" name="emp_email"  ></td>
+										<td><input id="emp_email" type="email" class="form-control" name="emp_email" placeholder="이메일을 입력하세요."></td>
 									</tr>
 									<tr>
 										<th>부서명</th>
@@ -158,7 +158,7 @@ pageEncoding="UTF-8"%>
 									</tr>
 									<tr>
 										<th>부서번호</th>
-										<td><input id="dept_no" type="text" class="form-control" name="dept_no" ></td>
+										<td><input id="dept_no" type="text" class="form-control" name="dept_no" placeholder="부서번호를 입력하세요."></td>
 									</tr>
 								</table>
 								
@@ -168,15 +168,15 @@ pageEncoding="UTF-8"%>
 								<table class="table table-boardered">
 									<tr>
 										<th>내선번호</th>
-										<td><input id="emp_extend" type="tel" class="form-control" name="emp_extend" ></td>
+										<td><input id="emp_extend" type="tel" class="form-control" name="emp_extend" placeholder="내선번호를 입력하세요."></td>
 									</tr>
 									<tr>
 										<th>직급</th>
-										<td><input id="emp_position" type="text" class="form-control" name="emp_position" ></td>
+										<td><input id="emp_position" type="text" class="form-control" name="emp_position" placeholder="직급을 입력하세요."></td>
 									</tr>
 									<tr>
 										<th>연봉</th>
-										<td><input id="emp_salary" type="text" class="form-control" name="emp_salary" ></td>
+										<td><input id="emp_salary" type="text" class="form-control" name="emp_salary" placeholder="연봉을 입력하세요."></td>
 									</tr>
 									<tr>
 										<th>성별</th>
@@ -189,7 +189,7 @@ pageEncoding="UTF-8"%>
 									</tr>
 									<tr>
 										<th>입사일자</th>
-										<td><input id="emp_hiredate" type="date" class="form-control" name="emp_hiredate" ></td>
+										<td><input id="emp_hiredate" type="date" class="form-control" name="emp_hiredate"  ></td>
 									</tr>
 									<tr>
 										<th>퇴사일자</th>
@@ -208,36 +208,38 @@ pageEncoding="UTF-8"%>
 									</tr>
 									<tr>
 										<th>은행</th>
-										<td><input id="emp_bank" type="text" class="form-control" name="emp_bank" ></td>
+										<td><input id="emp_bank" type="text" class="form-control" name="emp_bank" placeholder="은행을 입력하세요." ></td>
 									</tr>
 
 									<tr>
 										<th>계좌번호</th>
-										<td><input id="emp_account" type="text" class="form-control" name="emp_account" ></td>
+										<td><input id="emp_account" type="text" class="form-control" name="emp_account" placeholder="계좌번호를 입력하세요."></td>
 									</tr>
 								</table>
 							</div>
 
 							<!-- 주소 검색 부분 시작 ================================================================================== -->
 							<div id="postSearch" class="col-sm-12" align="left">
-								<table class="table table-boardered">
-									<tr>
-										<th>우편번호</th>
-										<td><input id="emp_zipcode" type="text" class="form-control" name="emp_zipcode" align="left" readonly></td>
-										<td><input type="button" class="btn btn-link" onclick="DaumPostcode()" value="주소검색" /></td>
-									</tr>
-									<tr>
-										<th>주소</th>
-										<td><input id="emp_address" type="text" class="form-control" name="emp_address" readonly></td>
-									</tr>
-									<tr>
-										<th>상세주소</th>
-										<td><input id="emp_detailaddress" type="text" class="form-control" name="emp_detailaddress" placeholder="상세 주소를 입력하세요..."></td>
-									</tr>
-								</table>
-								
+								<div class="row">
+									<div class="col-sm-8">
+										<table class="table table-boardered">
+											<tr>
+												<th>우편번호</th>
+												<td><input id="emp_zipcode" type="text" class="form-control" name="emp_zipcode" align="left" placeholder="우편번호" readonly></td>
+												<td><input type="button" class="btn btn-link" onclick="DaumPostcode()" value="주소검색" /></td>
+											</tr>
+											<tr>
+												<th>주소</th>
+												<td><input id="emp_address" type="text" class="form-control" name="emp_address" placeholder="주소" readonly></td>
+											</tr>
+											<tr>
+												<th>상세주소</th>
+												<td><input id="emp_detailaddress" type="text" class="form-control" name="emp_detailaddress" placeholder="상세 주소를 입력하세요..."></td>
+											</tr>
+										</table>
+									</div>
+								</div>
 							</div>
-							
 							<!-- 주소 검색 부분 끝 =================================================================================== -->
 
 						</div>
