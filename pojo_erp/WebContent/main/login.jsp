@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page session="true" %>
+<%
+	String emp_name = request.getParameter("msg");
+	/* out.print(emp_name); */
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,10 +30,31 @@
 <!--===============================================================================================-->
 <script type="text/javascript">
 	function send(){
-		$("#loginForm").attr('method','post');
+ 		$("#loginForm").attr('method','post');
 		$("#loginForm").attr('action','login.erp');
-		$("#loginForm").submit();
+		$("#loginForm").submit(); 
+		
+		/* var u_id = null;
+		var u_pw = null;
+		var param = [
+			u_id = $("#emp_id").val()
+			,u_pw = $("#emp_pw").val()
+		];
+		$.ajax({
+			url:"login.erp"
+			,type:"post"
+			,data: param
+			,success:function(data){
+				alert(data);
+			}
+		}); */
 	}
+	<%-- alert("<%=emp_name%>"); --%>
+	<%-- 	
+	if(<%=emp_name%> == "비밀번호가 틀립니다"){
+		alert("비밀번호가 다르다!!!");
+	} 
+	--%>
 </script>
 </head>
 <body>
@@ -40,7 +65,7 @@
 					<img src="images/2rplogo.png" alt="IMG">
 				</div>
 
-				<form id="loginForm" class="login100-form validate-form" style="background-color: #282828;">
+				<form id="loginForm" class="login100-form validate-form" style="background-color: #282828;"> 
 					<span class="login100-form-title" style="color: white;">
 						2RP PROGRAM
 					</span>
@@ -82,7 +107,7 @@
 							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
 						</a> -->
 					</div>
-				</form>
+				 </form> 
 			</div>
 		</div>
 	</div>

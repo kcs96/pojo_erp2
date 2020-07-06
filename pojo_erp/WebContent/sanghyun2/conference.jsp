@@ -92,58 +92,46 @@
 	  <td style=" font-size: 135%; margin-left: auto; margin-right: auto;" cellspacing=0>
 	   <br>
 	   <br>
-	   <h3 style="margin-left:255px;">업무 보고서</h3>
+	   <h3 style="margin-left:255px;">회의 보고서</h3>
 	   <br>
-	 	
-		<table border="1" cellspacing=0>
-		 <tr>
-		  <th style="width:200px; hieght:110px;">
-			작성자
-		  </th>
-		  <td style="width:110px;">
-			<input class="wrap3" id="ap_reporter"name="ap_reporter"style="border:0px;height:30px;"type="text">
-		  </td>
-		  <th style="width:200px; hieght:110px;">
-		        작성일자
-		  </th>
-		  <td style="width:120px;">
-			<input id="ap_appdate" name="ap_appdate" class="wrap3"style="border:0px;background-color:white;height:30px;" type="date">
-		  </td>
-		 </tr>
-		</table>
 		</td>
 	  </tr>
 	</table>
 <br>
-<div style="margin-top:40px;">
-◆&nbsp;&nbsp;금일 업무 내용
-</div>
-	   <!--작성자,작성일자  -->
 </td>
 </tr>
 <tr>
-<th class="auto-style3" colspan="3">내용</th>
-<th class="auto-style3" colspan="1">비고</th>
+<td style="text-align:center;width:130px;background:#C0C0C0;">성 &nbsp; 명</td>
+<td><input class="wrap3" id="ap_reporter"name="ap_reporter"style="width:99%;border:0px;height:30px;"type="text"></td>
+<td style="text-align:center;width:130px;background:#C0C0C0;">부 &nbsp; 서</td>
+<td><input class="wrap3" id="ap_dname"style="width:99%;border:0px;height:30px;"type="text"></td>
 </tr>
 <tr>
-<th colspan="3" style="height:420px;"> 
-<textarea class="wrap2" id="ap_content" name="ap_content" style="resize:none;border:0;width:99%;height:100%;" cols="30" rows="5" ></textarea>
-
-</th>
-<td colspan="1" style="height:350px;">
-<textarea class="wrap2" name="ap_bego" id="ap_bego"style="resize:none;border:0;width:99%;height:100%;"cols="10"  ></textarea>
-
+<td style="text-align:center;width:130px;background:#C0C0C0;">주 &nbsp; 제</td>
+<td><input class="wrap3" id="ap_contact"style="width:99%;border:0px;height:30px;"type="text"></td>
+<td style="text-align:center;width:130px;background:#C0C0C0;">일 &nbsp; 정</td>
+<td><input class="wrap3" id="ap_appdate"style="width:99%;border:0px;height:30px;"type="text"></td>
+</tr>
+<tr>
+<td style="text-align:center;background:#C0C0C0;">회의 내용</td>
+<td colspan="4">
+<textarea class="wrap2" id="ap_content" name="ap_content" style="resize:none;border:0;width:99%;height:100%;" cols="30" rows="12" >
+</textarea>
 </td>
 </tr>
 <tr>
-<th class="auto-style3" colspan="6">
-특이사항/ 건의 사항
-</th>
+<td style="text-align:center;background:#C0C0C0;">결정 사항</td>
+<td colspan="4";>
+<textarea id="ap_bego" class="wrap2" style="resize:none;border:0;width:99%;height:100%;" cols="30" rows="5" >
+</textarea>
+</td>
 </tr>
 <tr>
-<th colspan="6" "class="auto-style3" > 
-<textarea class="wrap2"  id="ap_instructions" name="ap_instructions" style="height:300px;resize:none;border:0;width:98%;"></textarea>
-</th>
+<td style="text-align:center;background:#C0C0C0;">소감 및 평가</td>
+<td colspan="4">
+<textarea class="wrap2" id="ap_instructions" style="resize:none;border:0;width:99%;height:100%;" cols="30" rows="12" >
+</textarea>
+</td>
 </tr>
 </table>
 </div>

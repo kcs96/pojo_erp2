@@ -40,7 +40,7 @@ pageEncoding="UTF-8"%>
  	String ap_appdate_3 = request.getParameter("ap_appdate_3"); //일
  	String ap_no = request.getParameter("ap_no"); //문서 고유번호
  	String page_no = request.getParameter("key"); //페이지 번호
- 	String ap_state = request.getParameter("ap_state"); //결재 상태 
+ 	String ap_state = request.getParameter("ap_state"); //결재 상태
  	
  	String null_check = "undefined"; //null체크
  	
@@ -89,9 +89,6 @@ pageEncoding="UTF-8"%>
  	if(ap_no.equals(null_check)){
  		ap_no = "";
  	}
- 	if(ap_state.equals(null_check)){
- 		ap_state = "";
- 	}
 %>
 <!-- 파라미터 받기 끝 -->
 
@@ -110,22 +107,34 @@ pageEncoding="UTF-8"%>
 		$("#f_gigag").submit();
 	}
 	
-	
-	//<![CDATA[
-	function printPage(){
-	 var initBody;
-	 window.onbeforeprint = function(){
-	  initBody = document.body.innerHTML;
-	  document.body.innerHTML =  document.getElementById('page').innerHTML;
-	 };
-	 window.onafterprint = function(){
-	  document.body.innerHTML = initBody;
-	 };
-	 window.print();
-	 return false;
+	function page_print(){ //인쇄버튼 반응
+	//파라미터 값 추가 
+		ap_reporter = "<%=ap_reporter%>"
+		no = "<%=no%>"
+		fr_no= "<%=fr_no%>"
+		ap_title= "<%=ap_title%>"
+		ap_prosessingdate = "<%=ap_prosessingdate%>"
+		ap_dname = "<%=ap_dname%>"
+		ap_content = "<%=ap_content%>"
+		ap_contact = "<%=ap_contact%>"
+		ap_bego = "<%=ap_bego%>"
+		ap_instructions = "<%=ap_instructions%>"
+		ap_appdate = "<%=ap_appdate%>"
+		ap_appdate_1 = "<%=ap_appdate_1%>"
+		ap_appdate_2 = "<%=ap_appdate_2%>"
+		ap_appdate_3 = "<%=ap_appdate_3%>"
+		ap_no = "<%=ap_no%>"
+		
+	 		location.href = '../page/approval_print.jsp?ap_reporter='+ap_reporter
+				+'&no='+no+'&fr_no='+fr_no+'&ap_title='+ap_title
+				+'&ap_prosessingdate='+ap_prosessingdate+'&ap_dname='
+				+ap_dname+'&ap_content='+ap_content+'&ap_contact='+ap_contact
+				+'&ap_appdate='+ap_appdate+'&ap_appdate_1='+ap_appdate_1
+				+'&ap_appdate_2='+ap_appdate_2+'&ap_appdate_3='+ap_appdate_3+'&ap_bego='+ap_bego
+				+'&ap_instructions='+ap_instructions+'&ap_no='+ap_no
 	}
-	//]]>
-	</script>
+
+</script>
 </head>
 <body class="sb-nav-fixed">
    <nav id="topNav"></nav>
@@ -135,16 +144,17 @@ pageEncoding="UTF-8"%>
            
 
 	 <h2><div id="page_title" style="border-bottom: 2px solid gray; margin: 50px 30px;"/></h2>
-  	 <div id="page_contents" style="max-width: 1730px; margin: 10px 100px;">
+  	 <div id="page_contents" style="border: 1px solid black; max-width: 1530px; margin: 0px 50px;">
   	 
   	 
   	 <div class="row"><!--승인 기각버튼  -->
   	 <div  class="col-1"></div>
-	    <div style="margin-top:0px;" id= "btns" class="col-5">
-	        <button id= "btn_print" onclick="printPage()"  style="margin-right:5px;"class="btn btn-info" >인쇄</button>
+	    <div style="margin-top:15px;" id= "btns" class="col-5">
+	        <button id= "btn_print" onclick="page_print()"  style="margin-right:5px;"class="btn btn-info" data-toggle="modal" >인쇄</button>
 	    	<button id= "btn_approval"  style="margin-right:5px;"class="btn btn-info" data-toggle="modal" data-target="#myModal">승인</button>
 	        <button id= "btn_dismissal"  style="margin-right:5px;"class="btn btn-info" data-toggle="modal" data-target="#myModal1">기각</button>
-			</div> <!--드랍다운 끝  -->
+	        </div> <!--드랍다운 끝  -->
+	      <div class="col-2"></div>
 			</div>
         <hr style="border: solid 1px black;">
   	<div class="row">
@@ -174,7 +184,7 @@ pageEncoding="UTF-8"%>
 		<hr style="border: solid 1px black;">
 	<div class="row">
 		<div class="col-1"></div>
-			<div style="overflow-x:scroll; border:2px solid black;"class="col-10"id="page"></div>
+			<div style=" border:2px solid black;"class="col-10"id="page"></div>
 	</div>		<div class="col-1"></div>
 
 <!-- 	<!-- 이전꺼 보여주는 거 -->
@@ -226,7 +236,8 @@ pageEncoding="UTF-8"%>
 								}
 							})
 						
-					}else if(page===3){	//업무보고서 
+					}
+		  	 			else if(page===3){	//업무보고서 
 							$.ajax({
 									url:"../page/upmo.jsp"
 									,success:function(data){
@@ -238,7 +249,22 @@ pageEncoding="UTF-8"%>
 										$("#ap_instructions").val("<%=ap_instructions%>");
 								}
 							})	
-					}else if(page===4){	//사직서 
+					}
+		  	 			else if(page===4){	//업무 지시서
+							$.ajax({
+									url:"../page/upmog.jsp"
+									,success:function(data){
+										$("#page").html(data);
+										$("#ap_reporter").val("<%=ap_reporter%>");
+										$("#ap_appdate").val("<%=ap_appdate%>");
+										$("#ap_content").val("<%=ap_content%>");
+										$("#ap_bego").val("<%=ap_bego%>");
+										$("#ap_instructions").val("<%=ap_instructions%>");
+								}
+							})	
+					}
+		  	 			
+		  	 		else if(page===5){	//사직서 
 							$.ajax({
 								url:"../page/sagic.jsp"
 								,success:function(data){
@@ -254,7 +280,29 @@ pageEncoding="UTF-8"%>
 									$("#ap_namein").val("<%=ap_reporter%>"); 
 								}
 							})
-					} 			
+					} 	
+		  	 			
+		  	 		else if(page===6){	//회의 보고서
+							$.ajax({
+								url:"../page/conference.jsp"
+								,success:function(data){
+									$("#page").html(data);
+									$("#ap_reporter").val("<%=ap_reporter%>");
+									$("#ap_dname").val("<%=ap_dname%>");
+									$("#ap_prosessingdate").val("<%=ap_prosessingdate%>");
+									$("#ap_content").val("<%=ap_content%>");
+									$("#ap_contact").val("<%=ap_contact%>");
+									$("#ap_appdate").val("<%=ap_appdate%>");
+									$("#ap_year").val("<%=ap_appdate_1%>");
+									$("#ap_month").val("<%=ap_appdate_2%>");
+									$("#ap_today").val("<%=ap_appdate_3%>");
+									$("#ap_namein").val("<%=ap_reporter%>"); 
+									$("#ap_bego").val("<%=ap_bego%>");
+									$("#ap_instructions").val("<%=ap_instructions%>");
+								}
+							})
+					} 	
+		  	 			
 		  	}) // $(document).ready처리 끝
 
 				

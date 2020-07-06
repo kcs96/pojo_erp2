@@ -20,7 +20,6 @@ pageEncoding="UTF-8"%>
 
 </head>
 <body class="sb-nav-fixed">
-
 <nav id="topNav"></nav>
 <div id="layoutSidenav">
    <div id="layoutSidenav_nav"></div>
@@ -199,7 +198,7 @@ pageEncoding="UTF-8"%>
     		ap_contact = row.AP_CONTACT	//사원 전화번호 
     		//alert("문자열 자름 : "+ ap_contact)
     		
-    		//alert("문자열 자르기 전 : "+ row.AP_APPDATE)
+    		alert("문자열 자르기 전 : "+ row.AP_APPDATE)
     		ap_appdate = row.AP_APPDATE.split('-'); //문서에 들어갈 날짜 
     		ap_appdate_1 = ap_appdate[0];	//년
     		ap_appdate_2 = ap_appdate[1];	//월
@@ -207,10 +206,10 @@ pageEncoding="UTF-8"%>
     		//alert("날짜 : "+ ap_appdate_1+"  "+ ap_appdate_2+"  "+ ap_appdate_3)
     		
     		ap_bego = row.AP_BEGO	//사원 전화번호 
-    		//alert("문자열 자름 : "+ ap_bego)
+    		alert("문자열 자름 : "+ ap_bego)
     		
     		ap_instructions = row.AP_INSTRUCTIONS	//사원 전화번호 
-    		//alert("문자열 자름 : "+ ap_contact)
+    		alert("문자열 자름 : "+ ap_instructions)
     	
     		ap_no = row.AP_NO	//문서 고유번호 
     		//alert("문자열 자름 : "+ ap_no)
@@ -219,13 +218,14 @@ pageEncoding="UTF-8"%>
     		//alert("page_no : " + page_no)
     		
     		ap_state = row.AP_STATE
+    		//alert("page_no : " + page_no)
     		
     		location.href = './approval_get.jsp?ap_reporter='+ap_reporter
     				+'&no='+no +'&fr_no='+fr_no+'&ap_title='+ap_title
     					+'&ap_prosessingdate='+ap_prosessingdate+'&ap_dname='
     						+ap_dname+'&ap_content='+ap_content+'&ap_contact='+ap_contact
     						+'&ap_appdate='+ap_appdate+'&ap_appdate_1='+ap_appdate_1+'&ap_appdate_2='+ap_appdate_2+'&ap_appdate_3='+ap_appdate_3
-    						+'&ap_bego='+ap_bego+'&ap_instructions='+ap_instructions+'&ap_no='+ap_no+'&key='+page_no +'&ap_state='+ap_state
+    						+'&ap_bego='+ap_bego+'&ap_instructions='+ap_instructions+'&ap_no='+ap_no+'&key='+page_no+'&ap_state='+ap_state
    
     }
  }

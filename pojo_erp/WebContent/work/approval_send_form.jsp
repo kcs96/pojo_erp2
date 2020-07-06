@@ -74,7 +74,7 @@
 		}
 	}
 		//del(el)파라미터 써주고 
-	function del(el){
+	/* function del(el){
 		alert("클릭");//
 		var imsi = $(el).text();//var imsi로 만들어줘서 $(el).text파라미터값만 받아올때 쓰는건가봄
 		alert(imsi+"삭제");
@@ -94,9 +94,8 @@
 				i--;//배열에서 하나 요소를 삭제 했으므로 인덱스 값이 하나씩 줄어든다! 따라서 i를 하나 빼준다!
 			}
 		}
-	}
+	} */
 	function test_modal(){
-		alert("결재하기?");
 		g_names=[];//배열에 저장된 값들 초기화하기
 		g_position =[];
 		$("input[type=checkbox]").prop("checked", false);
@@ -105,7 +104,6 @@
 		var url;
 		
 		 imsi = res;
-		alert("res:" + imsi);
 		if (res == "휴가양식") {
 			url = "../sanghyun2/huga.jsp"
 		} else if (res == "업무보고서") {
@@ -114,23 +112,40 @@
 			url = "../sanghyun2/paguns.jsp"
 		} else if (res == "사직양식") {
 			url = "../sanghyun2/sagi.jsp"
+		}else if (res == "업무지시서"){
+			url = "../sanghyun2/upmog.jsp"
+		} else if (res == "회의보고서"){
+			url = "../sanghyun2/conference.jsp"
 		}
 		$.ajax({
 			url : url,
 			success : function(data) {
 				$("#test").html(data);
+				$("#ap_reporter").val("<%=s_ename%>");
+                $("#ap_dname").val("<%=dept_name%>");
+                $('#ap_reporter').attr('disabled', 'disabled');
+                $('#ap_dname').attr('disabled', 'disabled');
+                $('#ap_year').val(year1);
+                $('#ap_month').val(month1);
+                $('#ap_today').val(date1);
+                $('#ap_namein').val("<%=s_ename%>");
+                ////////////////////////////////////////////
+                
+                $('#ap_year').attr('disabled', 'disabled');
+                $('#ap_month').attr('disabled', 'disabled');
+                $('#ap_today').attr('disabled', 'disabled');
+                $('#ap_namein').attr('disabled', 'disabled');
+                $('#ap_appdate').val(dates3);
 			}
 		});
 	}
  	function send() {
-		alert("보냄");
 		$("#approveModal").modal({
 			show:false
 		}); 
 		//부서이름
 			var ap_dname= $("#ap_dname").val();
 		if(ap_dname == null)ap_dname = '';
-			alert("ap_dname2ss:" + ap_dname);
 		//연락처
  		var ap_contact = $("#ap_contact").val();
 		if(ap_contact ==null)ap_contact='';
@@ -140,8 +155,7 @@
  		//파견일자,휴가일자,
 		var ap_prosessingdate =$("#ap_prosessingdate").val();
 		if(ap_prosessingdate == null) ap_prosessingdate ='2018-05-03';
-		var ap_prosessingdate =$("#ap_eprosessingdate").val();
-		alert("ap_prosessingdate" + ap_prosessingdate);
+		var ap_eprosessingdate =$("#ap_eprosessingdate").val();
 		if(ap_eprosessingdate == null) ap_eprosessingdate ='2018-05-04';
 		var ap_content =$("#ap_content").val();
  		var ap_appdate =$("#sdate").text();
@@ -173,7 +187,6 @@
 //alert("222");
 		var ap_closedate = year+'-'+month+'-'+date;
 		var rev_empNo = $("#approvalName").text();//결재자이름
-		alert('rev_empNo' + rev_empNo);
 		//alert("rev_empNo:"+rev_empNo);
 		var arrs = rev_empNo.split(',');
 		//alert("arrs:"+arrs);
@@ -181,7 +194,6 @@
 		//alert("app_num:"+app_num);
 		var ap_count = 1
 		var ap_title = $("#ap_titles").val();//제목 
-		alert("ap_ti")
 		var ap_empno = $("#emp_no").val();
 		
 	location.href="./workAddSendDoc.erp?ap_instructions="
@@ -203,7 +215,6 @@
  	}
  	
 	function approval(){
-		alert("승인");
 		$("#approveModal").modal({
 			show:true
 		});
@@ -288,6 +299,8 @@
 													<option value="1">휴가양식</option>
 													<option value="2">파견양식</option>
 													<option value="5">사직양식</option>
+													<option value="4">업무지시서</option>
+													<option value="6">회의보고서</option>
 											</select>
 											</td>
 											<th style="background: #EAEAEA; width: 17%;text-align: center;">기한</th>
@@ -322,7 +335,7 @@
 									<div class="col" style="text-align: center;">
 										<button
 											type="button" class="btn btn-info btn-lg"
-											data-toggle="modal" data-target="#approveModal">승인</button>
+											data-toggle="modal" data-target="#approveModal">신청</button>
 										<button type="button" class="btn btn-info btn-lg"
 											data-toggle="modal"  data-target="#cancle">취소</button>
 										<br> <br>
@@ -439,12 +452,20 @@
 				//선택된 텍스트 값을 p_zdo에 저장해 보자.
 				 $("#i_ap_instructions option:selected").each(function() {
 					var res = $(this).text();//var값을 집어넣으려면 val에다가 넣어야한다. 
-					//alert("res:" +res);
 					test(res);// ajax
 				});
 			});
 		</script>
 	<script type="text/javascript">
+	var year1 = to.getFullYear().toString(); // 년도
+	var month1 = (to.getMonth() + 1).toString();  // 월
+	var date1 = to.getDate().toString();  // 날짜
+	if(month1.length==1){//길이 11이면 2개  
+		month1 = "0"+month1;
+	}
+	if(date1.length==1){
+		date1 = "0"+date1;
+	}///
 		var temp='';
 		var fr_no = <%= fr_no %>
 			$(document).ready(function() {
@@ -460,6 +481,17 @@
                         $("#ap_dname").val("<%=dept_name%>");
                         $('#ap_reporter').attr('disabled', 'disabled');
                         $('#ap_dname').attr('disabled', 'disabled');
+                        $('#ap_year').val(year1);
+                        $('#ap_month').val(month1);
+                        $('#ap_today').val(date1);
+                        $('#ap_namein').val("<%=s_ename%>");
+                        ////////////////////////////////////////////
+                        
+                        $('#ap_year').attr('disabled', 'disabled');
+                        $('#ap_month').attr('disabled', 'disabled');
+                        $('#ap_today').attr('disabled', 'disabled');
+                        $('#ap_namein').attr('disabled', 'disabled');
+                        $('#i_ap_instructions option:eq(1)').prop('selected', true); // option 3번째 선택
 					}
 				});
 				
@@ -476,6 +508,17 @@
                         $("#ap_dname").val("<%=dept_name%>");
                         $('#ap_reporter').attr('disabled', 'disabled');
                         $('#ap_dname').attr('disabled', 'disabled');
+                        $('#ap_year').val(year1);
+                        $('#ap_month').val(month1);
+                        $('#ap_today').val(date1);
+                        $('#ap_namein').val("<%=s_ename%>");
+                        ////////////////////////////////////////////
+                        
+                        $('#ap_year').attr('disabled', 'disabled');
+                        $('#ap_month').attr('disabled', 'disabled');
+                        $('#ap_today').attr('disabled', 'disabled');
+                        $('#ap_namein').attr('disabled', 'disabled');
+                        $('#i_ap_instructions option:eq(2)').prop('selected', true); // option 3번째 선택
 					}
 				});
 				
@@ -490,8 +533,31 @@
 						
 						$("#ap_reporter").val("<%=s_ename%>");
                         $("#ap_dname").val("<%=dept_name%>");
+                        $('#ap_appdate').val(dates3);
                         $('#ap_reporter').attr('disabled', 'disabled');
                         $('#ap_dname').attr('disabled', 'disabled');
+                        $('#ap_appdate').attr('disabled', 'disabled');
+                        $('#i_ap_instructions option:eq(0)').prop('selected', true); // option 3번째 선택
+                        //options에서 보여지게 
+					}
+				});
+				
+			}	if(fr_no=="4"){
+				
+				$.ajax({
+					url : "../sanghyun2/upmog.jsp",
+					success : function(data) {
+						$("#test").html(data);
+						$('#sdate').append(dates3);
+						
+						$("#ap_reporter").val("<%=s_ename%>");
+                        $("#ap_dname").val("<%=dept_name%>");
+                        $('#ap_appdate').val(dates3);
+                        $('#ap_reporter').attr('disabled', 'disabled');
+                        $('#ap_dname').attr('disabled', 'disabled');
+                        $('#ap_appdate').attr('disabled', 'disabled');
+                        $('#i_ap_instructions option:eq(4)').prop('selected', true); // option 4번째 선택
+                        //options에서 보여지게 
 					}
 				});
 				
@@ -508,10 +574,41 @@
                         $("#ap_dname").val("<%=dept_name%>");
                         $('#ap_reporter').attr('disabled', 'disabled');
                         $('#ap_dname').attr('disabled', 'disabled');
+                        $('#ap_year').val(year1);
+                        $('#ap_month').val(month1);
+                        $('#ap_today').val(date1);
+                        $('#ap_namein').val("<%=s_ename%>");
+                        ////////////////////////////////////////////
+                        
+                        $('#ap_year').attr('disabled', 'disabled');
+                        $('#ap_month').attr('disabled', 'disabled');
+                        $('#ap_today').attr('disabled', 'disabled');
+                        $('#ap_namein').attr('disabled', 'disabled');
+                        $('#i_ap_instructions option:eq(3)').prop('selected', true); // option 3번째 선택
 					}
 				});
 				
 			}	
+			if(fr_no=="6"){
+					
+					$.ajax({
+						url : "../sanghyun2/conference.jsp",
+						success : function(data) {
+							$("#test").html(data);
+							$('#sdate').append(dates3);
+							
+							$("#ap_reporter").val("<%=s_ename%>");
+	                        $("#ap_dname").val("<%=dept_name%>");
+	                        $('#ap_appdate').val(dates3);
+	                        $('#ap_reporter').attr('disabled', 'disabled');
+	                        $('#ap_dname').attr('disabled', 'disabled');
+	                        $('#ap_appdate').attr('disabled', 'disabled');
+	                        $('#i_ap_instructions option:eq(0)').prop('selected', true); // option 3번째 선택
+	                        //options에서 보여지게 
+						}
+					});
+					}
+			
 				
 			    $('#tb_approval').on('check.bs.table', function (row, element) {
 			    	g_names.push(element.EMP_NAME);

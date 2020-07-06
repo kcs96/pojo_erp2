@@ -53,8 +53,10 @@ public class EmpController implements Controller {
 			session.setAttribute("dept_name",dept_name);
 			
 			if("비밀번호가 틀립니다".equals(emp_name)||"아이디가 없습니다".equals(emp_name)){
+				emp_name = new HangulConversion().toUTF(emp_name);
 				path="redirect:./login.jsp?msg="+emp_name;
-			}else {
+			}
+			else {
 				logger.info("메인페이지 호출");
 				pMap = new HashMap<>();
 				pMap.put("emp_no", emp_no);

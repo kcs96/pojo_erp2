@@ -91,20 +91,28 @@
 		 cellspacing=0>
 	<tr id="tableTr">
 	<td colspan="6" style="border-right:0;border-left:0;border-top:0;border-bottom:0;">
-		<br>
-	<br>
 	<table style="line-height:1; 
 		 margin-left: auto; margin-right: auto;" cellspacing=0>
       <tr>
-              <td><h4>휴 가 신 청 서</h4><br><br></td>
-        <td id="tms_auto_sign"  ></td>
+              	<td><div style="padding-top:50px;"><h4>휴 가 신 청 서</h4></div></td>
       </tr>
-      <tr>
 </table>
-	</td>
+<div style= "float: right; padding-bottom:10px;"> 
+    <table border="1"; cellpadding='10' ; cellspacing='0'; >
+ 	<tr>
+ 	<th class="auto-style2"  style="font-size: 70%;" width="60px" colspan="2" >
+ 	기안
+ 	</th> 
+ 	</tr>
+ 	<tr>
+	<th style="font-size: 89%;" width="30px" height="50px"  colspan="2">
+	<img src="imaged.png" width="110%" height="110%">
+	</th>
 	</tr>
-
- 
+ </table>	
+ </div>
+</td>
+</tr>
 	<tr>
     <th width="123"  class="auto-style3">성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명 </th>
     <td width="201">

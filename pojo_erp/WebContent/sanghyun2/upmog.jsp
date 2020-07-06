@@ -88,17 +88,17 @@
 <tr>
 <td colspan="6">
 	<table>
-	 <tr>
+<tr>
 	  <td style=" font-size: 135%; margin-left: auto; margin-right: auto;" cellspacing=0>
 	   <br>
 	   <br>
-	   <h3 style="margin-left:255px;">업무 보고서</h3>
+	   <h3 style="margin-left:255px;">업무 지시서</h3>
 	   <br>
 	 	
 		<table border="1" cellspacing=0>
 		 <tr>
 		  <th style="width:200px; hieght:110px;">
-			작성자
+			지시자
 		  </th>
 		  <td style="width:110px;">
 			<input class="wrap3" id="ap_reporter"name="ap_reporter"style="border:0px;height:30px;"type="text">
@@ -122,11 +122,11 @@
 </td>
 </tr>
 <tr>
-<th class="auto-style3" colspan="3">내용</th>
-<th class="auto-style3" colspan="1">비고</th>
+<th class="auto-style3" colspan="3">작 업 내 역</th>
+<th class="auto-style3" colspan="1">세 부 내 역</th>
 </tr>
 <tr>
-<th colspan="3" style="height:420px;"> 
+<th colspan="3" style="width:200px;height:420px;"> 
 <textarea class="wrap2" id="ap_content" name="ap_content" style="resize:none;border:0;width:99%;height:100%;" cols="30" rows="5" ></textarea>
 
 </th>
@@ -137,7 +137,7 @@
 </tr>
 <tr>
 <th class="auto-style3" colspan="6">
-특이사항/ 건의 사항
+완료여부 및 평가
 </th>
 </tr>
 <tr>

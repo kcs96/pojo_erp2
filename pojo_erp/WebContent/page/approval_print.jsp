@@ -134,7 +134,9 @@ pageEncoding="UTF-8"%>
 							}
 						})
 					
-				}else if(page===3){	//업무보고서 
+				}
+	  	 			
+	  	 		else if(page===3){	//업무보고서 
 						$.ajax({
 							url:"./upmo_print.jsp?ap_reporter='+ap_reporter"
 								+'&no='+no+'&fr_no='+fr_no+'&ap_title='+ap_title
@@ -151,7 +153,27 @@ pageEncoding="UTF-8"%>
 								$("#ap_instructions").val("<%=ap_instructions%>");
 							}
 						})	
-				}else if(page===4){	//사직서 
+				}
+	  	 		else if(page===4){	//업무지시서 
+						$.ajax({
+							url:"./upmog_print.jsp?ap_reporter='+ap_reporter"
+								+'&no='+no+'&fr_no='+fr_no+'&ap_title='+ap_title
+								+'&ap_prosessingdate='+ap_prosessingdate+'&ap_dname='
+									+ap_dname+'&ap_content='+ap_content+'&ap_contact='+ap_contact
+									+'&ap_appdate='+ap_appdate+'&ap_appdate_1='+ap_appdate_1+'&ap_appdate_2='+ap_appdate_2+'&ap_appdate_3='+ap_appdate_3
+									+'&ap_bego='+ap_bego+'&ap_instructions='+ap_instructions
+							,success:function(data){
+								$("#page_print").html(data);
+								$("#ap_reporter").val("<%=ap_reporter%>");
+								$("#ap_appdate").val("<%=ap_appdate%>");
+								$("#ap_content").val("<%=ap_content%>");
+								$("#ap_bego").val("<%=ap_bego%>");
+								$("#ap_instructions").val("<%=ap_instructions%>");
+							}
+						})	
+				}
+				
+				else if(page===5){	//사직서 
 						$.ajax({
 							url:"./sagic_print.jsp?ap_reporter='+ap_reporter"
 								+'&no='+no+'&fr_no='+fr_no+'&ap_title='+ap_title
@@ -173,6 +195,33 @@ pageEncoding="UTF-8"%>
 							}
 						})
 					}
+	  	 			
+				else if(page===6){	//회의 보고서
+						$.ajax({
+							url:"./conference_print.jsp?ap_reporter='+ap_reporter"
+								+'&no='+no+'&fr_no='+fr_no+'&ap_title='+ap_title
+								+'&ap_prosessingdate='+ap_prosessingdate+'&ap_dname='
+									+ap_dname+'&ap_content='+ap_content+'&ap_contact='+ap_contact
+									+'&ap_appdate='+ap_appdate+'&ap_appdate_1='+ap_appdate_1+'&ap_appdate_2='+ap_appdate_2+'&ap_appdate_3='+ap_appdate_3
+									+'&ap_bego='+ap_bego+'&ap_instructions='+ap_instructions
+							,success:function(data){
+								$("#page_print").html(data);
+								$("#ap_reporter").val("<%=ap_reporter%>");
+								$("#ap_dname").val("<%=ap_dname%>");
+								$("#ap_prosessingdate").val("<%=ap_prosessingdate%>");
+								$("#ap_content").val("<%=ap_content%>");
+								$("#ap_contact").val("<%=ap_contact%>");
+								$("#ap_year").val("<%=ap_appdate_1%>");
+								$("#ap_month").val("<%=ap_appdate_2%>");
+								$("#ap_today").val("<%=ap_appdate_3%>");
+								$("#ap_namein").val("<%=ap_reporter%>"); 
+								$("#ap_bego").val("<%=ap_bego%>");
+								$("#ap_instructions").val("<%=ap_instructions%>");
+							}
+						})
+					}
+	  	 			
+	  	 			
 	  	 			
 	  			 }) // $(document).ready처리 끝
 			</script> 

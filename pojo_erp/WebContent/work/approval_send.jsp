@@ -47,6 +47,15 @@
 			date = "0"+date;
 		}///
 		var dates3 = year+'-'+month+'-'+date;
+		var year1 = to.getFullYear().toString(); // 년도
+		var month1 = (to.getMonth() + 1).toString();  // 월
+		var date1 = to.getDate().toString();  // 날짜
+		if(month1.length==1){//길이 11이면 2개  
+			month1 = "0"+month1;
+		}
+		if(date1.length==1){
+			date1 = "0"+date1;
+		}///
 		var imsi;
 		var g_names=[];//배열 변수
 		var g_position =[];//배열 변수
@@ -73,29 +82,7 @@
 		}
 	}
 		//del(el)파라미터 써주고 
-	function del(el){
-		alert("클릭");//
-		var imsi = $(el).text();//var imsi로 만들어줘서 $(el).text파라미터값만 받아올때 쓰는건가봄
-		alert(imsi+"삭제");
-		$("#approvalName").html("");//클릭을하면 초기화
-		for(var i=0;i<g_position.length;i++) {
-			var val = g_position[i];
-			//alert("val"+val);
-			if(imsi!=val){
-				if(i==(g_names.length-1)){
-					$("#approvalName").append("<a href='#' onClick='del(this)'>"+g_position[i]+"</a>");
-				}else{
-					$("#approvalName").append("<a href='#' onClick='del(this)'>"+g_position[i]+"</a>"+",");
-				}
-			}else{
-				g_position.splice(i, 1)
-				//alert(i+"삭제");
-				i--;//배열에서 하나 요소를 삭제 했으므로 인덱스 값이 하나씩 줄어든다! 따라서 i를 하나 빼준다!
-			}
-		}
-	}
 	function test_modal(){
-		alert("결재하기?");
 		g_names=[];//배열에 저장된 값들 초기화하기
 		g_position =[];
 		$("input[type=checkbox]").prop("checked", false);
@@ -103,7 +90,6 @@
 	function test(res) {
 		 imsi = res;
 		var url;
-		alert("res:" + imsi);
 		if (res == "휴가양식") {
 			url = "../sanghyun2/huga.jsp"
 		} else if (res == "업무보고서") {
@@ -112,6 +98,11 @@
 			url = "../sanghyun2/paguns.jsp"
 		} else if (res == "사직양식") {
 			url = "../sanghyun2/sagi.jsp"
+		} else if (res == "업무지시서"){
+			url = "../sanghyun2/upmog.jsp"
+		}
+		 else if (res == "회의보고서"){
+			url = "../sanghyun2/conference.jsp"
 		}
 		$.ajax({
 			url : url,
@@ -121,18 +112,28 @@
                 $("#ap_dname").val("<%=dept_name%>");
                 $('#ap_reporter').attr('disabled', 'disabled');
                 $('#ap_dname').attr('disabled', 'disabled');
+                $('#ap_year').val(year1);
+                $('#ap_month').val(month1);
+                $('#ap_today').val(date1);
+                $('#ap_namein').val("<%=s_ename%>");
+                ////////////////////////////////////////////
+                
+                $('#ap_year').attr('disabled', 'disabled');
+                $('#ap_month').attr('disabled', 'disabled');
+                $('#ap_today').attr('disabled', 'disabled');
+                $('#ap_namein').attr('disabled', 'disabled');
+                $('#ap_appdate').val(dates3);
+                $('#ap_appdate').attr('disabled', 'disabled');
 			}
 		});
 	}
  	function send() {
-		alert("보냄");
 		$("#approveModal").modal({
 			show:false
 		}); 
 		//부서이름
 			var ap_dname= $("#ap_dname").val();
 		if(ap_dname == null)ap_dname = '';
-			alert("ap_dname2ss:" + ap_dname);
 		//연락처
  		var ap_contact = $("#ap_contact").val();
 		if(ap_contact ==null)ap_contact='';
@@ -141,10 +142,9 @@
  		var ap_reporter = $("#ap_reporter").val();
  		//파견일자,휴가일자,
 		var ap_prosessingdate =$("#ap_prosessingdate").val();
-		if(ap_prosessingdate == null) ap_prosessingdate ='2018-05-03';
+		if(ap_prosessingdate == null) ap_prosessingdate ='';
 		var ap_eprosessingdate =$("#ap_eprosessingdate").val();
-		alert("ap_eprosessingdate" + ap_eprosessingdate);
-		if(ap_eprosessingdate == null) ap_eprosessingdate ='2018-05-04';
+		if(ap_eprosessingdate == null) ap_eprosessingdate ='';	
 		///끝
 		var ap_content =$("#ap_content").val();
  		var ap_appdate =$("#sdate").text();
@@ -176,7 +176,6 @@
 //alert("222");
 		var ap_closedate = year+'-'+month+'-'+date;
 		var rev_empNo = $("#approvalName").text();//결재자이름
-		alert('rev_empNo' + rev_empNo);
 		//alert("rev_empNo:"+rev_empNo);
 		var arrs = rev_empNo.split(',');
 		//alert("arrs:"+arrs);
@@ -184,12 +183,9 @@
 		//alert("app_num:"+app_num);
 		var ap_count = 1
 		var ap_title = $("#ap_titles").val();//제목 
-		alert("테스트"+ap_prosessingdate+ap_eprosessingdate);
 		var ap_empno = $("#emp_no").val();
 		
-	alert("ap_eprosessingdate" + ap_eprosessingdate);
-	alert("ap_appdate" + ap_appdate);
-			location.href="./workAddSendDoc.erp?ap_instructions="
+			location.href="./workAddSendDoc.erp?ap_instructions="+ap_instructions
 												+"&fr_no=" + fr_no
 												+"&ap_title="+ap_title
 												+"&ap_reporter="+ap_reporter
@@ -210,7 +206,6 @@
 	}	
  	
 	function approval(){
-		alert("승인");
 		$("#approveModal").modal({
 			show:true
 		});
@@ -225,7 +220,7 @@
 			<main id="input_div">
 				<div id="frame_div" style="border: 1px solid black;">
 					<div id="page_title" style="border-bottom: 2px solid gray; margin: 50px 30px;"><h2>결재 신청</h2></div>
-				<div id="page_contents" style="max-width: 1730px; margin: 10px 100px;" >
+				<div id="page_contents" style="max-width: 1730px; margin: 10px 100px;">
 						<!-- 컨텐츠 들어갈내용 시작-->
 						<div class="row">
 							<div class="col-12">
@@ -295,6 +290,8 @@
 													<option value="1">휴가양식</option>
 													<option value="2">파견양식</option>
 													<option value="5">사직양식</option>
+													<option value="4">업무지시서</option>
+													<option value="6">회의보고서</option>
 											</select>
 											</td>
 											<th style="background: #EAEAEA; width: 17%;text-align: center;">기한</th>
@@ -316,19 +313,20 @@
 						</div>
 						<hr style="border: solid 1px black;">
 						<!--***************************양식 뿌려주기  ******************************-->
-						<div class="row" >
-							<div style="padding-top: 10px;" class="col-12">
+						<div class="row">
+							<div style="overflow-x:scroll ; padding-top: 10px;" class="col-12">
 							 <div  style=" border: 2px solid #d2d2d2; ">
 								<!-- <button style="float: right;"
 									type="button" class="btn btn-info" onclick="window.print();">인쇄</button> -->
 								<!-- *****밑에 승인취소버튼 -->
-								<div id="test"  style="overflow-x:scroll;"></div>
+								<div id="test">
+								</div>
 								<div class="row" style="text-align: center;">
 									
 									<div class="col" style="text-align: center;">
 										<button
 											type="button" class="btn btn-info btn-lg"
-											data-toggle="modal" data-target="#approveModal">승인</button>
+											data-toggle="modal" data-target="#approveModal">신청</button>
 										<button type="button" class="btn btn-info btn-lg"
 											data-toggle="modal"  data-target="#cancle">취소</button>
 										<br> <br>
@@ -464,7 +462,9 @@
                         $("#ap_dname").val("<%=dept_name%>");
                         $('#ap_reporter').attr('disabled', 'disabled');
                         $('#ap_dname').attr('disabled', 'disabled');
-						
+                        $('#ap_namein').attr('disabled', 'disabled');
+                        $('#ap_appdate').val(dates3);
+                        $('#ap_appdate').attr('disabled', 'disabled');
 					}
 				});
 			    $('#tb_approval').on('check.bs.table', function (row, element) {

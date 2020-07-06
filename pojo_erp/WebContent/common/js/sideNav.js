@@ -225,7 +225,7 @@ function generateSideNav() {
   
   //xxx부서 xxx님 추가 부분
   avatarBoxCreate.appendChild(userInfoBoxCreate);
-  userInfoBoxCreate.innerHTML = `${deptName} ${userName}님이<br/>입장하셨습니다.`;
+  userInfoBoxCreate.innerHTML = `${deptName} ${userName}님<br/>안녕하세요.`;
   
   avatarBoxCreate.appendChild(avatarButtonBoxCreate);
   avatarButtonBoxCreate.classList = avatarButtonBoxClassname;
