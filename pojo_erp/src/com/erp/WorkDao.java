@@ -300,6 +300,25 @@ public class WorkDao {
 		applist = sqlSes.selectList("app_setList",pMap);
 		return applist;
 	}
+	public List<Map<String, Object>> nowempList(Map<String, Object> pMap) {
+		logger.info("Dao : nowempList 호출 성공");
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+		sqlSes.selectOne("proc_nowempList",pMap);
+		list = (List<Map<String,Object>>)pMap.get("key");
+		logger.info("list.size() : " + list.size()); 
+		return list;
+	}
+	/*
+	 * public List<Map<String, Object>> emp_receiver(Map<String, Object> pMap) { //
+	 * TODO Auto-generated method stub logger.info("emp_receiver:호출");
+	 * List<Map<String,Object>> relist = null; relist =
+	 * sqlSes.selectList("sel_receiver"); logger.info("emp_receiver:호출.size" +
+	 * relist.size()); return relist; } public List<Map<String, Object>>
+	 * emp_recstate(Map<String, Object> pMap) { // TODO Auto-generated method stub
+	 * List<Map<String, Object>> rstList = null; rstList =
+	 * sqlSes.selectList("sel_recstate"); logger.info("sel_recstate호출 size값:"
+	 * +rstList.size()); return null; }
+	 */
 	
 	
 }

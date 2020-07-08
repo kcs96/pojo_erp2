@@ -164,9 +164,8 @@ public class WorkController implements Controller {
 			result = 0;
 			/////////////////////// 실제 코드    /////////////////////
 			pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
-			//pMap.put("emp_no", session.getAttribute("emp_no"));
 			result = workLogic.workUpdEmp(pMap); 
-			if(result==1) {path="redirect:../main/main.jsp";}
+			if(result==1) {path="redirect:../work/emp_manage.jsp";}
 			else {path="redirect:errorPage.jsp";}
 			///////////////////////  테스트 코드   /////////////////////
 			/*
@@ -202,7 +201,7 @@ public class WorkController implements Controller {
 			 pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
 			 //pMap.put("emp_no", session.getAttribute("emp_no"));
 			 result =workLogic.workAddEmp(pMap);
-			 if(result==1) {path="redirect:../main/main.jsp";} 
+			 if(result==1) {path="redirect:../work/emp_manage.jsp";} 
 			 else{path="redirect:errorPage.jsp";}
 			///////////////////////  테스트 코드   /////////////////////
 			/*
@@ -267,8 +266,8 @@ public class WorkController implements Controller {
 			pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
 			result = workLogic.workAddBranch(pMap);
 			if(result==1) {path="redirect:success.jsp";}
-			else {path="redirect:kimchizzige.jsp";}
-			
+			else {path="redirect:dispatcherfail.jsp";}
+		
 			///////////////////////  테스트 코드   /////////////////////
 			/*
 		    pMap = new HashMap<>(); 
@@ -491,6 +490,15 @@ public class WorkController implements Controller {
 
 			path = "forward:xxx.jsp";
 		}
+		/*
+		 * else if("sel_recestate".equals(requestName)){ pMap = new HashMap<>();
+		 * List<Map<String,Object>> rlist = null; rlist = workLogic.emp_receiver(pMap);
+		 * //결재진행사람 조회 List<Map<String,Object>> list = null; list =
+		 * workLogic.emp_recstate(pMap);//결재 진행상태 조회 req.setAttribute("sel_recestates",
+		 * rlist); System.out.println("rlist => "+rlist.size());
+		 * req.setAttribute("sel_recestate", list);
+		 * System.out.println("rlist => "+list.size()); }
+		 */
 //		else if("deptSchedule".equals(requestName)) {
 //			//부서일정 insert here
 //			logger.info("Controller : 부서일정 호출 성공");
@@ -619,6 +627,16 @@ public class WorkController implements Controller {
 		    rlist = workLogic.signForm(pMap); //파라미터 없음
 		    mav.addObject("formList", rlist);
 			mav.setViewName("jsonFromList");
+		}
+		else if(cud.equals("nowempList")) {     ///성공
+		//재직사원 조회
+		logger.info("Controller : 재직 사원 호출 성공");	
+		/////////////////////// 실제 코드    /////////////////////
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+		pMap = new HashMap<String, Object>();
+		list = workLogic.nowempList(pMap);
+		mav.addObject("nowempList", list);
+		mav.setViewName("jsonnowempList");
 		}
 		return mav;
 

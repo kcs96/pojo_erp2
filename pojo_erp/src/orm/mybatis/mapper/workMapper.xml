@@ -40,11 +40,11 @@
       ,A.AP_NO as AP_NO
       ,E.EMP_NAME as AP_REPORTER
       ,TO_CHAR(A.AP_APPDATE,'YYYY-MM-DD') as AP_APPDATE
-      ,AP_CLOSEDATE as AP_CLOSEDATE
+      ,TO_CHAR(AP_CLOSEDATE,'YYYY-MM-DD') as AP_CLOSEDATE
       ,A.ap_state as AP_STATE
       ,A.AP_CONTENT as AP_CONTENT
       ,A.AP_DNAME as AP_DNAME
-      ,A.AP_RETIREDATE as AP_RETIREDATE
+      ,TO_CHAR(A.AP_RETIREDATE,'YYYY-MM-DD') as AP_RETIREDATE
       ,A.AP_CONTACT as AP_CONTACT
       ,A.AP_PROSESSINGDATE as AP_PROSESSINGDATE
       ,A.AP_INSTRUCTIONS as AP_INSTRUCTIONS
@@ -82,7 +82,7 @@
         ,A.AP_SIGN as AP_SIGN
         ,A.AP_REASON as AP_REASON
         ,0 as KEY
-        from (SELECT * FROM RECEIVER WHERE emp_no = :emp_no) R, approve A, EMP E
+        from (SELECT * FROM RECEIVER WHERE emp_no = #{emp_no}) R, approve A, EMP E
         where R.AP_NO = A.AP_NO
         and E.EMP_NO = A.ap_reporter
         and R.rev_processing = 'true'
@@ -141,7 +141,9 @@
 	<!-- ================================== 전자결재 항목 끝 ============================================ -->
 
 
-
+	<select id="proc_nowempList" parameterType="map" statementType="CALLABLE">
+		{call proc_nowempList(#{key, jdbcType=CURSOR, mode=OUT, javaType=ResultSet, resultMap=wmap})}
+	</select>
 
 	<!-- ================================== 정보수정 ================================================ -->
 	<select id="PROC_EMPLIST_INSA" parameterType="map"
@@ -174,9 +176,9 @@
 		,emp_state = #{EMP_STATE}
 		,emp_bank = #{EMP_BANK}
 		,emp_account = #{EMP_ACCOUNT}
-		,emp_zipcode = #{EMP_ZIPCODE}
+		<!-- ,emp_zipcode = #{EMP_ZIPCODE}
 		,emp_address = #{EMP_ADDRESS}
-		,emp_detailaddress = #{EMP_DETAILADDRESS}
+		,emp_detailaddress = #{EMP_DETAILADDRESS} -->
 		WHERE emp_no = #{EMP_NO}
 	</update>
 	<!-- =================================== 정보수정 저장버튼 끝========================================== -->
@@ -291,7 +293,29 @@
 
 
 	<!-- ================================== 파견사원 조회 끝=============================================== -->
-
+	<!-- 결재진행상태 사람 조회 -->
+	<!-- <select id="sel_receiver" parameterType="map" 
+		resultType="java.util.Map">
+		SELECT E.EMP_POSITION as EMP_POSITION,R.REV_LEVEL as REV_LEVEL FROM APPROVE A,RECEIVER R,EMP E
+	 WHERE A.AP_NO = R.AP_NO
+	   AND A.AP_NO = #{AP_NO}
+	   AND R.EMP_NO = E.EMP_NO
+	ORDER BY R.REV_LEVEL ASC;
+	</select>
+	결재진행상태 사람조회  끝
+	
+	결재진행상태 상태조회  끝
+	<select id="sel_recstate" parameterType="map" 
+		resultType="java.util.Map">
+	SELECT REV_APPROVAL,REV_LEVEL FROM APPROVE A,RECEIVER R,EMP E
+	 WHERE A.AP_NO = R.AP_NO
+	   AND A.AP_NO = #{AP_NO}
+	   AND R.EMP_NO = E.EMP_NO
+	   AND REV_PROCESSING = 'true'
+	ORDER BY R.REV_LEVEL ASC;
+	</select> -->
+	<!-- 결재진행상태 조회  끝-->
+	
 
 
 	<!-- ==================================== 부서일정 ================================================== -->
@@ -339,7 +363,6 @@
 	</select>
 
 	<!-- ================================== 부서일정 리스트 끝=============================================== -->
-
 
 </mapper>
   

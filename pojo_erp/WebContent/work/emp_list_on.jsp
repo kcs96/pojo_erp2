@@ -6,7 +6,7 @@
 	   class="table table-hover"
 	   data-search="true" 
 	   data-pagination="true"
-	   data-url="./emp_list_on.erp?cud=empList">
+	   data-url="./emp_list_on.erp?cud=nowempList">
 	<thead class="thead-light">
 		<tr>
 			<th data-field="EMP_NO">사원번호</th>

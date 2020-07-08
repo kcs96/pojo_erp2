@@ -19,12 +19,14 @@ public class MyBatisCommonFactory {
 		} catch (FileNotFoundException fe) {
 			fe.toString();
 		}catch(Exception e) {
+			
 			e.getMessage();
 		}
 	}
 	public static SqlSessionFactory getSqlSessionFactory() {
 		init();
 		return sqlSessionFactory;
+		
 	}
 	
 	public static void main(String[] args) {

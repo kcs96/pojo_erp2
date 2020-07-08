@@ -2,11 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ page session="true" %>
 <%
-	String emp_name = request.getParameter("msg");
-	/* out.print(emp_name); */
+	String loginResult = request.getParameter("msg");
+	//out.print(loginResult);
 %>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<title>Login</title>
 	<meta charset="UTF-8">
@@ -15,7 +16,8 @@
 	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
+<!--==================================================================================
+=============-->
 	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
@@ -33,29 +35,18 @@
  		$("#loginForm").attr('method','post');
 		$("#loginForm").attr('action','login.erp');
 		$("#loginForm").submit(); 
-		
-		/* var u_id = null;
-		var u_pw = null;
-		var param = [
-			u_id = $("#emp_id").val()
-			,u_pw = $("#emp_pw").val()
-		];
-		$.ajax({
-			url:"login.erp"
-			,type:"post"
-			,data: param
-			,success:function(data){
-				alert(data);
-			}
-		}); */
 	}
-	<%-- alert("<%=emp_name%>"); --%>
-	<%-- 	
-	if(<%=emp_name%> == "비밀번호가 틀립니다"){
-		alert("비밀번호가 다르다!!!");
-	} 
-	--%>
 </script>
+<script type="text/javascript">
+ 	var confirm = "<%= loginResult %>";
+	if(confirm == "1"){
+		alert("비밀 번호가 일치하지 않습니다..");
+	}
+	else if(confirm == "2"){
+		alert("아이디가 일치하지 않습니다.");
+	}
+</script>
+
 </head>
 <body>
 	<div class="limiter">

@@ -90,6 +90,7 @@
 	<table>
 	 <tr>
 	  <td style=" font-size: 135%; margin-left: auto; margin-right: auto;" cellspacing=0>
+	  
 	   <br>
 	   <br>
 	   <h3 style="margin-left:255px;">교육 보고서</h3>

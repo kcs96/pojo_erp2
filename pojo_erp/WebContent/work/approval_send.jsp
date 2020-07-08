@@ -63,6 +63,7 @@
 		function appov(){ //모달에 있는 확인 버튼을 눌렀을대 onclick이벤트
 		var num = $('input:checkbox[name="selectItemName"]:checked').length;//체크된 아이들 갯수 ex)2개 선택했으면 2가뜸
 		//alert("num:" +num);
+		//($("input:checkbox[id='selectItemName']").attr("checked", false)!=)q;
 		$("#approvalName").html("");//span 태그에 있는 값 지우기 //하는이유 다시 결재창 버튼을 눌렀을때 span태그에있는 값을 초기화
 		if(num>0){//span 태그에 선택한 값 넣어주기 num- 2개 선택하면 0보다 2가 더크면 for문을돌려라  i가 0부터시작인까 0,1로올라간다.
 			for(var i=0;i<g_names.length;i++) {//for문을 돌리면 var 0,1 g_names길이는 3이뜰꺼임 
@@ -81,12 +82,33 @@
 			}
 		}
 	}
-		//del(el)파라미터 써주고 
 	function test_modal(){
 		g_names=[];//배열에 저장된 값들 초기화하기
 		g_position =[];
 		$("input[type=checkbox]").prop("checked", false);
 	}
+	function del(el){
+		alert("클릭");//
+		var imsi = $(el).text();//var imsi로 만들어줘서 $(el).text파라미터값만 받아올때 쓰는건가봄
+		alert(imsi+"삭제");
+		$("#approvalName").html("");//클릭을하면 초기화
+		for(var i=0;i<g_position.length;i++) {
+			var val = g_position[i];
+			//alert("val"+val);
+			if(imsi!=val){
+				if(i==(g_names.length-1)){
+					$("#approvalName").append("<a href='#' onClick='del(this)'>"+g_position[i]+"</a>");
+				}else{
+					$("#approvalName").append("<a href='#' onClick='del(this)'>"+g_position[i]+"</a>"+",");
+				}
+			}else{
+				g_position.splice(i, 1)
+				//alert(i+"삭제");
+				i--;//배열에서 하나 요소를 삭제 했으므로 인덱스 값이 하나씩 줄어든다! 따라서 i를 하나 빼준다!
+			}
+		}
+	}
+
 	function test(res) {
 		 imsi = res;
 		var url;
@@ -117,7 +139,6 @@
                 $('#ap_today').val(date1);
                 $('#ap_namein').val("<%=s_ename%>");
                 ////////////////////////////////////////////
-                
                 $('#ap_year').attr('disabled', 'disabled');
                 $('#ap_month').attr('disabled', 'disabled');
                 $('#ap_today').attr('disabled', 'disabled');
@@ -132,12 +153,12 @@
 			show:false
 		}); 
 		//부서이름
-			var ap_dname= $("#ap_dname").val();
+		var ap_dname= $("#ap_dname").val();
 		if(ap_dname == null)ap_dname = '';
 		//연락처
  		var ap_contact = $("#ap_contact").val();
 		if(ap_contact ==null)ap_contact='';
-		var ap_sign = $("#emp_name").text();
+		var ap_sign = "imaged.png";
 		var fr_no = $("#i_ap_instructions").val();
  		var ap_reporter = $("#ap_reporter").val();
  		//파견일자,휴가일자,
@@ -192,10 +213,10 @@
 										  		+"&ap_appdate="+ap_appdate
 												+"&ap_closedate="+ap_closedate
 										  		+"&ap_content="+ap_content
-												+"&ap_dname="+ap_dname
+												+"&ap_dname="+"<%=dept_name%>"
 										  		+"&ap_retiredate="+ap_retiredate
 												+"&ap_contact="+ap_contact
-												+"&ap_prosessingdate="+ap_prosessingdate+ap_eprosessingdate
+												+"&ap_prosessingdate="+ap_prosessingdate + " ~ " + ap_eprosessingdate
 										  		+"&ap_bego="+ap_bego
 												+"&ap_sign="+ap_sign
 												+"&rev_empNo="+rev_empNo

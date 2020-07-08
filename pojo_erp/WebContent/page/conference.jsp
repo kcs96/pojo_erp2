@@ -87,6 +87,20 @@
 <table style="margin-left: auto; margin-right: auto;" border="1" width="650px;"cellspacing=0>
 <tr>
 <td colspan="6">
+<div style= "float: right; padding-bottom:10px;"> 
+    <table border="1"; cellpadding='10' ; cellspacing='0'; >
+ 	<tr>
+ 	<th class="auto-style2"  style="font-size: 70%;" width="60px" colspan="2" >
+ 	기안
+ 	</th> 
+ 	</tr>
+ 	<tr>
+	<th style="font-size: 89%;" width="30px" height="50px"  colspan="2">
+	<img src="imaged.png" id="" width="110%" height="110%">
+	</th>
+	</tr>
+ </table>	
+ </div>
 	<table>
 	 <tr>
 	  <td style=" font-size: 135%; margin-left: auto; margin-right: auto;" cellspacing=0 disabled >

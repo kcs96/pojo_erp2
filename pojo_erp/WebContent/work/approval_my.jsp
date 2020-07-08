@@ -49,7 +49,7 @@ pageEncoding="UTF-8"%>
 							<th data-field="NO"  data-align="center" data-width="50%;" data-sortable="true">순번</th>
 							<th data-field="AP_TITLE" data-align="center" data-width="150%%;">제목</th>
 							<th data-field="AP_REPORTER" data-align="center" data-width="150%;" data-sortable="true">작성자</th>
-							<th data-field="AP_PROSESSINGDATE"  data-align="center" data-width="200%;" data-sortable="true">결재 기한</th>
+							<th data-field="AP_CLOSEDATE"  data-align="center" data-width="200%;" data-sortable="true">결재 기한</th>
 							<th data-field="AP_STATE" data-align="center" data-width="100%%;"  data-sortable="true">결재 상태</th>
 							<th data-field="operate" data-formatter="operateFormatter" data-width="30%;" data-events="operateEvents" data-align="center">보기</th>
 						</tr>
@@ -198,7 +198,7 @@ pageEncoding="UTF-8"%>
     		ap_contact = row.AP_CONTACT	//사원 전화번호 
     		//alert("문자열 자름 : "+ ap_contact)
     		
-    		alert("문자열 자르기 전 : "+ row.AP_APPDATE)
+    		//alert("문자열 자르기 전 : "+ row.AP_APPDATE)
     		ap_appdate = row.AP_APPDATE.split('-'); //문서에 들어갈 날짜 
     		ap_appdate_1 = ap_appdate[0];	//년
     		ap_appdate_2 = ap_appdate[1];	//월
@@ -206,10 +206,10 @@ pageEncoding="UTF-8"%>
     		//alert("날짜 : "+ ap_appdate_1+"  "+ ap_appdate_2+"  "+ ap_appdate_3)
     		
     		ap_bego = row.AP_BEGO	//사원 전화번호 
-    		alert("문자열 자름 : "+ ap_bego)
+    		//alert("문자열 자름 : "+ ap_bego)
     		
     		ap_instructions = row.AP_INSTRUCTIONS	//사원 전화번호 
-    		alert("문자열 자름 : "+ ap_instructions)
+    		//alert("문자열 자름 : "+ ap_instructions)
     	
     		ap_no = row.AP_NO	//문서 고유번호 
     		//alert("문자열 자름 : "+ ap_no)
@@ -217,7 +217,15 @@ pageEncoding="UTF-8"%>
     		page_no = row.KEY
     		//alert("page_no : " + page_no)
     		
+    		ap_sign = row.AP_SIGN
+    		//alert("page_no : " + page_no)
+    		
     		ap_state = row.AP_STATE
+    		
+    		//alert("page_no : " + page_no)
+    		ap_retiredate = row.AP_RETIREDATE
+    		
+    		
     		//alert("page_no : " + page_no)
     		
     		location.href = './approval_get.jsp?ap_reporter='+ap_reporter
@@ -225,7 +233,7 @@ pageEncoding="UTF-8"%>
     					+'&ap_prosessingdate='+ap_prosessingdate+'&ap_dname='
     						+ap_dname+'&ap_content='+ap_content+'&ap_contact='+ap_contact
     						+'&ap_appdate='+ap_appdate+'&ap_appdate_1='+ap_appdate_1+'&ap_appdate_2='+ap_appdate_2+'&ap_appdate_3='+ap_appdate_3
-    						+'&ap_bego='+ap_bego+'&ap_instructions='+ap_instructions+'&ap_no='+ap_no+'&key='+page_no+'&ap_state='+ap_state
+    						+'&ap_bego='+ap_bego+'&ap_instructions='+ap_instructions+'&ap_no='+ap_no+'&key='+page_no+'&ap_state='+ap_state+'&ap_sign='+ap_sign+"&ap_retiredate="+ap_retiredate 
    
     }
  }

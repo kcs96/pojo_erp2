@@ -81,17 +81,23 @@
 <body>
 <div class="book">
         <div class="page">
-            <div id="content">
+            <div class="subpage" id="content">
           
 
-<form id="forms_name">
-<input type="hidden" name="cud" value="workAddSendDoc">
 <table style="margin-left: auto; margin-right: auto;" border="1" width="650px;"cellspacing=0>
 <tr>
 <td colspan="6">
 	<table>
-	 <tr>
-	  <td tyle=" font-size: 135%; margin-left: auto; margin-right: auto;" cellspacing=0>
+<tr>
+	  <td style=" font-size: 135%; margin-left: auto; margin-right: auto;" cellspacing=0>
+	   <div style= "float: right; padding-bottom:10px;"> 
+    <table border="1"; cellpadding='10' ; cellspacing='0'; >
+ 	<tr>
+ 	</tr>
+ 	<tr>
+	</tr>
+ </table>	
+ </div>
 	   <br>
 	   <br>
 	   <h3 style="margin-left:255px;">업무 지시서</h3>
@@ -100,16 +106,16 @@
 		<table border="1" cellspacing=0>
 		 <tr>
 		  <th style="width:200px; hieght:110px;">
-			작성자
+			지시자
 		  </th>
 		  <td style="width:110px;">
-			<input class="wrap3" id="ap_reporter"name="ap_reporter"style="height:30px;"type="text"disabled>
+			<input class="wrap3" id="ap_reporter"name="ap_reporter"style="border:0px;height:30px;"type="text">
 		  </td>
 		  <th style="width:200px; hieght:110px;">
 		        작성일자
 		  </th>
 		  <td style="width:120px;">
-			<input id="ap_appdate" name="ap_appdate" class="wrap3"style="height:30px;"type="text"disabled>
+			<input id="ap_appdate" name="ap_appdate" class="wrap3"style="border:0px;background-color:white;height:30px;" type="text">
 		  </td>
 		 </tr>
 		</table>
@@ -124,31 +130,30 @@
 </td>
 </tr>
 <tr>
-<th class="auto-style3" colspan="3">내용</th>
-<th class="auto-style3" colspan="1">비고</th>
+<th class="auto-style3" colspan="3">작 업 내 역</th>
+<th class="auto-style3" colspan="1">세 부 내 역</th>
 </tr>
 <tr>
-<th colspan="3" style="height:420px;"> 
-<textarea class="wrap2" id="ap_content" name="ap_content" style="resize:none;border:0;width:99%;height:100%;" cols="30" rows="5" disabled></textarea>
+<th colspan="3" style="width:200px;height:420px;"> 
+<textarea class="wrap2" id="ap_content" name="ap_content" style="resize:none;border:0;width:99%;height:100%;" cols="30" rows="5" ></textarea>
 
 </th>
 <td colspan="1" style="height:350px;">
-<textarea class="wrap2" name="ap_bego" id="ap_bego"style="resize:none;border:0;width:99%;height:100%;"cols="10"  disabled></textarea>
+<textarea class="wrap2" name="ap_bego" id="ap_bego"style="resize:none;border:0;width:99%;height:100%;"cols="10"  ></textarea>
 
 </td>
 </tr>
 <tr>
 <th class="auto-style3" colspan="6">
-특이사항/ 건의 사항
+완료여부 및 평가
 </th>
 </tr>
 <tr>
 <th colspan="6" "class="auto-style3" > 
-<textarea class="wrap2"  id="ap_instructions" name="ap_instructions" style="height:300px;resize:none;border:0;width:98%;"disabled></textarea>
+<textarea class="wrap2"  id="ap_instructions" name="ap_instructions" style="height:300px;resize:none;border:0;width:98%;"></textarea>
 </th>
 </tr>
 </table>
-</form>
 </div>
 </div>
 </div>

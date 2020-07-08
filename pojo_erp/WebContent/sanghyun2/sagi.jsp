@@ -94,16 +94,7 @@
 		 cellspacing=0>
 	<tr id="tableTr">
 	<td colspan="6" style="border-right:0;border-left:0;border-top:0;border-bottom:0;">
-		<br>
-	<br>
-	<table style="line-height:1; 
-		 margin-left: auto; margin-right: auto;" cellspacing=0>
-      <tr>
-              <td><h4>사 직 서</h4></td>
-        <td id="tms_auto_sign"  ></td>
-      </tr>
-</table>
-<div style= "float: right; padding-bottom:10px;"> 
+	<div style= "float: right; padding-bottom:10px;"> 
     <table border="1"; cellpadding='10' ; cellspacing='0'; >
  	<tr>
  	<th class="auto-style2"  style="font-size: 70%;" width="60px" colspan="2" >
@@ -117,6 +108,15 @@
 	</tr>
  </table>	
  </div>
+		<br>
+	<br>
+	<table style="line-height:1; 
+		 margin-left: auto; margin-right: auto;" cellspacing=0>
+      <tr>
+              <td style="padding-left:90px;"><h3>사 직 서</h3></td>
+        <td id="tms_auto_sign"  ></td>
+      </tr>
+</table>
 	</td>
 	</tr>
 

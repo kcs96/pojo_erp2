@@ -105,16 +105,6 @@
 </table>
 <div style= "float: right; padding-bottom:10px;"> 
     <table border="1"; cellpadding='10' ; cellspacing='0'; >
- 	<tr>
- 	<th class="auto-style2"  style="font-size: 70%;" width="60px" colspan="2" >
- 	기안
- 	</th> 
- 	</tr>
- 	<tr>
-	<th style="font-size: 89%;" width="30px" height="50px"  colspan="2">
-	<img src="imaged.png" width="110%" height="110%">
-	</th>
-	</tr>
  </table>	
  </div>
 	</td>
@@ -133,10 +123,10 @@
     </tr>
   	<tr>
     <th width="123" class="auto-style3">
-   		 입 사 일 자
+   		 퇴 사 일 자 
    	 </th>
     <td colspan="3" height="100px;">
-    	<input class="wrap2" type="text" id="ap_prosessingdate" name="ap_prosessingdate"style=" height:100%;line-height: 75px; width:99%; border: 0;"disabled >
+    	<input class="wrap2" type="text" id="ap_retiredate" name="ap_reitredate" style=" height:100%;line-height: 75px; width:99%; border: 0;"disabled >
     </td>
   	</tr>
   	<tr>

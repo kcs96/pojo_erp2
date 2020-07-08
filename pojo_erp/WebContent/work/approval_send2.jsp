@@ -440,7 +440,6 @@
 		</script>
 	<script type="text/javascript">
 		var temp='';
-		
 			$(document).ready(function() {
 				$.ajax({
 					url : "../sanghyun2/upmo.jsp",

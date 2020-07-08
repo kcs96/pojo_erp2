@@ -1,3 +1,5 @@
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -23,12 +25,29 @@ pageEncoding="UTF-8"%>
    <title>2RP PROGRAM</title>
 <!-- 파라미터 받기  -->
  <%
+ 	String pos[] =new String[5];
+ 	pos[0] = "인사과장 ";
+ 	pos[1] = "인사차장 ";
+ 	pos[2] = "인사부장 ";
+ 	pos[3] = "사장";
+ 	pos[4] = "";
+ 	
+ 	String state[] = new String[5];
+ 	state[0] = "승인";
+ 	state[1] = "결재중";
+ 	state[2] = "";
+ 	state[3] = "";
+ 	state[4] = "";
+/* 	 List<Map<String,Object>> receiver =
+		(List<Map<String,Object>>)request.getAttribute("sel_recestates");//결재자사람
+	List<Map<String,Object>> recestate=
+	(List<Map<String,Object>>) request.getAttribute("sel_recestate");//결재자 진행중 */
 	request.setCharacterEncoding("UTF-8");
  	String ap_reporter = request.getParameter("ap_reporter"); //이름 채번
  	String no  = request.getParameter("no"); //번호  채번
  	String fr_no  = request.getParameter("fr_no"); //양식 채번
  	String ap_title  = request.getParameter("ap_title"); //제목 채번
- 	String ap_prosessingdate  = request.getParameter("ap_prosessingdate"); //기한 채번
+ 	String ap_prosessingdate  = request.getParameter("ap_prosessingdate"); 
  	String ap_dname  = request.getParameter("ap_dname"); //부서 채번
  	String ap_content  = request.getParameter("ap_content"); //문서 내용 채번
  	String ap_contact = request.getParameter("ap_contact"); //사원 번호 채번
@@ -41,6 +60,8 @@ pageEncoding="UTF-8"%>
  	String ap_no = request.getParameter("ap_no"); //문서 고유번호
  	String page_no = request.getParameter("key"); //페이지 번호
  	String ap_state = request.getParameter("ap_state"); //결재 상태
+	String ap_sign = request.getParameter("ap_sign");
+ 	String ap_retiredate = request.getParameter("ap_retiredate");
  	
  	String null_check = "undefined"; //null체크
  	
@@ -89,6 +110,9 @@ pageEncoding="UTF-8"%>
  	if(ap_no.equals(null_check)){
  		ap_no = "";
  	}
+ 	if(ap_sign.equals(null_check)){
+ 		ap_sign = "";
+ 	}
 %>
 <!-- 파라미터 받기 끝 -->
 
@@ -110,8 +134,8 @@ pageEncoding="UTF-8"%>
 	function page_print(){ //인쇄버튼 반응
 	//파라미터 값 추가 
 		ap_reporter = "<%=ap_reporter%>"
-		no = "<%=no%>"
-		fr_no= "<%=fr_no%>"
+		no = <%=no%>
+		fr_no= <%=fr_no%>
 		ap_title= "<%=ap_title%>"
 		ap_prosessingdate = "<%=ap_prosessingdate%>"
 		ap_dname = "<%=ap_dname%>"
@@ -123,15 +147,17 @@ pageEncoding="UTF-8"%>
 		ap_appdate_1 = "<%=ap_appdate_1%>"
 		ap_appdate_2 = "<%=ap_appdate_2%>"
 		ap_appdate_3 = "<%=ap_appdate_3%>"
-		ap_no = "<%=ap_no%>"
-		
+		ap_no = <%=ap_no%>
+		ap_sign= "<%=ap_sign%>"
+		ap_retiredate = "<%=ap_retiredate%>"
+
 	 		location.href = '../page/approval_print.jsp?ap_reporter='+ap_reporter
 				+'&no='+no+'&fr_no='+fr_no+'&ap_title='+ap_title
 				+'&ap_prosessingdate='+ap_prosessingdate+'&ap_dname='
 				+ap_dname+'&ap_content='+ap_content+'&ap_contact='+ap_contact
 				+'&ap_appdate='+ap_appdate+'&ap_appdate_1='+ap_appdate_1
 				+'&ap_appdate_2='+ap_appdate_2+'&ap_appdate_3='+ap_appdate_3+'&ap_bego='+ap_bego
-				+'&ap_instructions='+ap_instructions+'&ap_no='+ap_no
+				+'&ap_instructions='+ap_instructions+'&ap_no='+ap_no+'&ap_sign='+ap_sign +"&ap_retiredate="+ ap_retiredate
 	}
 
 </script>
@@ -177,6 +203,31 @@ pageEncoding="UTF-8"%>
 						<td><span><%= ap_appdate%></span></td>
 						<th style="background: #EAEAEA; text-align: center;">결재 상태</th><td><span><%=ap_state %></span></td>
 						</tr>
+								<tr>
+							<th rowspan="2"scope="row" style=" vertical-align: middle;background: #EAEAEA; width:17%; text-align: center;">
+						결재 진행
+								</th>
+						<%
+							for (int i = 0; i < pos.length; i++) {
+						%>
+						<td style="text-align:center;vertical-align: middle;width:17%;border-left:0px; border-right:0px;border-bottom:0px; ">
+							<%= pos[i]%>
+						</td>
+						<%
+							}
+						%>
+						</tr>
+						<tr>
+							<%
+							for (int i = 0;  i< state.length; i++) {
+						%>
+						<td style="text-align:center;vertical-align: middle;width:17%;border-left:0px; border-right:0px; border-top:0px;">
+							<%= state[i]%>
+						</td>
+						<%
+							}
+						%>
+						</tr>
 				</tbody>
 			</table>
   	 	</div>
@@ -214,7 +265,7 @@ pageEncoding="UTF-8"%>
 									$("#ap_month").val("<%=ap_appdate_2%>");
 									$("#ap_today").val("<%=ap_appdate_3%>");
 									$("#ap_namein").val("<%=ap_reporter%>"); 
-									
+									$("#ap_sign").attr("src","http://localhost:5000/work/<%=ap_sign %>");
 								} //성공 했을 때
 		  	 			
 							}) //아작스 종료 
@@ -233,6 +284,7 @@ pageEncoding="UTF-8"%>
 										$("#ap_month").val("<%=ap_appdate_2%>");
 										$("#ap_today").val("<%=ap_appdate_3%>");
 										$("#ap_namein").val("<%=ap_reporter%>"); 
+										$("#ap_sign").attr("src",'http://localhost:5000/work/<%=ap_sign %>');
 								}
 							})
 						
@@ -247,7 +299,8 @@ pageEncoding="UTF-8"%>
 										$("#ap_content").val("<%=ap_content%>");
 										$("#ap_bego").val("<%=ap_bego%>");
 										$("#ap_instructions").val("<%=ap_instructions%>");
-								}
+										$("#ap_sign").attr("src","http://localhost:5000/work/<%=ap_sign %>");
+									}
 							})	
 					}
 		  	 			else if(page===4){	//업무 지시서
@@ -260,6 +313,7 @@ pageEncoding="UTF-8"%>
 										$("#ap_content").val("<%=ap_content%>");
 										$("#ap_bego").val("<%=ap_bego%>");
 										$("#ap_instructions").val("<%=ap_instructions%>");
+										$("#ap_sign").attr("src","http://localhost:5000/work/<%=ap_sign %>");
 								}
 							})	
 					}
@@ -271,13 +325,14 @@ pageEncoding="UTF-8"%>
 									$("#page").html(data);
 									$("#ap_reporter").val("<%=ap_reporter%>");
 									$("#ap_dname").val("<%=ap_dname%>");
-									$("#ap_prosessingdate").val("<%=ap_prosessingdate%>");
+									$("#ap_retiredate").val("<%=ap_retiredate%>");
 									$("#ap_content").val("<%=ap_content%>");
 									$("#ap_contact").val("<%=ap_contact%>");
 									$("#ap_year").val("<%=ap_appdate_1%>");
 									$("#ap_month").val("<%=ap_appdate_2%>");
 									$("#ap_today").val("<%=ap_appdate_3%>");
 									$("#ap_namein").val("<%=ap_reporter%>"); 
+									$("#ap_sign").attr("src",'http://localhost:5000/work/<%=ap_sign %>');
 								}
 							})
 					} 	
@@ -299,6 +354,7 @@ pageEncoding="UTF-8"%>
 									$("#ap_namein").val("<%=ap_reporter%>"); 
 									$("#ap_bego").val("<%=ap_bego%>");
 									$("#ap_instructions").val("<%=ap_instructions%>");
+									$("#ap_sign").attr("src",'http://localhost:5000/work/<%=ap_sign %>');
 								}
 							})
 					} 	

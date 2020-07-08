@@ -78,33 +78,22 @@
 }
    </style> 
    </head> 
-<body> 
-
+<body>  
 <script>
 	window.onload = function (){
 		window.print();
 	}
-</script> 
+</script>  
 
- 
         <div class="page">
             <div id="content">
-<form id="forms_name" disabled >
-<input type="hidden" name="cud" value="workAddSendDoc" disabled>
+<form id="forms_name">
+<input type="hidden" name="cud" value="workAddSendDoc">
 <table style="margin-left: auto; margin-right: auto;" border="2" width="650" 
 		 cellspacing=0>
 	<tr id="tableTr">
 	<td colspan="6" style="border-right:0;border-left:0;border-top:0;border-bottom:0;">
-		<br>
-	<br>
-	<table style="line-height:1; 
-		 margin-left: auto; margin-right: auto;" cellspacing=0>
-      <tr>
-              <td><h4>파 견 신 청 서</h4></td>
-        <td id="tms_auto_sign" disabled></td>
-      </tr>
-</table>
-<div style= "float: right; padding-bottom:10px;"> 
+		<div style= "float: right; padding-bottom:10px;"> 
     <table border="1"; cellpadding='10' ; cellspacing='0'; >
  	<tr>
  	<th class="auto-style2"  style="font-size: 70%;" width="60px" colspan="2" >
@@ -113,11 +102,20 @@
  	</tr>
  	<tr>
 	<th style="font-size: 89%;" width="30px" height="50px"  colspan="2">
-	<img src="imaged.png" width="110%" height="110%">
+	<img id="ap_sign" src="imaged.png" id="ap_sign" width="110%" height="110%">
 	</th>
 	</tr>
  </table>	
  </div>
+		<br>
+	<br>
+	<table style="line-height:1; 
+		 margin-left: auto; margin-right: auto;" cellspacing=0>
+      <tr>
+              <td style="padding-left:80px;"><h3>파 견 신 청 서</h3><br><br></td>
+        <td id="tms_auto_sign" disabled></td>
+      </tr>
+</table>
 	</td>
 	</tr>
 
@@ -181,7 +179,7 @@
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;신  청  인:
-<input type="text" id="ap_namein" name="namein" style="font-size:20px;  width:80px; border: 0;"align="center"disabled >(인)</p>
+<input type="text" id="ap_namein" name="namein" style="font-size:20px;  width:80px; border: 0;"align="center"disabled>(인)</p>
 <br>
 <br>
 <br>

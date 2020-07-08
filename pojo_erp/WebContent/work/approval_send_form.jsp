@@ -149,7 +149,7 @@
 		//연락처
  		var ap_contact = $("#ap_contact").val();
 		if(ap_contact ==null)ap_contact='';
-		var ap_sign = $("#emp_name").text();
+		var ap_sign = "imaged.png";
 		var fr_no = $("#i_ap_instructions").val();
  		var ap_reporter = $("#ap_reporter").val();
  		//파견일자,휴가일자,
@@ -203,7 +203,7 @@
 								  		+"&ap_appdate="+ap_appdate
 										+"&ap_closedate="+ap_closedate
 								  		+"&ap_content="+ap_content
-										+"&ap_dname="+ap_dname
+										+"&ap_dname="+"<%=dept_name%>"
 								  		+"&ap_retiredate="+ap_retiredate
 										+"&ap_contact="+ap_contact
 										+"&ap_prosessingdate="+ap_prosessingdate+ap_eprosessingdate

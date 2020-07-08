@@ -255,16 +255,16 @@ pageEncoding="UTF-8"%>
 										<table class="table table-boardered">
 											<tr>
 												<th>우편번호</th>
-												<td><input id="emp_zipcode" type="text" class="form-control" name="emp_zipcode" align="left" placeholder="우편번호" readonly></td>
-												<td><input type="button" class="btn btn-link" onclick="DaumPostcode()" value="주소검색" /></td>
+												<td><input id="emp_zipcode" type="text" class="form-control" name="EMP_ZIPCODE" align="left" value="<%=rMap.get("EMP_ZIPCODE") %>"placeholder="우편번호" readonly></td>
+												<td><input type="button" class="btn btn-link" onclick="DaumPostcode()"value="검색"  /></td>
 											</tr>
 											<tr>
 												<th>주소</th>
-												<td><input id="emp_address" type="text" class="form-control" name="emp_address" placeholder="주소" readonly></td>
+												<td><input id="emp_address" type="text" class="form-control" name="EMP_ADDRESS" value=<%=rMap.get("EMP_ADDRESS") %>"placeholder="주소" readonly></td>
 											</tr>
 											<tr>
 												<th>상세주소</th>
-												<td><input id="emp_detailaddress" type="text" class="form-control" name="emp_detailaddress" placeholder="상세 주소를 입력하세요..."></td>
+												<td><input id="emp_detailaddress" type="text" class="form-control" name="EMP_DETAILADDRESS" value="<%=rMap.get("EMP_DETAILADDRESS")%>" placeholder="상세 주소를 입력하세요..."></td>
 											</tr>
 										</table>
 									</div>

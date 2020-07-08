@@ -45,16 +45,25 @@ public class EmpController implements Controller {
 			System.out.println("rList: "+rList);
 			
 			String emp_no =rList.get(0).get("EMP_NO").toString();
-			String emp_name =rList.get(0).get("EMP_NAME").toString();
-			String dept_name =rList.get(0).get("DEPT_NAME").toString();
-			System.out.println("emp_name: "+emp_name);
 			session.setAttribute("emp_no",emp_no);
-			session.setAttribute("emp_name",emp_name);
-			session.setAttribute("dept_name",dept_name);
 			
-			if("비밀번호가 틀립니다".equals(emp_name)||"아이디가 없습니다".equals(emp_name)){
-				emp_name = new HangulConversion().toUTF(emp_name);
-				path="redirect:./login.jsp?msg="+emp_name;
+			String emp_name =rList.get(0).get("EMP_NAME").toString();
+			
+			if(rList.get(0).containsKey("DEPT_NAME")) {
+				String dept_name =rList.get(0).get("DEPT_NAME").toString();
+				System.out.println("부서명 =>"+dept_name);
+				session.setAttribute("dept_name",dept_name);
+			}
+			System.out.println("emp_name: "+emp_name);
+			session.setAttribute("emp_name",emp_name);
+			
+			if("비밀번호가 틀립니다".equals(emp_name)){
+				//emp_name = new HangulConversion().toUTF(emp_name);
+				path="redirect:./login.jsp?msg="+1;
+			}
+			else if("아이디가 없습니다".equals(emp_name)) {
+				System.out.println("아이디가 없습니다.");
+				path="redirect:./login.jsp?msg="+2;
 			}
 			else {
 				logger.info("메인페이지 호출");

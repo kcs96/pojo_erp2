@@ -39,7 +39,8 @@ pageEncoding="UTF-8"%>
  	String ap_appdate_2 = request.getParameter("ap_appdate_2"); //월
  	String ap_appdate_3 = request.getParameter("ap_appdate_3"); //일
  	String ap_no = request.getParameter("ap_no"); //문서 고유번호
- 	
+	String ap_sign = request.getParameter("ap_sign");
+ 	String ap_retiredate = request.getParameter("ap_retiredate");
  	String null_check = "undefined"; //null체크
  	
 %>
@@ -69,24 +70,26 @@ pageEncoding="UTF-8"%>
 
 	  	<!--	페이지 나누기	  -->
 	  	 <script type="text/javascript">
-	  		//파라미터 값 추가 		
-	  		 page = <%=fr_no%>
-	  	 	 ap_reporter = "<%=ap_reporter%>"
-	  	 	 no = "<%=no%>"
-	  	 	 fr_no= "<%=fr_no%>"
-	  	 	 ap_title= "<%=ap_title%>"
-	  	 	 ap_prosessingdate = "<%=ap_prosessingdate%>"
-	  	 	 ap_dname = "<%=ap_dname%>"
-	  	 	 ap_content = "<%=ap_content%>"
-	  	 	 ap_contact = "<%=ap_contact%>"
-	  	 	 ap_bego = "<%=ap_bego%>"
-	 		 ap_instructions = "<%=ap_instructions%>"
-	  	 	 ap_appdate = "<%=ap_appdate%>"
-	  	 	 ap_appdate_1 = "<%=ap_appdate_1%>"
-	  	 	 ap_appdate_2 = "<%=ap_appdate_2%>"
-	  	 	 ap_appdate_3 = "<%=ap_appdate_3%>"
-	  	 	 ap_no = "<%=ap_no%>"
-	  	 				
+	  		//파라미터 값 추가 	
+	  		var page = <%=fr_no%> ;
+	  		var ap_reporter = "<%=ap_reporter%>";
+	  		var no = <%=no%>;
+	  		var fr_no= <%=fr_no%>;
+	  		var ap_title= "<%=ap_title%>";
+	  		var ap_prosessingdate = "<%=ap_prosessingdate%>";
+	  		var ap_dname = "<%=ap_dname%>";
+	  		var ap_content = "<%=ap_content%>";
+	  		var ap_contact = "<%=ap_contact%>";
+	  		var ap_bego = "<%=ap_bego%>";
+	  		var ap_instructions = "<%=ap_instructions%>";
+	  		var ap_appdate = "<%=ap_appdate%>" ;
+	  		var ap_appdate_1 = "<%=ap_appdate_1%>" ;
+	  		var ap_appdate_2 = "<%=ap_appdate_2%>" ;
+	  		var ap_appdate_3 = "<%=ap_appdate_3%>" ;
+	  		var ap_no = <%=ap_no%>
+	  		var ap_sign = "<%=ap_sign%>";
+	  		var ap_retiredate = "<%=ap_retiredate%>" ;
+	  	 	 
 	  	 $(document).ready(function(){
 	  	 			if(page===1){	//휴가 페이지
 						$.ajax({
@@ -95,20 +98,20 @@ pageEncoding="UTF-8"%>
 								+'&ap_prosessingdate='+ap_prosessingdate+'&ap_dname='
 									+ap_dname+'&ap_content='+ap_content+'&ap_contact='+ap_contact
 									+'&ap_appdate='+ap_appdate+'&ap_appdate_1='+ap_appdate_1+'&ap_appdate_2='+ap_appdate_2+'&ap_appdate_3='+ap_appdate_3
-									+'&ap_bego='+ap_bego+'&ap_instructions='+ap_instructions
+									+'&ap_bego='+ap_bego+'&ap_instructions='+ap_instructions+'&ap_sign='+ap_sign+"&ap_retiredate="+ap_retiredate 
 									
 							,success:function(data){
 								$("#page_print").html(data);
 								$("#ap_reporter").val("<%=ap_reporter%>");
-								$("#ap_dname").val("<%=ap_dname%>");
 								$("#ap_prosessingdate").val("<%=ap_prosessingdate%>");
+								$("#ap_dname").val("<%=ap_dname%>");
 								$("#ap_content").val("<%=ap_content%>");
 								$("#ap_contact").val("<%=ap_contact%>");
 								$("#ap_year").val("<%=ap_appdate_1%>");
 								$("#ap_month").val("<%=ap_appdate_2%>");
 								$("#ap_today").val("<%=ap_appdate_3%>");
 								$("#ap_namein").val("<%=ap_reporter%>"); 
-								
+								$("#ap_sign").attr("src","http://localhost:5000/work/<%=ap_sign %>");
 							} //성공 했을 때 
 						}) //아작스 종료 
 					} //휴가 끝 
@@ -119,7 +122,7 @@ pageEncoding="UTF-8"%>
 								+'&ap_prosessingdate='+ap_prosessingdate+'&ap_dname='
 									+ap_dname+'&ap_content='+ap_content+'&ap_contact='+ap_contact
 									+'&ap_appdate='+ap_appdate+'&ap_appdate_1='+ap_appdate_1+'&ap_appdate_2='+ap_appdate_2+'&ap_appdate_3='+ap_appdate_3
-									+'&ap_bego='+ap_bego+'&ap_instructions='+ap_instructions
+									+'&ap_bego='+ap_bego+'&ap_instructions='+ap_instructions+'&ap_sign='+ap_sign
 							,success:function(data){
 								$("#page_print").html(data);
 								$("#ap_reporter").val("<%=ap_reporter%>");
@@ -131,7 +134,8 @@ pageEncoding="UTF-8"%>
 								$("#ap_month").val("<%=ap_appdate_2%>");
 								$("#ap_today").val("<%=ap_appdate_3%>");
 								$("#ap_namein").val("<%=ap_reporter%>"); 
-							}
+								$("#ap_sign").attr("src","http://localhost:5000/work/<%=ap_sign %>");
+								}
 						})
 					
 				}
@@ -143,7 +147,7 @@ pageEncoding="UTF-8"%>
 								+'&ap_prosessingdate='+ap_prosessingdate+'&ap_dname='
 									+ap_dname+'&ap_content='+ap_content+'&ap_contact='+ap_contact
 									+'&ap_appdate='+ap_appdate+'&ap_appdate_1='+ap_appdate_1+'&ap_appdate_2='+ap_appdate_2+'&ap_appdate_3='+ap_appdate_3
-									+'&ap_bego='+ap_bego+'&ap_instructions='+ap_instructions
+									+'&ap_bego='+ap_bego+'&ap_instructions='+ap_instructions+'&ap_sign='+ap_sign
 							,success:function(data){
 								$("#page_print").html(data);
 								$("#ap_reporter").val("<%=ap_reporter%>");
@@ -151,6 +155,7 @@ pageEncoding="UTF-8"%>
 								$("#ap_content").val("<%=ap_content%>");
 								$("#ap_bego").val("<%=ap_bego%>");
 								$("#ap_instructions").val("<%=ap_instructions%>");
+								$("#ap_sign").attr("src","http://localhost:5000/work/<%=ap_sign %>");
 							}
 						})	
 				}
@@ -161,7 +166,7 @@ pageEncoding="UTF-8"%>
 								+'&ap_prosessingdate='+ap_prosessingdate+'&ap_dname='
 									+ap_dname+'&ap_content='+ap_content+'&ap_contact='+ap_contact
 									+'&ap_appdate='+ap_appdate+'&ap_appdate_1='+ap_appdate_1+'&ap_appdate_2='+ap_appdate_2+'&ap_appdate_3='+ap_appdate_3
-									+'&ap_bego='+ap_bego+'&ap_instructions='+ap_instructions
+									+'&ap_bego='+ap_bego+'&ap_instructions='+ap_instructions+'&ap_sign='+ap_sign
 							,success:function(data){
 								$("#page_print").html(data);
 								$("#ap_reporter").val("<%=ap_reporter%>");
@@ -169,6 +174,7 @@ pageEncoding="UTF-8"%>
 								$("#ap_content").val("<%=ap_content%>");
 								$("#ap_bego").val("<%=ap_bego%>");
 								$("#ap_instructions").val("<%=ap_instructions%>");
+								$("#ap_sign").attr("src","http://localhost:5000/work/<%=ap_sign %>");
 							}
 						})	
 				}
@@ -180,18 +186,19 @@ pageEncoding="UTF-8"%>
 								+'&ap_prosessingdate='+ap_prosessingdate+'&ap_dname='
 									+ap_dname+'&ap_content='+ap_content+'&ap_contact='+ap_contact
 									+'&ap_appdate='+ap_appdate+'&ap_appdate_1='+ap_appdate_1+'&ap_appdate_2='+ap_appdate_2+'&ap_appdate_3='+ap_appdate_3
-									+'&ap_bego='+ap_bego+'&ap_instructions='+ap_instructions
+									+'&ap_bego='+ap_bego+'&ap_instructions='+ap_instructions+'&ap_sign='+ap_sign+"&ap_retiredate="+ap_retiredate
 							,success:function(data){
 								$("#page_print").html(data);
 								$("#ap_reporter").val("<%=ap_reporter%>");
 								$("#ap_dname").val("<%=ap_dname%>");
-								$("#ap_prosessingdate").val("<%=ap_prosessingdate%>");
+								$("#ap_retiredate").val("<%=ap_retiredate%>");
 								$("#ap_content").val("<%=ap_content%>");
 								$("#ap_contact").val("<%=ap_contact%>");
 								$("#ap_year").val("<%=ap_appdate_1%>");
 								$("#ap_month").val("<%=ap_appdate_2%>");
 								$("#ap_today").val("<%=ap_appdate_3%>");
 								$("#ap_namein").val("<%=ap_reporter%>"); 
+								$("#ap_sign").attr("src","http://localhost:5000/work/<%=ap_sign %>");
 							}
 						})
 					}
@@ -203,7 +210,7 @@ pageEncoding="UTF-8"%>
 								+'&ap_prosessingdate='+ap_prosessingdate+'&ap_dname='
 									+ap_dname+'&ap_content='+ap_content+'&ap_contact='+ap_contact
 									+'&ap_appdate='+ap_appdate+'&ap_appdate_1='+ap_appdate_1+'&ap_appdate_2='+ap_appdate_2+'&ap_appdate_3='+ap_appdate_3
-									+'&ap_bego='+ap_bego+'&ap_instructions='+ap_instructions
+									+'&ap_bego='+ap_bego+'&ap_instructions='+ap_instructions+'&ap_sign='+ap_sign
 							,success:function(data){
 								$("#page_print").html(data);
 								$("#ap_reporter").val("<%=ap_reporter%>");
@@ -211,12 +218,14 @@ pageEncoding="UTF-8"%>
 								$("#ap_prosessingdate").val("<%=ap_prosessingdate%>");
 								$("#ap_content").val("<%=ap_content%>");
 								$("#ap_contact").val("<%=ap_contact%>");
+								$("#ap_appdate").val("<%=ap_appdate%>");
 								$("#ap_year").val("<%=ap_appdate_1%>");
 								$("#ap_month").val("<%=ap_appdate_2%>");
 								$("#ap_today").val("<%=ap_appdate_3%>");
 								$("#ap_namein").val("<%=ap_reporter%>"); 
 								$("#ap_bego").val("<%=ap_bego%>");
 								$("#ap_instructions").val("<%=ap_instructions%>");
+								$("#ap_sign").attr("src","http://localhost:5000/work/<%=ap_sign %>");
 							}
 						})
 					}

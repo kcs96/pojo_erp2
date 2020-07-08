@@ -250,7 +250,20 @@ public class WorkLogic {
 		seq_ar = workDao.getSeqAr();
 		return seq_ar;
 	}
-	
+	public List<Map<String, Object>> nowempList(Map<String, Object> pMap) {
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+		list = workDao.nowempList(pMap);
+		return list;
+	}
+	/*
+	 * public List<Map<String, Object>> emp_receiver(Map<String, Object> pMap) { //
+	 * TODO Auto-generated method stub List<Map<String,Object>> list = new
+	 * ArrayList<Map<String,Object>>(); list = workDao.emp_receiver(pMap); return
+	 * list; } public List<Map<String, Object>> emp_recstate(Map<String, Object>
+	 * pMap) { // TODO Auto-generated method stub List<Map<String,Object>> list =
+	 * new ArrayList<Map<String,Object>>(); list = workDao.emp_recstate(pMap);
+	 * return list; }
+	 */
 
 
 }
