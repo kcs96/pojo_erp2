@@ -101,7 +101,7 @@ const sideNavMainTitleApi = [
             id: "group",
             title: "조직도",
             className: "",
-            ref: "#",
+            ref: "http://localhost:5000/work/emp_organization.erp",
             onClick: "",
           },
           {

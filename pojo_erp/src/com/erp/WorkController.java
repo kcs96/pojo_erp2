@@ -13,6 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import com.google.gson.Gson;
+
 
 public class WorkController implements Controller {
 	
@@ -87,6 +89,7 @@ public class WorkController implements Controller {
 		    	//System.out.println(pMap.get(pMap.keySet().toArray()[i]));
 		    	System.out.println(pMap.keySet().toArray()[i]+" : "+pMap.get(pMap.keySet().toArray()[i]));
 		    }
+		    
 		    int ap_no = workLogic.getSeqAr();
 		    pMap.put("ap_no", ap_no);
 		    result = workLogic.workAddDoc(pMap);
@@ -96,7 +99,6 @@ public class WorkController implements Controller {
 		    for(int i=0; i<receiver.length; i++) {
 		    	System.out.println(receiver[i]);
 		    }
-		    
 			int count = 0;								     //성공시 증가
 			for(int i=0; i<receiver.length;i++) {            //수신자 인원수만큼 반복
 				pMap = new HashMap<>();                      //Map 초기화
@@ -414,14 +416,16 @@ public class WorkController implements Controller {
 			req.setAttribute("dispatchList", rlist);
 			path="forward:outsideWorker.jsp"; 
 		}
-		else if("personManageMent".equals(requestName)) {    ////////화면 미정
+		else if("emp_organization".equals(requestName)) {    ////////화면 미정
 			//인사조직도  insert here
 			logger.info("Controller : 인사조직도 호출 성공");
 			List<Map<String,Object>> rlist = null;
 			pMap = new HashMap<>();
 			rlist = workLogic.personManageMent(pMap);
-			req.setAttribute("personManageMentList", rlist);
-			path="forward:xxx.jsp";
+			Gson g = new Gson();
+			String imsi = g.toJson(rlist);
+			req.setAttribute("imsi", imsi);
+			path="forward:emp_organization.jsp";
 		}
 		else if("mySign".equals(requestName)) {
 			//전자결재 insert here
