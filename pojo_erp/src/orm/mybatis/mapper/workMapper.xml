@@ -291,9 +291,20 @@
 		AND SYSDATE BETWEEN dp.dp_sdate AND dp.dp_edate
 	</select>
 
+	<!-- 조직도 리스트 -->
+
+
+<select id="personManageMent" parameterType="map" resultType="java.util.Map">
+	select e.EMP_NO, e.DEPT_NO, EMP_PW, EMP_NAME, EMP_STATE, EMP_POSITION, EMP_RESNUM, EMP_GENDER,
+		  EMP_EMAIL, EMP_PHONE, to_char(EMP_HIREDATE,'yyyy-mm-dd') as EMP_HIREDATE, EMP_RETIREDATE,
+  		  EMP_ADDRESS, EMP_SALARY, EMP_EXTEND, EMP_PHOTO, EMP_OUTREASON, EMP_DETAILADDRESS, EMP_ZIPCODE,
+       	  EMP_ACCOUNT, EMP_BANK, e.DEPT_NO, DEPT_NAME, DEPT_TASK
+      from emp e,dept d where d.dept_no = e.dept_no 
+   </select>
 
 	<!-- ================================== 파견사원 조회 끝=============================================== -->
 	<!-- 결재진행상태 사람 조회 -->
+	
 	<!-- <select id="sel_receiver" parameterType="map" 
 		resultType="java.util.Map">
 		SELECT E.EMP_POSITION as EMP_POSITION,R.REV_LEVEL as REV_LEVEL FROM APPROVE A,RECEIVER R,EMP E
