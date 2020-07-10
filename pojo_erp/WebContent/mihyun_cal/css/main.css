@@ -8,13 +8,13 @@
 .sb-sidenav .sb-sidenav-menu .nav .nav-link {
   display: flex;
   align-items: center;
-  padding-top: 2.5rem;
-  padding-bottom: 1.5rem;
+  padding-top: 4rem;
+  padding-bottom: 3.3rem;
   position: relative;
 }
 .nav-link {
   display: block;
-  padding: 1rem 1.5rem;
+  padding: 1.5rem 2.5rem;
 }
 body {
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;

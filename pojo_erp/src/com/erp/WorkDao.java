@@ -319,6 +319,13 @@ public class WorkDao {
 	 * sqlSes.selectList("sel_recstate"); logger.info("sel_recstate호출 size값:"
 	 * +rstList.size()); return null; }
 	 */
-	
-	
+
+	public List<Map<String, Object>> log(Map<String, Object> pMap) {
+		logger.info("Dao : log 호출 성공");
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+		sqlSes.selectOne("proc_log",pMap);
+		list = (List<Map<String,Object>>)pMap.get("key");
+		logger.info("list.size() : " + list.size()); 
+		return list;
+	}
 }

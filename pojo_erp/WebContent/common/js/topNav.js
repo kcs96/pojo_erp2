@@ -16,7 +16,7 @@ const iStyle = "font-size:25px"; // 아이콘 크기
 const mainTitle = document.createElement("a"); //메인타이틀 a태그
 const mainTitleClass = "navbar-brand"; //메인타이틀 클래스
 const mainTitleStyle = "width:100%"; //메인타이틀 스타일
-const mainTitleText = "2RP PROGRAM"; //메인타이틀 텍스트
+const mainTitleText = "우리를 JAVA"; //메인타이틀 텍스트
 const mainTitleRef = "../main/reMain.erp"; //메인 타이틀 링크
 
 //Top nav dom 생성

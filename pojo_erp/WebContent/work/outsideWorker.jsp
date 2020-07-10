@@ -90,7 +90,7 @@ pageEncoding="UTF-8"%>
    <div id="layoutSidenav_content">
 		<main id="input_div">
 			<div id="frame_div" style="border: 1px solid black;">
-				<div id="page_title" style="border-bottom: 2px solid gray; margin: 50px 30px;"><h2>main page</h2></div>
+				<div id="page_title" style="border-bottom: 2px solid gray; margin: 50px 30px;"><h2>파견 사원</h2></div>
 				<div id="page_contents" style="max-width: 1730px; margin: 10px 100px;">
      			<!-- 컨텐츠 들어갈내용 시작-->
 
@@ -143,7 +143,7 @@ pageEncoding="UTF-8"%>
 
 									<div class="col-8">
 										<input readonly class="form-control mr-2" id="work_name"
-											type="search" placeholder="회사명" aria-label="Search">
+											type="search" placeholder="" aria-label="Search">
 									</div>
 								</div>
 								<!-- 회사전화번호 -->
@@ -154,7 +154,7 @@ pageEncoding="UTF-8"%>
 
 									<div class="col-8">
 										<input readonly class="form-control mr-2" id="work_num"
-											type="search" placeholder="회사명" aria-label="Search">
+											type="search" placeholder="" aria-label="Search">
 									</div>
 								</div>
 								<!-- 회사상세주소 -->
@@ -165,7 +165,7 @@ pageEncoding="UTF-8"%>
 
 									<div class="col-8">
 										<input readonly class="form-control mr-2" id="work_addr"
-											type="search" placeholder="회사명" aria-label="Search">
+											type="search" placeholder="" aria-label="Search">
 									</div>
 								</div>
 								<!-- 사원정보 -->
@@ -181,7 +181,7 @@ pageEncoding="UTF-8"%>
 
 									<div class="col-8">
 										<input readonly class="form-control mr-2" id="emp_no"
-											type="search" placeholder="회사명" aria-label="Search">
+											type="search" placeholder="" aria-label="Search">
 									</div>
 								</div>
 								<!-- 사원연락처 -->
@@ -192,7 +192,7 @@ pageEncoding="UTF-8"%>
 
 									<div class="col-8">
 										<input readonly class="form-control mr-2" id="emp_phone"
-											type="search" placeholder="회사명" aria-label="Search">
+											type="search" placeholder="" aria-label="Search">
 									</div>
 								</div>
 								<!-- 파견시작일 -->
@@ -203,7 +203,7 @@ pageEncoding="UTF-8"%>
 
 									<div class="col-8">
 										<input readonly class="form-control mr-2" id="start"
-											type="search" placeholder="회사명" aria-label="Search">
+											type="search" placeholder="" aria-label="Search">
 									</div>
 								</div>
 								<!-- 파견종료일 -->
@@ -214,7 +214,7 @@ pageEncoding="UTF-8"%>
 
 									<div class="col-8">
 										<input readonly class="form-control mr-2" id="end"
-											type="search" placeholder="회사명" aria-label="Search">
+											type="search" placeholder="" aria-label="Search">
 									</div>
 								</div>
 								<!-- bottom -->

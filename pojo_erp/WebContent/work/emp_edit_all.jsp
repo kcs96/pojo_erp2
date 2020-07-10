@@ -37,10 +37,10 @@ pageEncoding="UTF-8"%>
 			//load함수를 이용하여 core스크립트의 로딩이 완료된 후, 우편번호 서비스를 실행합니다.
 			new daum.Postcode({
 				oncomplete: function (data) {
-					alert(data);
+					//alert(data);
 					// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
 					var roadAddr = data.roadAddress;
-					alert("roadAddr: " + roadAddr);
+					//alert("roadAddr: " + roadAddr);
 					$("#emp_zipcode").val(data.zonecode);
 					$("#emp_address").val(roadAddr);
 					//document.getElementbyId('institutuionPostcode').value = data.zonecode;
@@ -73,7 +73,7 @@ pageEncoding="UTF-8"%>
 	 */
 	
 	function save(){
-		alert("저장 버튼 호출 성공");	
+		//alert("저장 버튼 호출 성공");	
  		$("#f_updInfo").attr("method","get");
 		$("#f_updInfo").attr("action","workUpdEmp.erp");
 		$("#f_updInfo").submit();
@@ -233,16 +233,16 @@ pageEncoding="UTF-8"%>
 										<table class="table table-boardered">
 											<tr>
 												<th>우편번호</th>
-												<td><input id="emp_zipcode" type="text" class="form-control" name="emp_zipcode" value="<%= rMap.get("EMP_ZIPCODE") %>" align="left" placeholder="우편번호" readonly></td>
+												<td><input id="emp_zipcode" type="text" class="form-control" name="EMP_ZIPCODE" value="<%= rMap.get("EMP_ZIPCODE") %>" align="left" placeholder="우편번호" readonly></td>
 												<td><input type="button" class="btn btn-link" onclick="DaumPostcode()" value="주소검색" /></td>
 											</tr>
 											<tr>
 												<th>주소</th>
-												<td><input id="emp_address" type="text" class="form-control" name="emp_address" value="<%= rMap.get("EMP_ADDRESS") %>" placeholder="주소" readonly></td>
+												<td><input id="emp_address" type="text" class="form-control" name="EMP_ADDRESS" value="<%= rMap.get("EMP_ADDRESS") %>" placeholder="주소" readonly></td>
 											</tr>
 											<tr>
 												<th>상세주소</th>
-												<td><input id="emp_detailaddress" type="text" class="form-control" name="emp_detailaddress" value="<%= rMap.get("EMP_DETAILADDRESS") %>" placeholder="상세 주소를 입력하세요..."></td>
+												<td><input id="emp_detailaddress" type="text" class="form-control" name="EMP_DETAILADDRESS" value="<%= rMap.get("EMP_DETAILADDRESS") %>" placeholder="상세 주소를 입력하세요..."></td>
 											</tr>
 										</table>
 									</div>

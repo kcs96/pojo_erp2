@@ -33,12 +33,11 @@ pageEncoding="UTF-8"%>
 	
  	function save(){
  		//$("#f_all").submit();
-  		alert("저장 버튼 호출 성공");
+  		//alert("저장 버튼 호출 성공");
  		$("#f_updInfo").attr("method","get");
 		$("#f_updInfo").attr("action","myUpdImformation.erp");
 		$("#f_updInfo").submit();
  	} 
-		
 			/*
 			$.ajax({
 			//url: "myUpdImformation.erp?emp_no="+no+"&emp_pw="+pw+"&emp_photo="+photo+"&emp_phone="+phone+"&emp_email="+email+"&emp_address="+address
@@ -65,7 +64,7 @@ pageEncoding="UTF-8"%>
 					//alert(data);
 					// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
 					var roadAddr = data.roadAddress;
-					alert("roadAddr: " + roadAddr);
+					//alert("roadAddr: " + roadAddr);
 					$("#emp_zipcode").val(data.zonecode);
 					$("#emp_address").val(roadAddr);
 					//document.getElementbyId('institutuionPostcode').value = data.zonecode;
@@ -82,17 +81,19 @@ pageEncoding="UTF-8"%>
 		var new_pw = $("#new_pw").val();
 		var new_repw = $("#new_repw").val();
 		$.ajax({
-			url : "./newPassword.erp?old_pw=" + old_pw + "&new_pw=" + new_pw + "&new_repw=" + new_repw
+			url : "./newPassword.erp?old_pw=" + old_pw 
+								 + "&new_pw=" + new_pw 
+								 + "&new_repw=" + new_repw
 		   ,method : "get"
 		   ,success : function(result) {
 				if (result == "1") {
-					alert("비밀번호 변경 성공!!!!");
+					alert("비밀번호 변경 성공.");
 					$("#intro").modal('hide');
 					$("#emp_pw").val(new_repw);
 					
 				}
 				else {
-					alert("비밀번호 변경 실패!!!!");
+					alert("비밀번호 변경 실패.");
 				}
 			}
 		});
@@ -128,15 +129,12 @@ pageEncoding="UTF-8"%>
 										<th>패스워드<span style="float:right"><button type="button" data-toggle="modal" class="btn btn-link" data-target="#intro" >변경</button></span></th>
 										<td><input id="emp_pw" type="password" class="form-control" name="EMP_PW" value="<%=rMap.get("EMP_PW") %>" readonly ></td>
 										<td>
-											
-											<!-- <form id="f_pw"> -->
 											<div id="intro" class="modal fade" role="dialog" aria-labelledby="introHeader" aria-hidden="true" tabindex="-1">
 												<div id="modalMain" class="modal-dialog">
 													<div id="modal" class="modal-content" style="padding: 40px; margin: 40px;">
 														<div class="form-group">
 															<label for="exampleInputEmail1">이전 비밀번호</label> 
 															<input type="password" class="form-control" id="old_pw" name="old_pw"  aria-describedby="pwHelp" width="50px"> 
-															<small id="pwlHelp" class="form-text text-muted">비밀번호가 생각나지 않으면 인사부로 문의하세요...</small>
 														</div>
 														<div class="form-group">
 															<label for="exampleInputPassword1">새 비밀번호</label> 
@@ -153,9 +151,6 @@ pageEncoding="UTF-8"%>
 													</div>
 												</div>
 											</div>
-											<!-- </form> -->
-				
-											
 											
 										</td>
 									</tr>
@@ -260,7 +255,7 @@ pageEncoding="UTF-8"%>
 											</tr>
 											<tr>
 												<th>주소</th>
-												<td><input id="emp_address" type="text" class="form-control" name="EMP_ADDRESS" value=<%=rMap.get("EMP_ADDRESS") %>" placeholder="주소" readonly></td>
+												<td><input id="emp_address" type="text" class="form-control" name="EMP_ADDRESS" value="<%=rMap.get("EMP_ADDRESS") %>" placeholder="주소" ></td>
 											</tr>
 											<tr>
 												<th>상세주소</th>

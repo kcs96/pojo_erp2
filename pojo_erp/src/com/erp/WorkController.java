@@ -95,7 +95,7 @@ public class WorkController implements Controller {
 		    result = workLogic.workAddDoc(pMap);
 	    	System.out.println(pMap.size());
 		    if(result == 1) { 		                         //결제테이블에 등록이 성공했으면
-		    String[] receiver = ((String)pMap.get("rev_empNo")).split(",");
+		    String[] receiver = ((String)pMap.get("ap_receiver")).split(",");
 		    for(int i=0; i<receiver.length; i++) {
 		    	System.out.println(receiver[i]);
 		    }
@@ -111,6 +111,8 @@ public class WorkController implements Controller {
 				System.out.println("테스트 : "+pMap.get("ap_count"));
 //				pMap.put("count",receiver.length);           //수신자수 담기
 				String str_count = workLogic.workAddSendDoc(pMap);
+				System.out.println("str_count: "+str_count);
+				
 				if(str_count.equals("1")) {count++;}
 			}//end of for문
 			if(count == receiver.length) {//만약 수신자수만큼 성공을했으면
@@ -641,6 +643,16 @@ public class WorkController implements Controller {
 		list = workLogic.nowempList(pMap);
 		mav.addObject("nowempList", list);
 		mav.setViewName("jsonnowempList");
+		}
+		else if(cud.equals("log")) {     ///성공
+			//재직사원 조회
+			logger.info("Controller : 재직 사원 호출 성공");	
+			/////////////////////// 실제 코드    /////////////////////
+			List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+			pMap = new HashMap<String, Object>();
+			list = workLogic.log(pMap); 
+			mav.addObject("log", list);
+			mav.setViewName("jsonLog");
 		}
 		return mav;
 

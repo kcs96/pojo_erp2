@@ -15,14 +15,14 @@
     <link rel=" shortcut icon" href="../mihyun_cal/image/favicon.ico">
 
     <link rel="stylesheet" href="../mihyun_cal/vendor/css/fullcalendar.min.css" />
-    <link rel="stylesheet" href="../mihyun_cal/vendor/css/bootstrap.min.css?ver">
+    <link rel="stylesheet" href="../mihyun_cal/vendor/css/bootstrap.min.css?aft2">
     <link rel="stylesheet" href='../mihyun_cal/vendor/css/select2.min.css' />
     <link rel="stylesheet" href='../mihyun_cal/vendor/css/bootstrap-datetimepicker.min.css' />
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,500,600">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-    <link rel="stylesheet" href="../mihyun_cal/css/main.css?ver">
+    <link rel="stylesheet" href="../mihyun_cal/css/main.css?after233">
 
 </head>
 <body>
@@ -67,9 +67,9 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
+                        <h4 class="modal-title"></h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title"></h4>
                     </div>
                     <div class="modal-body">
 

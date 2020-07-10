@@ -106,8 +106,8 @@ pageEncoding="UTF-8"%>
 	}
 	function go(){
 		var goText = $("#go").text();
-		alert("출근");
-		alert(goText+" goTex");
+		//alert("출근");
+		//alert(goText+" goTex");
 		var today = new Date();   
 		var  hours = today.getHours(); // 시
 		var minutes = today.getMinutes();  // 분
@@ -115,15 +115,15 @@ pageEncoding="UTF-8"%>
 		hours = hours < 10 ? '0'+hours : hours;
 		minutes = minutes < 10 ? '0'+minutes : minutes;
 		second = second < 10 ? '0'+second : second;
-		alert(hours+ ':' + minutes);
+		//alert(hours+ ':' + minutes);
 		var msg = hours+ ':' + minutes+':'+second;
 		if(goText == "-"){
 			$("#go").text(msg);
 			$.ajax({
 				url:"myGoWork.erp",
 				success:function(data){
-					alert("업데이트 결과"+data);
-					alert("출 근 성 공");
+					//alert("업데이트 결과"+data);
+					alert("출근");
 				}
 			});
      	}else{
@@ -132,8 +132,8 @@ pageEncoding="UTF-8"%>
 	}
 	function out() {
 		var outText = $("#out").text();
-		alert("외출")
-		alert(outText + " outText");
+		//alert("외출")
+		//alert(outText + " outText");
 		var today = new Date();
 		var hours = today.getHours(); // 시
 		var minutes = today.getMinutes(); // 분
@@ -141,16 +141,16 @@ pageEncoding="UTF-8"%>
 		hours = hours < 10 ? '0'+hours : hours;
 		minutes = minutes < 10 ? '0'+minutes : minutes;
 		second = second < 10 ? '0'+second : second;
-		alert(hours+ ':' + minutes +':'+second);
+		//alert(hours+ ':' + minutes +':'+second);
 		var msg = hours+ ':' + minutes+':'+second;
 		if (outText == "-") {
 			$("#out").text(msg);
 			$.ajax({
 				url : "myGoOut.erp",
 				success : function(data) {
-					alert("업데이트 성공" + data);
+					//alert("업데이트 성공" + data);
 					if(data != null){
-						alert("출근 성공")
+						//alert("외출 성공")
 					}
 				}
 			});
@@ -160,8 +160,8 @@ pageEncoding="UTF-8"%>
 	}
 	function comeback() {
 		var comeBackText = $("#comeBack").text();
-		alert("외츨복귀")
-		alert(comeBackText + " comeBackText");
+		//alert("외츨복귀")
+		//alert(comeBackText + " comeBackText");
 		var today = new Date();
 		var hours = today.getHours(); // 시
 		var minutes = today.getMinutes(); // 분
@@ -169,16 +169,17 @@ pageEncoding="UTF-8"%>
 		hours = hours < 10 ? '0'+hours : hours;
 		minutes = minutes < 10 ? '0'+minutes : minutes;
 		second = second < 10 ? '0'+second : second;
-		alert(hours+ ':' + minutes+':'+second);
+		//alert(hours+ ':' + minutes+':'+second);
 		var msg = hours+ ':' + minutes+':'+second;
 		var outText = $("#out").text();
-		alert(outText + " outText");
+		//alert(outText + " outText");
 		if (outText != "-") {
 			$("#comeBack").text(msg);
 			$.ajax({
 				url : "myComBack.erp",
 				success : function(data) {
-					alert("업데이트 성공" + data);
+					//alert("업데이트 성공" + data);
+					//alert("복귀 성공");
 				}
 			});
 		} else {
@@ -187,8 +188,8 @@ pageEncoding="UTF-8"%>
 	}
 	function leave() {
 		var leaveText = $("#leave").text();
-		alert("퇴근");
-		alert(leaveText + " leaveText");
+		//alert("퇴근");
+		//alert(leaveText + " leaveText");
 		var today = new Date();
 		var hours = today.getHours(); // 시
 		var minutes = today.getMinutes(); // 분
@@ -196,7 +197,7 @@ pageEncoding="UTF-8"%>
 		hours = hours < 10 ? '0'+hours : hours;
 		minutes = minutes < 10 ? '0'+minutes : minutes;
 		second = second < 10 ? '0'+second : second;
-		alert(hours+ ':' + minutes+':'+second);
+		//alert(hours+ ':' + minutes+':'+second);
 		var msg = hours+ ':' + minutes+':'+second;
 
 		if (leaveText == "-") {
@@ -204,7 +205,8 @@ pageEncoding="UTF-8"%>
 			$.ajax({
 				url : "myGoHome.erp",
 				success : function(data) {
-					alert("업데이트 성공" + data);
+					//alert("업데이트 성공" + data);
+					alert("퇴근");
 				}
 			});
 		} else {

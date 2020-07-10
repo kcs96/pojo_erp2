@@ -12,7 +12,10 @@
 	<title>Login</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
+<!--=====================================================================
+
+
+==========================-->	
 	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
@@ -118,6 +121,11 @@
 		$('.js-tilt').tilt({
 			scale: 1.1
 		})
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			localStorage.clear();
+		});
 	</script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>

@@ -18,14 +18,14 @@
     <!-- <link rel=" shortcut icon" href="../mihyun_cal/image/favicon.ico"> -->
 
     <link rel="stylesheet" href="../mihyun_cal/vendor/css/fullcalendar.min2.css" />
-    <link rel="stylesheet" href="../mihyun_cal/vendor/css/bootstrap.min2.css?after">
+    <link rel="stylesheet" href="../mihyun_cal/vendor/css/bootstrap.min2.css?af">
     <link rel="stylesheet" href='../mihyun_cal/vendor/css/select2.min.css' />
     <link rel="stylesheet" href='../mihyun_cal/vendor/css/bootstrap-datetimepicker.min.css' />
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,500,600">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-    <link rel="stylesheet" href="../mihyun_cal/css/main1.css">
+    <link rel="stylesheet" href="../mihyun_cal/css/main1.css?after">
 
 </head>
 <body>

@@ -25,7 +25,7 @@ pageEncoding="UTF-8"%>
 		$.ajax({
 			url : "./emp_list_on.jsp",
 			success : function(data) {
-				alert("data:" + data);
+				//alert("data:" + data);
 				$("#emp_list").html(data);
 			}
 		});
@@ -34,7 +34,7 @@ pageEncoding="UTF-8"%>
 		$.ajax({
 			url : "./emp_list_off.jsp",
 			success : function(data) {
-				alert("data:" + data);
+				//alert("data:" + data);
 				$("#emp_list").html(data);
 			}
 		});
@@ -74,7 +74,7 @@ pageEncoding="UTF-8"%>
 							   data-pagination="true"
 							   data-url="./emp_list_on.erp?cud=nowempList">
 							<thead class="thead-light">
-								<tr>
+								<tr style="text-align: center;">
 									<th data-field="EMP_NO">사원번호</th>
 									<th data-field="username">사원이름</th>
 									<th data-field="DEPT_NAME">부서</th>
@@ -82,7 +82,7 @@ pageEncoding="UTF-8"%>
 									<th data-field="EMP_EMAIL">이메일</th>
 									<th data-field="EMP_PHONE">핸드폰</th>
 									<th data-field="EMP_STATE">근무상태</th>
-									<th data-field="OPERATE" data-formatter="operateFormatter" data-events="operateEvents" width="300" >정보수정</th>
+									<th data-field="OPERATE" data-formatter="operateFormatter" data-events="operateEvents" width="300"  >정보수정</th>
 								</tr>
 							</thead>
 						</table>

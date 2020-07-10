@@ -1,6 +1,7 @@
 package com.erp;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,11 +35,13 @@ public class EmpController implements Controller {
 		int result = 0;
 		Map<String,Object> pMap = null;
 		HttpSession session = req.getSession();
-		
+		InetAddress local = InetAddress.getLocalHost();
+		String ip =  local.getHostAddress();
 		if("login".equals(requestName)) {
 			logger.info("EmpController => 로그인 호출");
 			/////////////////////// 실제 코드    /////////////////////
 			Map<String,Object> loginMap= HashMapBuilder.hashMapBuilder(req.getParameterMap());
+			loginMap.put("myIp",ip);
 			System.out.println("loginMap: "+loginMap);
 			List<Map<String,Object>> rList = new ArrayList<>();
 			rList =empLogic.login(loginMap);

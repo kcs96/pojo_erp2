@@ -29,7 +29,7 @@ pageEncoding="UTF-8"%>
 			$.ajax({
 				url : "manager_log_content.jsp",
 				success : function(data) {
-					alert("data:" + data);
+					//alert("data:" + data);
 					$("#log_content").html(data);
 				}
 			});
@@ -43,24 +43,46 @@ pageEncoding="UTF-8"%>
       <div id="layoutSidenav_nav"></div>
       <div id="layoutSidenav_content">
         <main id="input_div">
-        	<div id="frame_div" style="border: 1px solid black;">
+        	<div id="frame_div" >
 				<div id="page_title" style="border-bottom: 2px solid gray; margin: 50px 30px;"><h2>관리자 로그</h2></div>
 				<div id="page_contents" style="max-width: 1730px; margin: 10px 100px;">
           		<!-- 컨텐츠 들어갈내용 시작-->
-		            <ol class="breadcrumb mb-4">
+		           <!--  
+		           <ol class="breadcrumb mb-4">
 		              <li class="breadcrumb-item">
 		                <a href="main.jsp">main</a>
 		              </li>
 		              <li class="breadcrumb-item active">관리자 로그</li>
-		            </ol>
+		           </ol> 
+		           -->
 		             <div class="card-header">
 		                <i class="fas fa-table mr-1"></i>
-		                <button type="button" class="btn btn-info float-" id="b" value="로그 조회" onClick="manager_log_content()" style="border: 3px solid white; border-radius: 10px;">로그조회</button>
+		                <button type="button" class="btn btn-info float-" id="b" value="로그 조회" onClick="window.location.reload()" style="border: 3px solid white; border-radius: 10px;">로그갱신</button>
 		                <button type="button" class="btn btn-info float-right" style="border: 3px solid white; border-radius: 10px; padding-bottom: 5px; margin-bottom: 15px;" onClick="window.print()">출력</button>
 		              </div>
 		              
-					<div id="log_content">
+					<!-- <div id="log_content">
 					</div>
+					-->
+					
+					<table id="table" 
+						   data-toggle="table" 
+						   class="table table-hover"
+						   data-search="true" 
+						   data-toggle="table" 
+						   data-pagination="true"
+						   data-url="../work/gg.erp?cud=log">
+						<thead class="thead-light">
+							<tr>
+								<th data-field="LOG_NO">NO</th>
+								<th data-field="EMP_NO">사원번호</th>
+								<th data-field="LOG_IP">접속IP</th>
+								<th data-field="LOG_TYPE">활동내역</th>
+								<th data-field="LOG_TIME">접속시간</th>
+							</tr>
+						</thead>
+					</table>
+					
 
           		<!-- 컨텐츠 들어갈내용 끝   -->
           		</div>

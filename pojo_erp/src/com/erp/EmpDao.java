@@ -29,7 +29,7 @@ public class EmpDao {
 		List<Map<String, Object>> rMap = new ArrayList<>();
 		System.out.println(loginMap.get("emp_no"));
 		System.out.println(loginMap.get("emp_pw"));
-		sqlSec.selectOne("proc_empLogin",loginMap);
+		sqlSec.selectOne("proc_empLogin44",loginMap);
 		rMap = (List<Map<String,Object>>) loginMap.get("key");
 		System.out.println(rMap.get(0).get("EMP_NO"));
 		System.out.println(rMap.get(0).get("EMP_NAME"));

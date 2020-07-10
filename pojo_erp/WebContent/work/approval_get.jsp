@@ -1,3 +1,10 @@
+<%@page import="com.util.DBConnectionMgr"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.util.Vector"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -25,6 +32,10 @@ pageEncoding="UTF-8"%>
    <title>2RP PROGRAM</title>
 <!-- 파라미터 받기  -->
  <%
+ Connection con = null;
+	Statement stmt = null;
+	ResultSet rs = null;
+	String imsi[] = null;
  	String pos[] =new String[5];
  	pos[0] = "인사과장 ";
  	pos[1] = "인사차장 ";
@@ -203,28 +214,120 @@ pageEncoding="UTF-8"%>
 						<td><span><%= ap_appdate%></span></td>
 						<th style="background: #EAEAEA; text-align: center;">결재 상태</th><td><span><%=ap_state %></span></td>
 						</tr>
+							<%
+						
+						String position[] = null;
+						Vector<String> v = new Vector<>();
+						DBConnectionMgr dbmgr =DBConnectionMgr.getInstance(); 
+						PreparedStatement pstmt = null;
+						StringBuilder sb = new StringBuilder();
+						sb.append(" SELECT E.EMP_POSITION as"); 
+						sb.append(" EMP_POSITION,R.REV_LEVEL as REV_LEVEL FROM APPROVE");
+						sb.append(" A,RECEIVER R,EMP E WHERE A.AP_NO = R.AP_NO");
+						sb.append(" AND A.AP_NO = ? AND R.EMP_NO = E.EMP_NO ORDER BY R.REV_LEVEL ASC");
+						try {
+							con = dbmgr.getConnection();
+							pstmt = con.prepareStatement(sb.toString());
+							pstmt.setInt(1, Integer.parseInt(ap_no));
+							rs= pstmt.executeQuery();
+							while(rs.next()) {
+								String EMP_POSITION = rs.getString("EMP_POSITION");
+								System.out.println( rs.getString("EMP_POSITION"));
+								v.add(EMP_POSITION);
+							}
+							System.out.println("vv" + v.size());
+							//v.copyInto(position);
+						}catch(SQLException se) {
+							System.out.println(se.toString());
+						}catch(Exception e){
+							e.printStackTrace();
+						}
+						
+						%>
 								<tr>
 							<th rowspan="2"scope="row" style=" vertical-align: middle;background: #EAEAEA; width:17%; text-align: center;">
 						결재 진행
 								</th>
 						<%
-							for (int i = 0; i < pos.length; i++) {
+						if(v.size() > 8){
+							for (int i = 0; i < v.size(); i++) {
 						%>
 						<td style="text-align:center;vertical-align: middle;width:17%;border-left:0px; border-right:0px;border-bottom:0px; ">
-							<%= pos[i]%>
+							<%=v.get(i) %>
 						</td>
 						<%
 							}
+						}else{
+								int size = v.size();
+								for(int y = 0; y < 8 - v.size(); y++){
+									v.add(size, "");
+									size++;
+								}
+								for (int i = 0;i< v.size(); i++) {
+									
+									%>
+									<td style="text-align:center;vertical-align: middle;width:17%;border-left:0px; border-right:0px; border-top:0px;">
+											<%=v.get(i)%>
+									</td>
+									<%
+								}
+							}
 						%>
 						</tr>
+						<%
+						  Vector<String> v1 = new Vector<>();
+						 dbmgr =DBConnectionMgr.getInstance(); 
+						 String imsi11="";
+						StringBuilder sb1 = new StringBuilder();
+						sb1.append("SELECT REV_APPROVAL,REV_LEVEL FROM APPROVE A,RECEIVER R,EMP E");
+						sb1.append(" WHERE A.AP_NO = R.AP_NO");
+						sb1.append(" AND A.AP_NO =?");
+						sb1.append(" AND R.EMP_NO = E.EMP_NO");
+						sb1.append(" AND REV_PROCESSING = 'true'");
+						sb1.append(" ORDER BY R.REV_LEVEL ASC");
+						try {
+							con = dbmgr.getConnection();
+							pstmt = con.prepareStatement(sb1.toString());
+							pstmt.setInt(1, Integer.parseInt(ap_no));
+							rs= pstmt.executeQuery();
+							while(rs.next()) {
+								String REV_APPROVAL = rs.getString("REV_APPROVAL");
+								System.out.println(rs.getString("REV_APPROVAL"));
+								v1.add(REV_APPROVAL);
+							}
+							System.out.println("REV_APPROVAL" + v1.size());
+							//v.copyInto(position);
+						}catch(SQLException se) {
+							System.out.println(se.toString());
+						}catch(Exception e){
+							e.printStackTrace();
+						}
+						%>
 						<tr>
 							<%
-							for (int i = 0;  i< state.length; i++) {
-						%>
-						<td style="text-align:center;vertical-align: middle;width:17%;border-left:0px; border-right:0px; border-top:0px;">
-							<%= state[i]%>
-						</td>
-						<%
+							if(v1.size() > 8){
+								for (int i = 0;i< v1.size(); i++) {
+										
+							%>
+							<td style="text-align:center;vertical-align: middle;width:17%;border-left:0px; border-right:0px; border-top:0px;">
+									<%=v1.get(i)%>
+							</td>
+							<%
+								}
+							}else{
+								int size = v1.size();
+								for(int y = 0; y < 8 - v1.size(); y++){
+									v1.add(size, "");
+									size++;
+								}
+								for (int i = 0;i< v1.size(); i++) {
+									
+									%>
+									<td style="text-align:center;vertical-align: middle;width:17%;border-left:0px; border-right:0px; border-top:0px;">
+											<%=v1.get(i)%>
+									</td>
+									<%
+								}
 							}
 						%>
 						</tr>

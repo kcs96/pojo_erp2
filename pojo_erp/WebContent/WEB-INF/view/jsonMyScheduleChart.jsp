@@ -1,4 +1,3 @@
-<%@page import="test.DBConnect"%>
 <%@page import="com.google.gson.Gson"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.List"%>

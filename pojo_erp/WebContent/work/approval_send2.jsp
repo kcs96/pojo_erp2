@@ -72,9 +72,9 @@
 	}
 		//del(el)파라미터 써주고 
 	function del(el){
-		alert("클릭");//
+		//alert("클릭");//
 		var imsi = $(el).text();//var imsi로 만들어줘서 $(el).text파라미터값만 받아올때 쓰는건가봄
-		alert(imsi+"삭제");
+		//alert(imsi+"삭제");
 		$("#approvalName").html("");//클릭을하면 초기화
 		for(var i=0;i<g_position.length;i++) {
 			var val = g_position[i];
@@ -93,7 +93,7 @@
 		}
 	}
 	function test_modal(){
-		alert("결재하기?");
+		//alert("결재하기?");
 		g_names=[];//배열에 저장된 값들 초기화하기
 		g_position =[];
 		$("input[type=checkbox]").prop("checked", false);
@@ -101,7 +101,7 @@
 	function test(res) {
 		 imsi = res;
 		var url;
-		alert("res:" + imsi);
+		//alert("res:" + imsi);
 		if (res == "휴가양식") {
 			url = "../sanghyun2/huga.jsp"
 		} else if (res == "업무보고서") {
@@ -119,14 +119,14 @@
 		});
 	}
  	function send() {
-		alert("보냄");
+		//alert("보냄");
 		$("#approveModal").modal({
 			show:false
 		}); 
 		//부서이름
 			var ap_dname= $("#ap_dname").val();
 		if(ap_dname == null)ap_dname = '';
-			alert("ap_dname2ss:" + ap_dname);
+			//alert("ap_dname2ss:" + ap_dname);
 		//연락처
  		var ap_contact = $("#ap_contact").val();
 		if(ap_contact ==null)ap_contact='';
@@ -166,7 +166,7 @@
 //alert("222");
 		var ap_closedate = year+'-'+month+'-'+date;
 		var rev_empNo = $("#approvalName").text();//결재자이름
-		alert('rev_empNo' + rev_empNo);
+		//alert('rev_empNo' + rev_empNo);
 		//alert("rev_empNo:"+rev_empNo);
 		var arrs = rev_empNo.split(',');
 		//alert("arrs:"+arrs);
@@ -174,7 +174,7 @@
 		//alert("app_num:"+app_num);
 		var ap_count = 1
 		var ap_title = $("#ap_titles").val();//제목 
-		alert("ap_ti")
+		//alert("ap_ti")
 		var ap_empno = $("#emp_no").val();
 		
 	location.href="./workAddSendDoc.erp?ap_instructions="
@@ -197,7 +197,7 @@
 	}	
  	
 	function approval(){
-		alert("승인");
+		//alert("승인");
 		$("#approveModal").modal({
 			show:true
 		});

@@ -121,11 +121,12 @@
                    		   ,ap_prosessingdate
                    		   ,ap_instructions
                    		   ,ap_bego
-                   		   ,ap_sign)
+                   		   ,ap_sign
+                   		   ,ap_receiver)
         VALUES(#{ap_no},#{fr_no},#{ap_title},'결재대기'
               ,#{emp_no},to_date(#{ap_appdate},'yyyy-mm-dd'),to_date(#{ap_closedate},'yyyy-mm-dd')
                   ,#{ap_content},#{ap_dname},to_date(#{ap_retiredate},'yyyy-mm-dd')
-                  ,#{ap_contact},#{ap_prosessingdate},#{ap_instructions},#{ap_bego},#{ap_sign})
+                  ,#{ap_contact},#{ap_prosessingdate},#{ap_instructions},#{ap_bego},#{ap_sign},#{ap_receiver})
 	</insert>
 	<!-- 결제 신청시 수신자 테이블에 insert할때  필요한 seq_ar채번하기 -->
 	<select id="getSeqAr" parameterType="int" resultType="int">
@@ -176,9 +177,9 @@
 		,emp_state = #{EMP_STATE}
 		,emp_bank = #{EMP_BANK}
 		,emp_account = #{EMP_ACCOUNT}
-		<!-- ,emp_zipcode = #{EMP_ZIPCODE}
+		,emp_zipcode = #{EMP_ZIPCODE}
 		,emp_address = #{EMP_ADDRESS}
-		,emp_detailaddress = #{EMP_DETAILADDRESS} -->
+		,emp_detailaddress = #{EMP_DETAILADDRESS}
 		WHERE emp_no = #{EMP_NO}
 	</update>
 	<!-- =================================== 정보수정 저장버튼 끝========================================== -->
@@ -257,7 +258,13 @@
 		VALUES(SEQ_DL_NO.NEXTVAL,#{DL_LATITUDE},#{DL_LONGITUDE},#{DL_NAME},#{DL_TEL},#{DL_ADDRESS},#{DL_DETAILADDRESS},#{DL_NOTE})
 	</insert>
 	<!-- ================================== 지사등록 끝 =================================================== -->
-
+	
+	<!-- ================================== 관리자모드 로그 ================================================= -->
+	<select id="proc_log" parameterType="map" statementType="CALLABLE">
+	{call proc_log(#{key, jdbcType=CURSOR, mode=OUT, javaType=ResultSet, resultMap=wmap})}
+	</select>
+	<!-- ================================== 관리자모드 로그 ================================================= -->
+	
 	<!-- ================================== 지사관리삭제 =============================================== -->
 	<select id="PROC_DELBRANCH" parameterType="map"
 		statementType="CALLABLE" resultType="String">
@@ -282,7 +289,7 @@
 		SELECT e.emp_no as EMP_NO,dl.dl_name as DL_NAME,dl.dl_tel
 		as DL_TEL
 		,dl.dl_address as DL_ADDRESS,e.emp_name as EMP_NAME,e.emp_phone as EMP_PHONE
-		,dp.dp_sdate as DP_SDATE,dp.dp_edate as DP_EDATE,dl.dl_latitude as
+		,to_char(dp.dp_sdate) as DP_SDATE,to_char(dp.dp_edate) as DP_EDATE,dl.dl_latitude as
 		DL_LATITUDE,dl.dl_longitude as DL_LONGITUDE
 		FROM emp e, dispatch dp, dispatch_loc dl
 		WHERE e.emp_no = #{emp_no}

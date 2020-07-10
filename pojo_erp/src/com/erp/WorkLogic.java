@@ -264,6 +264,11 @@ public class WorkLogic {
 	 * new ArrayList<Map<String,Object>>(); list = workDao.emp_recstate(pMap);
 	 * return list; }
 	 */
+	public List<Map<String, Object>> log(Map<String, Object> pMap) {
+		List<Map<String,Object>> list = new ArrayList();
+		list = workDao.log(pMap);
+		return list; 
+	}
 
 
 }

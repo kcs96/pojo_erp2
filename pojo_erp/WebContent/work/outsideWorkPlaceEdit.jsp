@@ -35,7 +35,7 @@ pageEncoding="UTF-8"%>
 			,method : "GET"
 			,success : function(data){
 				if(data == "1"){
-					alert("입력이 완료 되었습니다.");
+					//alert("입력이 완료 되었습니다.");
 					location.href = "./outsideWorker.erp"
 				}
 			}
@@ -179,8 +179,8 @@ pageEncoding="UTF-8"%>
 	    function addrSearch() {
 	        new daum.Postcode({
 	            oncomplete: function(data) {
-	                var addr = data.sigungu; // 최종 주소 변수
-	                var addr1 = data.sido; // 최종 주소 변수
+	                var addr = data.sido; // 최종 주소 변수
+	                var addr1 = data.sigungu; // 최종 주소 변수
 	                var addr2 = data.bname; // 최종 주소 변수
 	                // 주소 정보를 해당 필드에 넣는다.
 	                document.getElementById("DL_ADDRESS").value = addr+" "+addr1+" "+addr2;

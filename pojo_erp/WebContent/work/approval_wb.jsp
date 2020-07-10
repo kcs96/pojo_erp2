@@ -82,8 +82,8 @@ pageEncoding="UTF-8"%>
 	/* 테이블 버튼 이벤트 처리 부분  */
 	window.operateEvents = {
 		'click .button' : function(e, value, row, index) {
-			alert('You click like action, row: ' + JSON.stringify(row))
-			alert('You click like action, row: ' + JSON.stringify(index))
+			//alert('You click like action, row: ' + JSON.stringify(row))
+			//alert('You click like action, row: ' + JSON.stringify(index))
 		}
 	}
 	/* 테이블 버튼 이벤트  처리 끝 */

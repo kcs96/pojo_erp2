@@ -124,7 +124,7 @@ pageEncoding="UTF-8"%>
 			$('input[name="selectItemName"]:checked').each(function() {
 				index.push($(this).data('index'))
 			})
-			alert('받은 결재함 삭제버튼 Checked row index: ' + index.join(', '))
+			//alert('받은 결재함 삭제버튼 Checked row index: ' + index.join(', '))
 		})
 	})
 	/* 승인 버튼 이벤트 처리  끝 */
@@ -151,7 +151,7 @@ pageEncoding="UTF-8"%>
 			$('input[name="selectItemName"]:checked').each(function() {
 				index.push($(this).data('index'))
 			})
-			alert('보낸 결재함 삭제버튼 Checked row index: ' + index.join(', '))
+			//alert('보낸 결재함 삭제버튼 Checked row index: ' + index.join(', '))
 		})
 	})
 	/* 읽기 버튼 이벤트 처리  끝 */
@@ -234,7 +234,6 @@ pageEncoding="UTF-8"%>
     						+ap_dname+'&ap_content='+ap_content+'&ap_contact='+ap_contact
     						+'&ap_appdate='+ap_appdate+'&ap_appdate_1='+ap_appdate_1+'&ap_appdate_2='+ap_appdate_2+'&ap_appdate_3='+ap_appdate_3
     						+'&ap_bego='+ap_bego+'&ap_instructions='+ap_instructions+'&ap_no='+ap_no+'&key='+page_no+'&ap_state='+ap_state+'&ap_sign='+ap_sign+"&ap_retiredate="+ap_retiredate 
-   
     }
  }
  /* 테이블 버튼 이벤트  처리 끝 */

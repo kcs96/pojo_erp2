@@ -61,7 +61,7 @@ const sideNavMainTitleApi = [
         subData: [
           {
             id: "approval_my",
-            title: "내 결제함",
+            title: "내 결재함",
             className: "",
             ref: "../work/approval_my.jsp",
             onClick: "",

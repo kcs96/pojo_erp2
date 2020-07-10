@@ -209,7 +209,7 @@
 										+"&ap_prosessingdate="+ap_prosessingdate+ap_eprosessingdate
 								  		+"&ap_bego="+ap_bego
 										+"&ap_sign="+ap_sign
-										+"&rev_empNo="+rev_empNo
+										+"&ap_receiver="+rev_empNo
 										+"&emp_no=<%= s_empno%>"
 										+"&ap_count="+app_num;
  	}

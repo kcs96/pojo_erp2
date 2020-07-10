@@ -302,7 +302,7 @@ pageEncoding="UTF-8"%>
 	 	var flag = <%=flag %>
 		if(flag == true){
 	var timeGap =<%=timeGap%>;
-	 	var timeGap =500; 
+	 	//var timeGap =500; 
 
 		if (timeGap < 60) {//출발 0시간
 			function start1() {
