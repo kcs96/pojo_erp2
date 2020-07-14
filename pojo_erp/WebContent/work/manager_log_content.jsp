@@ -6,14 +6,14 @@
 	   data-search="true" 
 	   data-toggle="table" 
 	   data-pagination="true"
-	   data-url="../minkyu/jsonEmpList.json">
+	   data-url="../work/json.erp?cud=log">
 	<thead class="thead-light">
 		<tr>
-			<th data-field="emp_no">날짜/시간</th>
-			<th data-field="dept_no">내용</th>
-			<th data-field="emp_pw">사원명</th>
-			<th data-field="emp_name">사원번호</th>
-			<th data-field="emp_state">IP</th>
+			<th data-field="LOG_NO">NO</th>
+			<th data-field="EMP_NO">사원번호</th>
+			<th data-field="LOG_IP">접속IP</th>
+			<th data-field="LOG_TYPE">활동내용</th>
+			<th data-field="LOG_TIME">접속시간</th>
 		</tr>
 	</thead>
 </table>

@@ -642,7 +642,16 @@ public class WorkController implements Controller {
 		mav.addObject("nowempList", list);
 		mav.setViewName("jsonnowempList");
 		}
+		else if(cud.equals("log")) {     ///성공
+			//재직사원 조회
+			logger.info("Controller : 재직 사원 호출 성공");	
+			/////////////////////// 실제 코드    /////////////////////
+			List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+			pMap = new HashMap<String, Object>();
+			list = workLogic.log(pMap); 
+			mav.addObject("log", list);
+			mav.setViewName("jsonLog");
+		}
 		return mav;
-
 	}
 }

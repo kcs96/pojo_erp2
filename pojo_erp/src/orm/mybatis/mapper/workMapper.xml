@@ -266,7 +266,12 @@
 	</select>
 	<!-- ================================== 지사관리 삭제 끝=============================================== -->
 
-
+	<!-- ================================== 관리자 로그 탭 ================================================ -->
+	<select id="proc_log" parameterType="map" statementType="CALLABLE">
+	{call PROC_LOG(#{key, jdbcType=CURSOR, mode=OUT, javaType=ResultSet, resultMap=wmap})}
+	</select>
+	<!-- ================================== 관리자 로그 탭 끝 ================================================ -->
+	
 	<!-- ================================== 파견사원 조회탭 =============================================== -->
 	<!-- 파견사원 탭 -->
 	<select id="dispatch_List" resultType="java.util.Map">
@@ -282,7 +287,7 @@
 		SELECT e.emp_no as EMP_NO,dl.dl_name as DL_NAME,dl.dl_tel
 		as DL_TEL
 		,dl.dl_address as DL_ADDRESS,e.emp_name as EMP_NAME,e.emp_phone as EMP_PHONE
-		,dp.dp_sdate as DP_SDATE,dp.dp_edate as DP_EDATE,dl.dl_latitude as
+		,to_char(dp.dp_sdate) as DP_SDATE,to_char(dp.dp_edate) as DP_EDATE,dl.dl_latitude as
 		DL_LATITUDE,dl.dl_longitude as DL_LONGITUDE
 		FROM emp e, dispatch dp, dispatch_loc dl
 		WHERE e.emp_no = #{emp_no}
