@@ -54,7 +54,24 @@ public class WorkController implements Controller {
 			if(result_accept.equals("1")) {path="redirect:xxx.jsp";}
 			else {path="redirect:errorPage.jsp";}
 			*/
-		}else if(requestName.equals("workDeny")) { //완료
+		}
+		if(requestName.equals("workAgreeAndroid")) {///성공
+			//결재 승인 insert here
+			logger.info("Controller : 결재 승인 호출 성공");
+			/////////////////////// 실제 코드    /////////////////////
+			pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
+			String result_accept = workLogic.workAgree(pMap);
+			path="redirect:./result.jsp?result="+result_accept;
+		}
+		else if(requestName.equals("workDenyAndroid")) { //완료
+			//결재 기각 insert here
+			logger.info("Controller : 결재 기각 호출 성공");
+			/////////////////////// 실제 코드    /////////////////////
+		    pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
+		    String result_deny = workLogic.workDeny(pMap);
+			path="redirect:./result.jsp?result="+result_deny;
+		}
+		else if(requestName.equals("workDeny")) { //완료
 			//결재 기각 insert here
 			logger.info("Controller : 결재 기각 호출 성공");
 			/////////////////////// 실제 코드    /////////////////////
@@ -653,6 +670,25 @@ public class WorkController implements Controller {
 			list = workLogic.log(pMap); 
 			mav.addObject("log", list);
 			mav.setViewName("jsonLog");
+		}
+		else if("app_getAndroid".equals(cud)) {   //받은 문서함
+			//사원조회 insert here
+			logger.info("Controller : 받은결재함 호출 성공");
+			List<Map<String,Object>> applist =  new ArrayList<>();
+			pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
+			applist = workLogic.app_get(pMap); 
+			mav.addObject("app_getList", applist);
+			mav.setViewName("jsonapp_getList");
+		} 
+		else if("app_setAndroid".equals(cud)) {	//보낸 문서함
+			//전자결재 insert here
+			logger.info("Controller : 보낸 결재함 호출 성공");
+			/////////////////////// 실제 코드    /////////////////////
+			List<Map<String,Object>> applist = new ArrayList<>();
+			pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
+			applist = workLogic.app_set(pMap); 
+			mav.addObject("app_setList", applist);
+			mav.setViewName("jsonapp_setList");
 		}
 		return mav;
 

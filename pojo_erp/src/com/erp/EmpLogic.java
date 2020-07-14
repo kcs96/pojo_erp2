@@ -25,6 +25,13 @@ public class EmpLogic {
 		rList = empDao.login(loginMap);
 		return  rList;
 	}
+	public List<Map<String, Object>> loginAnd(Map<String, Object> loginMap) {
+		//로그인 이벤트 시작
+		logger.info("EmpLogic => 로그인 버튼");
+		List<Map<String, Object>> rList = new ArrayList<>();
+		rList = empDao.loginAnd(loginMap);
+		return  rList;
+	}
 
 	public List<Map<String, Object>> inoutList(Map<String, Object> pMap) {
 		//메인페이지 오늘 출근 정보

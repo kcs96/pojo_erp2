@@ -115,9 +115,36 @@ public class MyServiceLogic {
 		logger.info("MyServiceLogic => 개인 일정 삭제  호출");
 		int result = 0;
 		result = myServiceDao.myDelSchedule(pMap);
-		
 		return result;
-		
+	}
+	public Map<String, Object> gowork() {
+		//출근 지역 가져오기 (안드로이드)
+				logger.info("EmpLogic 출근지 가져오기");
+				Map<String, Object> rMap = null;
+				rMap = myServiceDao.gowork();
+				return rMap;
+	}
+	public String myAddScheduleAndroid(Map<String, Object> pMap) {
+		//안드로이드 일정추가 버튼 이벤트
+				logger.info("MyServiceLogic => 개인 일정 추가  호출");
+				String result = "";
+				result = myServiceDao.myAddScheduleAndroid(pMap);
+				return result;
+	}
+
+	public String myUpdScheduleAndroid(Map<String, Object> pMap) {
+		logger.info("MyServiceLogic => 개인 일정 수정 안드로이드  호출");
+		String result = "";
+		result = myServiceDao.myUpdScheduleAndroid(pMap);
+		return result;
+	}
+
+	public int myDelScheduleAndroid(Map<String, Object> pMap) {
+		//일정삭제 안드로이드 버튼 이벤트
+				logger.info("MyServiceLogic => 개인 일정 삭제 안드로이드 호출");
+				int result = 0;
+				result = myServiceDao.myDelScheduleAndroid(pMap);
+				return result;
 	}
 
 	

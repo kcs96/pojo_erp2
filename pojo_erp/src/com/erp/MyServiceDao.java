@@ -136,6 +136,36 @@ public class MyServiceDao {
 		sqlSec.commit();
 		return result;
 	}
+	public String myAddScheduleAndroid(Map<String, Object> pMap) {
+		//일정추가 안드로이드 버튼 이벤트
+				logger.info("MyServiceDao => 개인 일정 안드로이드 추가 호출"); 
+				String result ="";
+				sqlSec.selectOne("proc_mySdAdd",pMap);
+				result=pMap.get("msg").toString();
+				return result;
+	}
+
+	public String myUpdScheduleAndroid(Map<String, Object> pMap) {
+		//일정수정 안드로이드 버튼 이벤트
+				logger.info("MyServiceDao => 개인 일정 수정 안드로이드 호출"); 
+				String result ="";
+				sqlSec.selectOne("proc_mySdUpd",pMap);
+				result=pMap.get("msg").toString();
+				return result;
+	}
+
+	public int myDelScheduleAndroid(Map<String, Object> pMap) {
+		//일정삭제 버튼 안드로이드 이벤트
+				logger.info("MyServiceDao => 개인 일정 삭제 안드로이드 호출"); 
+				result=sqlSec.delete("my_sdDel",pMap);
+				sqlSec.commit();
+				return result;
+	}
+	public Map<String, Object> gowork() {
+		logger.info("EmpDao => 안드 => 출근지가져오기");
+		Map<String, Object> rMap = sqlSec.selectOne("selete_dl");
+		return rMap;
+	}
 
 
 

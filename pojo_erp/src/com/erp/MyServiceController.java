@@ -236,6 +236,50 @@ public class MyServiceController implements Controller {
 			}
 			*/
 		}
+		else if(requestName.equals("myAddScheduleAndroid")) { //insert 일정 추가
+			//내 일정 내용 추가
+			logger.info("MyService => 내 일정 추가 실행");
+			/////////////////////// 실제 코드    /////////////////////
+			pMap= HashMapBuilder.hashMapBuilder(req.getParameterMap());
+			//pMap.put("emp_no", session.getAttribute("emp_no"));
+			for(int i=0; i<pMap.size(); i++) {
+				String key = (String)pMap.keySet().toArray()[i];
+				//logger.info(key);
+				logger.info(key+"="+pMap.get(key));
+			}
+			logger.info("pMap.size()===>"+pMap.size());
+			String result = myServiceLogic.myAddScheduleAndroid(pMap);
+			if(result.equals("1")) {path="redirect:empSchedule.jsp";}
+			else {path="redirect:errorPage.jsp";}
+		}
+		else if(requestName.equals("myUpdScheduleAndroid")) { //update 일정 수정
+			//내 일정 내용 수정
+			logger.info("MyService => 내 일정 변경 실행");
+			/////////////////////// 실제 코드    /////////////////////	
+			pMap= HashMapBuilder.hashMapBuilder(req.getParameterMap());
+			//pMap.put("emp_no", session.getAttribute("emp_no"));
+			for(int i=0; i<pMap.size(); i++) {
+				String key = (String)pMap.keySet().toArray()[i];
+				//logger.info(key);
+				logger.info(key+"="+pMap.get(key));
+			}
+			logger.info("pMap.size()===>"+pMap.size());
+			String result=myServiceLogic.myUpdScheduleAndroid(pMap);
+			if(result.equals("1")) {path="redirect:empSchedule.jsp";}
+			else {path="redirect:errorPage.jsp";}
+		}
+		else if(requestName.equals("myDelScheduleAndroid")) { //delete 일정 삭제
+			//내 일정 삭제
+			logger.info("MyService => 내 일정 삭제 실행");
+			/////////////////////// 실제 코드    /////////////////////
+			pMap= HashMapBuilder.hashMapBuilder(req.getParameterMap());
+			//pMap.put("emp_no", session.getAttribute("emp_no"));
+			//pMap.put("my_no", req.getParameter("my_no"));
+			int del_result = myServiceLogic.myDelScheduleAndroid(pMap);
+			
+			if(del_result==1) {path="redirect:empSchedule.jsp";}
+			else {path="redirect:errorPage.jsp";}
+		}
 		
 		//////////////////////////////////////////////////////// forward 지역 /////////////////////////////////////////////////////////////////////
 		else if(requestName.equals("inOutManager")) {
@@ -316,6 +360,42 @@ public class MyServiceController implements Controller {
 //			req.setAttribute("myScheduleList", rList);
 //			path="forward:jsonMySchedule.jsp";
 //		}
+		else if(requestName.equals("myGoWorkAnd")) { //update 상태컬럼 : 정상 -> 외출
+			//안드 로그인 성공했을 때
+			logger.info("MyService => 출근버튼 실행");
+			/////////////////////// 실제 코드    /////////////////////
+			Map<String,Object>rMap = new HashMap<>();
+			rMap = myServiceLogic.gowork();
+			String imsi = rMap.get("DL_LATITUDE").toString()+","+rMap.get("DL_LONGITUDE").toString()+","+rMap.get("DL_NAME");
+			req.setAttribute("imsi", imsi);
+			if(rMap.size()!=0) {path="forward:work.jsp";}
+			else {path="redirect:error.jsp";}
+			
+			///////////////////////  테스트 코드   /////////////////////
+			/*
+			pMap = new HashMap<>();
+			pMap.put("emp_no",10006);
+			pMap.put("btn_type","외출");
+			String result = myServiceLogic.myGoOut(pMap);
+			System.out.println("외출버튼 성공 여부 :"+result);
+			if(result.equals("1")) {
+				path="redirect:xxx.jsp";
+				System.out.println(path);
+			}else {
+				path="errorPage.jsp";
+			}
+			*/
+		}
+		
+		else if(requestName.equals("GoWorkAndBtn")) { //insert 출근테이블에 오늘 출근 row추가
+			//안드로이드 출근버튼 눌렀을때
+			logger.info("MyService => 안드로이드 출근버튼 실행");
+			/////////////////////// 실제 코드    /////////////////////
+			pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
+			String result = myServiceLogic.myGoWork(pMap);
+			System.out.println("출근 버튼 성공 여부 :"+result);
+			path="redirect:androidWork.jsp?result="+result;
+		}
 		return path;
 	}
 
@@ -366,6 +446,15 @@ public class MyServiceController implements Controller {
 			mav.addObject("myScheduleList", rList);
 			mav.setViewName("jsonMySchedule");
 		}
+		else if("myScheduleAndroid".equals(cud)) {
+	         //개인일정 insert here
+	         logger.info("MAV => 개인일정달력 실행");
+	         pMap = HashMapBuilder.hashMapBuilder(req.getParameterMap());
+	         List<Map<String,Object>> rList = myServiceLogic.mySchedule(pMap);
+	         System.out.println("개인일정안드로이드 리스트 => "+rList.size());
+	         mav.addObject("myScheduleList", rList);
+	         mav.setViewName("jsonMySchedule");
+	      }
 		return mav;
 		
 	}

@@ -40,7 +40,7 @@
 				<div id="layoutSidenav_content">
 			<main id="input_div">
 			<div id="frame_div" style="border: 1px solid black;">
-			<div id="page_title" style="border-bottom: 2px solid gray; margin: 50px 30px;"><h2>회 의 실 일 정</h2></div>
+			<div id="page_title" style="border-bottom: 2px solid gray; margin: 50px 30px;"><h2>회의실 일정</h2></div>
 			<div id="page_contents" style="max-width: 1730px; margin: 50px 50px;">
 <!-- 일정추가전 생기는 카탈로그 창 -->
         <!-- 일자 클릭시 메뉴오픈 -->

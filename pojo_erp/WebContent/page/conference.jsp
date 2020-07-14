@@ -96,14 +96,14 @@
  	</tr>
  	<tr>
 	<th style="font-size: 89%;" width="30px" height="50px"  colspan="2">
-	<img src="imaged.png" id="" width="110%" height="110%">
+	<img  id="ap_sign" width="110%" height="110%">
 	</th>
 	</tr>
  </table>	
  </div>
 	<table>
 	 <tr>
-	  <td style=" font-size: 135%; margin-left: auto; margin-right: auto;" cellspacing=0 disabled >
+	  <td style=" font-size: 135%; margin-left: auto; margin-right: auto;" cellspacing=0>
 	   <br>
 	   <br>
 	   <h3 style="margin-left:255px;">회의 보고서</h3>

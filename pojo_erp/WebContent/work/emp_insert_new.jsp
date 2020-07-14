@@ -29,6 +29,7 @@ pageEncoding="UTF-8"%>
 			new daum.Postcode({
 				oncomplete: function (data) {
 					// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+					var roadAddr = data.roadAddress;
 					//alert("roadAddr: " + roadAddr);
 					$("#emp_zipcode").val(data.zonecode);
 					$("#emp_address").val(roadAddr);
@@ -144,11 +145,11 @@ pageEncoding="UTF-8"%>
 									<tr>
 										<th>부서명</th>
 										<td>
-											<select id="dept_name" name="dept_name" class="form-control" >
-												<option value="인사부">인사부</option>
-												<option value="개발부">개발부</option>
-												<option value="품질관리부">품질관리부</option>
-												<option value="관리자">관리자</option>
+											<select id="dept_no" name="dept_no" class="form-control" >
+												<option value="10">인사부</option>
+												<option value="20">개발부</option>
+												<option value="30">품질관리부</option>
+												<option value="40">관리자</option>
 											</select>
 										</td>
 									</tr>

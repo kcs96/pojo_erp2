@@ -74,7 +74,7 @@
 		}
 	}
 		//del(el)파라미터 써주고 
-	/* function del(el){
+	 function del(el){
 		alert("클릭");//
 		var imsi = $(el).text();//var imsi로 만들어줘서 $(el).text파라미터값만 받아올때 쓰는건가봄
 		alert(imsi+"삭제");
@@ -94,7 +94,7 @@
 				i--;//배열에서 하나 요소를 삭제 했으므로 인덱스 값이 하나씩 줄어든다! 따라서 i를 하나 빼준다!
 			}
 		}
-	} */
+	}
 	function test_modal(){
 		g_names=[];//배열에 저장된 값들 초기화하기
 		g_position =[];
@@ -196,7 +196,7 @@
 		var ap_title = $("#ap_titles").val();//제목 
 		var ap_empno = $("#emp_no").val();
 		
-	location.href="./workAddSendDoc.erp?ap_instructions="
+	location.href="./workAddSendDoc.erp?ap_instructions="+ap_instructions
 										+"&fr_no=" + fr_no
 										+"&ap_title="+ap_title
 										+"&ap_reporter="+ap_reporter
@@ -206,7 +206,7 @@
 										+"&ap_dname="+"<%=dept_name%>"
 								  		+"&ap_retiredate="+ap_retiredate
 										+"&ap_contact="+ap_contact
-										+"&ap_prosessingdate="+ap_prosessingdate+ap_eprosessingdate
+										+"&ap_prosessingdate="+ap_prosessingdate+" ~ "+ap_eprosessingdate
 								  		+"&ap_bego="+ap_bego
 										+"&ap_sign="+ap_sign
 										+"&ap_receiver="+rev_empNo
@@ -323,8 +323,8 @@
 						<hr style="border: solid 1px black;">
 						<!--***************************양식 뿌려주기  ******************************-->
 						<div class="row">
-							<div style="overflow-x:scroll ; padding-top: 10px;" class="col-12">
-							 <div  style=" border: 2px solid #d2d2d2; ">
+							<div style="padding-top: 10px;" class="col-12">
+							 <div  style=" border: 2px solid #d2d2d2; overflow:scroll;">
 								<!-- <button style="float: right;"
 									type="button" class="btn btn-info" onclick="window.print();">인쇄</button> -->
 								<!-- *****밑에 승인취소버튼 -->
@@ -603,7 +603,7 @@
 	                        $('#ap_reporter').attr('disabled', 'disabled');
 	                        $('#ap_dname').attr('disabled', 'disabled');
 	                        $('#ap_appdate').attr('disabled', 'disabled');
-	                        $('#i_ap_instructions option:eq(0)').prop('selected', true); // option 3번째 선택
+	                        $('#i_ap_instructions option:eq(5)').prop('selected', true); // option 3번째 선택
 	                        //options에서 보여지게 
 						}
 					});

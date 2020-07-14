@@ -165,15 +165,15 @@
 <br>
 <br>
 <div class="wrap2" style="text-align:center;">
-<input type="text" id="ap_year" name="year" style="font-size:20px; line-height: 35px; width:48px; border: 0;"align="center"disabled>년
-<input type="text" id="ap_month" name="month" style="font-size:20px; line-height: 30px; width:30px; border: 0;"align="center"disabled>월
-<input type="text" id="ap_today" name="today" style="font-size:20px; line-height: 30px; width:30px; border: 0;"align="center"disabled>일
+<input type="text" id="ap_year" name="year" style="font-size:20px; line-height: 35px; width:48px; border: 0;"align="center" disabled>년
+<input type="text" id="ap_month" name="month" style="font-size:20px; line-height: 30px; width:30px; border: 0;"align="center" disabled>월
+<input type="text" id="ap_today" name="today" style="font-size:20px; line-height: 30px; width:30px; border: 0;"align="center" disabled>일
 <div>
 <br>
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;신  청  인:
-<input type="text" id="ap_namein" name="namein" style="font-size:20px;  width:80px; border: 0;"align="center"disabled>(인)</p>
+<input type="text" id="ap_namein" name="namein" style="font-size:20px;  width:80px; border: 0;"align="center" disabled>(인)</p>
 <br>
 <br>
 <br>

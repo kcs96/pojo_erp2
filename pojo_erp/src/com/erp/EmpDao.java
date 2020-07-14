@@ -27,15 +27,28 @@ public class EmpDao {
 		//로그인 이벤트
 		logger.info("EmpDao() => 로그인"); 
 		List<Map<String, Object>> rMap = new ArrayList<>();
-		System.out.println(loginMap.get("emp_no"));
-		System.out.println(loginMap.get("emp_pw"));
+		System.out.println("loginMap.get(\"emp_no\") => "+loginMap.get("emp_no"));
+		System.out.println("loginMap.get(\"emp_pw\") => "+loginMap.get("emp_pw"));
 		sqlSec.selectOne("proc_empLogin44",loginMap);
 		rMap = (List<Map<String,Object>>) loginMap.get("key");
-		System.out.println(rMap.get(0).get("EMP_NO"));
-		System.out.println(rMap.get(0).get("EMP_NAME"));
+		System.out.println("rMap.get(0).get(\"EMP_NO\") => "+rMap.get(0).get("EMP_NO"));
+		System.out.println("rMap.get(0).get(\"EMP_NAME\") => "+rMap.get(0).get("EMP_NAME"));
 		return rMap;
 	}
    
+	public List<Map<String, Object>> loginAnd(Map<String, Object> loginMap) {
+		//안드로이드 로그인 이벤트
+		logger.info("EmpDao() => 로그인"); 
+		List<Map<String, Object>> rMap = new ArrayList<>();
+		System.out.println("loginMap.get(\"emp_no\") => "+loginMap.get("emp_no"));
+		System.out.println("loginMap.get(\"emp_pw\") => "+loginMap.get("emp_pw"));
+		sqlSec.selectOne("proc_empLogin",loginMap);
+		rMap = (List<Map<String,Object>>) loginMap.get("key");
+		System.out.println("rMap.get(0).get(\"EMP_NO\") => "+rMap.get(0).get("EMP_NO"));
+		System.out.println("rMap.get(0).get(\"EMP_NAME\") => "+rMap.get(0).get("EMP_NAME"));
+		return rMap;
+	}
+	
 	public List<Map<String, Object>> inoutList(Map<String, Object> pMap) {
 		//오늘 출근정보 담기
 		logger.info("EmpDao() => 메인페이지 오늘 출근 정보 담기"); 

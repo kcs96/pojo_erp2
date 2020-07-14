@@ -338,7 +338,7 @@ pageEncoding="UTF-8"%>
 		<hr style="border: solid 1px black;">
 	<div class="row">
 		<div class="col-1"></div>
-			<div style=" border:2px solid black;"class="col-10"id="page"></div>
+			<div style="overflow:scroll; border:2px solid black;"class="col-10"id="page"></div>
 	</div>		<div class="col-1"></div>
 
 <!-- 	<!-- 이전꺼 보여주는 거 -->

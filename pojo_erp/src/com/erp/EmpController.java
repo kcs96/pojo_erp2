@@ -47,11 +47,9 @@ public class EmpController implements Controller {
 			rList =empLogic.login(loginMap);
 			System.out.println("rList: "+rList);
 			
-			String emp_no =rList.get(0).get("EMP_NO").toString();
-			session.setAttribute("emp_no",emp_no);
 			
 			String emp_name =rList.get(0).get("EMP_NAME").toString();
-			
+			System.out.println(emp_name);
 			if(rList.get(0).containsKey("DEPT_NAME")) {
 				String dept_name =rList.get(0).get("DEPT_NAME").toString();
 				System.out.println("부서명 =>"+dept_name);
@@ -61,7 +59,6 @@ public class EmpController implements Controller {
 			session.setAttribute("emp_name",emp_name);
 			
 			if("비밀번호가 틀립니다".equals(emp_name)){
-				//emp_name = new HangulConversion().toUTF(emp_name);
 				path="redirect:./login.jsp?msg="+1;
 			}
 			else if("아이디가 없습니다".equals(emp_name)) {
@@ -71,6 +68,8 @@ public class EmpController implements Controller {
 			else {
 				logger.info("메인페이지 호출");
 				pMap = new HashMap<>();
+				String emp_no =rList.get(0).get("EMP_NO").toString();
+				session.setAttribute("emp_no",emp_no);
 				pMap.put("emp_no", emp_no);
 				List<Map<String,Object>> taskTimeList = empLogic.commuteList(pMap);
 				System.out.println("오늘 업무시간 리스트 => "+taskTimeList.size());
@@ -79,22 +78,68 @@ public class EmpController implements Controller {
 			}
 		}
 
-//		else if("roomList".equals(requestName)) {
-//			pMap = new HashMap<>();
-//			List<Map<String,Object>> roomList = empLogic.roomList(pMap);
-//			System.out.println("오늘 회의실 예약 리스트 => "+roomList.size());
-//			req.setAttribute("roomList", roomList);
-//			path="forward:jsonRoomList.jsp";
-//		}
-//		else if("inoutList".equals(requestName)) {
-//			String emp_no = session.getAttribute("emp_no").toString();
-//			pMap = new HashMap<>();
-//			pMap.put("emp_no", emp_no);
-//			List<Map<String,Object>> inoutList = empLogic.inoutList(pMap);
-//			System.out.println("오늘 출근 리스트 사이즈 => "+inoutList.size());
-//			req.setAttribute("inOutList", inoutList);
-//			path="forward:./jsonInOutList.jsp";
-//		}
+		else if("loginAnd".equals(requestName)) {
+			logger.info("EmpController => 로그인 호출");
+			/////////////////////// 실제 코드    /////////////////////
+			Map<String,Object> loginMap= HashMapBuilder.hashMapBuilder(req.getParameterMap());
+			System.out.println("loginMap: "+loginMap);
+			List<Map<String,Object>> rList = new ArrayList<>();
+			rList =empLogic.loginAnd(loginMap);
+			System.out.println("rList: "+rList);
+			
+			String emp_no =rList.get(0).get("EMP_NO").toString();
+			String emp_name =rList.get(0).get("EMP_NAME").toString();
+			String dept_name =rList.get(0).get("DEPT_NAME").toString();
+			String emp_pos =rList.get(0).get("EMP_POSITION").toString();
+			String lofo = emp_no.trim()+","+emp_pos.trim();
+			System.out.println("emp_name: "+emp_name);
+			
+			if("비밀번호가 틀립니다".equals(emp_name)||"아이디가 없습니다".equals(emp_name)){
+				req.setAttribute("emp_no", "0");
+				path="forward:./loginand.jsp";
+			}else {
+				
+				logger.info("메인페이지 호출");
+				pMap = new HashMap<>();
+				req.setAttribute("emp_no", lofo);
+				path="forward:./loginand.jsp";
+			}
+			
+		}
+		else if("inoutListAndroid".equals(requestName)) {
+			pMap= HashMapBuilder.hashMapBuilder(req.getParameterMap());
+			List<Map<String,Object>> inoutList = empLogic.inoutList(pMap);
+			System.out.println("오늘 출근 리스트 사이즈 => "+inoutList.size());
+			StringBuilder sb = new StringBuilder();
+			for(int i=0; i<inoutList.size();i++) {
+				Map<String,Object> rMap = inoutList.get(i);
+				if(i==inoutList.size()-1) {
+					sb.append(rMap.get("TIME"));
+				}else {
+				sb.append(rMap.get("TIME")+",");
+				}
+			}
+			req.setAttribute("result", sb.toString());
+			path="forward:./androidResult.jsp";
+		}
+		
+		else if("roomList".equals(requestName)) {
+			pMap = new HashMap<>();
+			List<Map<String,Object>> roomList = empLogic.roomList(pMap);
+			System.out.println("오늘 회의실 예약 리스트 => "+roomList.size());
+			req.setAttribute("roomList", roomList);
+			path="forward:jsonRoomList.jsp";
+		}
+		else if("inoutList".equals(requestName)) {
+			String emp_no = session.getAttribute("emp_no").toString();
+			pMap = new HashMap<>();
+			pMap.put("emp_no", emp_no);
+			List<Map<String,Object>> inoutList = empLogic.inoutList(pMap);
+			System.out.println("오늘 출근 리스트 사이즈 => "+inoutList.size());
+			req.setAttribute("inOutList", inoutList);
+			path="forward:./jsonInOutList.jsp";
+		}
+
 		else if("reMain".equals(requestName)) {
 			logger.info("EmpController =>  remain 호출");
 			pMap= HashMapBuilder.hashMapBuilder(req.getParameterMap());

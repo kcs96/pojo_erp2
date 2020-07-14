@@ -133,7 +133,7 @@
                                      .append($nodeContent);
 
     // Expand and contract nodes
-    if ($childNodes.length > 0) {
+ /*   if ($childNodes.length > 0) {
       $nodeDiv.click(function() {
           var $this = $(this);
           var $tr = $this.closest("tr");
@@ -154,7 +154,7 @@
             $node.addClass('collapsed');
           }
         });
-    }
+    }*/
     
     $nodeCell.append($nodeDiv);
     $nodeRow.append($nodeCell);
@@ -225,10 +225,10 @@
     $appendTo.append($table);
     
     /* Prevent trees collapsing if a link inside a node is clicked */
-    $nodeDiv.children('a').click(function(e){
+  /*  $nodeDiv.children('a').click(function(e){
         console.log(e);
         e.stopPropagation();
-    });
+    });*/
   };
 
 })(jQuery);

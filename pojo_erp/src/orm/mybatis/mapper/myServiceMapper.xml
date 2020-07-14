@@ -44,6 +44,10 @@
 		                                   , resultMap=smap})}
 	</select>
 
+	<select id="selete_dl" resultType="map">
+		select dl_latitude,dl_longitude,dl_name
+		  from dispatch_loc where dl_no = 15 
+	</select>
 <!--=====================================출퇴 관리 탭 끝======================================-->	
 
 

@@ -9,14 +9,14 @@
 	   data-url="./emp_list_on.erp?cud=nowempList">
 	<thead class="thead-light">
 		<tr>
-			<th data-field="EMP_NO">사원번호</th>
-			<th data-field="username">사원이름</th>
-			<th data-field="DEPT_NAME">부서</th>
-			<th data-field="EMP_POSITION">직급</th>
-			<th data-field="EMP_EMAIL">이메일</th>
-			<th data-field="EMP_PHONE">핸드폰</th>
-			<th data-field="EMP_STATE">근무상태</th>
-			<th data-field="OPERATE" data-formatter="operateFormatter" data-events="operateEvents" width="300" >정보수정</th>
+			<th data-field="EMP_NO" style="width:12.5%">사원번호</th>
+			<th data-field="username" style="width:12.5%">사원이름</th>
+			<th data-field="DEPT_NAME" style="width:12.5%">부서</th>
+			<th data-field="EMP_POSITION" style="width:12.5%">직급</th>
+			<th data-field="EMP_EMAIL" style="width:12.5%">이메일</th>
+			<th data-field="EMP_PHONE" style="width:12.5%">핸드폰</th>
+			<th data-field="EMP_STATE" style="width:12.5%">근무상태</th>
+			<th data-field="OPERATE" data-formatter="operateFormatter" data-events="operateEvents" style="width:12.5%" data-align="center" >정보수정</th>
 		</tr>
 	</thead>
 </table>

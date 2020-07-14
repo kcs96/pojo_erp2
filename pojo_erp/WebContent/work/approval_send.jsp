@@ -335,8 +335,8 @@
                   <hr style="border: solid 1px black;">
                   <!--***************************양식 뿌려주기  ******************************-->
                   <div class="row">
-                     <div style="overflow-x:scroll ; padding-top: 10px;" class="col-12">
-                      <div  style=" border: 2px solid #d2d2d2; ">
+                     <div style="padding-top: 10px;" class="col-12">
+                      <div  style="overflow:scroll; border: 2px solid #d2d2d2; ">
                         <!-- <button style="float: right;"
                            type="button" class="btn btn-info" onclick="window.print();">인쇄</button> -->
                         <!-- *****밑에 승인취소버튼 -->

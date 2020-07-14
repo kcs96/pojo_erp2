@@ -2,14 +2,13 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
 <%
 	List<Map<String, Object>> rList = (List<Map<String, Object>>)request.getAttribute("myInfoList"); //DB에서 가져온 리스트를 사용 가능
 	Map<String, Object> rMap = rList.get(0);
 %>
-
+<!DOCTYPE html>
+<html>
+<head>
 <!--정보수정에 필요한 코드 시작=================================================================================-->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />

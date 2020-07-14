@@ -109,13 +109,13 @@
 			지시자
 		  </th>
 		  <td style="width:110px;">
-			<input class="wrap3" id="ap_reporter"name="ap_reporter"style="border:0px;height:30px;"type="text">
+			<input class="wrap3" id="ap_reporter"name="ap_reporter"style="border:0px;height:30px;"type="text" disabled>
 		  </td>
 		  <th style="width:200px; hieght:110px;">
 		        작성일자
 		  </th>
 		  <td style="width:120px;">
-			<input id="ap_appdate" name="ap_appdate" class="wrap3"style="border:0px;background-color:white;height:30px;" type="text">
+			<input id="ap_appdate" name="ap_appdate" class="wrap3"style="border:0px;background-color:white;height:30px;" type="text" disabled>
 		  </td>
 		 </tr>
 		</table>
@@ -135,11 +135,11 @@
 </tr>
 <tr>
 <th colspan="3" style="width:200px;height:420px;"> 
-<textarea class="wrap2" id="ap_content" name="ap_content" style="resize:none;border:0;width:99%;height:100%;" cols="30" rows="5" ></textarea>
+<textarea class="wrap2" id="ap_content" name="ap_content" style="resize:none;border:0;width:99%;height:100%;" cols="30" rows="5" disabled></textarea>
 
 </th>
 <td colspan="1" style="height:350px;">
-<textarea class="wrap2" name="ap_bego" id="ap_bego"style="resize:none;border:0;width:99%;height:100%;"cols="10"  ></textarea>
+<textarea class="wrap2" name="ap_bego" id="ap_bego"style="resize:none;border:0;width:99%;height:100%;"cols="10" disabled ></textarea>
 
 </td>
 </tr>
@@ -150,7 +150,7 @@
 </tr>
 <tr>
 <th colspan="6" "class="auto-style3" > 
-<textarea class="wrap2"  id="ap_instructions" name="ap_instructions" style="height:300px;resize:none;border:0;width:98%;"></textarea>
+<textarea class="wrap2"  id="ap_instructions" name="ap_instructions" style="height:300px;resize:none;border:0;width:98%;" disabled></textarea>
 </th>
 </tr>
 </table>
